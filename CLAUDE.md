@@ -3,6 +3,8 @@
 Auto-generated from all feature plans. Last updated: 2026-04-02
 
 ## Active Technologies
+- F# / .NET 8.0 (primary test language), Python 3.10+ (secondary), C11 (proxy under test) + Google.Protobuf (F#), betterproto (Python), xUnit (F# test framework), pytest (Python test framework) (002-headless-test-suite)
+- Filesystem only (reports as markdown, no database) (002-headless-test-suite)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -47,6 +49,7 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 002-headless-test-suite: Added F# / .NET 8.0 (primary test language), Python 3.10+ (secondary), C11 (proxy under test) + Google.Protobuf (F#), betterproto (Python), xUnit (F# test framework), pytest (Python test framework)
 
 - 001-native-proxy-bridge: Added
 
