@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>HighBar.Client</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.28.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="src/Events.fs" />
+    <Compile Include="src/Commands.fs" />
+    <Compile Include="src/Client.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="proto-gen/HighBar.Proto.csproj" />
+  </ItemGroup>
+
+</Project>

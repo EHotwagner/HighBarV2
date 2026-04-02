@@ -1,0 +1,10 @@
+version: v2
+managed:
+  enabled: true
+plugins:
+  - protoc_builtin: c_out
+    out: gen/c
+  - protoc_builtin: csharp_out
+    out: gen/csharp
+  - remote: buf.build/community/nipunn1313-betterproto
+    out: gen/python

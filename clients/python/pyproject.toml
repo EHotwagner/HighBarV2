@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "highbar"
+version = "0.1.0"
+description = "HighBar V2 client library for AI development"
+requires-python = ">=3.10"
+dependencies = [
+    "protobuf>=4.25.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]

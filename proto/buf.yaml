@@ -1,0 +1,8 @@
+version: v2
+lint:
+  use:
+    - PACKAGE_DEFINED
+    - PACKAGE_DIRECTORY_MATCH
+    - FIELD_LOWER_SNAKE_CASE
+modules:
+  - path: .

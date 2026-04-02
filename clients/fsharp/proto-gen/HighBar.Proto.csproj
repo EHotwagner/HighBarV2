@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Highbar</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.28.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../../../proto/gen/csharp/*.cs" />
+  </ItemGroup>
+
+</Project>

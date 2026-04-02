@@ -1,0 +1,45 @@
+# Generated protobuf code
+proto/gen/
+
+# Build artifacts
+build/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+
+# C artifacts
+*.out
+autom4te.cache/
+config.status
+config.log
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+packages/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Environment
+.env*
+*.log
