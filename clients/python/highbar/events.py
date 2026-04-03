@@ -7,56 +7,56 @@ from typing import Optional
 @dataclass
 class GameEvent:
     """Base class for all game events."""
-    event_type: str
+    event_type: str = field(init=False, default="unknown")
 
 
 @dataclass
 class InitEvent(GameEvent):
     team_id: int
-    event_type: str = "init"
+    event_type: str = field(init=False, default="init")
 
 
 @dataclass
 class ReleaseEvent(GameEvent):
-    event_type: str = "release"
+    event_type: str = field(init=False, default="release")
 
 
 @dataclass
 class UpdateEvent(GameEvent):
     frame: int
-    event_type: str = "update"
+    event_type: str = field(init=False, default="update")
 
 
 @dataclass
 class MessageEvent(GameEvent):
     player: int
     message: str
-    event_type: str = "message"
+    event_type: str = field(init=False, default="message")
 
 
 @dataclass
 class UnitCreatedEvent(GameEvent):
     unit_id: int
     builder_id: int
-    event_type: str = "unit_created"
+    event_type: str = field(init=False, default="unit_created")
 
 
 @dataclass
 class UnitFinishedEvent(GameEvent):
     unit_id: int
-    event_type: str = "unit_finished"
+    event_type: str = field(init=False, default="unit_finished")
 
 
 @dataclass
 class UnitIdleEvent(GameEvent):
     unit_id: int
-    event_type: str = "unit_idle"
+    event_type: str = field(init=False, default="unit_idle")
 
 
 @dataclass
 class UnitMoveFailedEvent(GameEvent):
     unit_id: int
-    event_type: str = "unit_move_failed"
+    event_type: str = field(init=False, default="unit_move_failed")
 
 
 @dataclass
@@ -66,14 +66,14 @@ class UnitDamagedEvent(GameEvent):
     damage: float
     weapon_def_id: int
     is_paralyzer: bool
-    event_type: str = "unit_damaged"
+    event_type: str = field(init=False, default="unit_damaged")
 
 
 @dataclass
 class UnitDestroyedEvent(GameEvent):
     unit_id: int
     attacker_id: Optional[int]
-    event_type: str = "unit_destroyed"
+    event_type: str = field(init=False, default="unit_destroyed")
 
 
 @dataclass
@@ -81,7 +81,7 @@ class UnitGivenEvent(GameEvent):
     unit_id: int
     old_team_id: int
     new_team_id: int
-    event_type: str = "unit_given"
+    event_type: str = field(init=False, default="unit_given")
 
 
 @dataclass
@@ -89,31 +89,31 @@ class UnitCapturedEvent(GameEvent):
     unit_id: int
     old_team_id: int
     new_team_id: int
-    event_type: str = "unit_captured"
+    event_type: str = field(init=False, default="unit_captured")
 
 
 @dataclass
 class EnemyEnterLOSEvent(GameEvent):
     enemy_id: int
-    event_type: str = "enemy_enter_los"
+    event_type: str = field(init=False, default="enemy_enter_los")
 
 
 @dataclass
 class EnemyLeaveLOSEvent(GameEvent):
     enemy_id: int
-    event_type: str = "enemy_leave_los"
+    event_type: str = field(init=False, default="enemy_leave_los")
 
 
 @dataclass
 class EnemyEnterRadarEvent(GameEvent):
     enemy_id: int
-    event_type: str = "enemy_enter_radar"
+    event_type: str = field(init=False, default="enemy_enter_radar")
 
 
 @dataclass
 class EnemyLeaveRadarEvent(GameEvent):
     enemy_id: int
-    event_type: str = "enemy_leave_radar"
+    event_type: str = field(init=False, default="enemy_leave_radar")
 
 
 @dataclass
@@ -122,21 +122,21 @@ class EnemyDamagedEvent(GameEvent):
     attacker_id: Optional[int]
     damage: float
     weapon_def_id: int
-    event_type: str = "enemy_damaged"
+    event_type: str = field(init=False, default="enemy_damaged")
 
 
 @dataclass
 class EnemyDestroyedEvent(GameEvent):
     enemy_id: int
     attacker_id: Optional[int]
-    event_type: str = "enemy_destroyed"
+    event_type: str = field(init=False, default="enemy_destroyed")
 
 
 @dataclass
 class WeaponFiredEvent(GameEvent):
     unit_id: int
     weapon_def_id: int
-    event_type: str = "weapon_fired"
+    event_type: str = field(init=False, default="weapon_fired")
 
 
 @dataclass
@@ -144,7 +144,7 @@ class PlayerCommandEvent(GameEvent):
     units: list[int]
     command_topic_id: int
     command_id: int
-    event_type: str = "player_command"
+    event_type: str = field(init=False, default="player_command")
 
 
 @dataclass
@@ -153,7 +153,7 @@ class SeismicPingEvent(GameEvent):
     y: float
     z: float
     strength: float
-    event_type: str = "seismic_ping"
+    event_type: str = field(init=False, default="seismic_ping")
 
 
 @dataclass
@@ -161,41 +161,41 @@ class CommandFinishedEvent(GameEvent):
     unit_id: int
     command_id: int
     command_topic_id: int
-    event_type: str = "command_finished"
+    event_type: str = field(init=False, default="command_finished")
 
 
 @dataclass
 class LoadEvent(GameEvent):
-    event_type: str = "load"
+    event_type: str = field(init=False, default="load")
 
 
 @dataclass
 class SaveEvent(GameEvent):
-    event_type: str = "save"
+    event_type: str = field(init=False, default="save")
 
 
 @dataclass
 class EnemyCreatedEvent(GameEvent):
     enemy_id: int
-    event_type: str = "enemy_created"
+    event_type: str = field(init=False, default="enemy_created")
 
 
 @dataclass
 class EnemyFinishedEvent(GameEvent):
     enemy_id: int
-    event_type: str = "enemy_finished"
+    event_type: str = field(init=False, default="enemy_finished")
 
 
 @dataclass
 class LuaMessageEvent(GameEvent):
     data: str
     in_message_id: int
-    event_type: str = "lua_message"
+    event_type: str = field(init=False, default="lua_message")
 
 
 @dataclass
 class UnknownEvent(GameEvent):
-    event_type: str = "unknown"
+    event_type: str = field(init=False, default="unknown")
 
 
 def which_event(engine_event) -> str:

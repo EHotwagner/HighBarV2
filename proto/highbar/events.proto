@@ -71,7 +71,7 @@ message UnitMoveFailedEvent {
 
 message UnitDamagedEvent {
   int32 unit_id = 1;
-  oneof _attacker_id { int32 attacker_id = 2; }
+  optional int32 attacker_id = 2;
   float damage = 3;
   Vector3 direction = 4;
   int32 weapon_def_id = 5;
@@ -80,7 +80,7 @@ message UnitDamagedEvent {
 
 message UnitDestroyedEvent {
   int32 unit_id = 1;
-  oneof _attacker_id { int32 attacker_id = 2; }
+  optional int32 attacker_id = 2;
 }
 
 message UnitGivenEvent {
@@ -113,7 +113,7 @@ message EnemyLeaveRadarEvent {
 
 message EnemyDamagedEvent {
   int32 enemy_id = 1;
-  oneof _attacker_id { int32 attacker_id = 2; }
+  optional int32 attacker_id = 2;
   float damage = 3;
   Vector3 direction = 4;
   int32 weapon_def_id = 5;
@@ -121,7 +121,7 @@ message EnemyDamagedEvent {
 
 message EnemyDestroyedEvent {
   int32 enemy_id = 1;
-  oneof _attacker_id { int32 attacker_id = 2; }
+  optional int32 attacker_id = 2;
 }
 
 message WeaponFiredEvent {

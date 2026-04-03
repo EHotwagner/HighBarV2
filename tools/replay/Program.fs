@@ -46,7 +46,7 @@ let main argv =
     printfn "Replay version %d, recorded at %O" header.Version header.Timestamp
 
     // Connect to AI process
-    let endpoint = Net.UnixDomainSocketEndPoint(socketPath)
+    let endpoint = UnixDomainSocketEndPoint(socketPath)
     use sock = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
     sock.Connect(endpoint)
     use stream = new NetworkStream(sock, true)

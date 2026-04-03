@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-02
 ## Active Technologies
 - F# / .NET 8.0 (primary test language), Python 3.10+ (secondary), C11 (proxy under test) + Google.Protobuf (F#), betterproto (Python), xUnit (F# test framework), pytest (Python test framework) (002-headless-test-suite)
 - Filesystem only (reports as markdown, no database) (002-headless-test-suite)
+- C11 (proxy), F# / .NET 8.0 (client + tools + tests), Python 3.10+ (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), betterproto (Python), buf CLI (proto generation) (003-tools-prereqs-test-fixes)
+- Filesystem only (reports as markdown) (003-tools-prereqs-test-fixes)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -28,8 +30,8 @@ specs/          # Feature specifications and plans
 # Build proxy
 cmake -B build -DCMAKE_BUILD_TYPE=Release proxy/ && cmake --build build
 
-# Proto linting and code generation
-buf lint proto/ && buf generate proto/
+# Proto linting and code generation (run from proto/ directory)
+cd proto && buf lint && buf generate && cd ..
 
 # F# client
 cd clients/fsharp && dotnet build
@@ -49,6 +51,7 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 003-tools-prereqs-test-fixes: Added C11 (proxy), F# / .NET 8.0 (client + tools + tests), Python 3.10+ (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), betterproto (Python), buf CLI (proto generation)
 - 002-headless-test-suite: Added F# / .NET 8.0 (primary test language), Python 3.10+ (secondary), C11 (proxy under test) + Google.Protobuf (F#), betterproto (Python), xUnit (F# test framework), pytest (Python test framework)
 
 - 001-native-proxy-bridge: Added
