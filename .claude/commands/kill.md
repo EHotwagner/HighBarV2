@@ -7,21 +7,28 @@ Run the following commands and report what was killed:
    pkill -9 -f "spring-headless|spring-dedicated|recoil-main" 2>/dev/null
    ```
 
-2. Check for any process holding UDP port 8452 (engine autohost port) and kill it:
+2. Find and kill any stale `dotnet test` process trees (vstest, testhost, MSBuild) from HighBar test runs:
+   ```bash
+   pgrep -f "vstest.console.dll.*HighBar|testhost.dll.*HighBar" | xargs -r kill -9 2>/dev/null
+   pgrep -f "dotnet test tests/integration" | xargs -r kill -9 2>/dev/null
+   ```
+
+3. Check for any process holding UDP port 8452 (engine autohost port) and kill it:
    ```bash
    ss -ulnp | grep 8452
    ```
    If found, extract the PID and `kill -9` it.
 
-3. Clean up stale socket files:
+4. Clean up stale socket files:
    ```bash
    rm -f /tmp/highbar-test-*.sock /tmp/highbar-test-*.sock.pid
    rm -f /tmp/hb-test*.sock /tmp/hb*.sock
    ```
 
-4. Verify everything is clean:
+5. Verify everything is clean:
    ```bash
    pgrep -a "spring|recoil" || echo "No engine processes"
+   pgrep -af "vstest|testhost" | grep -i highbar || echo "No stale test processes"
    ss -ulnp | grep 8452 || echo "Port 8452 free"
    ls /tmp/highbar-test-*.sock 2>/dev/null || echo "No stale sockets"
    ```
