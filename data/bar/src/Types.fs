@@ -39,7 +39,7 @@ type FeatureDef =
 /// Record for weapon definitions.
 type WeaponDef =
     { name: string
-      displayName: string option
+      displayName: string
       weaponType: string option
       damage: Map<string, float>
       range: ValueOrExpr<float> option
@@ -56,7 +56,5 @@ type WeaponDef =
       soundHit: string option
       explosiongenerator: string option
       rgbColor: string option
-      onlyTargetCategory: string option
-      badTargetCategory: string option
       customParams: Map<string, string>
       extras: Map<string, string> }

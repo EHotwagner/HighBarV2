@@ -57,9 +57,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 008-unified-bar-generators: Added F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework)
 - 007-flat-bar-types: Added F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework)
 - 006-typed-bar-data: Added F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework)
-- 005-fix-test-failures: Added F# / .NET 8.0 (test harness + tests), TDF config format (game-setup.txt) + xUnit (test framework), spring-headless 2025.06.21 (engine), BAR game content (test-29833-ee0f96a)
 
 
 <!-- MANUAL ADDITIONS START -->

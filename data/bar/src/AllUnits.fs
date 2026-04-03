@@ -1,4 +1,4 @@
-// Auto-generated index of all BAR unit definitions (flat types)
+// Auto-generated index of all BAR unit definitions
 namespace BarData
 
 module AllUnits =

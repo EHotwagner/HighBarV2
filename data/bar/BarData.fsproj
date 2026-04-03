@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Compile Include="src/Types.fs" />
+    <Compile Include="src/ComposableTypes.fs" />
     <Compile Include="src/Commands.fs" />
     <Compile Include="src/CustomCommands.fs" />
     <Compile Include="src/UnitSummary.fs" />
@@ -115,6 +116,7 @@
     <Compile Include="src/other_raptors_Swarmer_Advanced.fs" />
     <Compile Include="src/other_raptors_Swarmer_AllTerrain.fs" />
     <Compile Include="src/AllUnits.fs" />
+    <Compile Include="src/AllUnitDefs.fs" />
   </ItemGroup>
 
 </Project>

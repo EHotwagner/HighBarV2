@@ -1,4 +1,4 @@
-// Auto-generated BAR unit data: CorBuildings/SeaEconomy (flat per-unit types)
+// Auto-generated BAR unit data: CorBuildings/SeaEconomy (unified)
 namespace BarData.Units
 
 open BarData
@@ -15,6 +15,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           yardMap: string
           activateWhenBuilt: bool
           canRepeat: bool
@@ -32,6 +43,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 273.0
           footprintX = 3.0
           footprintZ = 3.0
+          objectName = Some "Units/CORFMKR.s3o"
+          buildPic = Some "CORFMKR.DDS"
+          script = Some "Units/CORFMKR.cob"
+          corpse = None
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
           yardMap = "wwwwwwwww"
           activateWhenBuilt = true
           canRepeat = false
@@ -60,6 +82,124 @@ module CorBuildings_SeaEconomy =
                 "buildangle", "8192.0"
             ] }
 
+    let corfmkrDef : UnitDef =
+        { name = "corfmkr"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 1.0
+          energyCost = ValueOrExpr.Concrete 1250.0
+          buildTime = ValueOrExpr.Concrete 2680.0
+          health = ValueOrExpr.Concrete 167.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Units/CORFMKR.s3o"
+          buildPic = Some "CORFMKR.DDS"
+          script = Some "Units/CORFMKR.cob"
+          corpse = None
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = None
+          building = Some (
+            { yardMap = Some "wwwwwwwww"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = None
+          sounds = Some (
+            { build = None
+              repair = None
+              working = Some "arm-bld-metalmaker"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["metlon2"] })
+          customParams = Map.ofList [
+              "energyconv_capacity", "70.0"
+              "energyconv_efficiency", "0.01429"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "unitgroup", "metal"
+          ]
+          extras = Map.ofList [
+              "buildangle", "8192.0"
+          ] }
+
+    let corfmkrToFlat (def: UnitDef) : Corfmkr =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let corfmkrToUnitDef (flat: Corfmkr) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = None
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = None
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Cortide =
         { name: string
           subfolder: string
@@ -70,6 +210,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           energyStorage: float
           yardMap: string
           activateWhenBuilt: bool
@@ -89,6 +240,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 130.0
           footprintX = 3.0
           footprintZ = 3.0
+          objectName = Some "Units/CORTIDE.s3o"
+          buildPic = Some "CORTIDE.DDS"
+          script = Some "Units/CORTIDE.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "tidal"
+          selfDestructAs = Some "tidalSelfd"
+          collisionVolumeOffsets = Some "-3 2 -1"
+          collisionVolumeScales = Some "28 30 33"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
           energyStorage = 50.0
           yardMap = "wwwwwwwww"
           activateWhenBuilt = true
@@ -150,6 +312,168 @@ module CorBuildings_SeaEconomy =
                 "tidalgenerator", "1.0"
             ] }
 
+    let cortideDef : UnitDef =
+        { name = "cortide"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 85.0
+          energyCost = ValueOrExpr.Concrete 250.0
+          buildTime = ValueOrExpr.Concrete 2100.0
+          health = ValueOrExpr.Concrete 395.0
+          sightDistance = ValueOrExpr.Concrete 130.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Units/CORTIDE.s3o"
+          buildPic = Some "CORTIDE.DDS"
+          script = Some "Units/CORTIDE.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "tidal"
+          selfDestructAs = Some "tidalSelfd"
+          collisionVolumeOffsets = Some "-3 2 -1"
+          collisionVolumeScales = Some "28 30 33"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 50.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "wwwwwwwww"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some false
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0.0854949951172 0.00585021972656 -1.6875"
+                collisionVolumeScales = Some "43.4789733887 28.4617004395 39.825012207"
+                collisionVolumeType = Some "Box"
+                damage = Some 145.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 4.0
+                metal = Some 53.0
+                object_ = Some "Units/cortide_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "35.0 4.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 185.0
+                featureDead = None
+                footprintX = Some 2.0
+                footprintZ = Some 2.0
+                height = Some 4.0
+                metal = Some 17.0
+                object_ = Some "Units/cor2X2D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["tidegen2"] })
+          customParams = Map.ofList [
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "unitgroup", "energy"
+          ]
+          extras = Map.ofList [
+              "buildangle", "4096.0"
+              "onoffable", "false"
+              "tidalgenerator", "1.0"
+          ] }
+
+    let cortideToFlat (def: UnitDef) : Cortide =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          energyStorage = def.economy.Value.energyStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let cortideToUnitDef (flat: Cortide) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = None
+              metalMake = None
+              energyStorage = Some flat.energyStorage
+              metalStorage = None
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwadves =
         { name: string
           subfolder: string
@@ -160,6 +484,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           energyStorage: float
           yardMap: string
           canRepeat: bool
@@ -178,6 +513,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 192.0
           footprintX = 5.0
           footprintZ = 5.0
+          objectName = Some "Units/CORUWADVES.s3o"
+          buildPic = Some "CORUWADVES.DDS"
+          script = Some "Units/CORUWADVES.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "advenergystorage"
+          selfDestructAs = Some "advenergystorageSelfd"
+          collisionVolumeOffsets = Some "0 -16 0"
+          collisionVolumeScales = Some "90 65 90"
+          collisionVolumeType = Some "CylY"
+          seismicSignature = Some 0.0
+          category = Some "CANBEUW"
           energyStorage = 40000.0
           yardMap = "ooooooooooooooooooooooooo"
           canRepeat = false
@@ -242,6 +588,171 @@ module CorBuildings_SeaEconomy =
                 "buildangle", "7822.0"
             ] }
 
+    let coruwadvesDef : UnitDef =
+        { name = "coruwadves"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 840.0
+          energyCost = ValueOrExpr.Concrete 11000.0
+          buildTime = ValueOrExpr.Concrete 20400.0
+          health = ValueOrExpr.Concrete 12700.0
+          sightDistance = ValueOrExpr.Concrete 192.0
+          footprintX = 5.0
+          footprintZ = 5.0
+          objectName = Some "Units/CORUWADVES.s3o"
+          buildPic = Some "CORUWADVES.DDS"
+          script = Some "Units/CORUWADVES.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "advenergystorage"
+          selfDestructAs = Some "advenergystorageSelfd"
+          collisionVolumeOffsets = Some "0 -16 0"
+          collisionVolumeScales = Some "90 65 90"
+          collisionVolumeType = Some "CylY"
+          seismicSignature = Some 0.0
+          category = Some "CANBEUW"
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 40000.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooooooooooooooooooo"
+              activateWhenBuilt = None
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "-2.07458496094 4.21508789046e-05 -0.501388549805"
+                collisionVolumeScales = Some "87.0777893066 35.5382843018 90.1298522949"
+                collisionVolumeType = Some "Box"
+                damage = Some 4560.0
+                featureDead = Some "HEAP"
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 9.0
+                metal = Some 514.0
+                object_ = Some "Units/coruwadves_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 2280.0
+                featureDead = None
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = None
+                metal = Some 206.0
+                object_ = Some "Units/cor5X5A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["storngy2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "8.0"
+              "buildinggrounddecalsizey", "8.0"
+              "buildinggrounddecaltype", "decals/coruwadves_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "techlevel", "2.0"
+              "unitgroup", "energy"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "7822.0"
+          ] }
+
+    let coruwadvesToFlat (def: UnitDef) : Coruwadves =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          energyStorage = def.economy.Value.energyStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwadvesToUnitDef (flat: Coruwadves) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = None
+              metalMake = None
+              energyStorage = Some flat.energyStorage
+              metalStorage = None
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = None
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwadvms =
         { name: string
           subfolder: string
@@ -252,6 +763,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           metalStorage: float
           yardMap: string
           canRepeat: bool
@@ -270,6 +792,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 182.0
           footprintX = 4.0
           footprintZ = 4.0
+          objectName = Some "Units/CORUWADVMS.s3o"
+          buildPic = Some "CORUWADVMS.DDS"
+          script = Some "Units/CORUWADVMS.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "mediumBuildingexplosiongeneric"
+          selfDestructAs = Some "mediumBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "-6 0 0"
+          collisionVolumeScales = Some "46 40 58"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = Some "CANBEUW"
           metalStorage = 10000.0
           yardMap = "oooooooooooooooo"
           canRepeat = false
@@ -334,6 +867,171 @@ module CorBuildings_SeaEconomy =
                 "buildangle", "6093.0"
             ] }
 
+    let coruwadvmsDef : UnitDef =
+        { name = "coruwadvms"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 760.0
+          energyCost = ValueOrExpr.Concrete 11000.0
+          buildTime = ValueOrExpr.Concrete 20500.0
+          health = ValueOrExpr.Concrete 11200.0
+          sightDistance = ValueOrExpr.Concrete 182.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/CORUWADVMS.s3o"
+          buildPic = Some "CORUWADVMS.DDS"
+          script = Some "Units/CORUWADVMS.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "mediumBuildingexplosiongeneric"
+          selfDestructAs = Some "mediumBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "-6 0 0"
+          collisionVolumeScales = Some "46 40 58"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = Some "CANBEUW"
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = None
+              metalStorage = Some 10000.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooooooo"
+              activateWhenBuilt = None
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "-8.0463180542 -4.28710937506e-05 2.1676940918"
+                collisionVolumeScales = Some "49.8645172119 42.9171142578 64.3353881836"
+                collisionVolumeType = Some "Box"
+                damage = Some 4020.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 9.0
+                metal = Some 462.0
+                object_ = Some "Units/coruwadvms_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "85.0 14.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 2010.0
+                featureDead = None
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = None
+                metal = Some 185.0
+                object_ = Some "Units/cor4X4A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["stormtl2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "6.0"
+              "buildinggrounddecalsizey", "6.0"
+              "buildinggrounddecaltype", "decals/coruwadvms_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "techlevel", "2.0"
+              "unitgroup", "metal"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "6093.0"
+          ] }
+
+    let coruwadvmsToFlat (def: UnitDef) : Coruwadvms =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          metalStorage = def.economy.Value.metalStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwadvmsToUnitDef (flat: Coruwadvms) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = None
+              metalMake = None
+              energyStorage = None
+              metalStorage = Some flat.metalStorage
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = None
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwageo =
         { name: string
           subfolder: string
@@ -344,6 +1042,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           energyMake: ValueOrExpr<float>
           energyStorage: float
           yardMap: string
@@ -363,6 +1072,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 273.0
           footprintX = 5.0
           footprintZ = 5.0
+          objectName = Some "Units/CORUWAGEO.s3o"
+          buildPic = Some "CORUWAGEO.DDS"
+          script = Some "Units/CORUWAGEO.cob"
+          corpse = None
+          explodeAs = Some "customfusionexplo"
+          selfDestructAs = Some "advgeo"
+          collisionVolumeOffsets = Some "0 5 0"
+          collisionVolumeScales = Some "96 86 96"
+          collisionVolumeType = Some "cylY"
+          seismicSignature = Some 0.0
+          category = None
           energyMake = ValueOrExpr.Concrete 1250.0
           energyStorage = 12000.0
           yardMap = "h cbgybsyybc bsbssbbssb ysbsbssbbg ybsssbsssy sbsbsssbsb bsbsssbsbs ysssbsssby gbbssbsbsy bssbbssbsb cbyysbygbc"
@@ -404,6 +1124,148 @@ module CorBuildings_SeaEconomy =
                 "maxdamage", "4150.0"
             ] }
 
+    let coruwageoDef : UnitDef =
+        { name = "coruwageo"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 0.0
+          energyCost = ValueOrExpr.Concrete 0.0
+          buildTime = ValueOrExpr.Concrete 48000.0
+          health = ValueOrExpr.Concrete 0.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 5.0
+          footprintZ = 5.0
+          objectName = Some "Units/CORUWAGEO.s3o"
+          buildPic = Some "CORUWAGEO.DDS"
+          script = Some "Units/CORUWAGEO.cob"
+          corpse = None
+          explodeAs = Some "customfusionexplo"
+          selfDestructAs = Some "advgeo"
+          collisionVolumeOffsets = Some "0 5 0"
+          collisionVolumeScales = Some "96 86 96"
+          collisionVolumeType = Some "cylY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = Some (ValueOrExpr.Concrete 1250.0)
+              metalMake = None
+              energyStorage = Some 12000.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "h cbgybsyybc bsbssbbssb ysbsbssbbg ybsssbsssy sbsbsssbsb bsbsssbsbs ysssbsssby gbbssbsbsy bssbbssbsb cbyysbygbc"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = None
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["geothrm2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "8.0"
+              "buildinggrounddecalsizey", "8.0"
+              "buildinggrounddecaltype", "decals/corageo_aoplane.dds"
+              "cvbuildable", "true"
+              "geothermal", "1.0"
+              "model_author", "Cremuss, Hornet"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "techlevel", "2.0"
+              "unitgroup", "energy"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "acceleration", "0.0"
+              "brakerate", "0.0"
+              "buildangle", "0.0"
+              "buildcostenergy", "27000.0"
+              "buildcostmetal", "1500.0"
+              "maxdamage", "4150.0"
+          ] }
+
+    let coruwageoToFlat (def: UnitDef) : Coruwageo =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          energyMake = def.economy.Value.energyMake.Value
+          energyStorage = def.economy.Value.energyStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwageoToUnitDef (flat: Coruwageo) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = Some flat.energyMake
+              metalMake = None
+              energyStorage = Some flat.energyStorage
+              metalStorage = None
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = None
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwes =
         { name: string
           subfolder: string
@@ -414,6 +1276,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           energyStorage: float
           yardMap: string
           canRepeat: bool
@@ -432,6 +1305,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 169.0
           footprintX = 4.0
           footprintZ = 4.0
+          objectName = Some "Units/CORUWES.s3o"
+          buildPic = Some "CORUWES.DDS"
+          script = Some "Units/CORUWES.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric-uw"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
           energyStorage = 6000.0
           yardMap = "oooooooooooooooo"
           canRepeat = false
@@ -495,6 +1379,170 @@ module CorBuildings_SeaEconomy =
                 "buildangle", "8192.0"
             ] }
 
+    let coruwesDef : UnitDef =
+        { name = "coruwes"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 175.0
+          energyCost = ValueOrExpr.Concrete 1800.0
+          buildTime = ValueOrExpr.Concrete 4260.0
+          health = ValueOrExpr.Concrete 2000.0
+          sightDistance = ValueOrExpr.Concrete 169.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/CORUWES.s3o"
+          buildPic = Some "CORUWES.DDS"
+          script = Some "Units/CORUWES.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric-uw"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 6000.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooooooo"
+              activateWhenBuilt = None
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "5.91815185547 -0.0585083374023 -0.949203491211"
+                collisionVolumeScales = Some "57.7583618164 50.6997833252 64.7775878906"
+                collisionVolumeType = Some "Box"
+                damage = Some 1825.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 20.0
+                metal = Some 182.0
+                object_ = Some "Units/coruwes_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "85.0 14.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 913.0
+                featureDead = None
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 4.0
+                metal = Some 73.0
+                object_ = Some "Units/cor4X4D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["storngy2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "6.0"
+              "buildinggrounddecalsizey", "6.0"
+              "buildinggrounddecaltype", "decals/coruwes_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "unitgroup", "energy"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "8192.0"
+          ] }
+
+    let coruwesToFlat (def: UnitDef) : Coruwes =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          energyStorage = def.economy.Value.energyStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwesToUnitDef (flat: Coruwes) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = None
+              metalMake = None
+              energyStorage = Some flat.energyStorage
+              metalStorage = None
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = None
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwfus =
         { name: string
           subfolder: string
@@ -505,6 +1553,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           energyMake: ValueOrExpr<float>
           energyStorage: float
           yardMap: string
@@ -525,6 +1584,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 143.0
           footprintX = 5.0
           footprintZ = 5.0
+          objectName = Some "Units/CORUWFUS.s3o"
+          buildPic = Some "CORUWFUS.DDS"
+          script = Some "Units/CORUWFUS.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "fusionExplosion-uw"
+          selfDestructAs = Some "fusionExplosionSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
           energyMake = ValueOrExpr.Concrete 1220.0
           energyStorage = 2500.0
           yardMap = "ooooooooooooooooooooooooo"
@@ -593,6 +1663,175 @@ module CorBuildings_SeaEconomy =
                 "hidedamage", "true"
             ] }
 
+    let coruwfusDef : UnitDef =
+        { name = "coruwfus"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 5400.0
+          energyCost = ValueOrExpr.Concrete 34000.0
+          buildTime = ValueOrExpr.Concrete 105000.0
+          health = ValueOrExpr.Concrete 5900.0
+          sightDistance = ValueOrExpr.Concrete 143.0
+          footprintX = 5.0
+          footprintZ = 5.0
+          objectName = Some "Units/CORUWFUS.s3o"
+          buildPic = Some "CORUWFUS.DDS"
+          script = Some "Units/CORUWFUS.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "fusionExplosion-uw"
+          selfDestructAs = Some "fusionExplosionSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = Some (ValueOrExpr.Concrete 1220.0)
+              metalMake = None
+              energyStorage = Some 2500.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooooooooooooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "1.8653717041 -0.0807505981445 0.994560241699"
+                collisionVolumeScales = Some "89.9762878418 27.3368988037 72.5986480713"
+                collisionVolumeType = Some "Box"
+                damage = Some 3210.0
+                featureDead = Some "HEAP"
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 20.0
+                metal = Some 3099.0
+                object_ = Some "Units/coruwfus_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1605.0
+                featureDead = None
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 4.0
+                metal = Some 1240.0
+                object_ = Some "Units/cor5X5A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["watfusn2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "8.0"
+              "buildinggrounddecalsizey", "8.0"
+              "buildinggrounddecaltype", "decals/coruwfus_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "techlevel", "2.0"
+              "unitgroup", "energy"
+              "restrictions_inclusion", "_nofusion_"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "8192.0"
+              "hidedamage", "true"
+          ] }
+
+    let coruwfusToFlat (def: UnitDef) : Coruwfus =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          energyMake = def.economy.Value.energyMake.Value
+          energyStorage = def.economy.Value.energyStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwfusToUnitDef (flat: Coruwfus) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = Some flat.energyMake
+              metalMake = None
+              energyStorage = Some flat.energyStorage
+              metalStorage = None
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwgeo =
         { name: string
           subfolder: string
@@ -603,6 +1842,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           energyMake: ValueOrExpr<float>
           energyStorage: float
           yardMap: string
@@ -623,6 +1873,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 273.0
           footprintX = 5.0
           footprintZ = 5.0
+          objectName = Some "Units/CORUWGEO.s3o"
+          buildPic = Some "CORUWGEO.DDS"
+          script = Some "Units/CORUWGEO.cob"
+          corpse = Some "dead"
+          explodeAs = Some "geo"
+          selfDestructAs = Some "geo"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "63 45 63"
+          collisionVolumeType = Some "cylY"
+          seismicSignature = Some 0.0
+          category = None
           energyMake = ValueOrExpr.Concrete 300.0
           energyStorage = 1000.0
           yardMap = "h cbbbbgbbbc bgbggbbggb bgbgbggbbb bbgggbgggb gbgbgggbgb bgbgggbgbg bgggbgggbb bbbggbgbgb bggbbggbgb cbbbgbbbbc"
@@ -695,6 +1956,179 @@ module CorBuildings_SeaEconomy =
                 "maxdamage", "2050.0"
             ] }
 
+    let coruwgeoDef : UnitDef =
+        { name = "coruwgeo"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 0.0
+          energyCost = ValueOrExpr.Concrete 0.0
+          buildTime = ValueOrExpr.Concrete 12900.0
+          health = ValueOrExpr.Concrete 0.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 5.0
+          footprintZ = 5.0
+          objectName = Some "Units/CORUWGEO.s3o"
+          buildPic = Some "CORUWGEO.DDS"
+          script = Some "Units/CORUWGEO.cob"
+          corpse = Some "dead"
+          explodeAs = Some "geo"
+          selfDestructAs = Some "geo"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "63 45 63"
+          collisionVolumeType = Some "cylY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = Some (ValueOrExpr.Concrete 300.0)
+              metalMake = None
+              energyStorage = Some 1000.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "h cbbbbgbbbc bgbggbbggb bgbgbggbbb bbgggbgggb gbgbgggbgb bgbgggbgbg bgggbgggbb bbbggbgbgb bggbbggbgb cbbbgbbbbc"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "63 45 63"
+                collisionVolumeType = Some "cylY"
+                damage = Some 1110.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 20.0
+                metal = Some 328.0
+                object_ = Some "Units/corgeo_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "85.0 14.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 555.0
+                featureDead = None
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 4.0
+                metal = Some 131.0
+                object_ = Some "Units/cor4X4B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["geothrm2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "6.0"
+              "buildinggrounddecalsizey", "6.0"
+              "buildinggrounddecaltype", "decals/corgeo_aoplane.dds"
+              "cvbuildable", "true"
+              "geothermal", "1.0"
+              "model_author", "Cremuss, Hornet"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "unitgroup", "energy"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "acceleration", "0.0"
+              "brakerate", "0.0"
+              "buildangle", "4096.0"
+              "buildcostenergy", "13000.0"
+              "buildcostmetal", "540.0"
+              "maxdamage", "2050.0"
+          ] }
+
+    let coruwgeoToFlat (def: UnitDef) : Coruwgeo =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          energyMake = def.economy.Value.energyMake.Value
+          energyStorage = def.economy.Value.energyStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwgeoToUnitDef (flat: Coruwgeo) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = Some flat.energyMake
+              metalMake = None
+              energyStorage = Some flat.energyStorage
+              metalStorage = None
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwmme =
         { name: string
           subfolder: string
@@ -705,6 +2139,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           metalStorage: float
           extractsMetal: float
           yardMap: string
@@ -725,6 +2170,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 169.0
           footprintX = 4.0
           footprintZ = 4.0
+          objectName = Some "Units/CORUWMME.s3o"
+          buildPic = Some "CORUWMME.DDS"
+          script = Some "Units/CORUWMME.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "mediumBuildingexplosiongeneric-uw"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
           metalStorage = 600.0
           extractsMetal = 0.004
           yardMap = "h cbbbbbbc bssssssb bsssossb bsobbssb bssbbosb bssosssb bssssssb cbbbbbbc"
@@ -796,6 +2252,178 @@ module CorBuildings_SeaEconomy =
                 "onoffable", "true"
             ] }
 
+    let coruwmmeDef : UnitDef =
+        { name = "coruwmme"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 640.0
+          energyCost = ValueOrExpr.Concrete 8100.0
+          buildTime = ValueOrExpr.Concrete 14100.0
+          health = ValueOrExpr.Concrete 3900.0
+          sightDistance = ValueOrExpr.Concrete 169.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/CORUWMME.s3o"
+          buildPic = Some "CORUWMME.DDS"
+          script = Some "Units/CORUWMME.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "mediumBuildingexplosiongeneric-uw"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = None
+              metalStorage = Some 600.0
+              extractsMetal = Some 0.004 })
+          building = Some (
+            { yardMap = Some "h cbbbbbbc bssssssb bsssossb bsobbssb bssbbosb bssosssb bssssssb cbbbbbbc"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0.0 -4.8856736084 -0.0"
+                collisionVolumeScales = Some "80.0 29.6428527832 80.0"
+                collisionVolumeType = Some "Box"
+                damage = Some 1243.0
+                featureDead = Some "HEAP"
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 150.0
+                metal = Some 550.0
+                object_ = Some "Units/coruwmme_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 622.0
+                featureDead = None
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 5.0
+                metal = Some 220.0
+                object_ = Some "Units/cor5X5C.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = Some "waterex2"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["waterex2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "7.7"
+              "buildinggrounddecalsizey", "7.7"
+              "buildinggrounddecaltype", "decals/coruwmme_aoplane.dds"
+              "cvbuildable", "true"
+              "metal_extractor", "4.0"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "techlevel", "2.0"
+              "unitgroup", "metal"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "32768.0"
+              "damagemodifier", "0.5"
+              "energyupkeep", "20.0"
+              "onoffable", "true"
+          ] }
+
+    let coruwmmeToFlat (def: UnitDef) : Coruwmme =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          metalStorage = def.economy.Value.metalStorage.Value
+          extractsMetal = def.economy.Value.extractsMetal.Value
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwmmeToUnitDef (flat: Coruwmme) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = None
+              metalMake = None
+              energyStorage = None
+              metalStorage = Some flat.metalStorage
+              extractsMetal = Some flat.extractsMetal
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwmmm =
         { name: string
           subfolder: string
@@ -806,6 +2434,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           yardMap: string
           activateWhenBuilt: bool
           canRepeat: bool
@@ -824,6 +2463,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 143.0
           footprintX = 5.0
           footprintZ = 5.0
+          objectName = Some "Units/CORUWMMM.s3o"
+          buildPic = Some "CORUWMMM.DDS"
+          script = Some "Units/coruwmmm.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingExplosionGeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "120 120 120"
+          collisionVolumeType = Some "Ell"
+          seismicSignature = Some 0.0
+          category = None
           yardMap = "ooooooooooooooooooooooooo"
           activateWhenBuilt = true
           canRepeat = false
@@ -885,6 +2535,157 @@ module CorBuildings_SeaEconomy =
                 "buildangle", "8192.0"
             ] }
 
+    let coruwmmmDef : UnitDef =
+        { name = "coruwmmm"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 370.0
+          energyCost = ValueOrExpr.Concrete 21000.0
+          buildTime = ValueOrExpr.Concrete 31300.0
+          health = ValueOrExpr.Concrete 560.0
+          sightDistance = ValueOrExpr.Concrete 143.0
+          footprintX = 5.0
+          footprintZ = 5.0
+          objectName = Some "Units/CORUWMMM.s3o"
+          buildPic = Some "CORUWMMM.DDS"
+          script = Some "Units/coruwmmm.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingExplosionGeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "120 120 120"
+          collisionVolumeType = Some "Ell"
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = None
+          building = Some (
+            { yardMap = Some "ooooooooooooooooooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0.0 -2.2497558593e-05 -0.0"
+                collisionVolumeScales = Some "60.0 29.4457550049 60.0"
+                collisionVolumeType = Some "Box"
+                damage = Some 300.0
+                featureDead = Some "HEAP"
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 20.0
+                metal = Some 242.0
+                object_ = Some "Units/coruwmmm_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 150.0
+                featureDead = None
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 4.0
+                metal = Some 97.0
+                object_ = Some "Units/cor5X5A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = Some "metlrun2"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["metlon2"] })
+          customParams = Map.ofList [
+              "energyconv_capacity", "600.0"
+              "energyconv_efficiency", "0.01724"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "techlevel", "2.0"
+              "unitgroup", "metal"
+          ]
+          extras = Map.ofList [
+              "buildangle", "8192.0"
+          ] }
+
+    let coruwmmmToFlat (def: UnitDef) : Coruwmmm =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          yardMap = def.building.Value.yardMap.Value
+          activateWhenBuilt = def.building.Value.activateWhenBuilt.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwmmmToUnitDef (flat: Coruwmmm) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = None
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = Some flat.activateWhenBuilt
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
+
     type Coruwms =
         { name: string
           subfolder: string
@@ -895,6 +2696,17 @@ module CorBuildings_SeaEconomy =
           sightDistance: ValueOrExpr<float>
           footprintX: float
           footprintZ: float
+          objectName: string option
+          buildPic: string option
+          script: string option
+          corpse: string option
+          explodeAs: string option
+          selfDestructAs: string option
+          collisionVolumeOffsets: string option
+          collisionVolumeScales: string option
+          collisionVolumeType: string option
+          seismicSignature: float option
+          category: string option
           metalStorage: float
           yardMap: string
           canRepeat: bool
@@ -913,6 +2725,17 @@ module CorBuildings_SeaEconomy =
           sightDistance = ValueOrExpr.Concrete 169.0
           footprintX = 4.0
           footprintZ = 4.0
+          objectName = Some "Units/CORUWMS.s3o"
+          buildPic = Some "CORUWMS.DDS"
+          script = Some "Units/CORUWMS.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric-uw"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
           metalStorage = 3000.0
           yardMap = "oooooooooooooooo"
           canRepeat = false
@@ -975,4 +2798,168 @@ module CorBuildings_SeaEconomy =
           extras = Map.ofList [
                 "buildangle", "8192.0"
             ] }
+
+    let coruwmsDef : UnitDef =
+        { name = "coruwms"
+          subfolder = "CorBuildings/SeaEconomy"
+          metalCost = ValueOrExpr.Concrete 340.0
+          energyCost = ValueOrExpr.Concrete 590.0
+          buildTime = ValueOrExpr.Concrete 2920.0
+          health = ValueOrExpr.Concrete 2100.0
+          sightDistance = ValueOrExpr.Concrete 169.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/CORUWMS.s3o"
+          buildPic = Some "CORUWMS.DDS"
+          script = Some "Units/CORUWMS.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric-uw"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd-uw"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = None
+              metalStorage = Some 3000.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooooooo"
+              activateWhenBuilt = None
+              canRepeat = Some false })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0.0 8.00781250021e-06 -0.0"
+                collisionVolumeScales = Some "80.0 48.7014160156 80.0"
+                collisionVolumeType = Some "Box"
+                damage = Some 2100.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 20.0
+                metal = Some 228.0
+                object_ = Some "Units/coruwms_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "85.0 14.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 1050.0
+                featureDead = None
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 4.0
+                metal = Some 91.0
+                object_ = Some "Units/cor4X4D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["stormtl2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "6.0"
+              "buildinggrounddecalsizey", "6.0"
+              "buildinggrounddecaltype", "decals/coruwms_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "removestop", "true"
+              "removewait", "true"
+              "subfolder", "CorBuildings/SeaEconomy"
+              "unitgroup", "metal"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "8192.0"
+          ] }
+
+    let coruwmsToFlat (def: UnitDef) : Coruwms =
+        { name = def.name
+          subfolder = def.subfolder
+          metalCost = def.metalCost
+          energyCost = def.energyCost
+          buildTime = def.buildTime
+          health = def.health
+          sightDistance = def.sightDistance
+          footprintX = def.footprintX
+          footprintZ = def.footprintZ
+          objectName = def.objectName
+          buildPic = def.buildPic
+          script = def.script
+          corpse = def.corpse
+          explodeAs = def.explodeAs
+          selfDestructAs = def.selfDestructAs
+          collisionVolumeOffsets = def.collisionVolumeOffsets
+          collisionVolumeScales = def.collisionVolumeScales
+          collisionVolumeType = def.collisionVolumeType
+          seismicSignature = def.seismicSignature
+          category = def.category
+          metalStorage = def.economy.Value.metalStorage.Value
+          yardMap = def.building.Value.yardMap.Value
+          canRepeat = def.building.Value.canRepeat.Value
+          featureDefs = def.featureDefs.Value
+          sounds = def.sounds.Value
+          customParams = def.customParams
+          extras = def.extras }
+
+    let coruwmsToUnitDef (flat: Coruwms) : UnitDef =
+        { name = flat.name
+          subfolder = flat.subfolder
+          metalCost = flat.metalCost
+          energyCost = flat.energyCost
+          buildTime = flat.buildTime
+          health = flat.health
+          sightDistance = flat.sightDistance
+          footprintX = flat.footprintX
+          footprintZ = flat.footprintZ
+          objectName = flat.objectName
+          buildPic = flat.buildPic
+          script = flat.script
+          corpse = flat.corpse
+          explodeAs = flat.explodeAs
+          selfDestructAs = flat.selfDestructAs
+          collisionVolumeOffsets = flat.collisionVolumeOffsets
+          collisionVolumeScales = flat.collisionVolumeScales
+          collisionVolumeType = flat.collisionVolumeType
+          seismicSignature = flat.seismicSignature
+          category = flat.category
+          movement = None
+          builder = None
+          weapons = None
+          economy = Some {
+              energyMake = None
+              metalMake = None
+              energyStorage = None
+              metalStorage = Some flat.metalStorage
+              extractsMetal = None
+            }
+          building = Some {
+              yardMap = Some flat.yardMap
+              activateWhenBuilt = None
+              canRepeat = Some flat.canRepeat
+            }
+          featureDefs = Some flat.featureDefs
+          sounds = Some flat.sounds
+          customParams = flat.customParams
+          extras = flat.extras }
 

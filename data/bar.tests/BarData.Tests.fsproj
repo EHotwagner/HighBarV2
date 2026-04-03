@@ -11,6 +11,10 @@
     <Compile Include="Tests/CorrectnessTests.fs" />
     <Compile Include="Tests/CapabilityTests.fs" />
     <Compile Include="Tests/StructuralTests.fs" />
+    <Compile Include="Tests/ComposableCorrectnessTests.fs" />
+    <Compile Include="Tests/ComposableCapabilityTests.fs" />
+    <Compile Include="Tests/ComposableStructuralTests.fs" />
+    <Compile Include="Tests/ConversionTests.fs" />
   </ItemGroup>
 
   <ItemGroup>
