@@ -12,7 +12,9 @@ local mapName = os.getenv("HIGHBAR_TEST_MAP") or "Comet Catcher Remake 1.8"
 
 return {
     ["mapname"] = mapName,
-    ["modoptions"] = {},
+    ["modoptions"] = {
+        ["gamemode"] = 3,  -- Disable victory conditions so game stays alive until harness terminates
+    },
     ["ishost"] = 1,
     ["myplayername"] = "HighBarV2Test",
 

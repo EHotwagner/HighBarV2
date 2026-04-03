@@ -1,0 +1,14 @@
+{
+  "engine": {
+    "version": "105.1.1-2549-g5765528 bar",
+    "binary": "spring-headless",
+    "downloadUrl": "https://github.com/beyond-all-reason/spring/releases"
+  },
+  "game": {
+    "name": "Beyond All Reason test-27612-e70fbc0",
+    "rapidTag": "byar-test:test"
+  },
+  "map": {
+    "name": "Comet Catcher Remake 1.8"
+  }
+}
