@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="src/Units.fs" />
     <Compile Include="src/Events.fs" />
     <Compile Include="src/Commands.fs" />
     <Compile Include="src/Client.fs" />
@@ -18,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="proto-gen/HighBar.Proto.csproj" />
+    <ProjectReference Include="../../data/bar/BarData.fsproj" />
   </ItemGroup>
 
 </Project>
