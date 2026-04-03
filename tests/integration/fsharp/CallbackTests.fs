@@ -40,27 +40,13 @@ type CallbackTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Callbacks")>]
     member _.``Unit position query returns plausible coordinates``() =
-        // Note: Callback queries require the proxy to support callback requests
-        // within the frame loop. If the client API doesn't expose callbacks directly,
-        // we verify that units have valid positions through events.
-        let mutable unitFound = false
-
-        let (_, events) = runWithCallbackQuery 15 (fun frame idx ->
-            frame.Events |> List.iter (function
-                | GameEvent.UnitCreated(uid, _) -> unitFound <- true
-                | _ -> ())
-            []
-        )
-
-        Assert.True(unitFound, "Should have observed at least one unit")
-
-        // Verify UnitCreated events have valid unit IDs (position is implicit
-        // in the engine's spawn location from game-setup.lua)
+        // UnitCreated events are captured during fixture warm-up
         let unitIds =
-            events |> List.choose (function
+            engine.InitialEvents |> List.choose (function
                 | GameEvent.UnitCreated(uid, _) -> Some uid
                 | _ -> None)
-        Assert.True(unitIds.Length > 0, "Should have unit IDs from created events")
+
+        Assert.True(unitIds.Length > 0, "Should have unit IDs from initial events")
         for uid in unitIds do
             Assert.True(uid > 0, $"Unit ID should be > 0, got {uid}")
 

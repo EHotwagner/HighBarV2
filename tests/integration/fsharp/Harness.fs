@@ -20,6 +20,8 @@ type EngineFixture() =
     let mutable sessionDir: string = ""
     let mutable listener: Socket option = None
     let mutable client: HighBarClient option = None
+    let mutable initialFrames: GameFrame list = []
+    let mutable initialEvents: GameEvent list = []
 
     let testsDir =
         let assemblyDir = Path.GetDirectoryName(typeof<EngineFixture>.Assembly.Location)
@@ -61,6 +63,13 @@ type EngineFixture() =
 
     /// The shared client connected to the proxy. Use this in tests.
     member _.Client = client |> Option.defaultWith (fun () -> failwith "Client not initialized")
+
+    /// Frames captured during initial warm-up (first ~30 frames after handshake).
+    /// Contains one-time events like Init and UnitCreated that won't appear again.
+    member _.InitialFrames = initialFrames
+
+    /// All events from the initial warm-up frames (Init, UnitCreated, etc.).
+    member _.InitialEvents = initialEvents
 
     /// The session directory containing engine logs.
     member _.SessionDir = sessionDir
@@ -172,6 +181,22 @@ type EngineFixture() =
 
             // Step 5: Handshake
             c.Handshake() |> ignore
+
+            // Step 6: Warm-up — capture initial frames to buffer one-time events
+            // (Init, UnitCreated, etc.) that all tests may need to reference.
+            let warmupFrames = ResizeArray<GameFrame>()
+            try
+                c.Run(fun frame ->
+                    warmupFrames.Add(frame)
+                    if warmupFrames.Count >= 30 then
+                        failwith "CAPTURED_ENOUGH"
+                    []
+                )
+            with
+            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+
+            initialFrames <- warmupFrames |> Seq.toList
+            initialEvents <- initialFrames |> List.collect (fun f -> f.Events)
             client <- Some c
         }
 

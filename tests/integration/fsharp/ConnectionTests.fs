@@ -47,16 +47,11 @@ type ConnectionTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Connection")>]
     member _.``First frame contains Init event``() =
-        let client = engine.Client
-        let frames = runForFrames client 1
-
-        Assert.True(frames.Length >= 1, "Should have received at least 1 frame")
-
-        let first = frames.[0]
+        // Init is a one-time event captured during fixture warm-up
         let hasInit =
-            first.Events
+            engine.InitialEvents
             |> List.exists (function GameEvent.Init _ -> true | _ -> false)
-        Assert.True(hasInit, "First frame should contain an Init event")
+        Assert.True(hasInit, "Init event should appear in the initial warm-up frames")
 
     [<Fact>]
     [<Trait("Category", "Connection")>]

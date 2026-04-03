@@ -35,9 +35,9 @@ type CommandTests(engine: EngineFixture) =
 
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
 
-    /// Helper: get the first builder unit ID from events.
-    let getFirstUnitId (events: GameEvent list) =
-        events
+    /// Helper: get the first builder unit ID from initial warm-up events.
+    let getFirstUnitId () =
+        engine.InitialEvents
         |> List.tryPick (function
             | GameEvent.UnitCreated(unitId, _) -> Some unitId
             | _ -> None)
@@ -48,21 +48,13 @@ type CommandTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Commands")>]
     member _.``MoveCommand causes unit to change position``() =
-        let mutable builderUnitId = None
+        let builderUnitId = getFirstUnitId()
         let mutable moveSent = false
 
-        let (_, events) = runWithCommands 35 (fun frame idx ->
-            // Collect builder unit ID from UnitCreated events
-            if builderUnitId.IsNone then
-                match frame.Events |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None) with
-                | Some uid -> builderUnitId <- Some uid
-                | None -> ()
-
-            // Send move command once we have a unit ID (after a few frames)
+        let (_, _) = runWithCommands 35 (fun frame idx ->
             match builderUnitId with
             | Some uid when not moveSent && idx >= 3 ->
                 moveSent <- true
-                // Move to a far position from spawn (512, 512)
                 [ MoveCommand uid 2048.0f 100.0f 2048.0f ]
             | _ -> []
         )
@@ -76,16 +68,11 @@ type CommandTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Commands")>]
     member _.``StopCommand halts a moving unit``() =
-        let mutable builderUnitId = None
+        let builderUnitId = getFirstUnitId()
         let mutable moveSent = false
         let mutable stopSent = false
 
         let (frames, _) = runWithCommands 25 (fun frame idx ->
-            if builderUnitId.IsNone then
-                match frame.Events |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None) with
-                | Some uid -> builderUnitId <- Some uid
-                | None -> ()
-
             match builderUnitId with
             | Some uid when not moveSent && idx >= 3 ->
                 moveSent <- true
@@ -98,7 +85,6 @@ type CommandTests(engine: EngineFixture) =
 
         Assert.True(builderUnitId.IsSome, "Should have found a builder unit")
         Assert.True(stopSent, "Should have sent StopCommand")
-        // If we got through all frames without error, the commands were accepted
         Assert.True(frames.Length >= 25, $"Should have run 25 frames, got {frames.Length}")
 
     // ---- T027: BuildCommand ----
@@ -107,18 +93,11 @@ type CommandTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Commands")>]
     member _.``BuildCommand triggers unit creation``() =
-        let mutable builderUnitId = None
+        let builderUnitId = getFirstUnitId()
         let mutable buildSent = false
         let createdAfterBuild = ResizeArray<int>()
-        let mutable buildSentAtFrame = -1
 
-        let (_, events) = runWithCommands 70 (fun frame idx ->
-            if builderUnitId.IsNone then
-                match frame.Events |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None) with
-                | Some uid -> builderUnitId <- Some uid
-                | None -> ()
-
-            // Track units created after we sent the build command
+        let (_, _) = runWithCommands 70 (fun frame idx ->
             if buildSent then
                 frame.Events |> List.iter (function
                     | GameEvent.UnitCreated(uid, _) -> createdAfterBuild.Add(uid)
@@ -127,18 +106,12 @@ type CommandTests(engine: EngineFixture) =
             match builderUnitId with
             | Some uid when not buildSent && idx >= 5 ->
                 buildSent <- true
-                buildSentAtFrame <- idx
-                // Build a structure near the builder. UnitDefId will need to be
-                // a valid buildable type. Use a common builder's first buildable.
-                // For now use unitDefId=1 (typically a basic structure in BAR).
                 [ BuildCommand uid 1 600.0f 100.0f 600.0f 0 ]
             | _ -> []
         )
 
         Assert.True(builderUnitId.IsSome, "Should have found a builder unit")
         Assert.True(buildSent, "Should have sent BuildCommand")
-        // Building may or may not succeed depending on valid unitDefId
-        // The test verifies the command was accepted without crashing
 
     // ---- T028: PatrolCommand ----
 
@@ -146,15 +119,10 @@ type CommandTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Commands")>]
     member _.``PatrolCommand accepted without errors``() =
-        let mutable builderUnitId = None
+        let builderUnitId = getFirstUnitId()
         let mutable patrolSent = false
 
         let (frames, _) = runWithCommands 25 (fun frame idx ->
-            if builderUnitId.IsNone then
-                match frame.Events |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None) with
-                | Some uid -> builderUnitId <- Some uid
-                | None -> ()
-
             match builderUnitId with
             | Some uid when not patrolSent && idx >= 3 ->
                 patrolSent <- true
@@ -171,26 +139,20 @@ type CommandTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Commands")>]
     member _.``Guard Attack Repair Fight commands accepted without crashing``() =
-        let mutable builderUnitId = None
+        let builderUnitId = getFirstUnitId()
         let mutable commandsSent = 0
 
         let (frames, _) = runWithCommands 30 (fun frame idx ->
-            if builderUnitId.IsNone then
-                match frame.Events |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None) with
-                | Some uid -> builderUnitId <- Some uid
-                | None -> ()
-
             match builderUnitId with
             | Some uid when idx = 5 ->
                 commandsSent <- commandsSent + 1
-                [ Commands.GuardCommand uid uid ] // Guard self (harmless)
+                [ Commands.GuardCommand uid uid ]
             | Some uid when idx = 10 ->
                 commandsSent <- commandsSent + 1
-                // Attack a non-existent unit -- should not crash proxy
                 [ Commands.AttackCommand uid 99999 ]
             | Some uid when idx = 15 ->
                 commandsSent <- commandsSent + 1
-                [ Commands.RepairCommand uid uid ] // Repair self (harmless)
+                [ Commands.RepairCommand uid uid ]
             | Some uid when idx = 20 ->
                 commandsSent <- commandsSent + 1
                 [ Commands.FightCommand uid 1500.0f 100.0f 1500.0f ]
@@ -206,17 +168,15 @@ type CommandTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Commands")>]
     member _.``StopCommand for all units accepted without errors``() =
-        let knownUnits = ResizeArray<int>()
+        let knownUnits =
+            engine.InitialEvents
+            |> List.choose (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None)
         let mutable stopsSent = false
 
         let (frames, _) = runWithCommands 20 (fun frame idx ->
-            frame.Events |> List.iter (function
-                | GameEvent.UnitCreated(uid, _) -> knownUnits.Add(uid)
-                | _ -> ())
-
-            if not stopsSent && idx >= 10 && knownUnits.Count > 0 then
+            if not stopsSent && idx >= 5 && knownUnits.Length > 0 then
                 stopsSent <- true
-                knownUnits |> Seq.map (fun uid -> Commands.StopCommand uid) |> Seq.toList
+                knownUnits |> List.map (fun uid -> Commands.StopCommand uid)
             else
                 []
         )

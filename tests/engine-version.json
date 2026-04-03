@@ -5,8 +5,8 @@
     "downloadUrl": "https://github.com/beyond-all-reason/spring/releases"
   },
   "game": {
-    "name": "Beyond All Reason test-local",
-    "rapidTag": "byar-test:test"
+    "name": "Beyond All Reason test-29833-ee0f96a",
+    "rapidTag": "byar:test"
   },
   "map": {
     "name": "Comet Catcher Remake"

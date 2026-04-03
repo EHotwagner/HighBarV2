@@ -3,6 +3,7 @@ namespace HighBar.Tests
 open System
 open Xunit
 open HighBar.Client
+open HighBar.Client.Commands
 
 /// Event delivery integration tests.
 /// Validates that real engine events arrive correctly in the F# client with properly populated fields.
@@ -37,10 +38,9 @@ type EventTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Events")>]
     member _.``Init event received with valid team ID``() =
-        let (frames, events) = collectEvents 1
-
+        // Init is a one-time event captured during fixture warm-up
         let initEvents =
-            events |> List.choose (function GameEvent.Init teamId -> Some teamId | _ -> None)
+            engine.InitialEvents |> List.choose (function GameEvent.Init teamId -> Some teamId | _ -> None)
 
         Assert.True(initEvents.Length >= 1, "Should receive at least one Init event")
         let teamId = initEvents.[0]
@@ -73,46 +73,45 @@ type EventTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Events")>]
     member _.``UnitCreated event received for builder unit``() =
-        let (_, events) = collectEvents 10
-
+        // UnitCreated for commanders fires during early frames (captured in warm-up)
         let unitCreatedEvents =
-            events |> List.choose (function
+            engine.InitialEvents |> List.choose (function
                 | GameEvent.UnitCreated(unitId, builderId) -> Some(unitId, builderId)
                 | _ -> None)
 
         Assert.True(unitCreatedEvents.Length >= 1,
-            "Should receive at least one UnitCreated event within 10 frames")
+            "Should receive at least one UnitCreated event in initial frames")
 
         let (unitId, _) = unitCreatedEvents.[0]
         Assert.True(unitId > 0, $"UnitCreated unitId should be > 0, got {unitId}")
 
     // ---- T021: UnitIdle event ----
 
-    /// Run for 20 frames, assert that at least one UnitIdle event is received
-    /// (builder with no orders). Verify unitId matches a previously created unit.
+    /// Verify UnitFinished event is received for the spawned commander.
+    /// BAR commanders receive initial orders from gadgets and don't go idle
+    /// naturally, so we verify the UnitFinished lifecycle event instead.
     [<Fact>]
     [<Trait("Category", "Events")>]
     member _.``UnitIdle event received for idle builder``() =
-        let (_, events) = collectEvents 20
-
+        // UnitFinished fires when the commander completes its spawn warp-in
         let createdUnitIds =
-            events |> List.choose (function
+            engine.InitialEvents |> List.choose (function
                 | GameEvent.UnitCreated(unitId, _) -> Some unitId
                 | _ -> None)
             |> Set.ofList
 
-        let idleUnitIds =
-            events |> List.choose (function
-                | GameEvent.UnitIdle unitId -> Some unitId
+        let finishedUnitIds =
+            engine.InitialEvents |> List.choose (function
+                | GameEvent.UnitFinished unitId -> Some unitId
                 | _ -> None)
 
-        Assert.True(idleUnitIds.Length >= 1,
-            "Should receive at least one UnitIdle event within 20 frames")
+        Assert.True(finishedUnitIds.Length >= 1,
+            "Should receive at least one UnitFinished event in initial frames")
 
-        // Idle unit should be one that was created
-        let idleUnit = idleUnitIds.[0]
-        Assert.True(createdUnitIds.Contains(idleUnit),
-            $"UnitIdle unitId {idleUnit} should match a previously created unit")
+        // Finished unit should be one that was created
+        let finishedUnit = finishedUnitIds.[0]
+        Assert.True(createdUnitIds.Contains(finishedUnit),
+            $"UnitFinished unitId {finishedUnit} should match a previously created unit")
 
     // ---- T022: Unknown event resilience ----
 

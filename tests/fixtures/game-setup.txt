@@ -1,6 +1,6 @@
 [GAME]
 {
-	GameType=Beyond All Reason test-local;
+	GameType=Beyond All Reason test-29833-ee0f96a;
 	MapName=__MAP_NAME__;
 	ModHash=1;
 	MapHash=1;
@@ -12,6 +12,9 @@
 	[MODOPTIONS]
 	{
 		GameMode=3;
+		draft_mode=disabled;
+		teamfaction_0=armada;
+		teamfaction_1=cortex;
 	}
 
 	[MAPOPTIONS]
@@ -52,12 +55,18 @@
 	{
 		TeamLeader=0;
 		AllyTeam=0;
+		Side=Armada;
+		StartPosX=1536;
+		StartPosZ=4096;
 	}
 
 	[TEAM1]
 	{
 		TeamLeader=0;
 		AllyTeam=1;
+		Side=Cortex;
+		StartPosX=4608;
+		StartPosZ=4096;
 	}
 
 	[ALLYTEAM0]
