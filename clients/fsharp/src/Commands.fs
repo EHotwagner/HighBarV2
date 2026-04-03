@@ -129,3 +129,33 @@ module Commands =
             c.Params.Add(p)
         cmd.Custom <- c
         cmd
+
+    let GiveMeResourceCommand (resourceId: int) (amount: float32) : AICommand =
+        let cmd = AICommand()
+        let g = GiveMeCommand()
+        g.ResourceId <- resourceId
+        g.Amount <- amount
+        cmd.GiveMe <- g
+        cmd
+
+    let GiveMeNewUnitCommand (unitDefId: int) (x: float32) (y: float32) (z: float32) : AICommand =
+        let cmd = AICommand()
+        let g = GiveMeNewUnitCommand()
+        g.UnitDefId <- unitDefId
+        g.Position <- vec3 x y z
+        cmd.GiveMeNewUnit <- g
+        cmd
+
+    let CallLuaRulesCommand (data: string) : AICommand =
+        let cmd = AICommand()
+        let c = CallLuaRulesCommand()
+        c.Data <- data
+        cmd.CallLuaRules <- c
+        cmd
+
+    let CallLuaUICommand (data: string) : AICommand =
+        let cmd = AICommand()
+        let c = CallLuaUICommand()
+        c.Data <- data
+        cmd.CallLuaUi <- c
+        cmd

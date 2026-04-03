@@ -15,6 +15,7 @@ Auto-generated from all feature plans. Last updated: 2026-04-03
 - Filesystem only (generated .fs source files) (006-typed-bar-data)
 - F# / .NET 8.0 + BarData library (in-repo), Google.Protobuf 3.28 (existing client dep), xUnit 2.9.3 (tests) (009-client-unit-types)
 - N/A (static in-memory data from generated F# records) (009-client-unit-types)
+- F# / .NET 8.0 + Google.Protobuf (generated types from `proto/highbar/commands.proto`) (010-cheat-command-builders)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -59,9 +60,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 010-cheat-command-builders: Added F# / .NET 8.0 + Google.Protobuf (generated types from `proto/highbar/commands.proto`)
 - 009-client-unit-types: Added F# / .NET 8.0 + BarData library (in-repo), Google.Protobuf 3.28 (existing client dep), xUnit 2.9.3 (tests)
 - 008-unified-bar-generators: Added F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework)
-- 007-flat-bar-types: Added F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework)
 
 
 <!-- MANUAL ADDITIONS START -->
