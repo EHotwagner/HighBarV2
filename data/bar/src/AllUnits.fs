@@ -5,7 +5,7 @@ open BarData.Units
 
 module AllUnits =
 
-    let all : (string * string * LuaValue) list =
+    let all : (string * string * UnitDef) list =
         [
             "armatlas", "ArmAircraft", ArmAircraft.armatlas
             "armca", "ArmAircraft", ArmAircraft.armca
@@ -962,5 +962,5 @@ module AllUnits =
             "raptor_allterrain_swarmer_basic_t4_v1", "other/raptors/Swarmer/AllTerrain", other_raptors_Swarmer_AllTerrain.raptor_allterrain_swarmer_basic_t4_v1
         ]
 
-    let tryFind (name: string) : LuaValue option =
+    let tryFind (name: string) : UnitDef option =
         all |> List.tryFind (fun (n, _, _) -> n = name) |> Option.map (fun (_, _, v) -> v)

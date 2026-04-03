@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="src/LuaValue.fs" />
+    <Compile Include="src/Types.fs" />
     <Compile Include="src/Commands.fs" />
     <Compile Include="src/CustomCommands.fs" />
     <Compile Include="src/ArmAircraft.fs" />

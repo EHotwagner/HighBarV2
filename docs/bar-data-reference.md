@@ -10,10 +10,10 @@ The primary structured data source. A .NET 8.0 F# library containing **953 unit 
 
 | File | Contents |
 |------|----------|
-| `src/LuaValue.fs` | `LuaValue` / `LuaKey` discriminated unions and accessor helpers (`tryGet`, `getString`, `getNumber`, `getBool`, `entries`, `buildOptions`) |
+| `src/Types.fs` | Typed record definitions: `ValueOrExpr<'T>`, `UnitDef`, `MovementDef`, `BuilderDef`, `WeaponDef`, `EconomyDef`, `BuildingDef`, `FeatureDef`, `SoundDef` |
 | `src/Commands.fs` | 46 engine command literal constants (`MOVE = 10`, `ATTACK = 20`, `GUARD = 25`, etc.) plus `buildCmd` helper and `all` list |
 | `src/CustomCommands.fs` | 22 BAR-specific command IDs (`FACTORY_GUARD = 13921`, `MORPH = 31210`, `AREA_MEX = 30100`, etc.) |
-| `src/AllUnits.fs` | Master index: `all` is a `(name * subfolder * LuaValue) list` of all 953 units, plus `tryFind` by name |
+| `src/AllUnits.fs` | Master index: `all` is a `(name * subfolder * UnitDef) list` of all 953 units, plus `tryFind` by name |
 
 ### Unit Module Files (102 files in `src/`)
 
@@ -61,24 +61,54 @@ Organized by faction and category, each module exposes individual unit bindings 
 
 ### Data Format
 
-Each unit is a `LuaValue.Table` containing the full Lua definition:
+Each unit is a typed `UnitDef` record with native F# field access and composable capability sub-records:
 
 ```fsharp
 open BarData
 open BarData.Units
 
 let ham = ArmBots.armham
-LuaValue.getNumber "metalcost" 0.0 ham     // 130.0
-LuaValue.getNumber "health" 0.0 ham        // 1000.0
-LuaValue.getNumber "speed" 0.0 ham         // 46.2
-LuaValue.getString "movementclass" "" ham   // "BOT3"
-LuaValue.getBool "canmove" false ham        // true
-LuaValue.buildOptions ham                   // ["armsolar"; "armwin"; ...]
+ham.metalCost       // ValueOrExpr.Concrete 130.0
+ham.health          // ValueOrExpr.Concrete 1000.0
+ham.movement.Value.speed  // ValueOrExpr.Concrete 46.2
+ham.movement.Value.movementClass  // Some "BOT3"
+
+// Capability checking via option pattern matching
+match ham.weapons with
+| Some ws -> printfn "Weapons: %d" ws.Length
+| None -> printfn "Unarmed"
+
+match ham.builder with
+| Some b -> printfn "Can build: %A" b.buildOptions
+| None -> printfn "Not a builder"
+
+// Commander has all capabilities
+let com = Root.armcom
+com.movement.IsSome  // true
+com.builder.IsSome   // true
+com.weapons.IsSome   // true
+
+// Economy building
+let solar = ArmBuildings_LandEconomy.armadvsol
+solar.economy.Value.energyMake  // Some (ValueOrExpr.Concrete 80.0)
+
+// Handle ValueOrExpr for fields that may be runtime Lua expressions
+match solar.economy.Value.energyMake with
+| Some (ValueOrExpr.Concrete v) -> printfn "Energy: %f" v
+| Some (ValueOrExpr.Expr s) -> printfn "Dynamic: %s" s
+| None -> printfn "No production"
+
+// Find units by name
+AllUnits.tryFind "armham"  // UnitDef option
+
+// Browse all units
+for (name, sub, def) in AllUnits.all do
+    printfn "%s (%s): %A metal" name sub def.metalCost
 ```
 
-Fields vary per unit but commonly include: `metalcost`, `energycost`, `buildtime`, `health`, `speed`, `sightdistance`, `maxslope`, `maxwaterdepth`, `movementclass`, `buildoptions`, `weapondefs`, `weapons`, `customparams`, `featuredefs`, `sounds`.
+Universal fields (`metalCost`, `energyCost`, `buildTime`, `health`, `sightDistance`, `footprintX/Z`, etc.) are present on every unit. Capability sub-records (`movement`, `builder`, `weapons`, `economy`, `building`) are `option` types — present only when the unit has that capability. Unrecognized fields are preserved in `extras: Map<string, string>`.
 
-Runtime Lua expressions (e.g., `math.ceil(...)`, `Spring.GetModOptions()`) are captured as `LuaValue.Expr` strings — these appear in ~35 unit files.
+Runtime Lua expressions (e.g., `Spring.GetModOptions()`) are captured as `ValueOrExpr.Expr` strings — these appear in ~35 unit files.
 
 ### Generator Script
 
@@ -185,7 +215,7 @@ The native shared library loaded by the Recoil engine.
 | Looking for... | Go to... |
 |----------------|----------|
 | All unit stats (cost, health, speed, weapons) | `data/bar/src/` — individual modules or `AllUnits.tryFind "unitname"` |
-| What a specific unit can build | `LuaValue.buildOptions unitDef` |
+| What a specific unit can build | `unitDef.builder.Value.buildOptions` |
 | Engine command IDs | `data/bar/src/Commands.fs` — `EngineCommands.MOVE`, etc. |
 | BAR custom command IDs | `data/bar/src/CustomCommands.fs` — `CustomCommands.MORPH`, etc. |
 | Build command for a unit | `EngineCommands.buildCmd unitDefId` (negative of def ID) |

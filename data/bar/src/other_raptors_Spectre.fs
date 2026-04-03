@@ -5,719 +5,727 @@ open BarData
 
 module other_raptors_Spectre =
 
-    let raptor_land_assault_spectre_t2_v1 =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.414
-            LuaKey.String "airsightdistance", LuaValue.Number 650.0
-            LuaKey.String "maxdec", LuaValue.Number 0.46
-            LuaKey.String "energycost", LuaValue.Number 3520.0
-            LuaKey.String "metalcost", LuaValue.Number 152.0
-            LuaKey.String "builder", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "raptors/raptora1_spectre.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 9000.0
-            LuaKey.String "canattack", LuaValue.Bool true
-            LuaKey.String "canguard", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "canpatrol", LuaValue.Bool true
-            LuaKey.String "canstop", LuaValue.String "1"
-            LuaKey.String "capturable", LuaValue.Bool false
-            LuaKey.String "cancloak", LuaValue.Bool true
-            LuaKey.String "category", LuaValue.String "RAPTOR"
-            LuaKey.String "cloakcost", LuaValue.Number 0.0
-            LuaKey.String "cloakcostmoving", LuaValue.Number 0.0
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -10 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "27 48 60"
-            LuaKey.String "collisionvolumetype", LuaValue.String "box"
-            LuaKey.String "defaultmissiontype", LuaValue.String "Standby"
-            LuaKey.String "explodeas", LuaValue.String "BIGBUG_DEATH"
-            LuaKey.String "footprintx", LuaValue.Number 3.0
-            LuaKey.String "footprintz", LuaValue.Number 3.0
-            LuaKey.String "initcloak", LuaValue.Bool true
-            LuaKey.String "leavetracks", LuaValue.Bool true
-            LuaKey.String "maneuverleashlength", LuaValue.String "640"
-            LuaKey.String "mass", LuaValue.Number 100000.0
-            LuaKey.String "health", LuaValue.Number 2500.0
-            LuaKey.String "maxslope", LuaValue.Number 18.0
-            LuaKey.String "speed", LuaValue.Number 39.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "mincloakdistance", LuaValue.Number 50.0
-            LuaKey.String "movementclass", LuaValue.String "RAPTORBIGHOVER"
-            LuaKey.String "noautofire", LuaValue.Bool false
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Raptors/raptora_spectre.s3o"
-            LuaKey.String "script", LuaValue.String "Raptors/raptora1.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 3.0
-            LuaKey.String "selfdestructas", LuaValue.String "BIGBUG_DEATH"
-            LuaKey.String "side", LuaValue.String "THUNDERBIRDS"
-            LuaKey.String "sightdistance", LuaValue.Number 300.0
-            LuaKey.String "smoothanim", LuaValue.Bool true
-            LuaKey.String "stealth", LuaValue.Number 1.0
-            LuaKey.String "trackoffset", LuaValue.Number 7.0
-            LuaKey.String "trackstrength", LuaValue.Number 3.0
-            LuaKey.String "trackstretch", LuaValue.Number 1.0
-            LuaKey.String "tracktype", LuaValue.String "RaptorTrack"
-            LuaKey.String "trackwidth", LuaValue.Number 34.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turnrate", LuaValue.Number 920.0
-            LuaKey.String "unitname", LuaValue.String "raptor_land_assault_spectre_t2_v1"
-            LuaKey.String "upright", LuaValue.Bool false
-            LuaKey.String "waterline", LuaValue.Number 24.0
-            LuaKey.String "workertime", LuaValue.Number 0.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "maxrange", LuaValue.String "200"
-                    LuaKey.String "subfolder", LuaValue.String "other/raptors"
-                    LuaKey.String "model_author", LuaValue.String "KDR_11k, Beherith"
-                    LuaKey.String "normalmaps", LuaValue.String "yes"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/chicken_l_normals.png"
+    let raptor_land_assault_spectre_t2_v1 : UnitDef =
+        { name = "raptor_land_assault_spectre_t2_v1"
+          subfolder = "other/raptors/Spectre"
+          metalCost = ValueOrExpr.Concrete 152.0
+          energyCost = ValueOrExpr.Concrete 3520.0
+          buildTime = ValueOrExpr.Concrete 9000.0
+          health = ValueOrExpr.Concrete 2500.0
+          sightDistance = ValueOrExpr.Concrete 300.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Raptors/raptora_spectre.s3o"
+          buildPic = Some "raptors/raptora1_spectre.DDS"
+          script = Some "Raptors/raptora1.cob"
+          corpse = None
+          explodeAs = Some "BIGBUG_DEATH"
+          selfDestructAs = Some "BIGBUG_DEATH"
+          collisionVolumeOffsets = Some "0 -10 0"
+          collisionVolumeScales = Some "27 48 60"
+          collisionVolumeType = Some "box"
+          seismicSignature = Some 3.0
+          category = Some "RAPTOR"
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 39.0
+              maxAcc = 0.414
+              maxDec = 0.46
+              turnRate = 920.0
+              movementClass = Some "RAPTORBIGHOVER"
+              maxSlope = Some 18.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = Some 24.0 })
+          builder = None
+          weapons = Some [
+              { name = "weapon"
+                displayName = Some "Claws"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 200.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:blood_spray"
-                            LuaKey.Int 2, LuaValue.String "custom:blood_explode"
-                            LuaKey.Int 3, LuaValue.String "custom:dirt"
-                            LuaKey.Int 4, LuaValue.String "custom:blob_fire"
-                            LuaKey.Int 5, LuaValue.String "custom:blood_explode"
-                            LuaKey.Int 6, LuaValue.String "custom:blood_spray"
-                            LuaKey.Int 7, LuaValue.String "custom:dirt"
-                        ]
-                    LuaKey.String "pieceexplosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "blood_spray"
-                            LuaKey.Int 2, LuaValue.String "blood_spray"
-                            LuaKey.Int 3, LuaValue.String "blood_spray"
-                        ]
+                range = Some (ValueOrExpr.Concrete 200.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.0)
+                weaponVelocity = Some 1500.0
+                areaOfEffect = Some 42.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 5000.0
+                edgeEffectiveness = Some 0.3
+                impulseFactor = Some 1.0
+                noSelfDamage = Some true
+                soundStart = Some "smallraptorattack"
+                soundHit = None
+                explosiongenerator = Some "custom:raptorspike-medium-sparks-burn"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL"
+                    "mount_maindir", "0 0 1"
+                    "mount_maxangledif", "125.0"
+                    "mount_onlytargetcategory", "NOTAIR"
+                    "collidefriendly", "0.0"
+                    "collidefeature", "0.0"
+                    "avoidfeature", "0.0"
+                    "avoidfriendly", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "0.0"
+                    "model", "Raptors/spike.s3o"
+                    "waterweapon", "true"
+                ] }
+              { name = "aaweapon"
+                displayName = Some "Deadly Defensive Spores"
+                weaponType = Some "MissileLauncher"
+                damage = Map.ofList [
+                    "default", 1.0
+                    "vtol", 2000.0
                 ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "aaweapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 256.0
-                            LuaKey.String "avoidfriendly", LuaValue.Bool false
-                            LuaKey.String "burnblow", LuaValue.Bool true
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "cameraShake", LuaValue.Number 700.0
-                            LuaKey.String "dance", LuaValue.Number 20.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.35
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-huge-bomb"
-                            LuaKey.String "firestarter", LuaValue.Number 0.0
-                            LuaKey.String "flighttime", LuaValue.Number 5.0
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.4
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 4.0
-                            LuaKey.String "metalpershot", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "SimpleFlareXL.s3o"
-                            LuaKey.String "name", LuaValue.String "Deadly Defensive Spores"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 750.0
-                            LuaKey.String "reloadtime", LuaValue.Number 20.0
-                            LuaKey.String "smoketrail", LuaValue.Bool true
-                            LuaKey.String "smokePeriod", LuaValue.Number 2.0
-                            LuaKey.String "smoketime", LuaValue.Number 45.0
-                            LuaKey.String "smokesize", LuaValue.Number 10.5
-                            LuaKey.String "smokecolor", LuaValue.Number 1.0
-                            LuaKey.String "soundhit", LuaValue.String "spore_explo"
-                            LuaKey.String "soundstart", LuaValue.String "spore_xl"
-                            LuaKey.String "soundstartvolume", LuaValue.Number 9.0
-                            LuaKey.String "startvelocity", LuaValue.Number 1000.0
-                            LuaKey.String "texture1", LuaValue.String "orangenovaexplo"
-                            LuaKey.String "texture2", LuaValue.String "sporetrail_xl"
-                            LuaKey.String "tolerance", LuaValue.Number 60000.0
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "trajectoryheight", LuaValue.Number 2.0
-                            LuaKey.String "turnrate", LuaValue.Number 60000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 40.0
-                            LuaKey.String "weapontype", LuaValue.String "MissileLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 2000.0
-                            LuaKey.String "wobble", LuaValue.Number 32000.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 1.0
-                                    LuaKey.String "vtol", LuaValue.Number 2000.0
-                                ]
-                        ]
-                    LuaKey.String "weapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 42.0
-                            LuaKey.String "collidefriendly", LuaValue.Number 0.0
-                            LuaKey.String "collidefeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfriendly", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.3
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:raptorspike-medium-sparks-burn"
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 1.0
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "Raptors/spike.s3o"
-                            LuaKey.String "name", LuaValue.String "Claws"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 200.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.0
-                            LuaKey.String "soundstart", LuaValue.String "smallraptorattack"
-                            LuaKey.String "tolerance", LuaValue.Number 5000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1500.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 200.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "WEAPON"
-                            LuaKey.String "maindir", LuaValue.String "0 0 1"
-                            LuaKey.String "maxangledif", LuaValue.Number 125.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTAIR"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "onlytargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "AAWEAPON"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 750.0)
+                reloadTime = Some (ValueOrExpr.Concrete 20.0)
+                weaponVelocity = Some 2000.0
+                areaOfEffect = Some 256.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 60000.0
+                edgeEffectiveness = Some 0.35
+                impulseFactor = Some 0.4
+                noSelfDamage = Some true
+                soundStart = Some "spore_xl"
+                soundHit = Some "spore_explo"
+                explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_onlytargetcategory", "VTOL"
+                    "avoidfriendly", "false"
+                    "burnblow", "true"
+                    "collidefriendly", "false"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "cameraShake", "700.0"
+                    "dance", "20.0"
+                    "firestarter", "0.0"
+                    "flighttime", "5.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "4.0"
+                    "metalpershot", "0.0"
+                    "model", "SimpleFlareXL.s3o"
+                    "smoketrail", "true"
+                    "smokePeriod", "2.0"
+                    "smoketime", "45.0"
+                    "smokesize", "10.5"
+                    "smokecolor", "1.0"
+                    "soundstartvolume", "9.0"
+                    "startvelocity", "1000.0"
+                    "texture1", "orangenovaexplo"
+                    "texture2", "sporetrail_xl"
+                    "tracks", "true"
+                    "trajectoryheight", "2.0"
+                    "turnrate", "60000.0"
+                    "waterweapon", "true"
+                    "weaponacceleration", "40.0"
+                    "wobble", "32000.0"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = None
+          sounds = None
+          customParams = Map.ofList [
+              "maxrange", "200"
+              "subfolder", "other/raptors"
+              "model_author", "KDR_11k, Beherith"
+              "normalmaps", "yes"
+              "normaltex", "unittextures/chicken_l_normals.png"
+          ]
+          extras = Map.ofList [
+              "airsightdistance", "650.0"
+              "canattack", "true"
+              "canguard", "true"
+              "canpatrol", "true"
+              "canstop", "1"
+              "capturable", "false"
+              "cancloak", "true"
+              "cloakcost", "0.0"
+              "cloakcostmoving", "0.0"
+              "defaultmissiontype", "Standby"
+              "initcloak", "true"
+              "leavetracks", "true"
+              "maneuverleashlength", "640"
+              "mass", "100000.0"
+              "mincloakdistance", "50.0"
+              "noautofire", "false"
+              "nochasecategory", "VTOL"
+              "side", "THUNDERBIRDS"
+              "smoothanim", "true"
+              "stealth", "1.0"
+              "trackoffset", "7.0"
+              "trackstrength", "3.0"
+              "trackstretch", "1.0"
+              "tracktype", "RaptorTrack"
+              "trackwidth", "34.0"
+              "unitname", "raptor_land_assault_spectre_t2_v1"
+              "upright", "false"
+          ] }
 
-    let raptor_land_assault_spectre_t4_v1 =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.414
-            LuaKey.String "airsightdistance", LuaValue.Number 1800.0
-            LuaKey.String "autoheal", LuaValue.Number 25.0
-            LuaKey.String "maxdec", LuaValue.Number 0.46
-            LuaKey.String "energycost", LuaValue.Number 3520.0
-            LuaKey.String "metalcost", LuaValue.Number 302.0
-            LuaKey.String "builder", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "raptors/raptora2_spectre.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 30000.0
-            LuaKey.String "canattack", LuaValue.Bool true
-            LuaKey.String "canguard", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "canpatrol", LuaValue.Bool true
-            LuaKey.String "canstop", LuaValue.String "1"
-            LuaKey.String "capturable", LuaValue.Bool false
-            LuaKey.String "cancloak", LuaValue.Bool true
-            LuaKey.String "category", LuaValue.String "RAPTOR"
-            LuaKey.String "cloakcost", LuaValue.Number 0.0
-            LuaKey.String "cloakcostmoving", LuaValue.Number 0.0
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 2"
-            LuaKey.String "collisionvolumescales", LuaValue.String "37 75 130"
-            LuaKey.String "collisionvolumetype", LuaValue.String "box"
-            LuaKey.String "defaultmissiontype", LuaValue.String "Standby"
-            LuaKey.String "explodeas", LuaValue.String "MEGABUG_DEATH"
-            LuaKey.String "footprintx", LuaValue.Number 3.0
-            LuaKey.String "footprintz", LuaValue.Number 3.0
-            LuaKey.String "initcloak", LuaValue.Bool true
-            LuaKey.String "leavetracks", LuaValue.Bool true
-            LuaKey.String "maneuverleashlength", LuaValue.String "640"
-            LuaKey.String "mass", LuaValue.Number 200000.0
-            LuaKey.String "health", LuaValue.Number 10000.0
-            LuaKey.String "maxslope", LuaValue.Number 18.0
-            LuaKey.String "speed", LuaValue.Number 30.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "mincloakdistance", LuaValue.Number 50.0
-            LuaKey.String "movementclass", LuaValue.String "RAPTORBIG2HOVER"
-            LuaKey.String "noautofire", LuaValue.Bool false
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Raptors/raptora2_spectre.s3o"
-            LuaKey.String "script", LuaValue.String "Raptors/raptora2.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 4.0
-            LuaKey.String "selfdestructas", LuaValue.String "MEGABUG_DEATH"
-            LuaKey.String "side", LuaValue.String "THUNDERBIRDS"
-            LuaKey.String "sightdistance", LuaValue.Number 400.0
-            LuaKey.String "smoothanim", LuaValue.Bool true
-            LuaKey.String "stealth", LuaValue.Number 1.0
-            LuaKey.String "trackoffset", LuaValue.Number 7.0
-            LuaKey.String "trackstrength", LuaValue.Number 3.0
-            LuaKey.String "trackstretch", LuaValue.Number 1.0
-            LuaKey.String "tracktype", LuaValue.String "RaptorTrack"
-            LuaKey.String "trackwidth", LuaValue.Number 38.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turnrate", LuaValue.Number 920.0
-            LuaKey.String "unitname", LuaValue.String "raptor_land_assault_spectre_t4_v1"
-            LuaKey.String "upright", LuaValue.Bool false
-            LuaKey.String "waterline", LuaValue.Number 40.0
-            LuaKey.String "workertime", LuaValue.Number 0.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "maxrange", LuaValue.String "200"
-                    LuaKey.String "subfolder", LuaValue.String "other/raptors"
-                    LuaKey.String "model_author", LuaValue.String "KDR_11k, Beherith"
-                    LuaKey.String "normalmaps", LuaValue.String "yes"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/chicken_l_normals.png"
+    let raptor_land_assault_spectre_t4_v1 : UnitDef =
+        { name = "raptor_land_assault_spectre_t4_v1"
+          subfolder = "other/raptors/Spectre"
+          metalCost = ValueOrExpr.Concrete 302.0
+          energyCost = ValueOrExpr.Concrete 3520.0
+          buildTime = ValueOrExpr.Concrete 30000.0
+          health = ValueOrExpr.Concrete 10000.0
+          sightDistance = ValueOrExpr.Concrete 400.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Raptors/raptora2_spectre.s3o"
+          buildPic = Some "raptors/raptora2_spectre.DDS"
+          script = Some "Raptors/raptora2.cob"
+          corpse = None
+          explodeAs = Some "MEGABUG_DEATH"
+          selfDestructAs = Some "MEGABUG_DEATH"
+          collisionVolumeOffsets = Some "0 0 2"
+          collisionVolumeScales = Some "37 75 130"
+          collisionVolumeType = Some "box"
+          seismicSignature = Some 4.0
+          category = Some "RAPTOR"
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 30.0
+              maxAcc = 0.414
+              maxDec = 0.46
+              turnRate = 920.0
+              movementClass = Some "RAPTORBIG2HOVER"
+              maxSlope = Some 18.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = Some 40.0 })
+          builder = None
+          weapons = Some [
+              { name = "weapon"
+                displayName = Some "Claws"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 550.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:blood_spray"
-                            LuaKey.Int 2, LuaValue.String "custom:blood_explode"
-                            LuaKey.Int 3, LuaValue.String "custom:dirt"
-                            LuaKey.Int 4, LuaValue.String "custom:blob_fire"
-                        ]
-                    LuaKey.String "pieceexplosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "blood_spray"
-                            LuaKey.Int 2, LuaValue.String "blood_spray"
-                            LuaKey.Int 3, LuaValue.String "blood_spray"
-                        ]
+                range = Some (ValueOrExpr.Concrete 400.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.6)
+                weaponVelocity = Some 1500.0
+                areaOfEffect = Some 42.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 5000.0
+                edgeEffectiveness = Some 0.3
+                impulseFactor = Some 1.0
+                noSelfDamage = Some true
+                soundStart = Some "smallraptorattack"
+                soundHit = None
+                explosiongenerator = Some "custom:raptorspike-large-sparks-burn"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL"
+                    "mount_maindir", "0 0 1"
+                    "mount_maxangledif", "125.0"
+                    "mount_onlytargetcategory", "NOTAIR"
+                    "collidefriendly", "0.0"
+                    "collidefeature", "0.0"
+                    "avoidfeature", "0.0"
+                    "avoidfriendly", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "0.0"
+                    "model", "Raptors/spike.s3o"
+                    "waterweapon", "true"
+                ] }
+              { name = "aaweapon"
+                displayName = Some "Deadly Defensive Spores"
+                weaponType = Some "MissileLauncher"
+                damage = Map.ofList [
+                    "default", 1.0
+                    "vtol", 2000.0
                 ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "aaweapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 256.0
-                            LuaKey.String "avoidfriendly", LuaValue.Bool false
-                            LuaKey.String "burnblow", LuaValue.Bool true
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "cameraShake", LuaValue.Number 700.0
-                            LuaKey.String "dance", LuaValue.Number 20.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.35
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-huge-bomb"
-                            LuaKey.String "firestarter", LuaValue.Number 0.0
-                            LuaKey.String "flighttime", LuaValue.Number 5.0
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.4
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 4.0
-                            LuaKey.String "metalpershot", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "SimpleFlareXL.s3o"
-                            LuaKey.String "name", LuaValue.String "Deadly Defensive Spores"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 1000.0
-                            LuaKey.String "reloadtime", LuaValue.Number 5.0
-                            LuaKey.String "smoketrail", LuaValue.Bool true
-                            LuaKey.String "smokePeriod", LuaValue.Number 2.0
-                            LuaKey.String "smoketime", LuaValue.Number 45.0
-                            LuaKey.String "smokesize", LuaValue.Number 10.5
-                            LuaKey.String "smokecolor", LuaValue.Number 1.0
-                            LuaKey.String "soundhit", LuaValue.String "spore_explo"
-                            LuaKey.String "soundstart", LuaValue.String "spore_xl"
-                            LuaKey.String "soundstartvolume", LuaValue.Number 9.0
-                            LuaKey.String "startvelocity", LuaValue.Number 1000.0
-                            LuaKey.String "texture1", LuaValue.String "orangenovaexplo"
-                            LuaKey.String "texture2", LuaValue.String "sporetrail_xl"
-                            LuaKey.String "tolerance", LuaValue.Number 60000.0
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "trajectoryheight", LuaValue.Number 2.0
-                            LuaKey.String "turnrate", LuaValue.Number 60000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 40.0
-                            LuaKey.String "weapontype", LuaValue.String "MissileLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 2000.0
-                            LuaKey.String "wobble", LuaValue.Number 32000.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 1.0
-                                    LuaKey.String "vtol", LuaValue.Number 2000.0
-                                ]
-                        ]
-                    LuaKey.String "weapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 42.0
-                            LuaKey.String "collidefriendly", LuaValue.Number 0.0
-                            LuaKey.String "collidefeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfriendly", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.3
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:raptorspike-large-sparks-burn"
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 1.0
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "Raptors/spike.s3o"
-                            LuaKey.String "name", LuaValue.String "Claws"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 400.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.6
-                            LuaKey.String "soundstart", LuaValue.String "smallraptorattack"
-                            LuaKey.String "tolerance", LuaValue.Number 5000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1500.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 550.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "WEAPON"
-                            LuaKey.String "maindir", LuaValue.String "0 0 1"
-                            LuaKey.String "maxangledif", LuaValue.Number 125.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTAIR"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "onlytargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "AAWEAPON"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 1000.0)
+                reloadTime = Some (ValueOrExpr.Concrete 5.0)
+                weaponVelocity = Some 2000.0
+                areaOfEffect = Some 256.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 60000.0
+                edgeEffectiveness = Some 0.35
+                impulseFactor = Some 0.4
+                noSelfDamage = Some true
+                soundStart = Some "spore_xl"
+                soundHit = Some "spore_explo"
+                explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_onlytargetcategory", "VTOL"
+                    "avoidfriendly", "false"
+                    "burnblow", "true"
+                    "collidefriendly", "false"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "cameraShake", "700.0"
+                    "dance", "20.0"
+                    "firestarter", "0.0"
+                    "flighttime", "5.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "4.0"
+                    "metalpershot", "0.0"
+                    "model", "SimpleFlareXL.s3o"
+                    "smoketrail", "true"
+                    "smokePeriod", "2.0"
+                    "smoketime", "45.0"
+                    "smokesize", "10.5"
+                    "smokecolor", "1.0"
+                    "soundstartvolume", "9.0"
+                    "startvelocity", "1000.0"
+                    "texture1", "orangenovaexplo"
+                    "texture2", "sporetrail_xl"
+                    "tracks", "true"
+                    "trajectoryheight", "2.0"
+                    "turnrate", "60000.0"
+                    "waterweapon", "true"
+                    "weaponacceleration", "40.0"
+                    "wobble", "32000.0"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = None
+          sounds = None
+          customParams = Map.ofList [
+              "maxrange", "200"
+              "subfolder", "other/raptors"
+              "model_author", "KDR_11k, Beherith"
+              "normalmaps", "yes"
+              "normaltex", "unittextures/chicken_l_normals.png"
+          ]
+          extras = Map.ofList [
+              "airsightdistance", "1800.0"
+              "autoheal", "25.0"
+              "canattack", "true"
+              "canguard", "true"
+              "canpatrol", "true"
+              "canstop", "1"
+              "capturable", "false"
+              "cancloak", "true"
+              "cloakcost", "0.0"
+              "cloakcostmoving", "0.0"
+              "defaultmissiontype", "Standby"
+              "initcloak", "true"
+              "leavetracks", "true"
+              "maneuverleashlength", "640"
+              "mass", "200000.0"
+              "mincloakdistance", "50.0"
+              "noautofire", "false"
+              "nochasecategory", "VTOL"
+              "side", "THUNDERBIRDS"
+              "smoothanim", "true"
+              "stealth", "1.0"
+              "trackoffset", "7.0"
+              "trackstrength", "3.0"
+              "trackstretch", "1.0"
+              "tracktype", "RaptorTrack"
+              "trackwidth", "38.0"
+              "unitname", "raptor_land_assault_spectre_t4_v1"
+              "upright", "false"
+          ] }
 
-    let raptor_land_spiker_spectre_t4_v1 =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "maxacc", LuaValue.Number 3.45
-            LuaKey.String "maxdec", LuaValue.Number 3.45
-            LuaKey.String "energycost", LuaValue.Number 174.0
-            LuaKey.String "metalcost", LuaValue.Number 174.0
-            LuaKey.String "builder", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "raptors/raptors2_spectre.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 10500.0
-            LuaKey.String "canattack", LuaValue.Bool true
-            LuaKey.String "canguard", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "canpatrol", LuaValue.Bool true
-            LuaKey.String "canstop", LuaValue.String "1"
-            LuaKey.String "capturable", LuaValue.Bool false
-            LuaKey.String "cancloak", LuaValue.Bool true
-            LuaKey.String "category", LuaValue.String "RAPTOR"
-            LuaKey.String "cloakcost", LuaValue.Number 0.0
-            LuaKey.String "cloakcostmoving", LuaValue.Number 0.0
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -1 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "24 34 53"
-            LuaKey.String "collisionvolumetype", LuaValue.String "box"
-            LuaKey.String "defaultmissiontype", LuaValue.String "Standby"
-            LuaKey.String "explodeas", LuaValue.String "BUG_DEATH"
-            LuaKey.String "floater", LuaValue.Bool false
-            LuaKey.String "footprintx", LuaValue.Number 3.0
-            LuaKey.String "footprintz", LuaValue.Number 3.0
-            LuaKey.String "initcloaked", LuaValue.Number 1.0
-            LuaKey.String "leavetracks", LuaValue.Bool true
-            LuaKey.String "maneuverleashlength", LuaValue.String "750"
-            LuaKey.String "mass", LuaValue.Number 300.0
-            LuaKey.String "health", LuaValue.Number 1250.0
-            LuaKey.String "maxslope", LuaValue.Number 18.0
-            LuaKey.String "speed", LuaValue.Number 270.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "mincloakdistance", LuaValue.Number 50.0
-            LuaKey.String "movementclass", LuaValue.String "RAPTORSMALLHOVER"
-            LuaKey.String "noautofire", LuaValue.Bool false
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Raptors/raptors2_spectre.s3o"
-            LuaKey.String "script", LuaValue.String "Raptors/raptors2.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 2.0
-            LuaKey.String "selfdestructas", LuaValue.String "BUG_DEATH"
-            LuaKey.String "side", LuaValue.String "THUNDERBIRDS"
-            LuaKey.String "sightdistance", LuaValue.Number 950.0
-            LuaKey.String "smoothanim", LuaValue.Bool true
-            LuaKey.String "sonardistance", LuaValue.Number 720.0
-            LuaKey.String "stealth", LuaValue.Number 1.0
-            LuaKey.String "trackoffset", LuaValue.Number 6.0
-            LuaKey.String "trackstrength", LuaValue.Number 3.0
-            LuaKey.String "trackstretch", LuaValue.Number 1.0
-            LuaKey.String "tracktype", LuaValue.String "RaptorTrack"
-            LuaKey.String "trackwidth", LuaValue.Number 30.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turnrate", LuaValue.Number 1840.0
-            LuaKey.String "unitname", LuaValue.String "raptor_land_spiker_spectre_t4_v1"
-            LuaKey.String "upright", LuaValue.Bool false
-            LuaKey.String "workertime", LuaValue.Number 0.0
-            LuaKey.String "waterline", LuaValue.Number 29.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "maxrange", LuaValue.String "375"
-                    LuaKey.String "subfolder", LuaValue.String "other/raptors"
-                    LuaKey.String "model_author", LuaValue.String "KDR_11k, Beherith"
-                    LuaKey.String "normalmaps", LuaValue.String "yes"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/chicken_m_normals.png"
+    let raptor_land_spiker_spectre_t4_v1 : UnitDef =
+        { name = "raptor_land_spiker_spectre_t4_v1"
+          subfolder = "other/raptors/Spectre"
+          metalCost = ValueOrExpr.Concrete 174.0
+          energyCost = ValueOrExpr.Concrete 174.0
+          buildTime = ValueOrExpr.Concrete 10500.0
+          health = ValueOrExpr.Concrete 1250.0
+          sightDistance = ValueOrExpr.Concrete 950.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Raptors/raptors2_spectre.s3o"
+          buildPic = Some "raptors/raptors2_spectre.DDS"
+          script = Some "Raptors/raptors2.cob"
+          corpse = None
+          explodeAs = Some "BUG_DEATH"
+          selfDestructAs = Some "BUG_DEATH"
+          collisionVolumeOffsets = Some "0 -1 0"
+          collisionVolumeScales = Some "24 34 53"
+          collisionVolumeType = Some "box"
+          seismicSignature = Some 2.0
+          category = Some "RAPTOR"
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 270.0
+              maxAcc = 3.45
+              maxDec = 3.45
+              turnRate = 1840.0
+              movementClass = Some "RAPTORSMALLHOVER"
+              maxSlope = Some 18.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = Some 29.0 })
+          builder = None
+          weapons = Some [
+              { name = "weapon"
+                displayName = Some "Spike"
+                weaponType = Some "MissileLauncher"
+                damage = Map.ofList [
+                    "default", 600.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:blood_spray"
-                            LuaKey.Int 2, LuaValue.String "custom:blood_explode"
-                            LuaKey.Int 3, LuaValue.String "custom:dirt"
-                        ]
-                    LuaKey.String "pieceexplosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "blood_spray"
-                            LuaKey.Int 2, LuaValue.String "blood_spray"
-                            LuaKey.Int 3, LuaValue.String "blood_spray"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "weapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 16.0
-                            LuaKey.String "cegtag", LuaValue.String "sporetrail-large"
-                            LuaKey.String "avoidfeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfriendly", LuaValue.Number 0.0
-                            LuaKey.String "burnblow", LuaValue.Bool true
-                            LuaKey.String "collidefeature", LuaValue.Bool true
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.3
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:raptorspike-huge-sparks-burn"
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.4
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "Raptors/spike.s3o"
-                            LuaKey.String "name", LuaValue.String "Spike"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 950.0
-                            LuaKey.String "reloadtime", LuaValue.Number 6.0
-                            LuaKey.String "soundstart", LuaValue.String "smallraptorattack"
-                            LuaKey.String "startvelocity", LuaValue.Number 600.0
-                            LuaKey.String "texture1", LuaValue.String ""
-                            LuaKey.String "texture2", LuaValue.String "sporetrail"
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool false
-                            LuaKey.String "weapontimer", LuaValue.Number 1.0
-                            LuaKey.String "weapontype", LuaValue.String "MissileLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1000.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 600.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "WEAPON"
-                            LuaKey.String "maindir", LuaValue.String "0 0 1"
-                            LuaKey.String "maxangledif", LuaValue.Number 180.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTAIR"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 950.0)
+                reloadTime = Some (ValueOrExpr.Concrete 6.0)
+                weaponVelocity = Some 1000.0
+                areaOfEffect = Some 16.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.3
+                impulseFactor = Some 0.4
+                noSelfDamage = Some true
+                soundStart = Some "smallraptorattack"
+                soundHit = None
+                explosiongenerator = Some "custom:raptorspike-huge-sparks-burn"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL"
+                    "mount_maindir", "0 0 1"
+                    "mount_maxangledif", "180.0"
+                    "mount_onlytargetcategory", "NOTAIR"
+                    "cegtag", "sporetrail-large"
+                    "avoidfeature", "0.0"
+                    "avoidfriendly", "0.0"
+                    "burnblow", "true"
+                    "collidefeature", "true"
+                    "collidefriendly", "false"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "0.0"
+                    "model", "Raptors/spike.s3o"
+                    "startvelocity", "600.0"
+                    "texture1", ""
+                    "texture2", "sporetrail"
+                    "waterweapon", "false"
+                    "weapontimer", "1.0"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = None
+          sounds = None
+          customParams = Map.ofList [
+              "maxrange", "375"
+              "subfolder", "other/raptors"
+              "model_author", "KDR_11k, Beherith"
+              "normalmaps", "yes"
+              "normaltex", "unittextures/chicken_m_normals.png"
+          ]
+          extras = Map.ofList [
+              "canattack", "true"
+              "canguard", "true"
+              "canpatrol", "true"
+              "canstop", "1"
+              "capturable", "false"
+              "cancloak", "true"
+              "cloakcost", "0.0"
+              "cloakcostmoving", "0.0"
+              "defaultmissiontype", "Standby"
+              "initcloaked", "1.0"
+              "leavetracks", "true"
+              "maneuverleashlength", "750"
+              "mass", "300.0"
+              "mincloakdistance", "50.0"
+              "noautofire", "false"
+              "nochasecategory", "VTOL"
+              "side", "THUNDERBIRDS"
+              "smoothanim", "true"
+              "sonardistance", "720.0"
+              "stealth", "1.0"
+              "trackoffset", "6.0"
+              "trackstrength", "3.0"
+              "trackstretch", "1.0"
+              "tracktype", "RaptorTrack"
+              "trackwidth", "30.0"
+              "unitname", "raptor_land_spiker_spectre_t4_v1"
+              "upright", "false"
+          ] }
 
-    let raptor_land_swarmer_spectre_t3_v1 =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.345
-            LuaKey.String "autoheal", LuaValue.Number 3.0
-            LuaKey.String "maxdec", LuaValue.Number 0.345
-            LuaKey.String "energycost", LuaValue.Number 79.0
-            LuaKey.String "metalcost", LuaValue.Number 79.0
-            LuaKey.String "builder", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "raptors/raptor1x_spectre.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 1500.0
-            LuaKey.String "canattack", LuaValue.Bool true
-            LuaKey.String "canguard", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "canpatrol", LuaValue.Bool true
-            LuaKey.String "canstop", LuaValue.String "1"
-            LuaKey.String "capturable", LuaValue.Bool false
-            LuaKey.String "cancloak", LuaValue.Bool true
-            LuaKey.String "category", LuaValue.String "RAPTOR"
-            LuaKey.String "cloakcost", LuaValue.Number 0.0
-            LuaKey.String "cloakcostmoving", LuaValue.Number 0.0
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -3 -3"
-            LuaKey.String "collisionvolumescales", LuaValue.String "18 40 40"
-            LuaKey.String "collisionvolumetype", LuaValue.String "box"
-            LuaKey.String "defaultmissiontype", LuaValue.String "Standby"
-            LuaKey.String "explodeas", LuaValue.String "BUG_DEATH"
-            LuaKey.String "floater", LuaValue.Bool false
-            LuaKey.String "footprintx", LuaValue.Number 1.0
-            LuaKey.String "footprintz", LuaValue.Number 1.0
-            LuaKey.String "initcloak", LuaValue.Bool true
-            LuaKey.String "leavetracks", LuaValue.Bool true
-            LuaKey.String "maneuverleashlength", LuaValue.Number 640.0
-            LuaKey.String "mass", LuaValue.Number 90.0
-            LuaKey.String "health", LuaValue.Number 500.0
-            LuaKey.String "maxslope", LuaValue.Number 18.0
-            LuaKey.String "speed", LuaValue.Number 150.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "mincloakdistance", LuaValue.Number 50.0
-            LuaKey.String "movementclass", LuaValue.String "RAPTORSMALLHOVER"
-            LuaKey.String "noautofire", LuaValue.Bool false
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Raptors/raptor1x_spectre.s3o"
-            LuaKey.String "script", LuaValue.String "Raptors/raptor1x.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 2.0
-            LuaKey.String "selfdestructas", LuaValue.String "BUG_DEATH"
-            LuaKey.String "side", LuaValue.String "THUNDERBIRDS"
-            LuaKey.String "sightdistance", LuaValue.Number 200.0
-            LuaKey.String "smoothanim", LuaValue.Bool true
-            LuaKey.String "stealth", LuaValue.Number 1.0
-            LuaKey.String "trackoffset", LuaValue.Number 0.0
-            LuaKey.String "trackstrength", LuaValue.Number 3.0
-            LuaKey.String "trackstretch", LuaValue.Number 1.0
-            LuaKey.String "tracktype", LuaValue.String "RaptorTrack"
-            LuaKey.String "trackwidth", LuaValue.Number 18.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turnrate", LuaValue.Number 1840.0
-            LuaKey.String "unitname", LuaValue.String "raptor_land_swarmer_spectre_t3_v1"
-            LuaKey.String "upright", LuaValue.Bool false
-            LuaKey.String "waterline", LuaValue.Number 19.0
-            LuaKey.String "workertime", LuaValue.Number 0.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "subfolder", LuaValue.String "other/raptors"
-                    LuaKey.String "model_author", LuaValue.String "KDR_11k, Beherith"
-                    LuaKey.String "normalmaps", LuaValue.String "yes"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/chicken_s_normals.png"
+    let raptor_land_swarmer_spectre_t3_v1 : UnitDef =
+        { name = "raptor_land_swarmer_spectre_t3_v1"
+          subfolder = "other/raptors/Spectre"
+          metalCost = ValueOrExpr.Concrete 79.0
+          energyCost = ValueOrExpr.Concrete 79.0
+          buildTime = ValueOrExpr.Concrete 1500.0
+          health = ValueOrExpr.Concrete 500.0
+          sightDistance = ValueOrExpr.Concrete 200.0
+          footprintX = 1.0
+          footprintZ = 1.0
+          objectName = Some "Raptors/raptor1x_spectre.s3o"
+          buildPic = Some "raptors/raptor1x_spectre.DDS"
+          script = Some "Raptors/raptor1x.cob"
+          corpse = None
+          explodeAs = Some "BUG_DEATH"
+          selfDestructAs = Some "BUG_DEATH"
+          collisionVolumeOffsets = Some "0 -3 -3"
+          collisionVolumeScales = Some "18 40 40"
+          collisionVolumeType = Some "box"
+          seismicSignature = Some 2.0
+          category = Some "RAPTOR"
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 150.0
+              maxAcc = 0.345
+              maxDec = 0.345
+              turnRate = 1840.0
+              movementClass = Some "RAPTORSMALLHOVER"
+              maxSlope = Some 18.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = Some 19.0 })
+          builder = None
+          weapons = Some [
+              { name = "weapon"
+                displayName = Some "Claws"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 120.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:blood_spray"
-                            LuaKey.Int 2, LuaValue.String "custom:blood_explode"
-                            LuaKey.Int 3, LuaValue.String "custom:dirt"
-                        ]
-                    LuaKey.String "pieceexplosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "blood_spray"
-                            LuaKey.Int 2, LuaValue.String "blood_spray"
-                            LuaKey.Int 3, LuaValue.String "blood_spray"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "weapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 24.0
-                            LuaKey.String "collidefriendly", LuaValue.Number 0.0
-                            LuaKey.String "collidefeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfriendly", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.3
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:raptorspike-small-sparks-burn"
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 1.0
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "Raptors/spike.s3o"
-                            LuaKey.String "name", LuaValue.String "Claws"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 200.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.8
-                            LuaKey.String "soundstart", LuaValue.String "smallraptorattack"
-                            LuaKey.String "tolerance", LuaValue.Number 5000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weapontimer", LuaValue.Number 0.1
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1000.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 120.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "WEAPON"
-                            LuaKey.String "maindir", LuaValue.String "0 0 1"
-                            LuaKey.String "maxangledif", LuaValue.Number 180.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTAIR"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 200.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.8)
+                weaponVelocity = Some 1000.0
+                areaOfEffect = Some 24.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 5000.0
+                edgeEffectiveness = Some 0.3
+                impulseFactor = Some 1.0
+                noSelfDamage = Some true
+                soundStart = Some "smallraptorattack"
+                soundHit = None
+                explosiongenerator = Some "custom:raptorspike-small-sparks-burn"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_maindir", "0 0 1"
+                    "mount_maxangledif", "180.0"
+                    "mount_onlytargetcategory", "NOTAIR"
+                    "collidefriendly", "0.0"
+                    "collidefeature", "0.0"
+                    "avoidfeature", "0.0"
+                    "avoidfriendly", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "0.0"
+                    "model", "Raptors/spike.s3o"
+                    "waterweapon", "true"
+                    "weapontimer", "0.1"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = None
+          sounds = None
+          customParams = Map.ofList [
+              "subfolder", "other/raptors"
+              "model_author", "KDR_11k, Beherith"
+              "normalmaps", "yes"
+              "normaltex", "unittextures/chicken_s_normals.png"
+          ]
+          extras = Map.ofList [
+              "autoheal", "3.0"
+              "canattack", "true"
+              "canguard", "true"
+              "canpatrol", "true"
+              "canstop", "1"
+              "capturable", "false"
+              "cancloak", "true"
+              "cloakcost", "0.0"
+              "cloakcostmoving", "0.0"
+              "defaultmissiontype", "Standby"
+              "initcloak", "true"
+              "leavetracks", "true"
+              "maneuverleashlength", "640.0"
+              "mass", "90.0"
+              "mincloakdistance", "50.0"
+              "noautofire", "false"
+              "nochasecategory", "VTOL"
+              "side", "THUNDERBIRDS"
+              "smoothanim", "true"
+              "stealth", "1.0"
+              "trackoffset", "0.0"
+              "trackstrength", "3.0"
+              "trackstretch", "1.0"
+              "tracktype", "RaptorTrack"
+              "trackwidth", "18.0"
+              "unitname", "raptor_land_swarmer_spectre_t3_v1"
+              "upright", "false"
+          ] }
 
-    let raptor_land_swarmer_spectre_t4_v1 =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.4025
-            LuaKey.String "maxdec", LuaValue.Number 0.345
-            LuaKey.String "energycost", LuaValue.Number 1000.0
-            LuaKey.String "metalcost", LuaValue.Number 100.0
-            LuaKey.String "builder", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "raptors/raptor2_spectre.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 7500.0
-            LuaKey.String "canattack", LuaValue.Bool true
-            LuaKey.String "canguard", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "canpatrol", LuaValue.Bool true
-            LuaKey.String "canstop", LuaValue.String "1"
-            LuaKey.String "capturable", LuaValue.Bool false
-            LuaKey.String "cancloak", LuaValue.Bool true
-            LuaKey.String "category", LuaValue.String "RAPTOR"
-            LuaKey.String "cloakcost", LuaValue.Number 0.0
-            LuaKey.String "cloakcostmoving", LuaValue.Number 0.0
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -1 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "20 40 44"
-            LuaKey.String "collisionvolumetype", LuaValue.String "box"
-            LuaKey.String "defaultmissiontype", LuaValue.String "Standby"
-            LuaKey.String "explodeas", LuaValue.String "BUG_DEATH"
-            LuaKey.String "floater", LuaValue.Bool false
-            LuaKey.String "footprintx", LuaValue.Number 2.0
-            LuaKey.String "footprintz", LuaValue.Number 2.0
-            LuaKey.String "initcloak", LuaValue.Bool true
-            LuaKey.String "leavetracks", LuaValue.Bool true
-            LuaKey.String "maneuverleashlength", LuaValue.Number 640.0
-            LuaKey.String "mass", LuaValue.Number 200.0
-            LuaKey.String "health", LuaValue.Number 1300.0
-            LuaKey.String "maxslope", LuaValue.Number 18.0
-            LuaKey.String "speed", LuaValue.Number 180.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "mincloakdistance", LuaValue.Number 50.0
-            LuaKey.String "movementclass", LuaValue.String "RAPTORSMALLHOVER"
-            LuaKey.String "noautofire", LuaValue.Bool false
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Raptors/raptor2_spectre.s3o"
-            LuaKey.String "script", LuaValue.String "Raptors/raptor2.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 2.0
-            LuaKey.String "selfdestructas", LuaValue.String "BUG_DEATH"
-            LuaKey.String "side", LuaValue.String "THUNDERBIRDS"
-            LuaKey.String "sightdistance", LuaValue.Number 200.0
-            LuaKey.String "smoothanim", LuaValue.Bool true
-            LuaKey.String "stealth", LuaValue.Number 1.0
-            LuaKey.String "trackoffset", LuaValue.Number 0.0
-            LuaKey.String "trackstrength", LuaValue.Number 3.0
-            LuaKey.String "trackstretch", LuaValue.Number 1.0
-            LuaKey.String "tracktype", LuaValue.String "RaptorTrack"
-            LuaKey.String "trackwidth", LuaValue.Number 18.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turnrate", LuaValue.Number 1840.0
-            LuaKey.String "unitname", LuaValue.String "raptor_land_swarmer_spectre_t4_v1"
-            LuaKey.String "upright", LuaValue.Bool false
-            LuaKey.String "waterline", LuaValue.Number 22.0
-            LuaKey.String "workertime", LuaValue.Number 0.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "subfolder", LuaValue.String "other/raptors"
-                    LuaKey.String "model_author", LuaValue.String "KDR_11k, Beherith"
-                    LuaKey.String "normalmaps", LuaValue.String "yes"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/chicken_m_normals.png"
-                    LuaKey.String "treeshader", LuaValue.String "yes"
+    let raptor_land_swarmer_spectre_t4_v1 : UnitDef =
+        { name = "raptor_land_swarmer_spectre_t4_v1"
+          subfolder = "other/raptors/Spectre"
+          metalCost = ValueOrExpr.Concrete 100.0
+          energyCost = ValueOrExpr.Concrete 1000.0
+          buildTime = ValueOrExpr.Concrete 7500.0
+          health = ValueOrExpr.Concrete 1300.0
+          sightDistance = ValueOrExpr.Concrete 200.0
+          footprintX = 2.0
+          footprintZ = 2.0
+          objectName = Some "Raptors/raptor2_spectre.s3o"
+          buildPic = Some "raptors/raptor2_spectre.DDS"
+          script = Some "Raptors/raptor2.cob"
+          corpse = None
+          explodeAs = Some "BUG_DEATH"
+          selfDestructAs = Some "BUG_DEATH"
+          collisionVolumeOffsets = Some "0 -1 0"
+          collisionVolumeScales = Some "20 40 44"
+          collisionVolumeType = Some "box"
+          seismicSignature = Some 2.0
+          category = Some "RAPTOR"
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 180.0
+              maxAcc = 0.4025
+              maxDec = 0.345
+              turnRate = 1840.0
+              movementClass = Some "RAPTORSMALLHOVER"
+              maxSlope = Some 18.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = Some 22.0 })
+          builder = None
+          weapons = Some [
+              { name = "weapon"
+                displayName = Some "Claws"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 300.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:blood_spray"
-                            LuaKey.Int 2, LuaValue.String "custom:blood_explode"
-                            LuaKey.Int 3, LuaValue.String "custom:dirt"
-                        ]
-                    LuaKey.String "pieceexplosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "blood_spray"
-                            LuaKey.Int 2, LuaValue.String "blood_spray"
-                            LuaKey.Int 3, LuaValue.String "blood_spray"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "weapon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 24.0
-                            LuaKey.String "collidefriendly", LuaValue.Number 0.0
-                            LuaKey.String "collidefeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfeature", LuaValue.Number 0.0
-                            LuaKey.String "avoidfriendly", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.3
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:raptorspike-medium-sparks-burn"
-                            LuaKey.String "firesubmersed", LuaValue.Bool true
-                            LuaKey.String "impulsefactor", LuaValue.Number 1.0
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "Raptors/spike.s3o"
-                            LuaKey.String "name", LuaValue.String "Claws"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 200.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.4
-                            LuaKey.String "soundstart", LuaValue.String "smallraptorattack"
-                            LuaKey.String "tolerance", LuaValue.Number 5000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weapontimer", LuaValue.Number 0.1
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1000.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 300.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "WEAPON"
-                            LuaKey.String "maindir", LuaValue.String "0 0 1"
-                            LuaKey.String "maxangledif", LuaValue.Number 180.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTAIR"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 200.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.4)
+                weaponVelocity = Some 1000.0
+                areaOfEffect = Some 24.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 5000.0
+                edgeEffectiveness = Some 0.3
+                impulseFactor = Some 1.0
+                noSelfDamage = Some true
+                soundStart = Some "smallraptorattack"
+                soundHit = None
+                explosiongenerator = Some "custom:raptorspike-medium-sparks-burn"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_maindir", "0 0 1"
+                    "mount_maxangledif", "180.0"
+                    "mount_onlytargetcategory", "NOTAIR"
+                    "collidefriendly", "0.0"
+                    "collidefeature", "0.0"
+                    "avoidfeature", "0.0"
+                    "avoidfriendly", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firesubmersed", "true"
+                    "interceptedbyshieldtype", "0.0"
+                    "model", "Raptors/spike.s3o"
+                    "waterweapon", "true"
+                    "weapontimer", "0.1"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = None
+          sounds = None
+          customParams = Map.ofList [
+              "subfolder", "other/raptors"
+              "model_author", "KDR_11k, Beherith"
+              "normalmaps", "yes"
+              "normaltex", "unittextures/chicken_m_normals.png"
+              "treeshader", "yes"
+          ]
+          extras = Map.ofList [
+              "canattack", "true"
+              "canguard", "true"
+              "canpatrol", "true"
+              "canstop", "1"
+              "capturable", "false"
+              "cancloak", "true"
+              "cloakcost", "0.0"
+              "cloakcostmoving", "0.0"
+              "defaultmissiontype", "Standby"
+              "initcloak", "true"
+              "leavetracks", "true"
+              "maneuverleashlength", "640.0"
+              "mass", "200.0"
+              "mincloakdistance", "50.0"
+              "noautofire", "false"
+              "nochasecategory", "VTOL"
+              "side", "THUNDERBIRDS"
+              "smoothanim", "true"
+              "stealth", "1.0"
+              "trackoffset", "0.0"
+              "trackstrength", "3.0"
+              "trackstretch", "1.0"
+              "tracktype", "RaptorTrack"
+              "trackwidth", "18.0"
+              "unitname", "raptor_land_swarmer_spectre_t4_v1"
+              "upright", "false"
+          ] }
 
-    let all : (string * LuaValue) list =
+    let all : (string * UnitDef) list =
         [
             "raptor_land_assault_spectre_t2_v1", raptor_land_assault_spectre_t2_v1
             "raptor_land_assault_spectre_t4_v1", raptor_land_assault_spectre_t4_v1

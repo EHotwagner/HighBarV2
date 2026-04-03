@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <OtherFlags>--strict-indentation-</OtherFlags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Tests/CompletenessTests.fs" />
+    <Compile Include="Tests/CorrectnessTests.fs" />
+    <Compile Include="Tests/CapabilityTests.fs" />
+    <Compile Include="Tests/StructuralTests.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../bar/BarData.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>

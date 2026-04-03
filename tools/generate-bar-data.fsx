@@ -284,7 +284,7 @@ let parseLua (src: string) : Result<LVal, string> =
     | Error e -> Error (XParsec.ErrorFormatting.formatStringError src e)
 
 // ---------------------------------------------------------------------------
-// 3. Code generation — emit F# source
+// 3. Code generation — emit F# source (typed records)
 // ---------------------------------------------------------------------------
 
 module CodeGen =
@@ -300,33 +300,404 @@ module CodeGen =
         let s = s.Replace("-", "_").Replace(" ", "_").Replace("/", "_").Replace("\\", "_")
         if s.Length > 0 && Char.IsDigit(s.[0]) then "_" + s else s
 
-    /// Emit a LVal as an F# expression constructing BarData.LuaValue.
-    let rec emitValue (indent: int) (v: LVal) : string =
-        let pad2 = String(' ', indent + 4)
-        match v with
-        | LStr s -> sprintf "LuaValue.String \"%s\"" (escapeString s)
-        | LNum n ->
-            if n = Math.Floor(n) && not (Double.IsInfinity n) && Math.Abs(n) < 1e15 then
-                sprintf "LuaValue.Number %s.0" (int64 n |> string)
-            else
-                sprintf "LuaValue.Number %s" (n.ToString("G", Globalization.CultureInfo.InvariantCulture))
-        | LBool b -> if b then "LuaValue.Bool true" else "LuaValue.Bool false"
-        | LNil -> "LuaValue.Nil"
-        | LExpr s -> sprintf "LuaValue.Expr \"%s\"" (escapeString s)
-        | LTbl [] -> "LuaValue.Table []"
-        | LTbl entries ->
-            let sb = StringBuilder()
-            sb.AppendLine("LuaValue.Table [") |> ignore
-            for (k, v) in entries do
-                let ks =
-                    match k with
-                    | KStr s -> sprintf "LuaKey.String \"%s\"" (escapeString s)
-                    | KInt i -> sprintf "LuaKey.Int %d" i
-                sb.Append(pad2).Append(ks).Append(", ").AppendLine(emitValue (indent + 8) v) |> ignore
-            sb.Append(String(' ', indent)).Append("]") |> ignore
-            sb.ToString()
+    // -- Lookup helpers for LVal tables --
 
-    /// Emit a module with unit definitions.
+    let tblEntries (v: LVal) =
+        match v with LTbl entries -> entries | _ -> []
+
+    let strEntries (v: LVal) =
+        tblEntries v |> List.choose (fun (k, v) -> match k with KStr s -> Some(s, v) | _ -> None)
+
+    let intEntries (v: LVal) =
+        tblEntries v
+        |> List.choose (fun (k, v) -> match k with KInt i -> Some(i, v) | _ -> None)
+        |> List.sortBy fst
+
+    let tryGet (key: string) (v: LVal) =
+        strEntries v |> List.tryFind (fun (k, _) -> k = key) |> Option.map snd
+
+    let getStr key v = match tryGet key v with Some(LStr s) -> Some s | _ -> None
+    let getNum key v = match tryGet key v with Some(LNum n) -> Some n | _ -> None
+    let getBool key v = match tryGet key v with Some(LBool b) -> Some b | _ -> None
+
+    // -- Emit helpers --
+
+    let emitFloat (n: float) =
+        if n = Math.Floor(n) && not (Double.IsInfinity n) && Math.Abs(n) < 1e15 then
+            sprintf "%s.0" (int64 n |> string)
+        else
+            n.ToString("G", Globalization.CultureInfo.InvariantCulture)
+
+    let emitValueOrExprFloat (v: LVal) =
+        match v with
+        | LNum n -> sprintf "ValueOrExpr.Concrete %s" (emitFloat n)
+        | LExpr s -> sprintf "ValueOrExpr.Expr \"%s\"" (escapeString s)
+        | LStr s ->
+            match Double.TryParse(s, Globalization.NumberStyles.Float, Globalization.CultureInfo.InvariantCulture) with
+            | true, n -> sprintf "ValueOrExpr.Concrete %s" (emitFloat n)
+            | _ -> sprintf "ValueOrExpr.Expr \"%s\"" (escapeString s)
+        | _ -> "ValueOrExpr.Concrete 0.0"
+
+    let emitOptionStr = function Some s -> sprintf "Some \"%s\"" (escapeString s) | None -> "None"
+    let emitOptionFloat = function Some n -> sprintf "Some %s" (emitFloat n) | None -> "None"
+    let emitOptionBool = function Some true -> "Some true" | Some false -> "Some false" | None -> "None"
+
+    let emitStringList (items: string list) =
+        if items.IsEmpty then "[]"
+        else
+            let inner = items |> List.map (fun s -> sprintf "\"%s\"" (escapeString s)) |> String.concat "; "
+            sprintf "[%s]" inner
+
+    let emitStringMap (pad: string) (items: (string * string) list) =
+        if items.IsEmpty then "Map.empty"
+        else
+            let lines = items |> List.map (fun (k, v) -> sprintf "%s    \"%s\", \"%s\"" pad (escapeString k) (escapeString v))
+            sprintf "Map.ofList [\n%s\n%s]" (String.concat "\n" lines) pad
+
+    let emitFloatMap (pad: string) (items: (string * float) list) =
+        if items.IsEmpty then "Map.empty"
+        else
+            let lines = items |> List.map (fun (k, v) -> sprintf "%s    \"%s\", %s" pad (escapeString k) (emitFloat v))
+            sprintf "Map.ofList [\n%s\n%s]" (String.concat "\n" lines) pad
+
+    // -- Sub-record emitters --
+
+    let emitSoundDef (pad: string) (tbl: LVal) : string =
+        let getOptStr key = getStr key tbl
+        let getStrList key =
+            match tryGet key tbl with
+            | Some sub ->
+                intEntries sub
+                |> List.choose (fun (_, v) -> match v with LStr s -> Some s | _ -> None)
+            | None -> []
+        [ sprintf "%s{ build = %s" pad (emitOptionStr (getOptStr "build"))
+          sprintf "%s  repair = %s" pad (emitOptionStr (getOptStr "repair"))
+          sprintf "%s  working = %s" pad (emitOptionStr (getOptStr "working"))
+          sprintf "%s  underAttack = %s" pad (emitOptionStr (getOptStr "underattack"))
+          sprintf "%s  cancelDestruct = %s" pad (emitOptionStr (getOptStr "canceldestruct"))
+          sprintf "%s  capture = %s" pad (emitOptionStr (getOptStr "capture"))
+          sprintf "%s  cant = %s" pad (emitStringList (getStrList "cant"))
+          sprintf "%s  count = %s" pad (emitStringList (getStrList "count"))
+          sprintf "%s  ok = %s" pad (emitStringList (getStrList "ok"))
+          sprintf "%s  select = %s }" pad (emitStringList (getStrList "select")) ]
+        |> String.concat "\n"
+
+    let emitFeatureDef (pad: string) (tbl: LVal) : string =
+        [ sprintf "%s{ blocking = %s" pad (emitOptionBool (getBool "blocking" tbl))
+          sprintf "%s  category = %s" pad (emitOptionStr (getStr "category" tbl))
+          sprintf "%s  collisionVolumeOffsets = %s" pad (emitOptionStr (getStr "collisionvolumeoffsets" tbl))
+          sprintf "%s  collisionVolumeScales = %s" pad (emitOptionStr (getStr "collisionvolumescales" tbl))
+          sprintf "%s  collisionVolumeType = %s" pad (emitOptionStr (getStr "collisionvolumetype" tbl))
+          sprintf "%s  damage = %s" pad (emitOptionFloat (getNum "damage" tbl))
+          sprintf "%s  featureDead = %s" pad (emitOptionStr (getStr "featuredead" tbl))
+          sprintf "%s  footprintX = %s" pad (emitOptionFloat (getNum "footprintx" tbl))
+          sprintf "%s  footprintZ = %s" pad (emitOptionFloat (getNum "footprintz" tbl))
+          sprintf "%s  height = %s" pad (emitOptionFloat (getNum "height" tbl))
+          sprintf "%s  metal = %s" pad (emitOptionFloat (getNum "metal" tbl))
+          sprintf "%s  object_ = %s" pad (emitOptionStr (getStr "object" tbl))
+          sprintf "%s  reclaimable = %s" pad (emitOptionBool (getBool "reclaimable" tbl))
+          sprintf "%s  resurrectable = %s }" pad (emitOptionFloat (getNum "resurrectable" tbl)) ]
+        |> String.concat "\n"
+
+    let emitWeaponDef (pad: string) (weaponName: string) (tbl: LVal) (mountOverrides: (string * LVal) list) : string =
+        // Core typed fields
+        let coreFields = Set.ofList [
+            "name"; "weapontype"; "range"; "reloadtime"; "weaponvelocity"
+            "areaofeffect"; "accuracy"; "turret"; "tolerance"; "edgeeffectiveness"
+            "impulsefactor"; "noselfdamage"; "soundstart"; "soundhit"
+            "explosiongenerator"; "rgbcolor"; "onlytargetcategory"; "badtargetcategory"
+            "damage"; "customparams" ]
+
+        // Damage map
+        let damageEntries =
+            match tryGet "damage" tbl with
+            | Some dmgTbl ->
+                strEntries dmgTbl
+                |> List.choose (fun (k, v) -> match v with LNum n -> Some(k, n) | _ -> None)
+            | None -> []
+
+        // Custom params
+        let cpEntries =
+            match tryGet "customparams" tbl with
+            | Some cpTbl ->
+                strEntries cpTbl
+                |> List.choose (fun (k, v) -> match v with LStr s -> Some(k, s) | _ -> None)
+            | None -> []
+
+        // Extras: all fields not in coreFields, plus mount overrides with mount_ prefix
+        let extras =
+            strEntries tbl
+            |> List.filter (fun (k, _) -> not (coreFields.Contains k))
+            |> List.choose (fun (k, v) ->
+                match v with
+                | LStr s -> Some(k, s)
+                | LNum n -> Some(k, emitFloat n)
+                | LBool b -> Some(k, if b then "true" else "false")
+                | LExpr s -> Some(k, s)
+                | _ -> None)
+            |> List.append (
+                mountOverrides
+                |> List.filter (fun (k, _) -> k <> "def")
+                |> List.choose (fun (k, v) ->
+                    match v with
+                    | LStr s -> Some("mount_" + k, s)
+                    | LNum n -> Some("mount_" + k, emitFloat n)
+                    | LBool b -> Some("mount_" + k, if b then "true" else "false")
+                    | _ -> None))
+
+        let emitVoEOption key =
+            match tryGet key tbl with
+            | Some v -> sprintf "Some (%s)" (emitValueOrExprFloat v)
+            | None -> "None"
+
+        [ sprintf "%s{ name = \"%s\"" pad (escapeString weaponName)
+          sprintf "%s  displayName = %s" pad (emitOptionStr (getStr "name" tbl))
+          sprintf "%s  weaponType = %s" pad (emitOptionStr (getStr "weapontype" tbl))
+          sprintf "%s  damage = %s" pad (emitFloatMap (pad + "  ") damageEntries)
+          sprintf "%s  range = %s" pad (emitVoEOption "range")
+          sprintf "%s  reloadTime = %s" pad (emitVoEOption "reloadtime")
+          sprintf "%s  weaponVelocity = %s" pad (emitOptionFloat (getNum "weaponvelocity" tbl))
+          sprintf "%s  areaOfEffect = %s" pad (emitOptionFloat (getNum "areaofeffect" tbl))
+          sprintf "%s  accuracy = %s" pad (emitOptionFloat (getNum "accuracy" tbl))
+          sprintf "%s  turret = %s" pad (emitOptionBool (getBool "turret" tbl))
+          sprintf "%s  tolerance = %s" pad (emitOptionFloat (getNum "tolerance" tbl))
+          sprintf "%s  edgeEffectiveness = %s" pad (emitOptionFloat (getNum "edgeeffectiveness" tbl))
+          sprintf "%s  impulseFactor = %s" pad (emitOptionFloat (getNum "impulsefactor" tbl))
+          sprintf "%s  noSelfDamage = %s" pad (emitOptionBool (getBool "noselfdamage" tbl))
+          sprintf "%s  soundStart = %s" pad (emitOptionStr (getStr "soundstart" tbl))
+          sprintf "%s  soundHit = %s" pad (emitOptionStr (getStr "soundhit" tbl))
+          sprintf "%s  explosiongenerator = %s" pad (emitOptionStr (getStr "explosiongenerator" tbl))
+          sprintf "%s  rgbColor = %s" pad (emitOptionStr (getStr "rgbcolor" tbl))
+          sprintf "%s  onlyTargetCategory = %s" pad (emitOptionStr (getStr "onlytargetcategory" tbl))
+          sprintf "%s  badTargetCategory = %s" pad (emitOptionStr (getStr "badtargetcategory" tbl))
+          sprintf "%s  customParams = %s" pad (emitStringMap (pad + "  ") cpEntries)
+          sprintf "%s  extras = %s }" pad (emitStringMap (pad + "  ") extras) ]
+        |> String.concat "\n"
+
+    let emitMovementDef (pad: string) (unit: LVal) : string option =
+        let canMove = getBool "canmove" unit |> Option.defaultValue false
+        let canFly = getBool "canfly" unit |> Option.defaultValue false
+        let speed = getNum "speed" unit
+        let hasYardMap = getStr "yardmap" unit |> Option.isSome
+        let maxAcc = getNum "maxacc" unit |> Option.defaultValue 0.0
+        if not canMove && not canFly && (speed.IsNone || (hasYardMap && maxAcc = 0.0)) then None
+        else
+            let speedVal = match tryGet "speed" unit with Some v -> emitValueOrExprFloat v | None -> "ValueOrExpr.Concrete 0.0"
+            [ sprintf "%s{ speed = %s" pad speedVal
+              sprintf "%s  maxAcc = %s" pad (emitFloat (getNum "maxacc" unit |> Option.defaultValue 0.0))
+              sprintf "%s  maxDec = %s" pad (emitFloat (getNum "maxdec" unit |> Option.defaultValue 0.0))
+              sprintf "%s  turnRate = %s" pad (emitFloat (getNum "turnrate" unit |> Option.defaultValue 0.0))
+              sprintf "%s  movementClass = %s" pad (emitOptionStr (getStr "movementclass" unit))
+              sprintf "%s  maxSlope = %s" pad (emitOptionFloat (getNum "maxslope" unit))
+              sprintf "%s  maxWaterDepth = %s" pad (emitOptionFloat (getNum "maxwaterdepth" unit))
+              sprintf "%s  canFly = %b" pad canFly
+              sprintf "%s  canMove = %b" pad canMove
+              sprintf "%s  floater = %b" pad (getBool "floater" unit |> Option.defaultValue false)
+              sprintf "%s  turnInPlace = %s" pad (emitOptionBool (getBool "turninplace" unit))
+              sprintf "%s  turnInPlaceAngleLimit = %s" pad (emitOptionFloat (getNum "turninplaceanglelimit" unit))
+              sprintf "%s  turnInPlaceSpeedLimit = %s" pad (emitOptionFloat (getNum "turninplacespeedlimit" unit))
+              sprintf "%s  cruiseAltitude = %s" pad (emitOptionFloat (getNum "cruisealtitude" unit))
+              sprintf "%s  minWaterDepth = %s" pad (emitOptionFloat (getNum "minwaterdepth" unit))
+              sprintf "%s  waterline = %s }" pad (emitOptionFloat (getNum "waterline" unit)) ]
+            |> String.concat "\n"
+            |> Some
+
+    let emitBuilderDef (pad: string) (unit: LVal) : string option =
+        let isBuilder = getBool "builder" unit |> Option.defaultValue false
+        let hasBuildOpts = tryGet "buildoptions" unit |> Option.isSome
+        if not isBuilder || not hasBuildOpts then None
+        else
+            let buildOpts =
+                match tryGet "buildoptions" unit with
+                | Some boTbl ->
+                    intEntries boTbl
+                    |> List.choose (fun (_, v) -> match v with LStr s -> Some s | _ -> None)
+                | None -> []
+            let wtVal = match tryGet "workertime" unit with Some v -> emitValueOrExprFloat v | None -> "ValueOrExpr.Concrete 0.0"
+            [ sprintf "%s{ workerTime = %s" pad wtVal
+              sprintf "%s  buildDistance = %s" pad (emitOptionFloat (getNum "builddistance" unit))
+              sprintf "%s  buildOptions = %s" pad (emitStringList buildOpts)
+              sprintf "%s  terraformSpeed = %s }" pad (emitOptionFloat (getNum "terraformspeed" unit)) ]
+            |> String.concat "\n"
+            |> Some
+
+    let emitEconomyDef (pad: string) (unit: LVal) : string option =
+        let em = tryGet "energymake" unit
+        let mm = tryGet "metalmake" unit
+        let es = getNum "energystorage" unit
+        let ms = getNum "metalstorage" unit
+        let ext = getNum "extractsmetal" unit
+        if em.IsNone && mm.IsNone && es.IsNone && ms.IsNone && ext.IsNone then None
+        else
+            let emitVoEOptField key =
+                match tryGet key unit with
+                | Some v -> sprintf "Some (%s)" (emitValueOrExprFloat v)
+                | None -> "None"
+            [ sprintf "%s{ energyMake = %s" pad (emitVoEOptField "energymake")
+              sprintf "%s  metalMake = %s" pad (emitVoEOptField "metalmake")
+              sprintf "%s  energyStorage = %s" pad (emitOptionFloat es)
+              sprintf "%s  metalStorage = %s" pad (emitOptionFloat ms)
+              sprintf "%s  extractsMetal = %s }" pad (emitOptionFloat ext) ]
+            |> String.concat "\n"
+            |> Some
+
+    let emitBuildingDef (pad: string) (unit: LVal) : string option =
+        let ym = getStr "yardmap" unit
+        if ym.IsNone then None
+        else
+            [ sprintf "%s{ yardMap = %s" pad (emitOptionStr ym)
+              sprintf "%s  activateWhenBuilt = %s" pad (emitOptionBool (getBool "activatewhenbuilt" unit))
+              sprintf "%s  canRepeat = %s }" pad (emitOptionBool (getBool "canrepeat" unit)) ]
+            |> String.concat "\n"
+            |> Some
+
+    let emitFeatureDefs (pad: string) (unit: LVal) : string option =
+        match tryGet "featuredefs" unit with
+        | None -> None
+        | Some fdTbl ->
+            let entries = strEntries fdTbl
+            if entries.IsEmpty then None
+            else
+                let lines =
+                    entries |> List.map (fun (name, ftbl) ->
+                        sprintf "%s    \"%s\",\n%s" pad (escapeString name) (emitFeatureDef (pad + "    ") ftbl))
+                sprintf "Map.ofList [\n%s\n%s]" (String.concat "\n" lines) pad |> Some
+
+    // -- Known fields to exclude from extras --
+    let knownUnitFields = Set.ofList [
+        "name"; "metalcost"; "energycost"; "buildtime"; "health"; "sightdistance"
+        "footprintx"; "footprintz"; "objectname"; "buildpic"; "script"; "corpse"
+        "explodeas"; "selfdestructas"; "collisionvolumeoffsets"; "collisionvolumescales"
+        "collisionvolumetype"; "seismicsignature"; "category"
+        // Movement
+        "speed"; "maxacc"; "maxdec"; "turnrate"; "movementclass"; "maxslope"
+        "maxwaterdepth"; "canfly"; "canmove"; "floater"; "turninplace"
+        "turninplaceanglelimit"; "turninplacespeedlimit"; "cruisealtitude"
+        "minwaterdepth"; "waterline"
+        // Builder
+        "builder"; "workertime"; "builddistance"; "buildoptions"; "terraformspeed"
+        // Economy
+        "energymake"; "metalmake"; "energystorage"; "metalstorage"; "extractsmetal"
+        // Building
+        "yardmap"; "activatewhenbuilt"; "canrepeat"
+        // Sub-tables
+        "weapondefs"; "weapons"; "featuredefs"; "sounds"; "customparams"; "sfxtypes" ]
+
+    let emitUnitDef (pad: string) (unitName: string) (subfolder: string) (unit: LVal) : string =
+        let p = pad + "  "
+
+        // Weapons: merge weapondefs with weapons mount array
+        let weaponsList =
+            match tryGet "weapondefs" unit, tryGet "weapons" unit with
+            | Some wdTbl, Some waTbl ->
+                let wdefs = strEntries wdTbl |> Map.ofList
+                let mountSlots =
+                    intEntries waTbl
+                    |> List.sortBy fst
+                    |> List.choose (fun (_, slotTbl) ->
+                        match getStr "def" slotTbl with
+                        | Some defName ->
+                            let overrides = strEntries slotTbl
+                            Some(defName, overrides)
+                        | None -> None)
+                let weapDefs =
+                    mountSlots |> List.choose (fun (defName, overrides) ->
+                        let lowerDef = defName.ToLowerInvariant()
+                        wdefs |> Map.tryFind lowerDef
+                        |> Option.orElseWith (fun () ->
+                            // Try case-insensitive match
+                            wdefs |> Map.tryPick (fun k v -> if k.ToLowerInvariant() = lowerDef then Some v else None))
+                        |> Option.map (fun wdef -> (lowerDef, wdef, overrides)))
+                if weapDefs.IsEmpty then None
+                else Some weapDefs
+            | Some wdTbl, None ->
+                let wdefs = strEntries wdTbl
+                if wdefs.IsEmpty then None
+                else Some (wdefs |> List.map (fun (k, v) -> (k, v, [])))
+            | _ -> None
+
+        let emitWeapons (pad2: string) =
+            match weaponsList with
+            | None -> "None"
+            | Some wl ->
+                let lines = wl |> List.map (fun (wname, wdef, overrides) ->
+                    emitWeaponDef (pad2 + "    ") wname wdef overrides)
+                sprintf "Some [\n%s\n%s]" (String.concat "\n" lines) pad2
+
+        // Sound def
+        let emitSounds (pad2: string) =
+            match tryGet "sounds" unit with
+            | None -> "None"
+            | Some stbl -> sprintf "Some (\n%s)" (emitSoundDef (pad2 + "  ") stbl)
+
+        // Feature defs
+        let emitFdefs (pad2: string) =
+            match emitFeatureDefs pad2 unit with
+            | None -> "None"
+            | Some s -> sprintf "Some (%s)" s
+
+        // Custom params
+        let cpEntries =
+            match tryGet "customparams" unit with
+            | Some cpTbl ->
+                strEntries cpTbl
+                |> List.choose (fun (k, v) -> match v with LStr s -> Some(k, s) | LBool b -> Some(k, if b then "true" else "false") | LNum n -> Some(k, emitFloat n) | _ -> None)
+            | None -> []
+
+        // Extras: unknown fields
+        let extraEntries =
+            strEntries unit
+            |> List.filter (fun (k, _) -> not (knownUnitFields.Contains k))
+            |> List.choose (fun (k, v) ->
+                match v with
+                | LStr s -> Some(k, s)
+                | LNum n -> Some(k, emitFloat n)
+                | LBool b -> Some(k, if b then "true" else "false")
+                | LExpr s -> Some(k, s)
+                | _ -> None)
+
+        let emitVoE key =
+            match tryGet key unit with
+            | Some v -> emitValueOrExprFloat v
+            | None -> "ValueOrExpr.Concrete 0.0"
+
+        let movOpt = emitMovementDef (p + "  ") unit
+        let bldOpt = emitBuilderDef (p + "  ") unit
+        let ecoOpt = emitEconomyDef (p + "  ") unit
+        let bldgOpt = emitBuildingDef (p + "  ") unit
+
+        [ sprintf "%s{ name = \"%s\"" pad (escapeString unitName)
+          sprintf "%s  subfolder = \"%s\"" pad (escapeString subfolder)
+          sprintf "%s  metalCost = %s" pad (emitVoE "metalcost")
+          sprintf "%s  energyCost = %s" pad (emitVoE "energycost")
+          sprintf "%s  buildTime = %s" pad (emitVoE "buildtime")
+          sprintf "%s  health = %s" pad (emitVoE "health")
+          sprintf "%s  sightDistance = %s" pad (emitVoE "sightdistance")
+          sprintf "%s  footprintX = %s" pad (emitFloat (getNum "footprintx" unit |> Option.defaultValue 1.0))
+          sprintf "%s  footprintZ = %s" pad (emitFloat (getNum "footprintz" unit |> Option.defaultValue 1.0))
+          sprintf "%s  objectName = %s" pad (emitOptionStr (getStr "objectname" unit))
+          sprintf "%s  buildPic = %s" pad (emitOptionStr (getStr "buildpic" unit))
+          sprintf "%s  script = %s" pad (emitOptionStr (getStr "script" unit))
+          sprintf "%s  corpse = %s" pad (emitOptionStr (getStr "corpse" unit))
+          sprintf "%s  explodeAs = %s" pad (emitOptionStr (getStr "explodeas" unit))
+          sprintf "%s  selfDestructAs = %s" pad (emitOptionStr (getStr "selfdestructas" unit))
+          sprintf "%s  collisionVolumeOffsets = %s" pad (emitOptionStr (getStr "collisionvolumeoffsets" unit))
+          sprintf "%s  collisionVolumeScales = %s" pad (emitOptionStr (getStr "collisionvolumescales" unit))
+          sprintf "%s  collisionVolumeType = %s" pad (emitOptionStr (getStr "collisionvolumetype" unit))
+          sprintf "%s  seismicSignature = %s" pad (emitOptionFloat (getNum "seismicsignature" unit))
+          sprintf "%s  category = %s" pad (emitOptionStr (getStr "category" unit))
+          sprintf "%s  movement = %s" pad (match movOpt with None -> "None" | Some s -> sprintf "Some (\n%s)" s)
+          sprintf "%s  builder = %s" pad (match bldOpt with None -> "None" | Some s -> sprintf "Some (\n%s)" s)
+          sprintf "%s  weapons = %s" pad (emitWeapons p)
+          sprintf "%s  economy = %s" pad (match ecoOpt with None -> "None" | Some s -> sprintf "Some (\n%s)" s)
+          sprintf "%s  building = %s" pad (match bldgOpt with None -> "None" | Some s -> sprintf "Some (\n%s)" s)
+          sprintf "%s  featureDefs = %s" pad (emitFdefs p)
+          sprintf "%s  sounds = %s" pad (emitSounds p)
+          sprintf "%s  customParams = %s" pad (emitStringMap p cpEntries)
+          sprintf "%s  extras = %s }" pad (emitStringMap p extraEntries) ]
+        |> String.concat "\n"
+
+    /// Emit a module with unit definitions as typed records.
     let emitUnitsModule (modName: string) (subfolder: string) (units: (string * LVal) list) : string =
         let sb = StringBuilder()
         sb.AppendLine(sprintf "// Auto-generated BAR unit data: %s" subfolder) |> ignore
@@ -338,10 +709,10 @@ module CodeGen =
         sb.AppendLine() |> ignore
         for (name, value) in units |> List.sortBy fst do
             let ident = sanitizeIdent name
-            sb.AppendLine(sprintf "    let %s =" ident) |> ignore
-            sb.Append("        ").AppendLine(emitValue 8 value) |> ignore
+            sb.AppendLine(sprintf "    let %s : UnitDef =" ident) |> ignore
+            sb.AppendLine(emitUnitDef "        " name subfolder value) |> ignore
             sb.AppendLine() |> ignore
-        sb.AppendLine("    let all : (string * LuaValue) list =") |> ignore
+        sb.AppendLine("    let all : (string * UnitDef) list =") |> ignore
         sb.AppendLine("        [") |> ignore
         for (name, _) in units |> List.sortBy fst do
             sb.AppendLine(sprintf "            \"%s\", %s" name (sanitizeIdent name)) |> ignore
@@ -374,7 +745,7 @@ module CodeGen =
         sb.AppendLine() |> ignore
         sb.AppendLine("module AllUnits =") |> ignore
         sb.AppendLine() |> ignore
-        sb.AppendLine("    let all : (string * string * LuaValue) list =") |> ignore
+        sb.AppendLine("    let all : (string * string * UnitDef) list =") |> ignore
         sb.AppendLine("        [") |> ignore
         for (sub, units) in groups do
             let modName = sanitizeIdent sub
@@ -382,7 +753,7 @@ module CodeGen =
                 sb.AppendLine(sprintf "            \"%s\", \"%s\", %s.%s" name sub modName (sanitizeIdent name)) |> ignore
         sb.AppendLine("        ]") |> ignore
         sb.AppendLine() |> ignore
-        sb.AppendLine("    let tryFind (name: string) : LuaValue option =") |> ignore
+        sb.AppendLine("    let tryFind (name: string) : UnitDef option =") |> ignore
         sb.AppendLine("        all |> List.tryFind (fun (n, _, _) -> n = name) |> Option.map (fun (_, _, v) -> v)") |> ignore
         sb.ToString()
 
@@ -454,7 +825,7 @@ let customCmds = parseCustomCommands ()
 printfn "Found %d custom commands." customCmds.Length
 
 // Clean generated files (keep hand-written ones)
-let keepFiles = Set.ofList ["LuaValue.fs"; "Commands.fs"]
+let keepFiles = Set.ofList ["Types.fs"; "Commands.fs"]
 if Directory.Exists(outDir) then
     for f in Directory.GetFiles(outDir, "*.fs") do
         if not (keepFiles.Contains(Path.GetFileName f)) then File.Delete(f)
@@ -486,7 +857,7 @@ let fsproj =
     sb.AppendLine("  </PropertyGroup>") |> ignore
     sb.AppendLine() |> ignore
     sb.AppendLine("  <ItemGroup>") |> ignore
-    sb.AppendLine("    <Compile Include=\"src/LuaValue.fs\" />") |> ignore
+    sb.AppendLine("    <Compile Include=\"src/Types.fs\" />") |> ignore
     sb.AppendLine("    <Compile Include=\"src/Commands.fs\" />") |> ignore
     sb.AppendLine("    <Compile Include=\"src/CustomCommands.fs\" />") |> ignore
     for fn in unitFileNames |> Seq.sort do

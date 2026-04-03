@@ -5,1557 +5,1721 @@ open BarData
 
 module Legion_Labs =
 
-    let legaap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 28000.0
-            LuaKey.String "metalcost", LuaValue.Number 2900.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGAAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 31050.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "142 50 142"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 3900.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGAAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 1000.0
-            LuaKey.String "radaremitheight", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGAAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 305.5
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legaca"
-                    LuaKey.Int 2, LuaValue.String "legstronghold"
-                    LuaKey.Int 3, LuaValue.String "legmineb"
-                    LuaKey.Int 4, LuaValue.String "legatorpbomber"
-                    LuaKey.Int 5, LuaValue.String "legafigdef"
-                    LuaKey.Int 6, LuaValue.String "legwhisper"
-                    LuaKey.Int 7, LuaValue.String "legfort"
-                    LuaKey.Int 8, LuaValue.String "legphoenix"
-                    LuaKey.Int 9, LuaValue.String "legvenator"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legaap_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "restrictions_inclusion", LuaValue.String "_noair_"
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "model_author", LuaValue.String "Protar/Ghoulish"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "142 50 142"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2112.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1936.0
-                            LuaKey.String "object", LuaValue.String "Units/legaap_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1056.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 968.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:radarpulse_t1_slow"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pairactv"
-                        ]
-                ]
-        ]
+    let legaap : UnitDef =
+        { name = "legaap"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 2900.0
+          energyCost = ValueOrExpr.Concrete 28000.0
+          buildTime = ValueOrExpr.Concrete 31050.0
+          health = ValueOrExpr.Concrete 3900.0
+          sightDistance = ValueOrExpr.Concrete 305.5
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/LEGAAP.s3o"
+          buildPic = Some "LEGAAP.DDS"
+          script = Some "Units/LEGAAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "142 50 142"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = ["legaca"; "legstronghold"; "legmineb"; "legatorpbomber"; "legafigdef"; "legwhisper"; "legfort"; "legphoenix"; "legvenator"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "142 50 142"
+                collisionVolumeType = Some "Box"
+                damage = Some 2112.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1936.0
+                object_ = Some "Units/legaap_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1056.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 968.0
+                object_ = Some "Units/cor7X7A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pairactv"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/legaap_aoplane.dds"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "buildert2"
+              "restrictions_inclusion", "_noair_"
+              "airfactory", "true"
+              "model_author", "Protar/Ghoulish"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "2.0"
+          ]
+          extras = Map.ofList [
+              "radardistance", "1000.0"
+              "radaremitheight", "50.0"
+          ] }
 
-    let legadvshipyard =
-        LuaValue.Table [
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "legadvshipyard.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 23550.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 10 -2"
-            LuaKey.String "collisionvolumescales", LuaValue.String "186 78 183"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 10000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 5900.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 2800.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 30.0
-            LuaKey.String "objectname", LuaValue.String "Units/legadvshipyard.s3o"
-            LuaKey.String "script", LuaValue.String "Units/legadvshipyard.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 301.60001
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "waterline", LuaValue.Number 19.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew"
-            LuaKey.String "buildoptions", LuaValue.Expr "{\r\n\t\t\t\"leganavyconsub\",\r\n\t\t\t\"leganavyengineer\",\r\n\t\t\t\"leganavycruiser\",\r\n\t\t\t\"leganavyheavysub\",\r\n\t\t\t\"leganavybattlesub\",\r\n\t\t\t\"leganavyaaship\",\r\n\t\t\t\"leganavyradjamship\",\r\n\t\t\t\"leganavyantinukecarrier\",\r\n\t\t\t\"leganavybattleship\",\r\n\t\t\t\"leganavyartyship\",\r\n\t\t\t\"leganavymissileship\",\r\n\t\t\t\"leganavyflagship\",\r\n\t\t\t\"leganavyantiswarm\",\r\n\t\t}"
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "model_author", LuaValue.String "Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -13 -3"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "192 61 180"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2650.0
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2174.0
-                            LuaKey.String "object", LuaValue.String "Units/legadvshipyard_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pshpactv"
-                        ]
-                ]
-        ]
+    let legadvshipyard : UnitDef =
+        { name = "legadvshipyard"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 2800.0
+          energyCost = ValueOrExpr.Concrete 10000.0
+          buildTime = ValueOrExpr.Concrete 23550.0
+          health = ValueOrExpr.Concrete 5900.0
+          sightDistance = ValueOrExpr.Concrete 301.60001
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/legadvshipyard.s3o"
+          buildPic = Some "legadvshipyard.DDS"
+          script = Some "Units/legadvshipyard.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 10 -2"
+          collisionVolumeScales = Some "186 78 183"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = None
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 30.0
+              waterline = Some 19.0 })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = []
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew weeeeeeeeeew"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some false
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -13 -3"
+                collisionVolumeScales = Some "192 61 180"
+                collisionVolumeType = Some "Box"
+                damage = Some 2650.0
+                featureDead = None
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 4.0
+                metal = Some 2174.0
+                object_ = Some "Units/legadvshipyard_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pshpactv"] })
+          customParams = Map.ofList [
+              "model_author", "Tharsis"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+          ]
+          extras = Map.empty }
 
-    let legalab =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "energycost", LuaValue.Number 16000.0
-            LuaKey.String "metalcost", LuaValue.Number 2600.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGALAB.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 25200.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "140 52 140"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 4500.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGALAB.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGALAB.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 288.60001
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo oooeeeooo oooeeeooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Expr "{\r\n\t\t\t\"legack\",\r\n\t\t\t\"legaceb\",\r\n\t\t\t\"legstr\",\r\n\t\t\t\"legamph\",\r\n\t\t\t\"legshot\",\r\n\t\t\t\"leginc\",\r\n\t\t\t\"legsrail\",\r\n\t\t\t\"legbart\",\r\n\t\t\t\"leginfestor\",\r\n\t\t\t\"leghrk\",\r\n\t\t\t\"legadvaabot\",\r\n\t\t\t\"legsnapper\",\r\n\t\t\t\"legaradk\",\r\n\t\t\t\"legaspy\",\r\n\t\t\t\"legajamk\",\r\n\t\t\t\"legdecom\",\r\n\t\t}"
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legalab_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "model_author", LuaValue.String "Protar/Ghoulish"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "140 52 140"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2443.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1743.0
-                            LuaKey.String "object", LuaValue.String "Units/legalab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1222.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 872.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "plabactv"
-                        ]
-                ]
-        ]
+    let legalab : UnitDef =
+        { name = "legalab"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 2600.0
+          energyCost = ValueOrExpr.Concrete 16000.0
+          buildTime = ValueOrExpr.Concrete 25200.0
+          health = ValueOrExpr.Concrete 4500.0
+          sightDistance = ValueOrExpr.Concrete 288.60001
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/LEGALAB.s3o"
+          buildPic = Some "LEGALAB.DDS"
+          script = Some "Units/LEGALAB.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "140 52 140"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = []
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo oooeeeooo oooeeeooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "140 52 140"
+                collisionVolumeType = Some "Box"
+                damage = Some 2443.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1743.0
+                object_ = Some "Units/legalab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1222.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 872.0
+                object_ = Some "Units/cor7X7A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["plabactv"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/legalab_aoplane.dds"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "buildert2"
+              "model_author", "Protar/Ghoulish"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "2.0"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+              "radardistance", "50.0"
+          ] }
 
-    let legamphlab =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 5600.0
-            LuaKey.String "metalcost", LuaValue.Number 1200.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "legamphlab.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 11400.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 5 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "98 60 91"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 160.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 2800.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 25.0
-            LuaKey.String "objectname", LuaValue.String "Units/legamphlab.s3o"
-            LuaKey.String "script", LuaValue.String "Units/legamphlab.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 240.0
-            LuaKey.String "terraformspeed", LuaValue.Number 750.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oooooo oooooo oeeeeo oeeeeo oeeeeo oeeeeo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legotter"
-                    LuaKey.Int 2, LuaValue.String "legamphtank"
-                    LuaKey.Int 3, LuaValue.String "legfloat"
-                    LuaKey.Int 4, LuaValue.String "legamph"
-                    LuaKey.Int 5, LuaValue.String "legaabot"
-                    LuaKey.Int 6, LuaValue.String "legadvaabot"
-                    LuaKey.Int 7, LuaValue.String "legdecom"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legamphlab_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "model_author", LuaValue.String "ZephyrSkies, Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 1.5
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "96 44 89"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1500.0
-                            LuaKey.String "footprintx", LuaValue.Number 7.0
-                            LuaKey.String "footprintz", LuaValue.Number 7.0
-                            LuaKey.String "height", LuaValue.Number 5.0
-                            LuaKey.String "metal", LuaValue.Number 800.0
-                            LuaKey.String "object", LuaValue.String "Units/legamphlab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pvehactv"
-                        ]
-                ]
-        ]
+    let legamphlab : UnitDef =
+        { name = "legamphlab"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 1200.0
+          energyCost = ValueOrExpr.Concrete 5600.0
+          buildTime = ValueOrExpr.Concrete 11400.0
+          health = ValueOrExpr.Concrete 2800.0
+          sightDistance = ValueOrExpr.Concrete 240.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/legamphlab.s3o"
+          buildPic = Some "legamphlab.DDS"
+          script = Some "Units/legamphlab.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 5 0"
+          collisionVolumeScales = Some "98 60 91"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 25.0
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legotter"; "legamphtank"; "legfloat"; "legamph"; "legaabot"; "legadvaabot"; "legdecom"]
+              terraformSpeed = Some 750.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 160.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooo oooooo oeeeeo oeeeeo oeeeeo oeeeeo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some false
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "96 44 89"
+                collisionVolumeType = Some "Box"
+                damage = Some 1500.0
+                featureDead = None
+                footprintX = Some 7.0
+                footprintZ = Some 7.0
+                height = Some 5.0
+                metal = Some 800.0
+                object_ = Some "Units/legamphlab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pvehactv"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/legamphlab_aoplane.dds"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "builder"
+              "model_author", "ZephyrSkies, Tharsis"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "1.5"
+          ]
+          extras = Map.empty }
 
-    let legap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 1100.0
-            LuaKey.String "metalcost", LuaValue.Number 430.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 6380.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "96 45 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "sightemitheight", LuaValue.Number 40.0
-            LuaKey.String "health", LuaValue.Number 1780.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 510.0
-            LuaKey.String "radaremitheight", LuaValue.Number 40.0
-            LuaKey.String "script", LuaValue.String "Units/LEGAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oooooo oooooo oooooo oooooo oooooo oooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legca"
-                    LuaKey.Int 2, LuaValue.String "legfig"
-                    LuaKey.Int 3, LuaValue.String "legkam"
-                    LuaKey.Int 4, LuaValue.String "legcib"
-                    LuaKey.Int 5, LuaValue.String "legmos"
-                    LuaKey.Int 6, LuaValue.String "leglts"
-                    LuaKey.Int 7, LuaValue.String "legatrans"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legap_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "restrictions_inclusion", LuaValue.String "_noair_"
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "model_author", LuaValue.String "Protar/Ghoulish"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "96 45 96"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1155.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 540.0
-                            LuaKey.String "object", LuaValue.String "Units/legap_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 578.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 216.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:radarpulse_t1_slow"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "unitready"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "airplantselect"
-                        ]
-                ]
-        ]
+    let legap : UnitDef =
+        { name = "legap"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 430.0
+          energyCost = ValueOrExpr.Concrete 1100.0
+          buildTime = ValueOrExpr.Concrete 6380.0
+          health = ValueOrExpr.Concrete 1780.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/LEGAP.s3o"
+          buildPic = Some "LEGAP.DDS"
+          script = Some "Units/LEGAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "96 45 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legca"; "legfig"; "legkam"; "legcib"; "legmos"; "leglts"; "legatrans"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooo oooooo oooooo oooooo oooooo oooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "96 45 96"
+                collisionVolumeType = Some "Box"
+                damage = Some 1155.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 540.0
+                object_ = Some "Units/legap_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 578.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 216.0
+                object_ = Some "Units/cor6X6B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["airplantselect"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/legap_aoplane.dds"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "builder"
+              "restrictions_inclusion", "_noair_"
+              "airfactory", "true"
+              "model_author", "Protar/Ghoulish"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+          ]
+          extras = Map.ofList [
+              "sightemitheight", "40.0"
+              "radardistance", "510.0"
+              "radaremitheight", "40.0"
+          ] }
 
-    let legavp =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "energycost", LuaValue.Number 16000.0
-            LuaKey.String "metalcost", LuaValue.Number 2500.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGAVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 27750.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 5"
-            LuaKey.String "collisionvolumescales", LuaValue.String "144 70 144"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "levelground", LuaValue.Bool false
-            LuaKey.String "health", LuaValue.Number 5100.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGAVP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGAVP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 286.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "h\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        "
-            LuaKey.String "buildoptions", LuaValue.Expr "{\r\n\t\t\t\"legacv\",\r\n\t\t\t\"legmrv\",\r\n\t\t\t\"legaskirmtank\",\r\n\t\t\t\"legfloat\",\r\n\t\t\t\"legaheattank\",\r\n\t\t\t\"legmed\",\r\n\t\t\t\"legamcluster\",\r\n\t\t\t\"legvcarry\",\r\n\t\t\t\"legavroc\",\r\n\t\t\t\"leginf\",\r\n\t\t\t\"legvflak\",\r\n\t\t\t\"legavantinuke\",\r\n\t\t\t\"legavjam\",\r\n\t\t\t\"legavrad\",\r\n\t\t\t\"legafcv\"\r\n\t\t}"
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool false
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legavp_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 0.01
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "model_author", LuaValue.String "ZephyrSkies"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 5"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "144 70 144"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2777.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1721.0
-                            LuaKey.String "object", LuaValue.String "Units/legavp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1389.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 860.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6C.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pvehactv"
-                        ]
-                ]
-        ]
+    let legavp : UnitDef =
+        { name = "legavp"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 2500.0
+          energyCost = ValueOrExpr.Concrete 16000.0
+          buildTime = ValueOrExpr.Concrete 27750.0
+          health = ValueOrExpr.Concrete 5100.0
+          sightDistance = ValueOrExpr.Concrete 286.0
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/LEGAVP.s3o"
+          buildPic = Some "LEGAVP.DDS"
+          script = Some "Units/LEGAVP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 5"
+          collisionVolumeScales = Some "144 70 144"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = []
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "h\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oo oo oo oo oo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        oo oo oe ee ee ee eo oo oo\r\n        "
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 5"
+                collisionVolumeScales = Some "144 70 144"
+                collisionVolumeType = Some "Box"
+                damage = Some 2777.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 1721.0
+                object_ = Some "Units/legavp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1389.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 860.0
+                object_ = Some "Units/cor6X6C.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pvehactv"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "false"
+              "buildinggrounddecaltype", "decals/legavp_aoplane.dds"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecaldecayspeed", "0.01"
+              "unitgroup", "buildert2"
+              "model_author", "ZephyrSkies"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "2.0"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+              "levelground", "false"
+              "radardistance", "50.0"
+          ] }
 
-    let legfhp =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 2000.0
-            LuaKey.String "metalcost", LuaValue.Number 670.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGFHP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 8700.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "96 35 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 3750.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 5.0
-            LuaKey.String "objectname", LuaValue.String "Units/legfhp.s3o"
-            LuaKey.String "script", LuaValue.String "Units/legfhp.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 312.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "waterline", LuaValue.Number 4.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "weeeew weeeew weeeew weeeew weeeew weeeew"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legch"
-                    LuaKey.Int 2, LuaValue.String "legsh"
-                    LuaKey.Int 3, LuaValue.String "legner"
-                    LuaKey.Int 4, LuaValue.String "legah"
-                    LuaKey.Int 5, LuaValue.String "legmh"
-                    LuaKey.Int 6, LuaValue.String "legcar"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "model_author", LuaValue.String "Protar, ZephyrSkies"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 1.5
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "96 35 96"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2014.0
-                            LuaKey.String "footprintx", LuaValue.Number 8.0
-                            LuaKey.String "footprintz", LuaValue.Number 7.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 715.0
-                            LuaKey.String "object", LuaValue.String "Units/legfhp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "hoverok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "hoversl2"
-                        ]
-                ]
-        ]
+    let legfhp : UnitDef =
+        { name = "legfhp"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 670.0
+          energyCost = ValueOrExpr.Concrete 2000.0
+          buildTime = ValueOrExpr.Concrete 8700.0
+          health = ValueOrExpr.Concrete 3750.0
+          sightDistance = ValueOrExpr.Concrete 312.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/legfhp.s3o"
+          buildPic = Some "LEGFHP.DDS"
+          script = Some "Units/legfhp.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "96 35 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = None
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 5.0
+              waterline = Some 4.0 })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legch"; "legsh"; "legner"; "legah"; "legmh"; "legcar"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "weeeew weeeew weeeew weeeew weeeew weeeew"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some false
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "96 35 96"
+                collisionVolumeType = Some "Box"
+                damage = Some 2014.0
+                featureDead = None
+                footprintX = Some 8.0
+                footprintZ = Some 7.0
+                height = Some 20.0
+                metal = Some 715.0
+                object_ = Some "Units/legfhp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+          ])
+          sounds = Some (
+            { build = Some "hoverok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["hoversl2"] })
+          customParams = Map.ofList [
+              "unitgroup", "builder"
+              "model_author", "Protar, ZephyrSkies"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "1.5"
+          ]
+          extras = Map.empty }
 
-    let leggant =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 62000.0
-            LuaKey.String "metalcost", LuaValue.Number 8400.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGGANT.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 67300.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 105 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGGANT.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGGANT.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1800.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
-            LuaKey.String "buildoptions", LuaValue.Expr "{\r\n\t\t\t\"legeheatraymech\",\r\n\t\t\t\"legeallterrainmech\",\r\n\t\t\t\"legjav\",\r\n\t\t\t\"legelrpcmech\",\r\n\t\t\t\"legehovertank\",\r\n\t\t\t\"legerailtank\",\r\n\t\t\t\"legeshotgunmech\",\r\n\t\t\t\"legkeres\",\r\n\t\t}"
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/leggant_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "model_author", LuaValue.String "Protar"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "190 100 190"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/leggant_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:GantWhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:YellowLight"
-                            LuaKey.Int 3, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "activate", LuaValue.String "gantok2"
-                    LuaKey.String "build", LuaValue.String "gantok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "deactivate", LuaValue.String "gantok2"
-                    LuaKey.String "repair", LuaValue.String "lathelrg"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "gantok1"
-                    LuaKey.String "working", LuaValue.String "build"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "gantsel1"
-                        ]
-                ]
-        ]
+    let leggant : UnitDef =
+        { name = "leggant"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 8400.0
+          energyCost = ValueOrExpr.Concrete 62000.0
+          buildTime = ValueOrExpr.Concrete 67300.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/LEGGANT.s3o"
+          buildPic = Some "LEGGANT.DDS"
+          script = Some "Units/LEGGANT.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 105 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1800.0
+              buildDistance = None
+              buildOptions = []
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 12 0"
+                collisionVolumeScales = Some "190 100 190"
+                collisionVolumeType = Some "Box"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/leggant_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "gantok2"
+              repair = Some "lathelrg"
+              working = Some "build"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["gantsel1"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/leggant_aoplane.dds"
+              "buildinggrounddecalsizey", "15.0"
+              "buildinggrounddecalsizex", "15.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "buildert3"
+              "model_author", "Protar"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "3.0"
+          ]
+          extras = Map.ofList [
+              "radardistance", "50.0"
+          ] }
 
-    let leggantuw =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 62000.0
-            LuaKey.String "metalcost", LuaValue.Number 8400.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGGANTUW.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 67300.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 105 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 30.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGGANT.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGGANT.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1800.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
-            LuaKey.String "buildoptions", LuaValue.Expr "{\r\n\t\t\t\"legeheatraymech\",\r\n\t\t\t\"legjav\",\r\n\t\t\t\"legehovertank\",\r\n            \"legfloat\",\r\n            \"legamph\",\r\n            \"leganavybattleship\"\r\n\t\t}"
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/leggant_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "model_author", LuaValue.String "Protar"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "190 100 190"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/leggant_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:GantWhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:YellowLight"
-                            LuaKey.Int 3, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "activate", LuaValue.String "gantok2"
-                    LuaKey.String "build", LuaValue.String "gantok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "deactivate", LuaValue.String "gantok2"
-                    LuaKey.String "repair", LuaValue.String "lathelrg"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "gantok1"
-                    LuaKey.String "working", LuaValue.String "build"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "gantsel1"
-                        ]
-                ]
-        ]
+    let leggantuw : UnitDef =
+        { name = "leggantuw"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 8400.0
+          energyCost = ValueOrExpr.Concrete 62000.0
+          buildTime = ValueOrExpr.Concrete 67300.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/LEGGANT.s3o"
+          buildPic = Some "LEGGANTUW.DDS"
+          script = Some "Units/LEGGANT.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 105 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 30.0
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1800.0
+              buildDistance = None
+              buildOptions = []
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 12 0"
+                collisionVolumeScales = Some "190 100 190"
+                collisionVolumeType = Some "Box"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/leggant_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "gantok2"
+              repair = Some "lathelrg"
+              working = Some "build"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["gantsel1"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/leggant_aoplane.dds"
+              "buildinggrounddecalsizey", "15.0"
+              "buildinggrounddecalsizex", "15.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "buildert3"
+              "model_author", "Protar"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "3.0"
+          ]
+          extras = Map.ofList [
+              "radardistance", "50.0"
+          ] }
 
-    let leghalab =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 62000.0
-            LuaKey.String "metalcost", LuaValue.Number 4900.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGGANT.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 67300.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 105 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGGANT.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGGANT.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1200.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "leghack"
-                    LuaKey.Int 2, LuaValue.String "leginc"
-                    LuaKey.Int 3, LuaValue.String "legsrail"
-                    LuaKey.Int 4, LuaValue.String "legajamk"
-                    LuaKey.Int 5, LuaValue.String "legdecom"
-                    LuaKey.Int 6, LuaValue.String "legadvaabot"
-                    LuaKey.Int 7, LuaValue.String "legjav"
-                    LuaKey.Int 8, LuaValue.String "legshot"
-                    LuaKey.Int 9, LuaValue.String "legamph"
-                    LuaKey.Int 10, LuaValue.String "legaspy"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/leggant_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "model_author", LuaValue.String "Protar"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "190 100 190"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/leggant_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:GantWhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:YellowLight"
-                            LuaKey.Int 3, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "activate", LuaValue.String "gantok2"
-                    LuaKey.String "build", LuaValue.String "gantok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "deactivate", LuaValue.String "gantok2"
-                    LuaKey.String "repair", LuaValue.String "lathelrg"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "gantok1"
-                    LuaKey.String "working", LuaValue.String "build"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "gantsel1"
-                        ]
-                ]
-        ]
+    let leghalab : UnitDef =
+        { name = "leghalab"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 4900.0
+          energyCost = ValueOrExpr.Concrete 62000.0
+          buildTime = ValueOrExpr.Concrete 67300.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/LEGGANT.s3o"
+          buildPic = Some "LEGGANT.DDS"
+          script = Some "Units/LEGGANT.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 105 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1200.0
+              buildDistance = None
+              buildOptions = ["leghack"; "leginc"; "legsrail"; "legajamk"; "legdecom"; "legadvaabot"; "legjav"; "legshot"; "legamph"; "legaspy"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 12 0"
+                collisionVolumeScales = Some "190 100 190"
+                collisionVolumeType = Some "Box"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/leggant_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "gantok2"
+              repair = Some "lathelrg"
+              working = Some "build"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["gantsel1"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/leggant_aoplane.dds"
+              "buildinggrounddecalsizey", "15.0"
+              "buildinggrounddecalsizex", "15.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "buildert3"
+              "model_author", "Protar"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "3.0"
+          ]
+          extras = Map.ofList [
+              "radardistance", "50.0"
+          ] }
 
-    let leghavp =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 46000.0
-            LuaKey.String "metalcost", LuaValue.Number 4900.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGHAVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 67300.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 105 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGHAVP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGHAVP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "leghacv"
-                    LuaKey.Int 2, LuaValue.String "legaheattank"
-                    LuaKey.Int 3, LuaValue.String "legmed"
-                    LuaKey.Int 4, LuaValue.String "legavroc"
-                    LuaKey.Int 5, LuaValue.String "leginf"
-                    LuaKey.Int 6, LuaValue.String "legvflak"
-                    LuaKey.Int 7, LuaValue.String "legavantinuke"
-                    LuaKey.Int 8, LuaValue.String "legavjam"
-                    LuaKey.Int 9, LuaValue.String "legmrv"
-                    LuaKey.Int 10, LuaValue.String "legehovertank"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legamphlab_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "model_author", LuaValue.String "Protar"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "190 100 190"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/leghavp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pvehactv"
-                        ]
-                ]
-        ]
+    let leghavp : UnitDef =
+        { name = "leghavp"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 4900.0
+          energyCost = ValueOrExpr.Concrete 46000.0
+          buildTime = ValueOrExpr.Concrete 67300.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/LEGHAVP.s3o"
+          buildPic = Some "LEGHAVP.DDS"
+          script = Some "Units/LEGHAVP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 105 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = ["leghacv"; "legaheattank"; "legmed"; "legavroc"; "leginf"; "legvflak"; "legavantinuke"; "legavjam"; "legmrv"; "legehovertank"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo yoeeeeeeeeoy"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 12 0"
+                collisionVolumeScales = Some "190 100 190"
+                collisionVolumeType = Some "Box"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/leghavp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pvehactv"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/legamphlab_aoplane.dds"
+              "buildinggrounddecalsizey", "15.0"
+              "buildinggrounddecalsizex", "15.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "buildert3"
+              "model_author", "Protar"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "3.0"
+          ]
+          extras = Map.ofList [
+              "radardistance", "50.0"
+          ] }
 
-    let leghp =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "energycost", LuaValue.Number 2000.0
-            LuaKey.String "metalcost", LuaValue.Number 670.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGHP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 8700.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "96 35 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 3750.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGHP.s3o"
-            LuaKey.String "script", LuaValue.String "Units/LEGHP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 312.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legch"
-                    LuaKey.Int 2, LuaValue.String "legsh"
-                    LuaKey.Int 3, LuaValue.String "legner"
-                    LuaKey.Int 4, LuaValue.String "legah"
-                    LuaKey.Int 5, LuaValue.String "legmh"
-                    LuaKey.Int 6, LuaValue.String "legcar"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/leghp_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 8.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 8.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "model_author", LuaValue.String "Protar"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "techlevel", LuaValue.Number 1.5
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "96 35 96"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2014.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 662.0
-                            LuaKey.String "object", LuaValue.String "Units/leghp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 5 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "96 12 96"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1007.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 265.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7D.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "hoverok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "hoversl2"
-                        ]
-                ]
-        ]
+    let leghp : UnitDef =
+        { name = "leghp"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 670.0
+          energyCost = ValueOrExpr.Concrete 2000.0
+          buildTime = ValueOrExpr.Concrete 8700.0
+          health = ValueOrExpr.Concrete 3750.0
+          sightDistance = ValueOrExpr.Concrete 312.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/LEGHP.s3o"
+          buildPic = Some "LEGHP.DDS"
+          script = Some "Units/LEGHP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "96 35 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legch"; "legsh"; "legner"; "legah"; "legmh"; "legcar"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "96 35 96"
+                collisionVolumeType = Some "Box"
+                damage = Some 2014.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 662.0
+                object_ = Some "Units/leghp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = Some "0 5 0"
+                collisionVolumeScales = Some "96 12 96"
+                collisionVolumeType = Some "Box"
+                damage = Some 1007.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 265.0
+                object_ = Some "Units/cor7X7D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "hoverok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["hoversl2"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/leghp_aoplane.dds"
+              "buildinggrounddecalsizey", "8.0"
+              "buildinggrounddecalsizex", "8.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "builder"
+              "model_author", "Protar"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "techlevel", "1.5"
+          ]
+          extras = Map.empty }
 
-    let leglab =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "energycost", LuaValue.Number 1050.0
-            LuaKey.String "metalcost", LuaValue.Number 470.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGLAB.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 5000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 5 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "100 45 100"
-            LuaKey.String "collisionvolumetype", LuaValue.String "CylY"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 2900.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGLAB.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGLAB.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 290.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oooooo oooooo oeeeeo oeeeeo oeeeeo oeeeeo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legck"
-                    LuaKey.Int 2, LuaValue.String "legrezbot"
-                    LuaKey.Int 3, LuaValue.String "leggob"
-                    LuaKey.Int 4, LuaValue.String "leglob"
-                    LuaKey.Int 5, LuaValue.String "legcen"
-                    LuaKey.Int 6, LuaValue.String "legbal"
-                    LuaKey.Int 7, LuaValue.String "legkark"
-                    LuaKey.Int 8, LuaValue.String "legaabot"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/leglab_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "model_author", LuaValue.String "Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "88 28 88"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1560.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 442.0
-                            LuaKey.String "object", LuaValue.String "Units/leglab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 780.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 177.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "unitready"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "labselect"
-                        ]
-                ]
-        ]
+    let leglab : UnitDef =
+        { name = "leglab"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 470.0
+          energyCost = ValueOrExpr.Concrete 1050.0
+          buildTime = ValueOrExpr.Concrete 5000.0
+          health = ValueOrExpr.Concrete 2900.0
+          sightDistance = ValueOrExpr.Concrete 290.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/LEGLAB.s3o"
+          buildPic = Some "LEGLAB.DDS"
+          script = Some "Units/LEGLAB.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 5 0"
+          collisionVolumeScales = Some "100 45 100"
+          collisionVolumeType = Some "CylY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legck"; "legrezbot"; "leggob"; "leglob"; "legcen"; "legbal"; "legkark"; "legaabot"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooo oooooo oeeeeo oeeeeo oeeeeo oeeeeo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "88 28 88"
+                collisionVolumeType = Some "Box"
+                damage = Some 1560.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 442.0
+                object_ = Some "Units/leglab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 780.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 177.0
+                object_ = Some "Units/cor6X6B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["labselect"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/leglab_aoplane.dds"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "builder"
+              "model_author", "Tharsis"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+              "radardistance", "50.0"
+          ] }
 
-    let legsplab =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "legsplab.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 11800.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "category", LuaValue.String "SURFACE UNDERWATER"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 5500.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 2200.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 1400.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 30.0
-            LuaKey.String "objectname", LuaValue.String "Units/legsplab.s3o"
-            LuaKey.String "script", LuaValue.String "Units/legsplab.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 169.0
-            LuaKey.String "sonardistance", LuaValue.Number 800.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "waterline", LuaValue.Number 0.0
-            LuaKey.String "workertime", LuaValue.Number 300.0
-            LuaKey.String "yardmap", LuaValue.String "wwwwww weeeew weeeew weeeew weeeew wwwwww"
-            LuaKey.String "buildoptions", LuaValue.Expr "{\r\n\t\t\t\"legspcon\",\r\n\t\t\t\"legspsurfacegunship\",\r\n\t\t\t\"legspcarrier\",\r\n\t\t\t\"legspbomber\",\r\n\t\t\t\"legsptorpgunship\",\r\n\t\t\t\"legspfighter\",\r\n\t\t\t\"legspradarsonarplane\",\r\n\t\t}"
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "model_author", LuaValue.String "ZephyrSkies"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "restrictions_inclusion", LuaValue.String "_noair_"
-                    LuaKey.String "techlevel", LuaValue.Number 1.5
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "2.5 0.0 -0.0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "117.5 41.25 112.5"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1200.0
-                            LuaKey.String "footprintx", LuaValue.Number 7.0
-                            LuaKey.String "footprintz", LuaValue.Number 7.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 930.0
-                            LuaKey.String "object", LuaValue.String "Units/legsplab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "seaplok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "seaplsl2"
-                        ]
-                ]
-        ]
+    let legsplab : UnitDef =
+        { name = "legsplab"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 1400.0
+          energyCost = ValueOrExpr.Concrete 5500.0
+          buildTime = ValueOrExpr.Concrete 11800.0
+          health = ValueOrExpr.Concrete 2200.0
+          sightDistance = ValueOrExpr.Concrete 169.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/legsplab.s3o"
+          buildPic = Some "legsplab.DDS"
+          script = Some "Units/legsplab.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = Some "SURFACE UNDERWATER"
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = None
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 30.0
+              waterline = Some 0.0 })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 300.0
+              buildDistance = None
+              buildOptions = []
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = None
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "wwwwww weeeew weeeew weeeew weeeew wwwwww"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some false
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "2.5 0.0 -0.0"
+                collisionVolumeScales = Some "117.5 41.25 112.5"
+                collisionVolumeType = Some "Box"
+                damage = Some 1200.0
+                featureDead = None
+                footprintX = Some 7.0
+                footprintZ = Some 7.0
+                height = Some 20.0
+                metal = Some 930.0
+                object_ = Some "Units/legsplab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+          ])
+          sounds = Some (
+            { build = Some "seaplok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["seaplsl2"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "model_author", "ZephyrSkies"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "unitgroup", "builder"
+              "restrictions_inclusion", "_noair_"
+              "techlevel", "1.5"
+          ]
+          extras = Map.ofList [
+              "sonardistance", "800.0"
+          ] }
 
-    let legsy =
-        LuaValue.Table [
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "legsy.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 5100.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "96 42 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 950.0
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 4300.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 450.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 30.0
-            LuaKey.String "objectname", LuaValue.String "Units/legsy.s3o"
-            LuaKey.String "script", LuaValue.String "Units/legsy.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 340.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "waterline", LuaValue.Number 1.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oyyyyo oeeeeo oeeeeo oeeeeo oeeeeo oyyyyo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legnavyconship"
-                    LuaKey.Int 2, LuaValue.String "legnavyrezsub"
-                    LuaKey.Int 3, LuaValue.String "legnavyscout"
-                    LuaKey.Int 4, LuaValue.String "legnavyaaship"
-                    LuaKey.Int 5, LuaValue.String "legnavyfrigate"
-                    LuaKey.Int 6, LuaValue.String "legnavydestro"
-                    LuaKey.Int 7, LuaValue.String "legnavysub"
-                    LuaKey.Int 8, LuaValue.String "legnavyartyship"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "model_author", LuaValue.String "Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "103 42 103"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1794.0
-                            LuaKey.String "footprintx", LuaValue.Number 7.0
-                            LuaKey.String "footprintz", LuaValue.Number 7.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 400.0
-                            LuaKey.String "object", LuaValue.String "Units/legsy_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pshpactv"
-                        ]
-                ]
-        ]
+    let legsy : UnitDef =
+        { name = "legsy"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 450.0
+          energyCost = ValueOrExpr.Concrete 950.0
+          buildTime = ValueOrExpr.Concrete 5100.0
+          health = ValueOrExpr.Concrete 4300.0
+          sightDistance = ValueOrExpr.Concrete 340.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/legsy.s3o"
+          buildPic = Some "legsy.DDS"
+          script = Some "Units/legsy.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "96 42 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = None
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 30.0
+              waterline = Some 1.0 })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legnavyconship"; "legnavyrezsub"; "legnavyscout"; "legnavyaaship"; "legnavyfrigate"; "legnavydestro"; "legnavysub"; "legnavyartyship"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oyyyyo oeeeeo oeeeeo oeeeeo oeeeeo oyyyyo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some false
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "103 42 103"
+                collisionVolumeType = Some "Box"
+                damage = Some 1794.0
+                featureDead = None
+                footprintX = Some 7.0
+                footprintZ = Some 7.0
+                height = Some 4.0
+                metal = Some 400.0
+                object_ = Some "Units/legsy_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pshpactv"] })
+          customParams = Map.ofList [
+              "model_author", "Tharsis"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+              "unitgroup", "builder"
+          ]
+          extras = Map.empty }
 
-    let legvp =
-        LuaValue.Table [
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "buildangle", LuaValue.Number 2048.0
-            LuaKey.String "energycost", LuaValue.Number 1650.0
-            LuaKey.String "metalcost", LuaValue.Number 570.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 5700.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 19 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "101 53 106"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "levelground", LuaValue.Bool true
-            LuaKey.String "health", LuaValue.Number 3000.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGVP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGVP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 279.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "h\r\n    oo oo oo oo oo oo\r\n    oo oo oo oo oo oo\r\n    oo oo oo oo oo oo\r\n    oo oo oo oo oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    "
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "legscout"
-                    LuaKey.Int 2, LuaValue.String "legcv"
-                    LuaKey.Int 3, LuaValue.String "legotter"
-                    LuaKey.Int 4, LuaValue.String "leghades"
-                    LuaKey.Int 5, LuaValue.String "leghelios"
-                    LuaKey.Int 6, LuaValue.String "leggat"
-                    LuaKey.Int 7, LuaValue.String "legbar"
-                    LuaKey.Int 8, LuaValue.String "legrail"
-                    LuaKey.Int 9, LuaValue.String "legmlv"
-                    LuaKey.Int 10, LuaValue.String "legamphtank"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/legvp_aoplane.dds"
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "model_author", LuaValue.String "Protar/Ghoulish"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/leg_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "Legion/Labs"
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -13 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "101 40 106"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "BOX"
-                            LuaKey.String "damage", LuaValue.Number 1590.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 470.0
-                            LuaKey.String "object", LuaValue.String "Units/legvp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 795.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 188.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "unitready"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "vehplantselect"
-                        ]
-                ]
-        ]
+    let legvp : UnitDef =
+        { name = "legvp"
+          subfolder = "Legion/Labs"
+          metalCost = ValueOrExpr.Concrete 570.0
+          energyCost = ValueOrExpr.Concrete 1650.0
+          buildTime = ValueOrExpr.Concrete 5700.0
+          health = ValueOrExpr.Concrete 3000.0
+          sightDistance = ValueOrExpr.Concrete 279.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/LEGVP.s3o"
+          buildPic = Some "LEGVP.DDS"
+          script = Some "Units/LEGVP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 19 0"
+          collisionVolumeScales = Some "101 53 106"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["legscout"; "legcv"; "legotter"; "leghades"; "leghelios"; "leggat"; "legbar"; "legrail"; "legmlv"; "legamphtank"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "h\r\n    oo oo oo oo oo oo\r\n    oo oo oo oo oo oo\r\n    oo oo oo oo oo oo\r\n    oo oo oo oo oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    oe ee ee ee oo oo\r\n    "
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -13 0"
+                collisionVolumeScales = Some "101 40 106"
+                collisionVolumeType = Some "BOX"
+                damage = Some 1590.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 470.0
+                object_ = Some "Units/legvp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 795.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 188.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["vehplantselect"] })
+          customParams = Map.ofList [
+              "usebuildinggrounddecal", "true"
+              "buildinggrounddecaltype", "decals/legvp_aoplane.dds"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "unitgroup", "builder"
+              "model_author", "Protar/Ghoulish"
+              "normaltex", "unittextures/leg_normal.dds"
+              "subfolder", "Legion/Labs"
+          ]
+          extras = Map.ofList [
+              "buildangle", "2048.0"
+              "levelground", "true"
+              "radardistance", "50.0"
+          ] }
 
-    let all : (string * LuaValue) list =
+    let all : (string * UnitDef) list =
         [
             "legaap", legaap
             "legadvshipyard", legadvshipyard

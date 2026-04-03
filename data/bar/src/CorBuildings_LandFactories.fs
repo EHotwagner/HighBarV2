@@ -5,1719 +5,1822 @@ open BarData
 
 module CorBuildings_LandFactories =
 
-    let coraap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORAAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 32000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 4 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "142 64 142"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 28000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 3900.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 2900.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORAAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 1000.0
-            LuaKey.String "radaremitheight", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/CORAAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 305.5
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "coraca"
-                    LuaKey.Int 2, LuaValue.String "corape"
-                    LuaKey.Int 3, LuaValue.String "corhurc"
-                    LuaKey.Int 4, LuaValue.String "cortitan"
-                    LuaKey.Int 5, LuaValue.String "corvamp"
-                    LuaKey.Int 6, LuaValue.String "corawac"
-                    LuaKey.Int 7, LuaValue.String "corseah"
-                    LuaKey.Int 8, LuaValue.String "corcrwh"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coraap_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "restrictions_inclusion", LuaValue.String "_noair_"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -12 -22"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "98 32 52"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2112.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1936.0
-                            LuaKey.String "object", LuaValue.String "Units/coraap_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1056.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 968.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:radarpulse_t1_slow"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pairactv"
-                        ]
-                ]
-        ]
+    let coraap : UnitDef =
+        { name = "coraap"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 2900.0
+          energyCost = ValueOrExpr.Concrete 28000.0
+          buildTime = ValueOrExpr.Concrete 32000.0
+          health = ValueOrExpr.Concrete 3900.0
+          sightDistance = ValueOrExpr.Concrete 305.5
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/CORAAP.s3o"
+          buildPic = Some "CORAAP.DDS"
+          script = Some "Units/CORAAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 4 0"
+          collisionVolumeScales = Some "142 64 142"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = ["coraca"; "corape"; "corhurc"; "cortitan"; "corvamp"; "corawac"; "corseah"; "corcrwh"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -12 -22"
+                collisionVolumeScales = Some "98 32 52"
+                collisionVolumeType = Some "Box"
+                damage = Some 2112.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1936.0
+                object_ = Some "Units/coraap_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1056.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 968.0
+                object_ = Some "Units/cor6X6A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pairactv"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coraap_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "restrictions_inclusion", "_noair_"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "radardistance", "1000.0"
+              "radaremitheight", "50.0"
+          ] }
 
-    let coralab =
-        LuaValue.Table [
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORALAB.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 26000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 2 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "144 56 144"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 16000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 4500.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 2600.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORALAB.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORALAB.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 288.60001
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo oooeeeooo oooeeeooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corack"
-                    LuaKey.Int 2, LuaValue.String "corfast"
-                    LuaKey.Int 3, LuaValue.String "corpyro"
-                    LuaKey.Int 4, LuaValue.String "coramph"
-                    LuaKey.Int 5, LuaValue.String "corcan"
-                    LuaKey.Int 6, LuaValue.String "corsumo"
-                    LuaKey.Int 7, LuaValue.String "cortermite"
-                    LuaKey.Int 8, LuaValue.String "cormort"
-                    LuaKey.Int 9, LuaValue.String "corhrk"
-                    LuaKey.Int 10, LuaValue.String "coraak"
-                    LuaKey.Int 11, LuaValue.String "corroach"
-                    LuaKey.Int 12, LuaValue.String "corsktl"
-                    LuaKey.Int 13, LuaValue.String "cordecom"
-                    LuaKey.Int 14, LuaValue.String "corvoyr"
-                    LuaKey.Int 15, LuaValue.String "corspy"
-                    LuaKey.Int 16, LuaValue.String "corspec"
-                    LuaKey.Int 17, LuaValue.String "cormando"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coralab_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -16 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "100 34 90"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2443.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1743.0
-                            LuaKey.String "object", LuaValue.String "Units/coralab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1222.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 872.0
-                            LuaKey.String "object", LuaValue.String "Units/cor5X5A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "plabactv"
-                        ]
-                ]
-        ]
+    let coralab : UnitDef =
+        { name = "coralab"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 2600.0
+          energyCost = ValueOrExpr.Concrete 16000.0
+          buildTime = ValueOrExpr.Concrete 26000.0
+          health = ValueOrExpr.Concrete 4500.0
+          sightDistance = ValueOrExpr.Concrete 288.60001
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/CORALAB.s3o"
+          buildPic = Some "CORALAB.DDS"
+          script = Some "Units/CORALAB.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 2 0"
+          collisionVolumeScales = Some "144 56 144"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = ["corack"; "corfast"; "corpyro"; "coramph"; "corcan"; "corsumo"; "cortermite"; "cormort"; "corhrk"; "coraak"; "corroach"; "corsktl"; "cordecom"; "corvoyr"; "corspy"; "corspec"; "cormando"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo oooeeeooo oooeeeooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -16 0"
+                collisionVolumeScales = Some "100 34 90"
+                collisionVolumeType = Some "Box"
+                damage = Some 2443.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1743.0
+                object_ = Some "Units/coralab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1222.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 872.0
+                object_ = Some "Units/cor5X5A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["plabactv"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coralab_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+          ] }
 
-    let corap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 5380.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "128 33 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 1100.0
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 2150.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 630.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 510.0
-            LuaKey.String "radaremitheight", LuaValue.Number 40.0
-            LuaKey.String "script", LuaValue.String "Units/CORAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "sightemitheight", LuaValue.Number 40.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corca"
-                    LuaKey.Int 2, LuaValue.String "corfink"
-                    LuaKey.Int 3, LuaValue.String "corveng"
-                    LuaKey.Int 4, LuaValue.String "corshad"
-                    LuaKey.Int 5, LuaValue.String "corvalk"
-                    LuaKey.Int 6, LuaValue.String "corbw"
-                    LuaKey.Int 7, LuaValue.String "corhvytrans"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 11.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/corap_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "restrictions_inclusion", LuaValue.String "_noair_"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -14 -23"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "110 33 50"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1155.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 540.0
-                            LuaKey.String "object", LuaValue.String "Units/corap_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 578.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 216.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:radarpulse_t1_slow"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "unitready"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "airplantselect"
-                        ]
-                ]
-        ]
+    let corap : UnitDef =
+        { name = "corap"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 630.0
+          energyCost = ValueOrExpr.Concrete 1100.0
+          buildTime = ValueOrExpr.Concrete 5380.0
+          health = ValueOrExpr.Concrete 2150.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 9.0
+          footprintZ = 6.0
+          objectName = Some "Units/CORAP.s3o"
+          buildPic = Some "CORAP.DDS"
+          script = Some "Units/CORAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "128 33 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["corca"; "corfink"; "corveng"; "corshad"; "corvalk"; "corbw"; "corhvytrans"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -14 -23"
+                collisionVolumeScales = Some "110 33 50"
+                collisionVolumeType = Some "Box"
+                damage = Some 1155.0
+                featureDead = Some "HEAP"
+                footprintX = Some 12.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 540.0
+                object_ = Some "Units/corap_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 578.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 216.0
+                object_ = Some "Units/cor6X6B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["airplantselect"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "11.0"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecaltype", "decals/corap_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "unitgroup", "builder"
+              "restrictions_inclusion", "_noair_"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "radardistance", "510.0"
+              "radaremitheight", "40.0"
+              "sightemitheight", "40.0"
+          ] }
 
-    let coravp =
-        LuaValue.Table [
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORAVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 28000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 8 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "144 70 144"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 16000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 5100.0
-            LuaKey.String "levelground", LuaValue.Bool false
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 2600.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORAVP.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORAVP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 286.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "coracv"
-                    LuaKey.Int 2, LuaValue.String "corsala"
-                    LuaKey.Int 3, LuaValue.String "correap"
-                    LuaKey.Int 4, LuaValue.String "corparrow"
-                    LuaKey.Int 5, LuaValue.String "corgol"
-                    LuaKey.Int 6, LuaValue.String "corban"
-                    LuaKey.Int 7, LuaValue.String "cormart"
-                    LuaKey.Int 8, LuaValue.String "corvroc"
-                    LuaKey.Int 9, LuaValue.String "cortrem"
-                    LuaKey.Int 10, LuaValue.String "corsent"
-                    LuaKey.Int 11, LuaValue.String "cormabm"
-                    LuaKey.Int 12, LuaValue.String "coreter"
-                    LuaKey.Int 13, LuaValue.String "corvrad"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 0.01
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coravp_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -6 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "124 30 104"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2777.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1721.0
-                            LuaKey.String "object", LuaValue.String "Units/coravp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1389.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 860.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6C.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pvehactv"
-                        ]
-                ]
-        ]
+    let coravp : UnitDef =
+        { name = "coravp"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 2600.0
+          energyCost = ValueOrExpr.Concrete 16000.0
+          buildTime = ValueOrExpr.Concrete 28000.0
+          health = ValueOrExpr.Concrete 5100.0
+          sightDistance = ValueOrExpr.Concrete 286.0
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/CORAVP.s3o"
+          buildPic = Some "CORAVP.DDS"
+          script = Some "Units/CORAVP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 8 0"
+          collisionVolumeScales = Some "144 70 144"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = ["coracv"; "corsala"; "correap"; "corparrow"; "corgol"; "corban"; "cormart"; "corvroc"; "cortrem"; "corsent"; "cormabm"; "coreter"; "corvrad"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -6 0"
+                collisionVolumeScales = Some "124 30 104"
+                collisionVolumeType = Some "Box"
+                damage = Some 2777.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1721.0
+                object_ = Some "Units/coravp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1389.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 860.0
+                object_ = Some "Units/cor6X6C.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pvehactv"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "0.01"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coravp_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+              "levelground", "false"
+          ] }
 
-    let corgant =
-        LuaValue.Table [
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORGANT.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 68000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 110 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 62000.0
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 8400.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORGANT.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORGANT.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1800.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corkorg"
-                    LuaKey.Int 2, LuaValue.String "corkarg"
-                    LuaKey.Int 3, LuaValue.String "corjugg"
-                    LuaKey.Int 4, LuaValue.String "corshiva"
-                    LuaKey.Int 5, LuaValue.String "corcat"
-                    LuaKey.Int 6, LuaValue.String "corsok"
-                    LuaKey.Int 7, LuaValue.String "cordemon"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/corgant_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob, Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -21 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "114 74 129"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "CylZ"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/corgant_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:GantWhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:YellowLight"
-                            LuaKey.Int 3, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "activate", LuaValue.String "gantok2"
-                    LuaKey.String "build", LuaValue.String "gantok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "deactivate", LuaValue.String "gantok2"
-                    LuaKey.String "repair", LuaValue.String "lathelrg"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "gantok1"
-                    LuaKey.String "working", LuaValue.String "build"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "gantsel1"
-                        ]
-                ]
-        ]
+    let corgant : UnitDef =
+        { name = "corgant"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 8400.0
+          energyCost = ValueOrExpr.Concrete 62000.0
+          buildTime = ValueOrExpr.Concrete 68000.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/CORGANT.s3o"
+          buildPic = Some "CORGANT.DDS"
+          script = Some "Units/CORGANT.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 110 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1800.0
+              buildDistance = None
+              buildOptions = ["corkorg"; "corkarg"; "corjugg"; "corshiva"; "corcat"; "corsok"; "cordemon"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -21 0"
+                collisionVolumeScales = Some "114 74 129"
+                collisionVolumeType = Some "CylZ"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/corgant_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "gantok2"
+              repair = Some "lathelrg"
+              working = Some "build"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["gantsel1"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "15.0"
+              "buildinggrounddecalsizey", "15.0"
+              "buildinggrounddecaltype", "decals/corgant_aoplane.dds"
+              "model_author", "Mr Bob, Tharsis"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "3.0"
+              "unitgroup", "buildert3"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.empty }
 
-    let corhaap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORAAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 92000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 65000.0
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 4700.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORHAAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 750.0
-            LuaKey.String "radaremitheight", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/CORAAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1800.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corhaca"
-                    LuaKey.Int 2, LuaValue.String "corape"
-                    LuaKey.Int 3, LuaValue.String "corhurc"
-                    LuaKey.Int 4, LuaValue.String "cortitan"
-                    LuaKey.Int 5, LuaValue.String "corvamp"
-                    LuaKey.Int 6, LuaValue.String "corseah"
-                    LuaKey.Int 7, LuaValue.String "corawac"
-                    LuaKey.Int 8, LuaValue.String "corcrwh"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coraap_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "5 0.0 -0.0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "235 82.5 225"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/corhaap_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "seaplok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "seaplsl2"
-                        ]
-                ]
-        ]
+    let corhaap : UnitDef =
+        { name = "corhaap"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 4700.0
+          energyCost = ValueOrExpr.Concrete 65000.0
+          buildTime = ValueOrExpr.Concrete 92000.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/CORHAAP.s3o"
+          buildPic = Some "CORAAP.DDS"
+          script = Some "Units/CORAAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1800.0
+              buildDistance = None
+              buildOptions = ["corhaca"; "corape"; "corhurc"; "cortitan"; "corvamp"; "corseah"; "corawac"; "corcrwh"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "5 0.0 -0.0"
+                collisionVolumeScales = Some "235 82.5 225"
+                collisionVolumeType = Some "Box"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/corhaap_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "seaplok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["seaplsl2"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coraap_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "3.0"
+              "unitgroup", "buildert3"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "radardistance", "750.0"
+              "radaremitheight", "50.0"
+          ] }
 
-    let corhaapuw =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORPLAT.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 42000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 4 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "142 64 142"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 23000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 3900.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "metalcost", LuaValue.Number 1900.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "minwaterdepth", LuaValue.Number 30.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORAAPLAT.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 1000.0
-            LuaKey.String "radaremitheight", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/CORPLAT.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 305.5
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 200.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "coraca"
-                    LuaKey.Int 2, LuaValue.String "corhunt"
-                    LuaKey.Int 3, LuaValue.String "corcut"
-                    LuaKey.Int 4, LuaValue.String "corsb"
-                    LuaKey.Int 5, LuaValue.String "corseap"
-                    LuaKey.Int 6, LuaValue.String "corsfig"
-                    LuaKey.Int 7, LuaValue.String "corhvytrans"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coraap_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -12 -22"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "98 32 52"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2112.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1936.0
-                            LuaKey.String "object", LuaValue.String "Units/coraaplat_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1056.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 968.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "seaplok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "seaplsl2"
-                        ]
-                ]
-        ]
+    let corhaapuw : UnitDef =
+        { name = "corhaapuw"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 1900.0
+          energyCost = ValueOrExpr.Concrete 23000.0
+          buildTime = ValueOrExpr.Concrete 42000.0
+          health = ValueOrExpr.Concrete 3900.0
+          sightDistance = ValueOrExpr.Concrete 305.5
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/CORAAPLAT.s3o"
+          buildPic = Some "CORPLAT.DDS"
+          script = Some "Units/CORPLAT.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 4 0"
+          collisionVolumeScales = Some "142 64 142"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = None
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = Some 30.0
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 200.0
+              buildDistance = None
+              buildOptions = ["coraca"; "corhunt"; "corcut"; "corsb"; "corseap"; "corsfig"; "corhvytrans"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -12 -22"
+                collisionVolumeScales = Some "98 32 52"
+                collisionVolumeType = Some "Box"
+                damage = Some 2112.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1936.0
+                object_ = Some "Units/coraaplat_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1056.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 968.0
+                object_ = Some "Units/cor6X6A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "seaplok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["seaplsl2"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coraap_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "radardistance", "1000.0"
+              "radaremitheight", "50.0"
+          ] }
 
-    let corhalab =
-        LuaValue.Table [
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORGANT.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 92000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 110 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 52200.0
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 4900.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORGANT.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORGANT.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1200.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "coraak"
-                    LuaKey.Int 2, LuaValue.String "corshiva"
-                    LuaKey.Int 3, LuaValue.String "corpyro"
-                    LuaKey.Int 4, LuaValue.String "corhack"
-                    LuaKey.Int 5, LuaValue.String "corsumo"
-                    LuaKey.Int 6, LuaValue.String "cordecom"
-                    LuaKey.Int 7, LuaValue.String "corsktl"
-                    LuaKey.Int 8, LuaValue.String "corspec"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 15.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/corgant_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob, Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -21 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "114 74 129"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "CylZ"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/corgant_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:GantWhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:YellowLight"
-                            LuaKey.Int 3, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "activate", LuaValue.String "gantok2"
-                    LuaKey.String "build", LuaValue.String "gantok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "deactivate", LuaValue.String "gantok2"
-                    LuaKey.String "repair", LuaValue.String "lathelrg"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "gantok1"
-                    LuaKey.String "working", LuaValue.String "build"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "gantsel1"
-                        ]
-                ]
-        ]
+    let corhalab : UnitDef =
+        { name = "corhalab"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 4900.0
+          energyCost = ValueOrExpr.Concrete 52200.0
+          buildTime = ValueOrExpr.Concrete 92000.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/CORGANT.s3o"
+          buildPic = Some "CORGANT.DDS"
+          script = Some "Units/CORGANT.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 110 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1200.0
+              buildDistance = None
+              buildOptions = ["coraak"; "corshiva"; "corpyro"; "corhack"; "corsumo"; "cordecom"; "corsktl"; "corspec"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -21 0"
+                collisionVolumeScales = Some "114 74 129"
+                collisionVolumeType = Some "CylZ"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/corgant_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "gantok2"
+              repair = Some "lathelrg"
+              working = Some "build"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["gantsel1"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "15.0"
+              "buildinggrounddecalsizey", "15.0"
+              "buildinggrounddecaltype", "decals/corgant_aoplane.dds"
+              "model_author", "Mr Bob, Tharsis"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "3.0"
+              "unitgroup", "buildert3"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.empty }
 
-    let corhavp =
-        LuaValue.Table [
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORHAVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 92000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 110 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 46000.0
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 4900.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORHAVP.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORAMSUB.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 1200.0
-            LuaKey.String "yardmap", LuaValue.String "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corhacv"
-                    LuaKey.Int 2, LuaValue.String "corgol"
-                    LuaKey.Int 3, LuaValue.String "corvroc"
-                    LuaKey.Int 4, LuaValue.String "cortrem"
-                    LuaKey.Int 5, LuaValue.String "corsent"
-                    LuaKey.Int 6, LuaValue.String "cormabm"
-                    LuaKey.Int 7, LuaValue.String "coreter"
-                    LuaKey.Int 8, LuaValue.String "corsok"
-                    LuaKey.Int 9, LuaValue.String "corparrow"
-                    LuaKey.Int 10, LuaValue.String "corsala"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 18.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 18.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coramsub_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob, Tharsis"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -21 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "114 74 129"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "CylZ"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/corhavp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:GantWhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:YellowLight"
-                            LuaKey.Int 3, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "activate", LuaValue.String "gantok2"
-                    LuaKey.String "build", LuaValue.String "gantok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "deactivate", LuaValue.String "gantok2"
-                    LuaKey.String "repair", LuaValue.String "lathelrg"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "gantok1"
-                    LuaKey.String "working", LuaValue.String "build"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "gantsel1"
-                        ]
-                ]
-        ]
+    let corhavp : UnitDef =
+        { name = "corhavp"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 4900.0
+          energyCost = ValueOrExpr.Concrete 46000.0
+          buildTime = ValueOrExpr.Concrete 92000.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/CORHAVP.s3o"
+          buildPic = Some "CORHAVP.DDS"
+          script = Some "Units/CORAMSUB.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 110 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 1200.0
+              buildDistance = None
+              buildOptions = ["corhacv"; "corgol"; "corvroc"; "cortrem"; "corsent"; "cormabm"; "coreter"; "corsok"; "corparrow"; "corsala"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooooooooo oooooooooooo oooooooooooo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo ooeeeeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -21 0"
+                collisionVolumeScales = Some "114 74 129"
+                collisionVolumeType = Some "CylZ"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/corhavp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "gantok2"
+              repair = Some "lathelrg"
+              working = Some "build"
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["gantsel1"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "18.0"
+              "buildinggrounddecalsizey", "18.0"
+              "buildinggrounddecaltype", "decals/coramsub_aoplane.dds"
+              "model_author", "Mr Bob, Tharsis"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "3.0"
+              "unitgroup", "buildert3"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.empty }
 
-    let corhp =
-        LuaValue.Table [
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORHP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 8700.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 5 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "96 32 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 2000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 3750.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 670.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORHP.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORHP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 312.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corch"
-                    LuaKey.Int 2, LuaValue.String "corsh"
-                    LuaKey.Int 3, LuaValue.String "corsnap"
-                    LuaKey.Int 4, LuaValue.String "corah"
-                    LuaKey.Int 5, LuaValue.String "cormh"
-                    LuaKey.Int 6, LuaValue.String "corhal"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/corhp_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                    LuaKey.String "techlevel", LuaValue.Number 1.5
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "120 26 108"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2014.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 662.0
-                            LuaKey.String "object", LuaValue.String "Units/corhp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1007.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 265.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7D.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "hoverok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "hoversl2"
-                        ]
-                ]
-        ]
+    let corhp : UnitDef =
+        { name = "corhp"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 670.0
+          energyCost = ValueOrExpr.Concrete 2000.0
+          buildTime = ValueOrExpr.Concrete 8700.0
+          health = ValueOrExpr.Concrete 3750.0
+          sightDistance = ValueOrExpr.Concrete 312.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/CORHP.s3o"
+          buildPic = Some "CORHP.DDS"
+          script = Some "Units/CORHP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 5 0"
+          collisionVolumeScales = Some "96 32 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["corch"; "corsh"; "corsnap"; "corah"; "cormh"; "corhal"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo oeeeeo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "120 26 108"
+                collisionVolumeType = Some "Box"
+                damage = Some 2014.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 662.0
+                object_ = Some "Units/corhp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1007.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 265.0
+                object_ = Some "Units/cor7X7D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "hoverok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["hoversl2"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecaltype", "decals/corhp_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "unitgroup", "builder"
+              "usebuildinggrounddecal", "true"
+              "techlevel", "1.5"
+          ]
+          extras = Map.empty }
 
-    let corlab =
-        LuaValue.Table [
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORLAB.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 5000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "93 92 87"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 1050.0
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 2900.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 470.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORLAB.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORLAB.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 290.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oeeeeooeeeeooeeeeooeeeeooeeeeooeeeeo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corck"
-                    LuaKey.Int 2, LuaValue.String "corak"
-                    LuaKey.Int 3, LuaValue.String "cornecro"
-                    LuaKey.Int 4, LuaValue.String "corstorm"
-                    LuaKey.Int 5, LuaValue.String "corthud"
-                    LuaKey.Int 6, LuaValue.String "corcrash"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 8.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 8.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/corlab_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "88 28 88"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1560.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 442.0
-                            LuaKey.String "object", LuaValue.String "Units/corlab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 780.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 177.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "unitready"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "labselect"
-                        ]
-                ]
-        ]
+    let corlab : UnitDef =
+        { name = "corlab"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 470.0
+          energyCost = ValueOrExpr.Concrete 1050.0
+          buildTime = ValueOrExpr.Concrete 5000.0
+          health = ValueOrExpr.Concrete 2900.0
+          sightDistance = ValueOrExpr.Concrete 290.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/CORLAB.s3o"
+          buildPic = Some "CORLAB.DDS"
+          script = Some "Units/CORLAB.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "93 92 87"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["corck"; "corak"; "cornecro"; "corstorm"; "corthud"; "corcrash"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oeeeeooeeeeooeeeeooeeeeooeeeeooeeeeo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "88 28 88"
+                collisionVolumeType = Some "Box"
+                damage = Some 1560.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 442.0
+                object_ = Some "Units/corlab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 780.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 177.0
+                object_ = Some "Units/cor6X6B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["labselect"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "8.0"
+              "buildinggrounddecalsizey", "8.0"
+              "buildinggrounddecaltype", "decals/corlab_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "unitgroup", "builder"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+          ] }
 
-    let corsaap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGAAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 51000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 4 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "142 64 142"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 35000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingExplosionGeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 3900.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 3500.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGAAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 1000.0
-            LuaKey.String "radaremitheight", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/LEGAAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 305.5
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 200.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corcsa"
-                    LuaKey.Int 2, LuaValue.String "corape"
-                    LuaKey.Int 3, LuaValue.String "corhurc"
-                    LuaKey.Int 4, LuaValue.String "cortitan"
-                    LuaKey.Int 5, LuaValue.String "corvamp"
-                    LuaKey.Int 6, LuaValue.String "corseah"
-                    LuaKey.Int 7, LuaValue.String "corcrwh"
-                    LuaKey.Int 8, LuaValue.String "corhunt"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coraap_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -12 -22"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "98 32 52"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2112.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1936.0
-                            LuaKey.String "object", LuaValue.String "Units/legaap_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1056.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 968.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                            LuaKey.Int 2, LuaValue.String "custom:radarpulse_t1_slow"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pairactv"
-                        ]
-                ]
-        ]
+    let corsaap : UnitDef =
+        { name = "corsaap"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 3500.0
+          energyCost = ValueOrExpr.Concrete 35000.0
+          buildTime = ValueOrExpr.Concrete 51000.0
+          health = ValueOrExpr.Concrete 3900.0
+          sightDistance = ValueOrExpr.Concrete 305.5
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/LEGAAP.s3o"
+          buildPic = Some "LEGAAP.DDS"
+          script = Some "Units/LEGAAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingExplosionGeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 4 0"
+          collisionVolumeScales = Some "142 64 142"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 200.0
+              buildDistance = None
+              buildOptions = ["corcsa"; "corape"; "corhurc"; "cortitan"; "corvamp"; "corseah"; "corcrwh"; "corhunt"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -12 -22"
+                collisionVolumeScales = Some "98 32 52"
+                collisionVolumeType = Some "Box"
+                damage = Some 2112.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1936.0
+                object_ = Some "Units/legaap_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1056.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 968.0
+                object_ = Some "Units/cor6X6A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pairactv"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coraap_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "radardistance", "1000.0"
+              "radaremitheight", "50.0"
+          ] }
 
-    let corsalab =
-        LuaValue.Table [
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGALAB.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 51000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 2 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "144 56 144"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 35000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 4500.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 3500.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGALAB.s3o"
-            LuaKey.String "script", LuaValue.String "Units/LEGALAB.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 288.60001
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 300.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo oooeeeooo oooeeeooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corsack"
-                    LuaKey.Int 2, LuaValue.String "corsumo"
-                    LuaKey.Int 3, LuaValue.String "corhrk"
-                    LuaKey.Int 4, LuaValue.String "corsktl"
-                    LuaKey.Int 5, LuaValue.String "corvoyr"
-                    LuaKey.Int 6, LuaValue.String "corspec"
-                    LuaKey.Int 7, LuaValue.String "cormando"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coralab_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -16 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "100 34 90"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2443.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1743.0
-                            LuaKey.String "object", LuaValue.String "Units/legalab_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1222.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 872.0
-                            LuaKey.String "object", LuaValue.String "Units/cor5X5A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "plabactv"
-                        ]
-                ]
-        ]
+    let corsalab : UnitDef =
+        { name = "corsalab"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 3500.0
+          energyCost = ValueOrExpr.Concrete 35000.0
+          buildTime = ValueOrExpr.Concrete 51000.0
+          health = ValueOrExpr.Concrete 4500.0
+          sightDistance = ValueOrExpr.Concrete 288.60001
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/LEGALAB.s3o"
+          buildPic = Some "LEGALAB.DDS"
+          script = Some "Units/LEGALAB.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 2 0"
+          collisionVolumeScales = Some "144 56 144"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 300.0
+              buildDistance = None
+              buildOptions = ["corsack"; "corsumo"; "corhrk"; "corsktl"; "corvoyr"; "corspec"; "cormando"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo oooeeeooo oooeeeooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -16 0"
+                collisionVolumeScales = Some "100 34 90"
+                collisionVolumeType = Some "Box"
+                damage = Some 2443.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1743.0
+                object_ = Some "Units/legalab_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1222.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 872.0
+                object_ = Some "Units/cor5X5A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["plabactv"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coralab_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+          ] }
 
-    let corsavp =
-        LuaValue.Table [
-            LuaKey.String "buildangle", LuaValue.Number 1024.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "LEGAVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 51000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 8 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "144 70 144"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 35000.0
-            LuaKey.String "energystorage", LuaValue.Number 200.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 9.0
-            LuaKey.String "footprintz", LuaValue.Number 9.0
-            LuaKey.String "health", LuaValue.Number 5100.0
-            LuaKey.String "levelground", LuaValue.Bool false
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 3500.0
-            LuaKey.String "metalstorage", LuaValue.Number 200.0
-            LuaKey.String "objectname", LuaValue.String "Units/LEGAVP.s3o"
-            LuaKey.String "script", LuaValue.String "Units/LEGAVP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 286.0
-            LuaKey.String "terraformspeed", LuaValue.Number 1000.0
-            LuaKey.String "workertime", LuaValue.Number 300.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corsacv"
-                    LuaKey.Int 2, LuaValue.String "corparrow"
-                    LuaKey.Int 3, LuaValue.String "corgol"
-                    LuaKey.Int 4, LuaValue.String "corban"
-                    LuaKey.Int 5, LuaValue.String "corvroc"
-                    LuaKey.Int 6, LuaValue.String "cortrem"
-                    LuaKey.Int 7, LuaValue.String "coreter"
-                    LuaKey.Int 8, LuaValue.String "corvrad"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 0.01
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 12.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coravp_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 2.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert2"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -6 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "124 30 104"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2777.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 1721.0
-                            LuaKey.String "object", LuaValue.String "Units/legavp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 1389.0
-                            LuaKey.String "footprintx", LuaValue.Number 9.0
-                            LuaKey.String "footprintz", LuaValue.Number 9.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 860.0
-                            LuaKey.String "object", LuaValue.String "Units/cor6X6C.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "pvehactv"
-                        ]
-                ]
-        ]
+    let corsavp : UnitDef =
+        { name = "corsavp"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 3500.0
+          energyCost = ValueOrExpr.Concrete 35000.0
+          buildTime = ValueOrExpr.Concrete 51000.0
+          health = ValueOrExpr.Concrete 5100.0
+          sightDistance = ValueOrExpr.Concrete 286.0
+          footprintX = 9.0
+          footprintZ = 9.0
+          objectName = Some "Units/LEGAVP.s3o"
+          buildPic = Some "LEGAVP.DDS"
+          script = Some "Units/LEGAVP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 8 0"
+          collisionVolumeScales = Some "144 70 144"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 300.0
+              buildDistance = None
+              buildOptions = ["corsacv"; "corparrow"; "corgol"; "corban"; "corvroc"; "cortrem"; "coreter"; "corvrad"]
+              terraformSpeed = Some 1000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 200.0
+              metalStorage = Some 200.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo ooeeeeeoo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -6 0"
+                collisionVolumeScales = Some "124 30 104"
+                collisionVolumeType = Some "Box"
+                damage = Some 2777.0
+                featureDead = Some "HEAP"
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 20.0
+                metal = Some 1721.0
+                object_ = Some "Units/legavp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 1389.0
+                featureDead = None
+                footprintX = Some 9.0
+                footprintZ = Some 9.0
+                height = Some 4.0
+                metal = Some 860.0
+                object_ = Some "Units/cor6X6C.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["pvehactv"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "0.01"
+              "buildinggrounddecalsizex", "12.0"
+              "buildinggrounddecalsizey", "12.0"
+              "buildinggrounddecaltype", "decals/coravp_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "2.0"
+              "unitgroup", "buildert2"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "1024.0"
+              "levelground", "false"
+          ] }
 
-    let corvp =
-        LuaValue.Table [
-            LuaKey.String "buildangle", LuaValue.Number 2048.0
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORVP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 5650.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 5 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "96 40 96"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 1550.0
-            LuaKey.String "energystorage", LuaValue.Number 100.0
-            LuaKey.String "explodeas", LuaValue.String "largeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 6.0
-            LuaKey.String "footprintz", LuaValue.Number 6.0
-            LuaKey.String "health", LuaValue.Number 3000.0
-            LuaKey.String "levelground", LuaValue.Bool false
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 570.0
-            LuaKey.String "metalstorage", LuaValue.Number 100.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORVP.s3o"
-            LuaKey.String "script", LuaValue.String "Units/CORVP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "largeBuildingexplosiongenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 279.0
-            LuaKey.String "terraformspeed", LuaValue.Number 500.0
-            LuaKey.String "workertime", LuaValue.Number 150.0
-            LuaKey.String "yardmap", LuaValue.String "oooooo oooooo oeeeeo oeeeeo oeeeeo oeeeeo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "corcv"
-                    LuaKey.Int 2, LuaValue.String "cormuskrat"
-                    LuaKey.Int 3, LuaValue.String "cormlv"
-                    LuaKey.Int 4, LuaValue.String "corfav"
-                    LuaKey.Int 5, LuaValue.String "corgator"
-                    LuaKey.Int 6, LuaValue.String "corgarp"
-                    LuaKey.Int 7, LuaValue.String "corraid"
-                    LuaKey.Int 8, LuaValue.String "corlevlr"
-                    LuaKey.Int 9, LuaValue.String "corwolv"
-                    LuaKey.Int 10, LuaValue.String "cormist"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/corvp_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "unitgroup", LuaValue.String "builder"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -13 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "101 40 106"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "BOX"
-                            LuaKey.String "damage", LuaValue.Number 1590.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 470.0
-                            LuaKey.String "object", LuaValue.String "Units/corvp_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 795.0
-                            LuaKey.String "footprintx", LuaValue.Number 6.0
-                            LuaKey.String "footprintz", LuaValue.Number 6.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 188.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:WhiteLight"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "unitready"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "vehplantselect"
-                        ]
-                ]
-        ]
+    let corvp : UnitDef =
+        { name = "corvp"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 570.0
+          energyCost = ValueOrExpr.Concrete 1550.0
+          buildTime = ValueOrExpr.Concrete 5650.0
+          health = ValueOrExpr.Concrete 3000.0
+          sightDistance = ValueOrExpr.Concrete 279.0
+          footprintX = 6.0
+          footprintZ = 6.0
+          objectName = Some "Units/CORVP.s3o"
+          buildPic = Some "CORVP.DDS"
+          script = Some "Units/CORVP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "largeBuildingexplosiongeneric"
+          selfDestructAs = Some "largeBuildingexplosiongenericSelfd"
+          collisionVolumeOffsets = Some "0 5 0"
+          collisionVolumeScales = Some "96 40 96"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 150.0
+              buildDistance = None
+              buildOptions = ["corcv"; "cormuskrat"; "cormlv"; "corfav"; "corgator"; "corgarp"; "corraid"; "corlevlr"; "corwolv"; "cormist"]
+              terraformSpeed = Some 500.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 100.0
+              metalStorage = Some 100.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "oooooo oooooo oeeeeo oeeeeo oeeeeo oeeeeo"
+              activateWhenBuilt = None
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 -13 0"
+                collisionVolumeScales = Some "101 40 106"
+                collisionVolumeType = Some "BOX"
+                damage = Some 1590.0
+                featureDead = Some "HEAP"
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 20.0
+                metal = Some 470.0
+                object_ = Some "Units/corvp_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 795.0
+                featureDead = None
+                footprintX = Some 6.0
+                footprintZ = Some 6.0
+                height = Some 4.0
+                metal = Some 188.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["vehplantselect"] })
+          customParams = Map.ofList [
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecaltype", "decals/corvp_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "unitgroup", "builder"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "buildangle", "2048.0"
+              "levelground", "false"
+          ] }
 
-    let leghaap =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool true
-            LuaKey.String "buildpic", LuaValue.String "CORHAAP.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 92000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 12 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "196 110 196"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 62000.0
-            LuaKey.String "energystorage", LuaValue.Number 1400.0
-            LuaKey.String "explodeas", LuaValue.String "hugeBuildingexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 12.0
-            LuaKey.String "footprintz", LuaValue.Number 12.0
-            LuaKey.String "health", LuaValue.Number 17800.0
-            LuaKey.String "maxacc", LuaValue.Number 0.0
-            LuaKey.String "maxdec", LuaValue.Number 0.0
-            LuaKey.String "maxslope", LuaValue.Number 10.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 4700.0
-            LuaKey.String "metalstorage", LuaValue.Number 800.0
-            LuaKey.String "objectname", LuaValue.String "Units/CORHAAP.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 750.0
-            LuaKey.String "radaremitheight", LuaValue.Number 50.0
-            LuaKey.String "script", LuaValue.String "Units/CORHAAP.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "hugeBuildingExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 273.0
-            LuaKey.String "terraformspeed", LuaValue.Number 3000.0
-            LuaKey.String "workertime", LuaValue.Number 600.0
-            LuaKey.String "yardmap", LuaValue.String "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
-            LuaKey.String "buildoptions", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.String "leghaca"
-                    LuaKey.Int 2, LuaValue.String "legstronghold"
-                    LuaKey.Int 3, LuaValue.String "legmineb"
-                    LuaKey.Int 4, LuaValue.String "legatorpbomber"
-                    LuaKey.Int 5, LuaValue.String "legafigdef"
-                    LuaKey.Int 6, LuaValue.String "legwhisper"
-                    LuaKey.Int 7, LuaValue.String "legfort"
-                    LuaKey.Int 8, LuaValue.String "legphoenix"
-                    LuaKey.Int 9, LuaValue.String "legvenator"
-                ]
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "airfactory", LuaValue.Bool true
-                    LuaKey.String "buildinggrounddecaldecayspeed", LuaValue.Number 30.0
-                    LuaKey.String "buildinggrounddecalsizex", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecalsizey", LuaValue.Number 9.0
-                    LuaKey.String "buildinggrounddecaltype", LuaValue.String "decals/coraap_aoplane.dds"
-                    LuaKey.String "model_author", LuaValue.String "Mr Bob"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/cor_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "CorBuildings/LandFactories"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "buildert3"
-                    LuaKey.String "usebuildinggrounddecal", LuaValue.Bool true
-                ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "2.5 0.0 -0.0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "117.5 41.25 112.5"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 9600.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 5101.0
-                            LuaKey.String "object", LuaValue.String "Units/corplat_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "damage", LuaValue.Number 4800.0
-                            LuaKey.String "footprintx", LuaValue.Number 12.0
-                            LuaKey.String "footprintz", LuaValue.Number 12.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2040.0
-                            LuaKey.String "object", LuaValue.String "Units/cor7X7B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "build", LuaValue.String "seaplok2"
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "unitcomplete", LuaValue.String "untdone"
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "seaplsl2"
-                        ]
-                ]
-        ]
+    let leghaap : UnitDef =
+        { name = "leghaap"
+          subfolder = "CorBuildings/LandFactories"
+          metalCost = ValueOrExpr.Concrete 4700.0
+          energyCost = ValueOrExpr.Concrete 62000.0
+          buildTime = ValueOrExpr.Concrete 92000.0
+          health = ValueOrExpr.Concrete 17800.0
+          sightDistance = ValueOrExpr.Concrete 273.0
+          footprintX = 12.0
+          footprintZ = 12.0
+          objectName = Some "Units/CORHAAP.s3o"
+          buildPic = Some "CORHAAP.DDS"
+          script = Some "Units/CORHAAP.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "hugeBuildingexplosiongeneric"
+          selfDestructAs = Some "hugeBuildingExplosionGenericSelfd"
+          collisionVolumeOffsets = Some "0 12 0"
+          collisionVolumeScales = Some "196 110 196"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 0.0
+              maxAcc = 0.0
+              maxDec = 0.0
+              turnRate = 0.0
+              movementClass = None
+              maxSlope = Some 10.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = None
+              turnInPlaceAngleLimit = None
+              turnInPlaceSpeedLimit = None
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = Some (
+            { workerTime = ValueOrExpr.Concrete 600.0
+              buildDistance = None
+              buildOptions = ["leghaca"; "legstronghold"; "legmineb"; "legatorpbomber"; "legafigdef"; "legwhisper"; "legfort"; "legphoenix"; "legvenator"]
+              terraformSpeed = Some 3000.0 })
+          weapons = None
+          economy = Some (
+            { energyMake = None
+              metalMake = None
+              energyStorage = Some 1400.0
+              metalStorage = Some 800.0
+              extractsMetal = None })
+          building = Some (
+            { yardMap = Some "ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo ooooooooo"
+              activateWhenBuilt = Some true
+              canRepeat = None })
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "2.5 0.0 -0.0"
+                collisionVolumeScales = Some "117.5 41.25 112.5"
+                collisionVolumeType = Some "Box"
+                damage = Some 9600.0
+                featureDead = Some "HEAP"
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 20.0
+                metal = Some 5101.0
+                object_ = Some "Units/corplat_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 4800.0
+                featureDead = None
+                footprintX = Some 12.0
+                footprintZ = Some 12.0
+                height = Some 4.0
+                metal = Some 2040.0
+                object_ = Some "Units/cor7X7B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = Some "seaplok2"
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = []
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = []
+              select = ["seaplsl2"] })
+          customParams = Map.ofList [
+              "airfactory", "true"
+              "buildinggrounddecaldecayspeed", "30.0"
+              "buildinggrounddecalsizex", "9.0"
+              "buildinggrounddecalsizey", "9.0"
+              "buildinggrounddecaltype", "decals/coraap_aoplane.dds"
+              "model_author", "Mr Bob"
+              "normaltex", "unittextures/cor_normal.dds"
+              "subfolder", "CorBuildings/LandFactories"
+              "techlevel", "3.0"
+              "unitgroup", "buildert3"
+              "usebuildinggrounddecal", "true"
+          ]
+          extras = Map.ofList [
+              "radardistance", "750.0"
+              "radaremitheight", "50.0"
+          ] }
 
-    let all : (string * LuaValue) list =
+    let all : (string * UnitDef) list =
         [
             "coraap", coraap
             "coralab", coralab

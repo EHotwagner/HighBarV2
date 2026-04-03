@@ -5,1573 +5,1553 @@ open BarData
 
 module ArmGantry =
 
-    let armbanth =
-        LuaValue.Table [
-            LuaKey.String "airsightdistance", LuaValue.Number 1100.0
-            LuaKey.String "buildpic", LuaValue.String "ARMBANTH.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 360000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "60 88 60"
-            LuaKey.String "collisionvolumetype", LuaValue.String "CylY"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 286000.0
-            LuaKey.String "energymake", LuaValue.Number 150.0
-            LuaKey.String "energystorage", LuaValue.Number 2500.0
-            LuaKey.String "explodeas", LuaValue.String "bantha"
-            LuaKey.String "footprintx", LuaValue.Number 4.0
-            LuaKey.String "footprintz", LuaValue.Number 4.0
-            LuaKey.String "health", LuaValue.Number 69000.0
-            LuaKey.String "mass", LuaValue.Number 13500.0
-            LuaKey.String "maxacc", LuaValue.Number 0.11845
-            LuaKey.String "maxdec", LuaValue.Number 0.7521
-            LuaKey.String "maxslope", LuaValue.Number 17.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 12.0
-            LuaKey.String "metalcost", LuaValue.Number 13500.0
-            LuaKey.String "movementclass", LuaValue.String "HABOT5"
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Units/ARMBANTH.s3o"
-            LuaKey.String "script", LuaValue.String "Units/ARMBANTH.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "banthaSelfd"
-            LuaKey.String "selfdestructcountdown", LuaValue.Number 10.0
-            LuaKey.String "sightdistance", LuaValue.Number 617.0
-            LuaKey.String "speed", LuaValue.Number 45.6
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 1.089
-            LuaKey.String "turnrate", LuaValue.Number 1214.40002
-            LuaKey.String "upright", LuaValue.Bool true
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "customrange", LuaValue.Number 465.0
-                    LuaKey.String "model_author", LuaValue.String "FireStorm"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "paralyzemultiplier", LuaValue.Number 1.0
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "weapon"
+    let armbanth : UnitDef =
+        { name = "armbanth"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 13500.0
+          energyCost = ValueOrExpr.Concrete 286000.0
+          buildTime = ValueOrExpr.Concrete 360000.0
+          health = ValueOrExpr.Concrete 69000.0
+          sightDistance = ValueOrExpr.Concrete 617.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/ARMBANTH.s3o"
+          buildPic = Some "ARMBANTH.DDS"
+          script = Some "Units/ARMBANTH.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "bantha"
+          selfDestructAs = Some "banthaSelfd"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "60 88 60"
+          collisionVolumeType = Some "CylY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 45.6
+              maxAcc = 0.11845
+              maxDec = 0.7521
+              turnRate = 1214.40002
+              movementClass = Some "HABOT5"
+              maxSlope = Some 17.0
+              maxWaterDepth = Some 12.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 1.089
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "armbantha_fire"
+                displayName = Some "Close-quarters impulsion blaster"
+                weaponType = Some "LaserCannon"
+                damage = Map.ofList [
+                    "default", 730.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "66.5059539795 40 69.125361816406"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 21000.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 8249.0
-                            LuaKey.String "object", LuaValue.String "Units/armbanth_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "55.0 4.0 6.0"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "cylY"
-                            LuaKey.String "damage", LuaValue.Number 10500.0
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 3300.0
-                            LuaKey.String "object", LuaValue.String "Units/arm3X3A.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
+                range = Some (ValueOrExpr.Concrete 465.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.4)
+                weaponVelocity = Some 1072.0
+                areaOfEffect = Some 64.0
+                accuracy = Some 100.0
+                turret = Some true
+                tolerance = Some 10000.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "banthie2"
+                soundHit = Some "xplosml3"
+                explosiongenerator = Some "custom:genericshellexplosion-medium"
+                rgbColor = Some "0.7 0.7 0.1"
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL"
+                    "mount_onlytargetcategory", "NOTSUB"
+                    "avoidfeature", "false"
+                    "beamdecay", "12.0"
+                    "corethickness", "0.85"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "duration", "0.02"
+                    "intensity", "1.0"
+                    "laserflaresize", "10.1"
+                    "proximitypriority", "1.0"
+                    "size", "2.0"
+                    "soundhitwet", "sizzle"
+                    "soundstartvolume", "45.0"
+                    "thickness", "3.3"
+                ] }
+              { name = "tehlazerofdewm"
+                displayName = Some "High-energy long-range g2g/g2a lazor of DEEEEEEWWWWWWMMMMMM"
+                weaponType = Some "BeamLaser"
+                damage = Map.ofList [
+                    "commanders", 1800.0
+                    "default", 6000.0
+                    "vtol", 3000.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:barrelshot-large-impulse"
-                        ]
+                range = Some (ValueOrExpr.Concrete 800.0)
+                reloadTime = Some (ValueOrExpr.Concrete 7.5)
+                weaponVelocity = Some 1500.0
+                areaOfEffect = Some 14.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 10000.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "annigun1"
+                soundHit = None
+                explosiongenerator = Some "custom:laserhit-large-blue"
+                rgbColor = Some "0.2 0.2 1"
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL GROUNDSCOUT"
+                    "mount_onlytargetcategory", "NOTSUB"
+                    "avoidfeature", "false"
+                    "beamtime", "1.05"
+                    "corethickness", "0.3"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "energypershot", "1300.0"
+                    "firestarter", "90.0"
+                    "laserflaresize", "9.1"
+                    "soundhitdry", ""
+                    "soundhitwet", "sizzle"
+                    "soundtrigger", "1.0"
+                    "thickness", "4.7"
+                ] }
+              { name = "bantha_rocket"
+                displayName = Some "Heavy g2g/g2a guided starburst missile launcher"
+                weaponType = Some "StarburstLauncher"
+                damage = Map.ofList [
+                    "default", 900.0
+                    "subs", 500.0
                 ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "krogok1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "krogsel1"
-                        ]
+                range = Some (ValueOrExpr.Concrete 860.0)
+                reloadTime = Some (ValueOrExpr.Concrete 6.86667)
+                weaponVelocity = Some 2000.0
+                areaOfEffect = Some 96.0
+                accuracy = None
+                turret = None
+                tolerance = Some 9000.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "rapidrocket3"
+                soundHit = Some "xplomed2"
+                explosiongenerator = Some "custom:genericshellexplosion-large"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.ofList [
+                    "projectile_destruction_method", "descend"
                 ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "armbantha_fire", LuaValue.Table [
-                            LuaKey.String "accuracy", LuaValue.Number 100.0
-                            LuaKey.String "areaofeffect", LuaValue.Number 64.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "beamdecay", LuaValue.Number 12.0
-                            LuaKey.String "corethickness", LuaValue.Number 0.85
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "duration", LuaValue.Number 0.02
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium"
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.0
-                            LuaKey.String "intensity", LuaValue.Number 1.0
-                            LuaKey.String "laserflaresize", LuaValue.Number 10.1
-                            LuaKey.String "name", LuaValue.String "Close-quarters impulsion blaster"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "proximitypriority", LuaValue.Number 1.0
-                            LuaKey.String "range", LuaValue.Number 465.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.4
-                            LuaKey.String "rgbcolor", LuaValue.String "0.7 0.7 0.1"
-                            LuaKey.String "size", LuaValue.Number 2.0
-                            LuaKey.String "soundhit", LuaValue.String "xplosml3"
-                            LuaKey.String "soundhitwet", LuaValue.String "sizzle"
-                            LuaKey.String "soundstart", LuaValue.String "banthie2"
-                            LuaKey.String "soundstartvolume", LuaValue.Number 45.0
-                            LuaKey.String "thickness", LuaValue.Number 3.3
-                            LuaKey.String "tolerance", LuaValue.Number 10000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "LaserCannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1072.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 730.0
-                                ]
-                        ]
-                    LuaKey.String "bantha_rocket", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 96.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "canattackground", LuaValue.Bool false
-                            LuaKey.String "castshadow", LuaValue.Bool true
-                            LuaKey.String "cegtag", LuaValue.String "missiletrailsmall-starburst"
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-large"
-                            LuaKey.String "firestarter", LuaValue.Number 70.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "model", LuaValue.String "corkbmissl1.s3o"
-                            LuaKey.String "name", LuaValue.String "Heavy g2g/g2a guided starburst missile launcher"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "proximitypriority", LuaValue.Number -1.0
-                            LuaKey.String "range", LuaValue.Number 860.0
-                            LuaKey.String "reloadtime", LuaValue.Number 6.86667
-                            LuaKey.String "smokecolor", LuaValue.Number 0.7
-                            LuaKey.String "smokeperiod", LuaValue.Number 9.0
-                            LuaKey.String "smokesize", LuaValue.Number 12.0
-                            LuaKey.String "smoketime", LuaValue.Number 36.0
-                            LuaKey.String "smoketrail", LuaValue.Bool true
-                            LuaKey.String "smoketrailcastshadow", LuaValue.Bool false
-                            LuaKey.String "soundhit", LuaValue.String "xplomed2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splsmed"
-                            LuaKey.String "soundstart", LuaValue.String "rapidrocket3"
-                            LuaKey.String "startvelocity", LuaValue.Number 10.0
-                            LuaKey.String "texture1", LuaValue.String "null"
-                            LuaKey.String "texture2", LuaValue.String "smoketrailbar"
-                            LuaKey.String "texture3", LuaValue.String "null"
-                            LuaKey.String "tolerance", LuaValue.Number 9000.0
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "turnrate", LuaValue.Number 15000.0
-                            LuaKey.String "weaponacceleration", LuaValue.Number 200.0
-                            LuaKey.String "weapontimer", LuaValue.Number 1.0
-                            LuaKey.String "weapontype", LuaValue.String "StarburstLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 2000.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "overrange_distance", LuaValue.Number 989.0
-                                    LuaKey.String "projectile_destruction_method", LuaValue.String "descend"
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 900.0
-                                    LuaKey.String "subs", LuaValue.Number 500.0
-                                ]
-                        ]
-                    LuaKey.String "banthfootstep", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 128.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "camerashake", LuaValue.Number 300.0
-                            LuaKey.String "canattackground", LuaValue.Bool false
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.0
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:footstep-large"
-                            LuaKey.String "impactonly", LuaValue.Number 1.0
-                            LuaKey.String "name", LuaValue.String "BanthStep"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 0.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.5
-                            LuaKey.String "soundhit", LuaValue.String "banthstep"
-                            LuaKey.String "soundhitvolume", LuaValue.Number 35.0
-                            LuaKey.String "soundhitwet", LuaValue.String "splssml"
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "nodecal", LuaValue.Bool true
-                                    LuaKey.String "noexplosionlight", LuaValue.Number 1.0
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 0.0
-                                ]
-                        ]
-                    LuaKey.String "tehlazerofdewm", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 14.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "beamtime", LuaValue.Number 1.05
-                            LuaKey.String "corethickness", LuaValue.Number 0.3
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "energypershot", LuaValue.Number 1300.0
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:laserhit-large-blue"
-                            LuaKey.String "firestarter", LuaValue.Number 90.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.0
-                            LuaKey.String "laserflaresize", LuaValue.Number 9.1
-                            LuaKey.String "name", LuaValue.String "High-energy long-range g2g/g2a lazor of DEEEEEEWWWWWWMMMMMM"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 800.0
-                            LuaKey.String "reloadtime", LuaValue.Number 7.5
-                            LuaKey.String "rgbcolor", LuaValue.String "0.2 0.2 1"
-                            LuaKey.String "soundhitdry", LuaValue.String ""
-                            LuaKey.String "soundhitwet", LuaValue.String "sizzle"
-                            LuaKey.String "soundstart", LuaValue.String "annigun1"
-                            LuaKey.String "soundtrigger", LuaValue.Number 1.0
-                            LuaKey.String "thickness", LuaValue.Number 4.7
-                            LuaKey.String "tolerance", LuaValue.Number 10000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "BeamLaser"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 1500.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "commanders", LuaValue.Number 1800.0
-                                    LuaKey.String "default", LuaValue.Number 6000.0
-                                    LuaKey.String "vtol", LuaValue.Number 3000.0
-                                ]
-                        ]
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL GROUNDSCOUT"
+                    "mount_onlytargetcategory", "NOTSUB"
+                    "avoidfeature", "false"
+                    "canattackground", "false"
+                    "castshadow", "true"
+                    "cegtag", "missiletrailsmall-starburst"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firestarter", "70.0"
+                    "model", "corkbmissl1.s3o"
+                    "proximitypriority", "-1.0"
+                    "smokecolor", "0.7"
+                    "smokeperiod", "9.0"
+                    "smokesize", "12.0"
+                    "smoketime", "36.0"
+                    "smoketrail", "true"
+                    "smoketrailcastshadow", "false"
+                    "soundhitwet", "splsmed"
+                    "startvelocity", "10.0"
+                    "texture1", "null"
+                    "texture2", "smoketrailbar"
+                    "texture3", "null"
+                    "tracks", "true"
+                    "turnrate", "15000.0"
+                    "weaponacceleration", "200.0"
+                    "weapontimer", "1.0"
+                ] }
+              { name = "banthfootstep"
+                displayName = Some "BanthStep"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 0.0
                 ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "ARMBANTHA_FIRE"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTSUB"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "TEHLAZEROFDEWM"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTSUB"
-                        ]
-                    LuaKey.Int 3, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "BANTHA_ROCKET"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTSUB"
-                        ]
-                    LuaKey.Int 4, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "BANTHFOOTSTEP"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 0.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.5)
+                weaponVelocity = None
+                areaOfEffect = Some 128.0
+                accuracy = None
+                turret = None
+                tolerance = None
+                edgeEffectiveness = Some 0.0
+                impulseFactor = None
+                noSelfDamage = Some true
+                soundStart = None
+                soundHit = Some "banthstep"
+                explosiongenerator = Some "custom:footstep-large"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "avoidfeature", "false"
+                    "camerashake", "300.0"
+                    "canattackground", "false"
+                    "collidefriendly", "false"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "impactonly", "1.0"
+                    "soundhitvolume", "35.0"
+                    "soundhitwet", "splssml"
+                ] }
+          ]
+          economy = Some (
+            { energyMake = Some (ValueOrExpr.Concrete 150.0)
+              metalMake = None
+              energyStorage = Some 2500.0
+              metalStorage = None
+              extractsMetal = None })
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "66.5059539795 40 69.125361816406"
+                collisionVolumeType = Some "Box"
+                damage = Some 21000.0
+                featureDead = Some "HEAP"
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 20.0
+                metal = Some 8249.0
+                object_ = Some "Units/armbanth_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "55.0 4.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 10500.0
+                featureDead = None
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 4.0
+                metal = Some 3300.0
+                object_ = Some "Units/arm3X3A.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["krogok1"]
+              select = ["krogsel1"] })
+          customParams = Map.ofList [
+              "customrange", "465.0"
+              "model_author", "FireStorm"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "paralyzemultiplier", "1.0"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "weapon"
+          ]
+          extras = Map.ofList [
+              "airsightdistance", "1100.0"
+              "cantbetransported", "true"
+              "mass", "13500.0"
+              "nochasecategory", "VTOL"
+              "selfdestructcountdown", "10.0"
+              "upright", "true"
+          ] }
 
-    let armlun =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool true
-            LuaKey.String "builder", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "ARMLUN.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 40000.0
-            LuaKey.String "canattack", LuaValue.Bool true
-            LuaKey.String "canguard", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "canpatrol", LuaValue.Bool true
-            LuaKey.String "canstop", LuaValue.Number 1.0
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "corpse", LuaValue.String "dead"
-            LuaKey.String "energycost", LuaValue.Number 23000.0
-            LuaKey.String "explodeas", LuaValue.String "largeexplosiongeneric"
-            LuaKey.String "footprintx", LuaValue.Number 4.0
-            LuaKey.String "footprintz", LuaValue.Number 4.0
-            LuaKey.String "health", LuaValue.Number 5300.0
-            LuaKey.String "maxacc", LuaValue.Number 0.01788
-            LuaKey.String "maxdec", LuaValue.Number 0.01788
-            LuaKey.String "maxslope", LuaValue.Number 16.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 1150.0
-            LuaKey.String "movementclass", LuaValue.String "HHOVER4"
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Units/ARMLUN.s3o"
-            LuaKey.String "radardistance", LuaValue.Number 0.0
-            LuaKey.String "script", LuaValue.String "Units/armlun.cob"
-            LuaKey.String "selfdestructas", LuaValue.String "largeExplosionGenericSelfd"
-            LuaKey.String "sightdistance", LuaValue.Number 620.0
-            LuaKey.String "sonardistance", LuaValue.Number 550.0
-            LuaKey.String "speed", LuaValue.Number 50.1
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 1.122
-            LuaKey.String "turnrate", LuaValue.Number 250.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "model_author", LuaValue.String "Flaka"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "weapon"
+    let armlun : UnitDef =
+        { name = "armlun"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 1150.0
+          energyCost = ValueOrExpr.Concrete 23000.0
+          buildTime = ValueOrExpr.Concrete 40000.0
+          health = ValueOrExpr.Concrete 5300.0
+          sightDistance = ValueOrExpr.Concrete 620.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/ARMLUN.s3o"
+          buildPic = Some "ARMLUN.DDS"
+          script = Some "Units/armlun.cob"
+          corpse = Some "dead"
+          explodeAs = Some "largeexplosiongeneric"
+          selfDestructAs = Some "largeExplosionGenericSelfd"
+          collisionVolumeOffsets = None
+          collisionVolumeScales = None
+          collisionVolumeType = None
+          seismicSignature = None
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 50.1
+              maxAcc = 0.01788
+              maxDec = 0.01788
+              turnRate = 250.0
+              movementClass = Some "HHOVER4"
+              maxSlope = Some 16.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 1.122
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "cannon"
+                displayName = Some "Heavy ballistic underwater cannon"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 370.0
+                    "subs", 370.0
+                    "vtol", 60.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "damage", LuaValue.Number 7000.0
-                            LuaKey.String "featuredead", LuaValue.String "heap"
-                            LuaKey.String "footprintx", LuaValue.Number 4.0
-                            LuaKey.String "footprintz", LuaValue.Number 4.0
-                            LuaKey.String "height", LuaValue.Number 15.0
-                            LuaKey.String "metal", LuaValue.Number 514.0
-                            LuaKey.String "object", LuaValue.String "Units/armlun_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "85.0 14.0 6.0"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "cylY"
-                            LuaKey.String "damage", LuaValue.Number 3500.0
-                            LuaKey.String "footprintx", LuaValue.Number 4.0
-                            LuaKey.String "footprintz", LuaValue.Number 4.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 188.0
-                            LuaKey.String "object", LuaValue.String "Units/arm4x4d.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
+                range = Some (ValueOrExpr.Concrete 575.0)
+                reloadTime = Some (ValueOrExpr.Concrete 1.8)
+                weaponVelocity = Some 300.0
+                areaOfEffect = Some 160.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "largegun"
+                soundHit = Some "xplomed1"
+                explosiongenerator = Some "custom:genericshellexplosion-medium"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.ofList [
+                    "cegtag", "missiletrailcorroyspecial"
+                    "def", "armlun_cannonuw"
+                    "model", "airbombt2"
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:barrelshot-large"
-                            LuaKey.Int 2, LuaValue.String "custom:waterwake-small-hover"
-                            LuaKey.Int 3, LuaValue.String "custom:bowsplash-small-hover"
-                            LuaKey.Int 4, LuaValue.String "custom:hover-wake-large"
-                        ]
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "cegtag", "missiletrailcorroyspecial"
+                    "craterareaofeffect", "160.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "gravityaffected", "true"
+                    "interceptedbyshieldtype", "4.0"
+                    "model", "airbombt2.s3o"
+                    "soundhitwet", "splslrg"
+                    "waterweapon", "false"
+                ] }
+              { name = "depthcharge"
+                displayName = Some "Depthcharge launcher"
+                weaponType = Some "TorpedoLauncher"
+                damage = Map.ofList [
+                    "default", 225.0
                 ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "hovt2lasok"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "hovt2lassel"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "armlun_rocket", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 128.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "cegtag", LuaValue.String "missiletrailsmall"
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 128.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium"
-                            LuaKey.String "firestarter", LuaValue.Number 70.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 1.015
-                            LuaKey.String "model", LuaValue.String "catapultmissile.s3o"
-                            LuaKey.String "name", LuaValue.String "Heavy g2g rocket launcher"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 550.0
-                            LuaKey.String "reloadtime", LuaValue.Number 7.5
-                            LuaKey.String "smoketrail", LuaValue.Bool false
-                            LuaKey.String "soundhit", LuaValue.String "xplosml2"
-                            LuaKey.String "soundhitvolume", LuaValue.Number 8.0
-                            LuaKey.String "soundhitwet", LuaValue.String "splsmed"
-                            LuaKey.String "soundstart", LuaValue.String "rocklit1"
-                            LuaKey.String "soundstartvolume", LuaValue.Number 7.0
-                            LuaKey.String "startvelocity", LuaValue.Number 100.0
-                            LuaKey.String "texture1", LuaValue.String "null"
-                            LuaKey.String "texture2", LuaValue.String "smoketrailbar"
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "trajectoryheight", LuaValue.Number 0.4
-                            LuaKey.String "turnrate", LuaValue.Number 22000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 80.0
-                            LuaKey.String "weapontimer", LuaValue.Number 3.0
-                            LuaKey.String "weapontype", LuaValue.String "MissileLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 230.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "overrange_distance", LuaValue.Number 633.0
-                                    LuaKey.String "projectile_destruction_method", LuaValue.String "descend"
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 330.0
-                                    LuaKey.String "subs", LuaValue.Number 165.0
-                                    LuaKey.String "vtol", LuaValue.Number 35.0
-                                ]
-                        ]
-                    LuaKey.String "cannon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 160.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "cegtag", LuaValue.String "missiletrailcorroyspecial"
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 160.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium"
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 4.0
-                            LuaKey.String "model", LuaValue.String "airbombt2.s3o"
-                            LuaKey.String "name", LuaValue.String "Heavy ballistic underwater cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 575.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.8
-                            LuaKey.String "soundhit", LuaValue.String "xplomed1"
-                            LuaKey.String "soundhitwet", LuaValue.String "splslrg"
-                            LuaKey.String "soundstart", LuaValue.String "largegun"
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool false
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 300.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "cegtag", LuaValue.String "missiletrailcorroyspecial"
-                                    LuaKey.String "def", LuaValue.String "armlun_cannonuw"
-                                    LuaKey.String "model", LuaValue.String "airbombt2"
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 370.0
-                                    LuaKey.String "subs", LuaValue.Number 370.0
-                                    LuaKey.String "vtol", LuaValue.Number 60.0
-                                ]
-                        ]
-                    LuaKey.String "cannonuw", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 160.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "cegtag", LuaValue.String "missiletrailcorroyspecial"
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 160.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium"
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "model", LuaValue.String "airbombt2.s3o"
-                            LuaKey.String "name", LuaValue.String "Heavy ballistic underwater cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 575.0
-                            LuaKey.String "reloadtime", LuaValue.Number 1.8
-                            LuaKey.String "soundhit", LuaValue.String "xplomed1"
-                            LuaKey.String "soundhitwet", LuaValue.String "splslrg"
-                            LuaKey.String "soundhitwetvolume", LuaValue.Number 0.5
-                            LuaKey.String "soundstart", LuaValue.String "largegun"
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 300.0
-                            LuaKey.String "customparams", LuaValue.Table []
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 370.0
-                                    LuaKey.String "subs", LuaValue.Number 370.0
-                                    LuaKey.String "vtol", LuaValue.Number 60.0
-                                ]
-                        ]
-                    LuaKey.String "depthcharge", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 24.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "avoidfriendly", LuaValue.Bool false
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.9
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium-uw"
-                            LuaKey.String "flighttime", LuaValue.Number 3.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "model", LuaValue.String "cordepthcharge.s3o"
-                            LuaKey.String "name", LuaValue.String "Depthcharge launcher"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "predictboost", LuaValue.Number 0.0
-                            LuaKey.String "range", LuaValue.Number 400.0
-                            LuaKey.String "reloadtime", LuaValue.Number 2.0
-                            LuaKey.String "soundhit", LuaValue.String "xplodep2"
-                            LuaKey.String "soundstart", LuaValue.String "torpedo1"
-                            LuaKey.String "startvelocity", LuaValue.Number 120.0
-                            LuaKey.String "tolerance", LuaValue.Number 1000.0
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "turnrate", LuaValue.Number 6000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "waterweapon", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 20.0
-                            LuaKey.String "weapontimer", LuaValue.Number 3.0
-                            LuaKey.String "weapontype", LuaValue.String "TorpedoLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 140.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 225.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL"
-                            LuaKey.String "def", LuaValue.String "CANNON"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "NOTSUB"
-                            LuaKey.String "def", LuaValue.String "DEPTHCHARGE"
-                            LuaKey.String "maindir", LuaValue.String "0 -1 0"
-                            LuaKey.String "maxangledif", LuaValue.Number 179.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "CANBEUW UNDERWATER"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 400.0)
+                reloadTime = Some (ValueOrExpr.Concrete 2.0)
+                weaponVelocity = Some 140.0
+                areaOfEffect = Some 24.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 1000.0
+                edgeEffectiveness = Some 0.9
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "torpedo1"
+                soundHit = Some "xplodep2"
+                explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "NOTSUB"
+                    "mount_maindir", "0 -1 0"
+                    "mount_maxangledif", "179.0"
+                    "mount_onlytargetcategory", "CANBEUW UNDERWATER"
+                    "avoidfeature", "false"
+                    "avoidfriendly", "false"
+                    "collidefriendly", "false"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "flighttime", "3.0"
+                    "model", "cordepthcharge.s3o"
+                    "predictboost", "0.0"
+                    "startvelocity", "120.0"
+                    "tracks", "true"
+                    "turnrate", "6000.0"
+                    "waterweapon", "true"
+                    "weaponacceleration", "20.0"
+                    "weapontimer", "3.0"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = None
+                collisionVolumeType = None
+                damage = Some 7000.0
+                featureDead = Some "heap"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 15.0
+                metal = Some 514.0
+                object_ = Some "Units/armlun_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "85.0 14.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 3500.0
+                featureDead = None
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 4.0
+                metal = Some 188.0
+                object_ = Some "Units/arm4x4d.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["hovt2lasok"]
+              select = ["hovt2lassel"] })
+          customParams = Map.ofList [
+              "model_author", "Flaka"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "weapon"
+          ]
+          extras = Map.ofList [
+              "canattack", "true"
+              "canguard", "true"
+              "canpatrol", "true"
+              "canstop", "1.0"
+              "cantbetransported", "true"
+              "nochasecategory", "VTOL"
+              "radardistance", "0.0"
+              "sonardistance", "550.0"
+          ] }
 
-    let armmar =
-        LuaValue.Table [
-            LuaKey.String "buildpic", LuaValue.String "ARMMAR.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 33000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "50 70 50"
-            LuaKey.String "collisionvolumetype", LuaValue.String "CYLY"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 21000.0
-            LuaKey.String "explodeas", LuaValue.String "explosiont3med"
-            LuaKey.String "footprintx", LuaValue.Number 3.0
-            LuaKey.String "footprintz", LuaValue.Number 3.0
-            LuaKey.String "health", LuaValue.Number 4900.0
-            LuaKey.String "mass", LuaValue.Number 970.0
-            LuaKey.String "maxacc", LuaValue.Number 0.253
-            LuaKey.String "maxdec", LuaValue.Number 0.8211
-            LuaKey.String "maxslope", LuaValue.Number 17.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 32.0
-            LuaKey.String "metalcost", LuaValue.Number 970.0
-            LuaKey.String "movementclass", LuaValue.String "HABOT5"
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Units/ARMMAR.s3o"
-            LuaKey.String "script", LuaValue.String "Units/armmar.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "explosiont3"
-            LuaKey.String "sightdistance", LuaValue.Number 455.0
-            LuaKey.String "speed", LuaValue.Number 94.5
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 1.98
-            LuaKey.String "turnrate", LuaValue.Number 1214.40002
-            LuaKey.String "upright", LuaValue.Bool true
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "maxrange", LuaValue.String "350"
-                    LuaKey.String "model_author", LuaValue.String "PtaQ"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "weapon"
-                    LuaKey.String "weapon1turretx", LuaValue.Number 90.0
-                    LuaKey.String "weapon1turrety", LuaValue.Number 150.0
+    let armmar : UnitDef =
+        { name = "armmar"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 970.0
+          energyCost = ValueOrExpr.Concrete 21000.0
+          buildTime = ValueOrExpr.Concrete 33000.0
+          health = ValueOrExpr.Concrete 4900.0
+          sightDistance = ValueOrExpr.Concrete 455.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Units/ARMMAR.s3o"
+          buildPic = Some "ARMMAR.DDS"
+          script = Some "Units/armmar.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "explosiont3med"
+          selfDestructAs = Some "explosiont3"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "50 70 50"
+          collisionVolumeType = Some "CYLY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 94.5
+              maxAcc = 0.253
+              maxDec = 0.8211
+              turnRate = 1214.40002
+              movementClass = Some "HABOT5"
+              maxSlope = Some 17.0
+              maxWaterDepth = Some 32.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 1.98
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "armmech_cannon"
+                displayName = Some "Double close-quarters gauss cannon"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 235.0
+                    "vtol", 60.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "60 30 60"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2400.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 592.0
-                            LuaKey.String "object", LuaValue.String "Units/armmar_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "40 40 40"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Sphere"
-                            LuaKey.String "damage", LuaValue.Number 1200.0
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 237.0
-                            LuaKey.String "object", LuaValue.String "Units/arm3X3F.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
+                range = Some (ValueOrExpr.Concrete 350.0)
+                reloadTime = Some (ValueOrExpr.Concrete 0.7)
+                weaponVelocity = Some 600.0
+                areaOfEffect = Some 12.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "KroGun1"
+                soundHit = Some "xplomed2"
+                explosiongenerator = Some "custom:genericshellexplosion-medium"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "GROUNDSCOUT"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firestarter", "5.0"
+                    "gravityaffected", "true"
+                    "soundhitwet", "splshbig"
+                    "targetmoveerror", "0.15"
+                    "weapontimer", "2.0"
+                ] }
+              { name = "armamph_missile"
+                displayName = Some "Guided g2a missile launcher"
+                weaponType = Some "MissileLauncher"
+                damage = Map.ofList [
+                    "vtol", 90.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:barrelshot-medium"
-                            LuaKey.Int 2, LuaValue.String "custom:subbubbles"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "mavbok1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "mavbsel1"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "armamph_missile", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 48.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "burnblow", LuaValue.Bool true
-                            LuaKey.String "canattackground", LuaValue.Bool false
-                            LuaKey.String "castshadow", LuaValue.Bool false
-                            LuaKey.String "cegtag", LuaValue.String "missiletrailaa"
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-tiny-aa"
-                            LuaKey.String "firestarter", LuaValue.Number 70.0
-                            LuaKey.String "flighttime", LuaValue.Number 1.75
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "metalpershot", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "cormissile.s3o"
-                            LuaKey.String "name", LuaValue.String "Guided g2a missile launcher"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 600.0
-                            LuaKey.String "reloadtime", LuaValue.Number 2.1
-                            LuaKey.String "smokecolor", LuaValue.Number 0.95
-                            LuaKey.String "smokeperiod", LuaValue.Number 6.0
-                            LuaKey.String "smokesize", LuaValue.Number 4.4
-                            LuaKey.String "smoketime", LuaValue.Number 12.0
-                            LuaKey.String "smoketrail", LuaValue.Bool true
-                            LuaKey.String "smoketrailcastshadow", LuaValue.Bool false
-                            LuaKey.String "soundhit", LuaValue.String "xplosml2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splshbig"
-                            LuaKey.String "soundstart", LuaValue.String "rocklit1"
-                            LuaKey.String "startvelocity", LuaValue.Number 650.0
-                            LuaKey.String "texture1", LuaValue.String "null"
-                            LuaKey.String "texture2", LuaValue.String "smoketrailaa"
-                            LuaKey.String "tolerance", LuaValue.Number 9000.0
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "turnrate", LuaValue.Number 48000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 200.0
-                            LuaKey.String "weapontimer", LuaValue.Number 5.0
-                            LuaKey.String "weapontype", LuaValue.String "MissileLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 850.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "vtol", LuaValue.Number 90.0
-                                ]
-                        ]
-                    LuaKey.String "armmech_cannon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 12.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium"
-                            LuaKey.String "firestarter", LuaValue.Number 5.0
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "name", LuaValue.String "Double close-quarters gauss cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 350.0
-                            LuaKey.String "reloadtime", LuaValue.Number 0.7
-                            LuaKey.String "soundhit", LuaValue.String "xplomed2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splshbig"
-                            LuaKey.String "soundstart", LuaValue.String "KroGun1"
-                            LuaKey.String "targetmoveerror", LuaValue.Number 0.15
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontimer", LuaValue.Number 2.0
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 600.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 235.0
-                                    LuaKey.String "vtol", LuaValue.Number 60.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "ARMMECH_CANNON"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "ARMAMPH_MISSILE"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "VTOL"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 600.0)
+                reloadTime = Some (ValueOrExpr.Concrete 2.1)
+                weaponVelocity = Some 850.0
+                areaOfEffect = Some 48.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 9000.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "rocklit1"
+                soundHit = Some "xplosml2"
+                explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_onlytargetcategory", "VTOL"
+                    "avoidfeature", "false"
+                    "burnblow", "true"
+                    "canattackground", "false"
+                    "castshadow", "false"
+                    "cegtag", "missiletrailaa"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firestarter", "70.0"
+                    "flighttime", "1.75"
+                    "metalpershot", "0.0"
+                    "model", "cormissile.s3o"
+                    "smokecolor", "0.95"
+                    "smokeperiod", "6.0"
+                    "smokesize", "4.4"
+                    "smoketime", "12.0"
+                    "smoketrail", "true"
+                    "smoketrailcastshadow", "false"
+                    "soundhitwet", "splshbig"
+                    "startvelocity", "650.0"
+                    "texture1", "null"
+                    "texture2", "smoketrailaa"
+                    "tracks", "true"
+                    "turnrate", "48000.0"
+                    "weaponacceleration", "200.0"
+                    "weapontimer", "5.0"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "60 30 60"
+                collisionVolumeType = Some "Box"
+                damage = Some 2400.0
+                featureDead = Some "HEAP"
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 20.0
+                metal = Some 592.0
+                object_ = Some "Units/armmar_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "40 40 40"
+                collisionVolumeType = Some "Sphere"
+                damage = Some 1200.0
+                featureDead = None
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 4.0
+                metal = Some 237.0
+                object_ = Some "Units/arm3X3F.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["mavbok1"]
+              select = ["mavbsel1"] })
+          customParams = Map.ofList [
+              "maxrange", "350"
+              "model_author", "PtaQ"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "weapon"
+              "weapon1turretx", "90.0"
+              "weapon1turrety", "150.0"
+          ]
+          extras = Map.ofList [
+              "cantbetransported", "true"
+              "mass", "970.0"
+              "nochasecategory", "VTOL"
+              "upright", "true"
+          ] }
 
-    let armprowl =
-        LuaValue.Table [
-            LuaKey.String "buildpic", LuaValue.String "ARMMAR.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 33000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -2 -1"
-            LuaKey.String "collisionvolumescales", LuaValue.String "34 68 38"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 21000.0
-            LuaKey.String "explodeas", LuaValue.String "explosiont3med"
-            LuaKey.String "footprintx", LuaValue.Number 3.0
-            LuaKey.String "footprintz", LuaValue.Number 3.0
-            LuaKey.String "health", LuaValue.Number 4900.0
-            LuaKey.String "mass", LuaValue.Number 970.0
-            LuaKey.String "maxacc", LuaValue.Number 0.253
-            LuaKey.String "maxdec", LuaValue.Number 0.8211
-            LuaKey.String "maxslope", LuaValue.Number 17.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 32.0
-            LuaKey.String "metalcost", LuaValue.Number 970.0
-            LuaKey.String "movementclass", LuaValue.String "ATANK3"
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Units/armprowl.s3o"
-            LuaKey.String "script", LuaValue.String "Units/armprowl.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "explosiont3"
-            LuaKey.String "sightdistance", LuaValue.Number 455.0
-            LuaKey.String "speed", LuaValue.Number 94.5
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 1.98
-            LuaKey.String "turnrate", LuaValue.Number 1214.40002
-            LuaKey.String "upright", LuaValue.Bool true
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "i18nfromunit", LuaValue.String "armmar"
-                    LuaKey.String "model_author", LuaValue.String "PtaQ"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "weapon"
-                    LuaKey.String "weapon1turretx", LuaValue.Number 90.0
-                    LuaKey.String "weapon1turrety", LuaValue.Number 150.0
+    let armprowl : UnitDef =
+        { name = "armprowl"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 970.0
+          energyCost = ValueOrExpr.Concrete 21000.0
+          buildTime = ValueOrExpr.Concrete 33000.0
+          health = ValueOrExpr.Concrete 4900.0
+          sightDistance = ValueOrExpr.Concrete 455.0
+          footprintX = 3.0
+          footprintZ = 3.0
+          objectName = Some "Units/armprowl.s3o"
+          buildPic = Some "ARMMAR.DDS"
+          script = Some "Units/armprowl.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "explosiont3med"
+          selfDestructAs = Some "explosiont3"
+          collisionVolumeOffsets = Some "0 -2 -1"
+          collisionVolumeScales = Some "34 68 38"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 94.5
+              maxAcc = 0.253
+              maxDec = 0.8211
+              turnRate = 1214.40002
+              movementClass = Some "ATANK3"
+              maxSlope = Some 17.0
+              maxWaterDepth = Some 32.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 1.98
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "armmech_cannon"
+                displayName = Some "Double close-quarters gauss cannon"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 235.0
+                    "vtol", 60.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0.882118225098 0.0283161499023 6.0887298584"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "32.1447906494 31.2162322998 37.0860900879"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 2400.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 4.0
-                            LuaKey.String "footprintz", LuaValue.Number 4.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 592.0
-                            LuaKey.String "object", LuaValue.String "Units/armmar_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "55.0 4.0 6.0"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "cylY"
-                            LuaKey.String "damage", LuaValue.Number 1200.0
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 237.0
-                            LuaKey.String "object", LuaValue.String "Units/arm3X3F.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
+                range = Some (ValueOrExpr.Concrete 350.0)
+                reloadTime = Some (ValueOrExpr.Concrete 0.7)
+                weaponVelocity = Some 600.0
+                areaOfEffect = Some 12.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "KroGun1"
+                soundHit = Some "xplomed2"
+                explosiongenerator = Some "custom:genericshellexplosion-medium"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "GROUNDSCOUT"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firestarter", "5.0"
+                    "gravityaffected", "true"
+                    "soundhitwet", "splshbig"
+                    "targetmoveerror", "0.15"
+                    "weapontimer", "2.0"
+                ] }
+              { name = "armamph_missile"
+                displayName = Some "Guided g2a missile launcher"
+                weaponType = Some "MissileLauncher"
+                damage = Map.ofList [
+                    "vtol", 85.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:barrelshot-medium"
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "mavbok1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "mavbsel1"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "armamph_missile", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 48.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "burnblow", LuaValue.Bool true
-                            LuaKey.String "canattackground", LuaValue.Bool false
-                            LuaKey.String "castshadow", LuaValue.Bool false
-                            LuaKey.String "cegtag", LuaValue.String "missiletrailaa"
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-tiny-aa"
-                            LuaKey.String "firestarter", LuaValue.Number 70.0
-                            LuaKey.String "flighttime", LuaValue.Number 1.75
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "metalpershot", LuaValue.Number 0.0
-                            LuaKey.String "model", LuaValue.String "cormissile.s3o"
-                            LuaKey.String "name", LuaValue.String "Guided g2a missile launcher"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 600.0
-                            LuaKey.String "reloadtime", LuaValue.Number 2.0
-                            LuaKey.String "smokecolor", LuaValue.Number 0.95
-                            LuaKey.String "smokeperiod", LuaValue.Number 5.0
-                            LuaKey.String "smokesize", LuaValue.Number 4.4
-                            LuaKey.String "smoketime", LuaValue.Number 12.0
-                            LuaKey.String "smoketrail", LuaValue.Bool true
-                            LuaKey.String "smoketrailcastshadow", LuaValue.Bool false
-                            LuaKey.String "soundhit", LuaValue.String "xplosml2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splshbig"
-                            LuaKey.String "soundstart", LuaValue.String "rocklit1"
-                            LuaKey.String "startvelocity", LuaValue.Number 650.0
-                            LuaKey.String "texture1", LuaValue.String "null"
-                            LuaKey.String "texture2", LuaValue.String "smoketrailaa"
-                            LuaKey.String "tolerance", LuaValue.Number 9000.0
-                            LuaKey.String "tracks", LuaValue.Bool true
-                            LuaKey.String "turnrate", LuaValue.Number 48000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 200.0
-                            LuaKey.String "weapontimer", LuaValue.Number 5.0
-                            LuaKey.String "weapontype", LuaValue.String "MissileLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 850.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "vtol", LuaValue.Number 85.0
-                                ]
-                        ]
-                    LuaKey.String "armmech_cannon", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 12.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-medium"
-                            LuaKey.String "firestarter", LuaValue.Number 5.0
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.123
-                            LuaKey.String "name", LuaValue.String "Double close-quarters gauss cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 350.0
-                            LuaKey.String "reloadtime", LuaValue.Number 0.7
-                            LuaKey.String "soundhit", LuaValue.String "xplomed2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splshbig"
-                            LuaKey.String "soundstart", LuaValue.String "KroGun1"
-                            LuaKey.String "targetmoveerror", LuaValue.Number 0.15
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontimer", LuaValue.Number 2.0
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 600.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 235.0
-                                    LuaKey.String "vtol", LuaValue.Number 60.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "ARMMECH_CANNON"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "ARMAMPH_MISSILE"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "VTOL"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 600.0)
+                reloadTime = Some (ValueOrExpr.Concrete 2.0)
+                weaponVelocity = Some 850.0
+                areaOfEffect = Some 48.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 9000.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.123
+                noSelfDamage = Some true
+                soundStart = Some "rocklit1"
+                soundHit = Some "xplosml2"
+                explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_onlytargetcategory", "VTOL"
+                    "avoidfeature", "false"
+                    "burnblow", "true"
+                    "canattackground", "false"
+                    "castshadow", "false"
+                    "cegtag", "missiletrailaa"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firestarter", "70.0"
+                    "flighttime", "1.75"
+                    "metalpershot", "0.0"
+                    "model", "cormissile.s3o"
+                    "smokecolor", "0.95"
+                    "smokeperiod", "5.0"
+                    "smokesize", "4.4"
+                    "smoketime", "12.0"
+                    "smoketrail", "true"
+                    "smoketrailcastshadow", "false"
+                    "soundhitwet", "splshbig"
+                    "startvelocity", "650.0"
+                    "texture1", "null"
+                    "texture2", "smoketrailaa"
+                    "tracks", "true"
+                    "turnrate", "48000.0"
+                    "weaponacceleration", "200.0"
+                    "weapontimer", "5.0"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0.882118225098 0.0283161499023 6.0887298584"
+                collisionVolumeScales = Some "32.1447906494 31.2162322998 37.0860900879"
+                collisionVolumeType = Some "Box"
+                damage = Some 2400.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 20.0
+                metal = Some 592.0
+                object_ = Some "Units/armmar_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "55.0 4.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 1200.0
+                featureDead = None
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 4.0
+                metal = Some 237.0
+                object_ = Some "Units/arm3X3F.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["mavbok1"]
+              select = ["mavbsel1"] })
+          customParams = Map.ofList [
+              "i18nfromunit", "armmar"
+              "model_author", "PtaQ"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "weapon"
+              "weapon1turretx", "90.0"
+              "weapon1turrety", "150.0"
+          ]
+          extras = Map.ofList [
+              "cantbetransported", "true"
+              "mass", "970.0"
+              "nochasecategory", "VTOL"
+              "upright", "true"
+          ] }
 
-    let armraz =
-        LuaValue.Table [
-            LuaKey.String "buildpic", LuaValue.String "ARMRAZ.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 120000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "55 80 55"
-            LuaKey.String "collisionvolumetype", LuaValue.String "CYLY"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 68000.0
-            LuaKey.String "explodeas", LuaValue.String "explosiont3"
-            LuaKey.String "footprintx", LuaValue.Number 4.0
-            LuaKey.String "footprintz", LuaValue.Number 4.0
-            LuaKey.String "health", LuaValue.Number 13300.0
-            LuaKey.String "mass", LuaValue.Number 3800.0
-            LuaKey.String "maxacc", LuaValue.Number 0.2369
-            LuaKey.String "maxdec", LuaValue.Number 0.9039
-            LuaKey.String "maxslope", LuaValue.Number 15.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 22.0
-            LuaKey.String "metalcost", LuaValue.Number 3800.0
-            LuaKey.String "movementclass", LuaValue.String "HBOT4"
-            LuaKey.String "objectname", LuaValue.String "Units/ARMRAZ.s3o"
-            LuaKey.String "script", LuaValue.String "Units/armraz.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "explosiont3xl"
-            LuaKey.String "sightdistance", LuaValue.Number 450.0
-            LuaKey.String "speed", LuaValue.Number 69.0
-            LuaKey.String "strafetoattack", LuaValue.Bool true
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 1.518
-            LuaKey.String "turnrate", LuaValue.Number 600.0
-            LuaKey.String "upright", LuaValue.Bool true
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "model_author", LuaValue.String "PtaQ"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "weapon"
-                    LuaKey.String "weapon1turretx", LuaValue.Number 200.0
-                    LuaKey.String "weapon1turrety", LuaValue.Number 200.0
+    let armraz : UnitDef =
+        { name = "armraz"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 3800.0
+          energyCost = ValueOrExpr.Concrete 68000.0
+          buildTime = ValueOrExpr.Concrete 120000.0
+          health = ValueOrExpr.Concrete 13300.0
+          sightDistance = ValueOrExpr.Concrete 450.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/ARMRAZ.s3o"
+          buildPic = Some "ARMRAZ.DDS"
+          script = Some "Units/armraz.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "explosiont3"
+          selfDestructAs = Some "explosiont3xl"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "55 80 55"
+          collisionVolumeType = Some "CYLY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 69.0
+              maxAcc = 0.2369
+              maxDec = 0.9039
+              turnRate = 600.0
+              movementClass = Some "HBOT4"
+              maxSlope = Some 15.0
+              maxWaterDepth = Some 22.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 1.518
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "mech_rapidlaser"
+                displayName = Some "Rapid-fire close quarters g2g armor-piercing laser"
+                weaponType = Some "BeamLaser"
+                damage = Map.ofList [
+                    "default", 116.0
+                    "vtol", 22.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "61.6002807617 54.8114776611 71.5794219971"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 1500.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 4.0
-                            LuaKey.String "footprintz", LuaValue.Number 4.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 2325.0
-                            LuaKey.String "object", LuaValue.String "Units/armraz_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "55.0 4.0 6.0"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "cylY"
-                            LuaKey.String "damage", LuaValue.Number 2000.0
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 930.0
-                            LuaKey.String "object", LuaValue.String "Units/arm3X3B.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
-                ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "mavbok1"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "mavbsel1"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "mech_rapidlaser", LuaValue.Table [
-                            LuaKey.String "accuracy", LuaValue.Number 32.0
-                            LuaKey.String "areaofeffect", LuaValue.Number 32.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "beamburst", LuaValue.Bool true
-                            LuaKey.String "beamdecay", LuaValue.Number 1.0
-                            LuaKey.String "beamtime", LuaValue.Number 0.07
-                            LuaKey.String "burst", LuaValue.Number 6.0
-                            LuaKey.String "burstrate", LuaValue.Number 0.06667
-                            LuaKey.String "corethickness", LuaValue.Number 0.35
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "energypershot", LuaValue.Number 75.0
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:laserhit-medium-red"
-                            LuaKey.String "firestarter", LuaValue.Number 10.0
-                            LuaKey.String "firetolerance", LuaValue.Number 3640.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.0
-                            LuaKey.String "largebeamlaser", LuaValue.Bool true
-                            LuaKey.String "laserflaresize", LuaValue.Number 8.8
-                            LuaKey.String "name", LuaValue.String "Rapid-fire close quarters g2g armor-piercing laser"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "proximitypriority", LuaValue.Number 1.0
-                            LuaKey.String "pulsespeed", LuaValue.Number 8.0
-                            LuaKey.String "range", LuaValue.Number 475.0
-                            LuaKey.String "reloadtime", LuaValue.Number 0.63333
-                            LuaKey.String "rgbcolor", LuaValue.String "0.75 0 0"
-                            LuaKey.String "rgbcolor2", LuaValue.String "0.9 0.9 0.6"
-                            LuaKey.String "soundhitdry", LuaValue.String ""
-                            LuaKey.String "soundhitwet", LuaValue.String "sizzle"
-                            LuaKey.String "soundstart", LuaValue.String "lasfirerc"
-                            LuaKey.String "soundtrigger", LuaValue.Number 1.0
-                            LuaKey.String "thickness", LuaValue.Number 2.4
-                            LuaKey.String "tolerance", LuaValue.Number 4500.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "BeamLaser"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 920.0
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 116.0
-                                    LuaKey.String "vtol", LuaValue.Number 22.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL GROUNDSCOUT"
-                            LuaKey.String "burstcontrolwhenoutofarc", LuaValue.Number 2.0
-                            LuaKey.String "comment", LuaValue.String "seems to have 40 deg burst limit arc limit w the burstcontrolwhenoutofarc = 2, fastautoretargeting, compounding"
-                            LuaKey.String "def", LuaValue.String "MECH_RAPIDLASER"
-                            LuaKey.String "fastautoretargeting", LuaValue.Bool true
-                            LuaKey.String "fastquerypointupdate", LuaValue.Bool true
-                            LuaKey.String "onlytargetcategory", LuaValue.String "NOTSUB"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 475.0)
+                reloadTime = Some (ValueOrExpr.Concrete 0.63333)
+                weaponVelocity = Some 920.0
+                areaOfEffect = Some 32.0
+                accuracy = Some 32.0
+                turret = Some true
+                tolerance = Some 4500.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "lasfirerc"
+                soundHit = None
+                explosiongenerator = Some "custom:laserhit-medium-red"
+                rgbColor = Some "0.75 0 0"
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL GROUNDSCOUT"
+                    "mount_burstcontrolwhenoutofarc", "2.0"
+                    "mount_comment", "seems to have 40 deg burst limit arc limit w the burstcontrolwhenoutofarc = 2, fastautoretargeting, compounding"
+                    "mount_fastautoretargeting", "true"
+                    "mount_fastquerypointupdate", "true"
+                    "mount_onlytargetcategory", "NOTSUB"
+                    "avoidfeature", "false"
+                    "beamburst", "true"
+                    "beamdecay", "1.0"
+                    "beamtime", "0.07"
+                    "burst", "6.0"
+                    "burstrate", "0.06667"
+                    "corethickness", "0.35"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "energypershot", "75.0"
+                    "firestarter", "10.0"
+                    "firetolerance", "3640.0"
+                    "largebeamlaser", "true"
+                    "laserflaresize", "8.8"
+                    "proximitypriority", "1.0"
+                    "pulsespeed", "8.0"
+                    "rgbcolor2", "0.9 0.9 0.6"
+                    "soundhitdry", ""
+                    "soundhitwet", "sizzle"
+                    "soundtrigger", "1.0"
+                    "thickness", "2.4"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "0 0 0"
+                collisionVolumeScales = Some "61.6002807617 54.8114776611 71.5794219971"
+                collisionVolumeType = Some "Box"
+                damage = Some 1500.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 20.0
+                metal = Some 2325.0
+                object_ = Some "Units/armraz_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "55.0 4.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 2000.0
+                featureDead = None
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 4.0
+                metal = Some 930.0
+                object_ = Some "Units/arm3X3B.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["mavbok1"]
+              select = ["mavbsel1"] })
+          customParams = Map.ofList [
+              "model_author", "PtaQ"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "weapon"
+              "weapon1turretx", "200.0"
+              "weapon1turrety", "200.0"
+          ]
+          extras = Map.ofList [
+              "cantbetransported", "true"
+              "mass", "3800.0"
+              "strafetoattack", "true"
+              "upright", "true"
+          ] }
 
-    let armthor =
-        LuaValue.Table [
-            LuaKey.String "buildpic", LuaValue.String "ARMTHOR.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 320000.0
-            LuaKey.String "canmanualfire", LuaValue.Bool true
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 0 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "58 34 58"
-            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 240000.0
-            LuaKey.String "explodeas", LuaValue.String "explosiont3xl"
-            LuaKey.String "footprintx", LuaValue.Number 5.0
-            LuaKey.String "footprintz", LuaValue.Number 5.0
-            LuaKey.String "health", LuaValue.Number 56000.0
-            LuaKey.String "leavetracks", LuaValue.Bool true
-            LuaKey.String "mass", LuaValue.Number 9000.0
-            LuaKey.String "maxacc", LuaValue.Number 0.015
-            LuaKey.String "maxdec", LuaValue.Number 0.03
-            LuaKey.String "maxslope", LuaValue.Number 14.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 20.0
-            LuaKey.String "metalcost", LuaValue.Number 9000.0
-            LuaKey.String "movementclass", LuaValue.String "HTANK7"
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Units/ARMTHOR.s3o"
-            LuaKey.String "script", LuaValue.String "Units/ARMTHOR.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "explosiont3xxl"
-            LuaKey.String "sightdistance", LuaValue.Number 600.0
-            LuaKey.String "speed", LuaValue.Number 54.0
-            LuaKey.String "trackoffset", LuaValue.Number 6.0
-            LuaKey.String "trackstrength", LuaValue.Number 5.0
-            LuaKey.String "tracktype", LuaValue.String "armacv_tracks"
-            LuaKey.String "trackwidth", LuaValue.Number 60.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 1.6
-            LuaKey.String "turnrate", LuaValue.Number 180.0
-            LuaKey.String "usepiececollisionvolumes", LuaValue.Number 1.0
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "lumamult", LuaValue.String "0.7"
-                    LuaKey.String "maxrange", LuaValue.String "540"
-                    LuaKey.String "model_author", LuaValue.String "Flaka"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "paralyzemultiplier", LuaValue.Number 0.0
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "emp"
+    let armthor : UnitDef =
+        { name = "armthor"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 9000.0
+          energyCost = ValueOrExpr.Concrete 240000.0
+          buildTime = ValueOrExpr.Concrete 320000.0
+          health = ValueOrExpr.Concrete 56000.0
+          sightDistance = ValueOrExpr.Concrete 600.0
+          footprintX = 5.0
+          footprintZ = 5.0
+          objectName = Some "Units/ARMTHOR.s3o"
+          buildPic = Some "ARMTHOR.DDS"
+          script = Some "Units/ARMTHOR.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "explosiont3xl"
+          selfDestructAs = Some "explosiont3xxl"
+          collisionVolumeOffsets = Some "0 0 0"
+          collisionVolumeScales = Some "58 34 58"
+          collisionVolumeType = Some "Box"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 54.0
+              maxAcc = 0.015
+              maxDec = 0.03
+              turnRate = 180.0
+              movementClass = Some "HTANK7"
+              maxSlope = Some 14.0
+              maxWaterDepth = Some 20.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 1.6
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "thunder"
+                displayName = Some "Heavy Lighting Cannon"
+                weaponType = Some "LightningCannon"
+                damage = Map.ofList [
+                    "default", 300.0
+                    "subs", 30.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "-1.01699066162 -0.66435255127 0.0775146484375"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "31.8865509033 22.2328948975 29.3510131836"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 25000.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 4.0
-                            LuaKey.String "footprintz", LuaValue.Number 4.0
-                            LuaKey.String "height", LuaValue.Number 25.0
-                            LuaKey.String "metal", LuaValue.Number 5500.0
-                            LuaKey.String "object", LuaValue.String "Units/armthor_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "35.0 4.0 6.0"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "cylY"
-                            LuaKey.String "damage", LuaValue.Number 10000.0
-                            LuaKey.String "footprintx", LuaValue.Number 5.0
-                            LuaKey.String "footprintz", LuaValue.Number 5.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 2750.0
-                            LuaKey.String "object", LuaValue.String "Units/arm2X2D.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
+                range = Some (ValueOrExpr.Concrete 540.0)
+                reloadTime = Some (ValueOrExpr.Concrete 3.1)
+                weaponVelocity = Some 400.0
+                areaOfEffect = Some 48.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "lghthvy1"
+                soundHit = Some "lasrfir2"
+                explosiongenerator = Some "custom:genericshellexplosion-large-lightning-thor"
+                rgbColor = Some "0.5 0.5 1"
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.ofList [
+                    "spark_ceg", "genericshellexplosion-splash-large-lightning"
+                    "spark_forkdamage", "0.25"
+                    "spark_maxunits", "5"
+                    "spark_range", "125"
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:barrelshot-lightning"
-                        ]
+                extras = Map.ofList [
+                    "mount_burstcontrolwhenoutofarc", "2.0"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "beamttl", "1.0"
+                    "burst", "10.0"
+                    "burstrate", "0.03333"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "duration", "2.0"
+                    "energypershot", "350.0"
+                    "falloffrate", "0.5"
+                    "firestarter", "50.0"
+                    "hardstop", "false"
+                    "impactonly", "1.0"
+                    "intensity", "28.0"
+                    "soundhitwet", "sizzle"
+                    "soundtrigger", "true"
+                    "thickness", "1.8"
+                ] }
+              { name = "empmissile"
+                displayName = Some "Heavy long-range g2g EMP starburst rocket"
+                weaponType = Some "StarburstLauncher"
+                damage = Map.ofList [
+                    "default", 80000.0
                 ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "tarmmove"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "tarmsel"
-                        ]
+                range = Some (ValueOrExpr.Concrete 1050.0)
+                reloadTime = Some (ValueOrExpr.Concrete 3.0)
+                weaponVelocity = Some 500.0
+                areaOfEffect = Some 196.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 4000.0
+                edgeEffectiveness = Some 1.0
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "mismed1emp1"
+                soundHit = Some "emgpuls1"
+                explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "avoidfriendly", "false"
+                    "burnblow", "true"
+                    "cegtag", "cruisemissiletrail-emp"
+                    "collidefriendly", "false"
+                    "commandfire", "true"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "energypershot", "5000.0"
+                    "firestarter", "0.0"
+                    "fixedlauncher", "true"
+                    "flighttime", "12.0"
+                    "interceptedbyshieldtype", "0.0"
+                    "metalpershot", "100.0"
+                    "model", "corshiprocket.s3o"
+                    "paralyzer", "true"
+                    "paralyzetime", "12.0"
+                    "smoketrail", "false"
+                    "startvelocity", "0.0"
+                    "stockpile", "true"
+                    "stockpiletime", "65.0"
+                    "texture1", "null"
+                    "texture2", "null"
+                    "texture3", "null"
+                    "turnrate", "20000.0"
+                    "weaponacceleration", "75.0"
+                    "weapontimer", "2.5"
+                ] }
+              { name = "emp"
+                displayName = Some "Long Range EMP laser"
+                weaponType = Some "BeamLaser"
+                damage = Map.ofList [
+                    "default", 300.0
                 ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "emp", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 8.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "beamdecay", LuaValue.Number 0.5
-                            LuaKey.String "beamtime", LuaValue.Number 0.25
-                            LuaKey.String "beamttl", LuaValue.Number 1.0
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "corethickness", LuaValue.Number 0.2
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "duration", LuaValue.Number 0.01
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "energypershot", LuaValue.Number 15.0
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:laserhit-emp"
-                            LuaKey.String "firetolerance", LuaValue.Number 1820.0
-                            LuaKey.String "impactonly", LuaValue.Number 1.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.0
-                            LuaKey.String "laserflaresize", LuaValue.Number 8.8
-                            LuaKey.String "name", LuaValue.String "Long Range EMP laser"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "paralyzer", LuaValue.Bool true
-                            LuaKey.String "paralyzetime", LuaValue.Number 8.0
-                            LuaKey.String "range", LuaValue.Number 350.0
-                            LuaKey.String "reloadtime", LuaValue.Number 0.25
-                            LuaKey.String "rgbcolor", LuaValue.String "0.7 0.7 1"
-                            LuaKey.String "soundhitdry", LuaValue.String ""
-                            LuaKey.String "soundhitwet", LuaValue.String "sizzle"
-                            LuaKey.String "soundstart", LuaValue.String "hackshot"
-                            LuaKey.String "soundtrigger", LuaValue.Number 1.0
-                            LuaKey.String "thickness", LuaValue.Number 1.2
-                            LuaKey.String "tolerance", LuaValue.Number 1820.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "BeamLaser"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 800.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "noattackrangearc", LuaValue.Number 1.0
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 300.0
-                                ]
-                        ]
-                    LuaKey.String "empmissile", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 196.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "avoidfriendly", LuaValue.Bool false
-                            LuaKey.String "burnblow", LuaValue.Bool true
-                            LuaKey.String "cegtag", LuaValue.String "cruisemissiletrail-emp"
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "commandfire", LuaValue.Bool true
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 1.0
-                            LuaKey.String "energypershot", LuaValue.Number 5000.0
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-huge-lightning"
-                            LuaKey.String "firestarter", LuaValue.Number 0.0
-                            LuaKey.String "fixedlauncher", LuaValue.Bool true
-                            LuaKey.String "flighttime", LuaValue.Number 12.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.0
-                            LuaKey.String "interceptedbyshieldtype", LuaValue.Number 0.0
-                            LuaKey.String "metalpershot", LuaValue.Number 100.0
-                            LuaKey.String "model", LuaValue.String "corshiprocket.s3o"
-                            LuaKey.String "name", LuaValue.String "Heavy long-range g2g EMP starburst rocket"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "paralyzer", LuaValue.Bool true
-                            LuaKey.String "paralyzetime", LuaValue.Number 12.0
-                            LuaKey.String "range", LuaValue.Number 1050.0
-                            LuaKey.String "reloadtime", LuaValue.Number 3.0
-                            LuaKey.String "smoketrail", LuaValue.Bool false
-                            LuaKey.String "soundhit", LuaValue.String "emgpuls1"
-                            LuaKey.String "soundstart", LuaValue.String "mismed1emp1"
-                            LuaKey.String "startvelocity", LuaValue.Number 0.0
-                            LuaKey.String "stockpile", LuaValue.Bool true
-                            LuaKey.String "stockpiletime", LuaValue.Number 65.0
-                            LuaKey.String "texture1", LuaValue.String "null"
-                            LuaKey.String "texture2", LuaValue.String "null"
-                            LuaKey.String "texture3", LuaValue.String "null"
-                            LuaKey.String "tolerance", LuaValue.Number 4000.0
-                            LuaKey.String "turnrate", LuaValue.Number 20000.0
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weaponacceleration", LuaValue.Number 75.0
-                            LuaKey.String "weapontimer", LuaValue.Number 2.5
-                            LuaKey.String "weapontype", LuaValue.String "StarburstLauncher"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 500.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "shield_aoe_penetration", LuaValue.Bool true
-                                    LuaKey.String "stockpilelimit", LuaValue.Number 2.0
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 80000.0
-                                ]
-                        ]
-                    LuaKey.String "thunder", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 48.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "beamttl", LuaValue.Number 1.0
-                            LuaKey.String "burst", LuaValue.Number 10.0
-                            LuaKey.String "burstrate", LuaValue.Number 0.03333
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 0.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "duration", LuaValue.Number 2.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.15
-                            LuaKey.String "energypershot", LuaValue.Number 350.0
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-large-lightning-thor"
-                            LuaKey.String "falloffrate", LuaValue.Number 0.5
-                            LuaKey.String "firestarter", LuaValue.Number 50.0
-                            LuaKey.String "hardstop", LuaValue.Bool false
-                            LuaKey.String "impactonly", LuaValue.Number 1.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.0
-                            LuaKey.String "intensity", LuaValue.Number 28.0
-                            LuaKey.String "name", LuaValue.String "Heavy Lighting Cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "range", LuaValue.Number 540.0
-                            LuaKey.String "reloadtime", LuaValue.Number 3.1
-                            LuaKey.String "rgbcolor", LuaValue.String "0.5 0.5 1"
-                            LuaKey.String "soundhit", LuaValue.String "lasrfir2"
-                            LuaKey.String "soundhitwet", LuaValue.String "sizzle"
-                            LuaKey.String "soundstart", LuaValue.String "lghthvy1"
-                            LuaKey.String "soundtrigger", LuaValue.Bool true
-                            LuaKey.String "thickness", LuaValue.Number 1.8
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "LightningCannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 400.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "noattackrangearc", LuaValue.Number 1.0
-                                    LuaKey.String "spark_ceg", LuaValue.String "genericshellexplosion-splash-large-lightning"
-                                    LuaKey.String "spark_forkdamage", LuaValue.String "0.25"
-                                    LuaKey.String "spark_maxunits", LuaValue.String "5"
-                                    LuaKey.String "spark_range", LuaValue.String "125"
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 300.0
-                                    LuaKey.String "subs", LuaValue.Number 30.0
-                                ]
-                        ]
+                range = Some (ValueOrExpr.Concrete 350.0)
+                reloadTime = Some (ValueOrExpr.Concrete 0.25)
+                weaponVelocity = Some 800.0
+                areaOfEffect = Some 8.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 1820.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "hackshot"
+                soundHit = None
+                explosiongenerator = Some "custom:laserhit-emp"
+                rgbColor = Some "0.7 0.7 1"
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_maindir", "-1 0 0"
+                    "mount_maxangledif", "180.0"
+                    "mount_onlytargetcategory", "EMPABLE"
+                    "avoidfeature", "false"
+                    "beamdecay", "0.5"
+                    "beamtime", "0.25"
+                    "beamttl", "1.0"
+                    "collidefriendly", "false"
+                    "corethickness", "0.2"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "duration", "0.01"
+                    "energypershot", "15.0"
+                    "firetolerance", "1820.0"
+                    "impactonly", "1.0"
+                    "laserflaresize", "8.8"
+                    "paralyzer", "true"
+                    "paralyzetime", "8.0"
+                    "soundhitdry", ""
+                    "soundhitwet", "sizzle"
+                    "soundtrigger", "1.0"
+                    "thickness", "1.2"
+                ] }
+              { name = "emp"
+                displayName = Some "Long Range EMP laser"
+                weaponType = Some "BeamLaser"
+                damage = Map.ofList [
+                    "default", 300.0
                 ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "burstcontrolwhenoutofarc", LuaValue.Number 2.0
-                            LuaKey.String "def", LuaValue.String "thunder"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "EMPMISSILE"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 3, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "EMP"
-                            LuaKey.String "maindir", LuaValue.String "-1 0 0"
-                            LuaKey.String "maxangledif", LuaValue.Number 180.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "EMPABLE"
-                        ]
-                    LuaKey.Int 4, LuaValue.Table [
-                            LuaKey.String "def", LuaValue.String "EMP"
-                            LuaKey.String "maindir", LuaValue.String "1 0 0"
-                            LuaKey.String "maxangledif", LuaValue.Number 180.0
-                            LuaKey.String "onlytargetcategory", LuaValue.String "EMPABLE"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 350.0)
+                reloadTime = Some (ValueOrExpr.Concrete 0.25)
+                weaponVelocity = Some 800.0
+                areaOfEffect = Some 8.0
+                accuracy = None
+                turret = Some true
+                tolerance = Some 1820.0
+                edgeEffectiveness = Some 0.15
+                impulseFactor = Some 0.0
+                noSelfDamage = Some true
+                soundStart = Some "hackshot"
+                soundHit = None
+                explosiongenerator = Some "custom:laserhit-emp"
+                rgbColor = Some "0.7 0.7 1"
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_maindir", "1 0 0"
+                    "mount_maxangledif", "180.0"
+                    "mount_onlytargetcategory", "EMPABLE"
+                    "avoidfeature", "false"
+                    "beamdecay", "0.5"
+                    "beamtime", "0.25"
+                    "beamttl", "1.0"
+                    "collidefriendly", "false"
+                    "corethickness", "0.2"
+                    "craterareaofeffect", "0.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "duration", "0.01"
+                    "energypershot", "15.0"
+                    "firetolerance", "1820.0"
+                    "impactonly", "1.0"
+                    "laserflaresize", "8.8"
+                    "paralyzer", "true"
+                    "paralyzetime", "8.0"
+                    "soundhitdry", ""
+                    "soundhitwet", "sizzle"
+                    "soundtrigger", "1.0"
+                    "thickness", "1.2"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "-1.01699066162 -0.66435255127 0.0775146484375"
+                collisionVolumeScales = Some "31.8865509033 22.2328948975 29.3510131836"
+                collisionVolumeType = Some "Box"
+                damage = Some 25000.0
+                featureDead = Some "HEAP"
+                footprintX = Some 4.0
+                footprintZ = Some 4.0
+                height = Some 25.0
+                metal = Some 5500.0
+                object_ = Some "Units/armthor_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "35.0 4.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 10000.0
+                featureDead = None
+                footprintX = Some 5.0
+                footprintZ = Some 5.0
+                height = Some 4.0
+                metal = Some 2750.0
+                object_ = Some "Units/arm2X2D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["tarmmove"]
+              select = ["tarmsel"] })
+          customParams = Map.ofList [
+              "lumamult", "0.7"
+              "maxrange", "540"
+              "model_author", "Flaka"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "paralyzemultiplier", "0.0"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "emp"
+          ]
+          extras = Map.ofList [
+              "canmanualfire", "true"
+              "cantbetransported", "true"
+              "leavetracks", "true"
+              "mass", "9000.0"
+              "nochasecategory", "VTOL"
+              "trackoffset", "6.0"
+              "trackstrength", "5.0"
+              "tracktype", "armacv_tracks"
+              "trackwidth", "60.0"
+              "usepiececollisionvolumes", "1.0"
+          ] }
 
-    let armvang =
-        LuaValue.Table [
-            LuaKey.String "activatewhenbuilt", LuaValue.Bool false
-            LuaKey.String "buildpic", LuaValue.String "ARMVANG.DDS"
-            LuaKey.String "buildtime", LuaValue.Number 120000.0
-            LuaKey.String "canmove", LuaValue.Bool true
-            LuaKey.String "cantbetransported", LuaValue.Bool true
-            LuaKey.String "collisionvolumeoffsets", LuaValue.String "0 -1 0"
-            LuaKey.String "collisionvolumescales", LuaValue.String "65 60 65"
-            LuaKey.String "collisionvolumetype", LuaValue.String "CylY"
-            LuaKey.String "corpse", LuaValue.String "DEAD"
-            LuaKey.String "energycost", LuaValue.Number 71000.0
-            LuaKey.String "explodeas", LuaValue.String "explosiont3"
-            LuaKey.String "footprintx", LuaValue.Number 4.0
-            LuaKey.String "footprintz", LuaValue.Number 4.0
-            LuaKey.String "health", LuaValue.Number 8500.0
-            LuaKey.String "mass", LuaValue.Number 3300.0
-            LuaKey.String "maxacc", LuaValue.Number 0.02645
-            LuaKey.String "maxdec", LuaValue.Number 0.345
-            LuaKey.String "maxslope", LuaValue.Number 17.0
-            LuaKey.String "maxwaterdepth", LuaValue.Number 0.0
-            LuaKey.String "metalcost", LuaValue.Number 3300.0
-            LuaKey.String "movementclass", LuaValue.String "HTBOT6"
-            LuaKey.String "movestate", LuaValue.Number 0.0
-            LuaKey.String "nochasecategory", LuaValue.String "VTOL"
-            LuaKey.String "objectname", LuaValue.String "Units/ARMVANG.s3o"
-            LuaKey.String "script", LuaValue.String "Units/ARMVANG.cob"
-            LuaKey.String "seismicsignature", LuaValue.Number 0.0
-            LuaKey.String "selfdestructas", LuaValue.String "explosiont3xl"
-            LuaKey.String "sightdistance", LuaValue.Number 625.0
-            LuaKey.String "speed", LuaValue.Number 33.0
-            LuaKey.String "turninplace", LuaValue.Bool true
-            LuaKey.String "turninplaceanglelimit", LuaValue.Number 90.0
-            LuaKey.String "turninplacespeedlimit", LuaValue.Number 0.726
-            LuaKey.String "turnrate", LuaValue.Number 265.64999
-            LuaKey.String "customparams", LuaValue.Table [
-                    LuaKey.String "model_author", LuaValue.String "Flaka"
-                    LuaKey.String "normaltex", LuaValue.String "unittextures/Arm_normal.dds"
-                    LuaKey.String "subfolder", LuaValue.String "ArmGantry"
-                    LuaKey.String "techlevel", LuaValue.Number 3.0
-                    LuaKey.String "unitgroup", LuaValue.String "weapon"
+    let armvang : UnitDef =
+        { name = "armvang"
+          subfolder = "ArmGantry"
+          metalCost = ValueOrExpr.Concrete 3300.0
+          energyCost = ValueOrExpr.Concrete 71000.0
+          buildTime = ValueOrExpr.Concrete 120000.0
+          health = ValueOrExpr.Concrete 8500.0
+          sightDistance = ValueOrExpr.Concrete 625.0
+          footprintX = 4.0
+          footprintZ = 4.0
+          objectName = Some "Units/ARMVANG.s3o"
+          buildPic = Some "ARMVANG.DDS"
+          script = Some "Units/ARMVANG.cob"
+          corpse = Some "DEAD"
+          explodeAs = Some "explosiont3"
+          selfDestructAs = Some "explosiont3xl"
+          collisionVolumeOffsets = Some "0 -1 0"
+          collisionVolumeScales = Some "65 60 65"
+          collisionVolumeType = Some "CylY"
+          seismicSignature = Some 0.0
+          category = None
+          movement = Some (
+            { speed = ValueOrExpr.Concrete 33.0
+              maxAcc = 0.02645
+              maxDec = 0.345
+              turnRate = 265.64999
+              movementClass = Some "HTBOT6"
+              maxSlope = Some 17.0
+              maxWaterDepth = Some 0.0
+              canFly = false
+              canMove = true
+              floater = false
+              turnInPlace = Some true
+              turnInPlaceAngleLimit = Some 90.0
+              turnInPlaceSpeedLimit = Some 0.726
+              cruiseAltitude = None
+              minWaterDepth = None
+              waterline = None })
+          builder = None
+          weapons = Some [
+              { name = "shocker_low"
+                displayName = Some "Heavy long-range g2g plasma cannon"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "commanders", 1100.0
+                    "default", 1265.0
+                    "shields", 765.0
+                    "subs", 500.0
                 ]
-            LuaKey.String "featuredefs", LuaValue.Table [
-                    LuaKey.String "dead", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool true
-                            LuaKey.String "category", LuaValue.String "corpses"
-                            LuaKey.String "collisionvolumeoffsets", LuaValue.String "-3.37104034424 -1.05229058838 1.8899307251"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "64.0154266357 41.4324188232 55.433883667"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "Box"
-                            LuaKey.String "damage", LuaValue.Number 3000.0
-                            LuaKey.String "featuredead", LuaValue.String "HEAP"
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 20.0
-                            LuaKey.String "metal", LuaValue.Number 2028.0
-                            LuaKey.String "object", LuaValue.String "Units/armvang_dead.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                        ]
-                    LuaKey.String "heap", LuaValue.Table [
-                            LuaKey.String "blocking", LuaValue.Bool false
-                            LuaKey.String "category", LuaValue.String "heaps"
-                            LuaKey.String "collisionvolumescales", LuaValue.String "85.0 14.0 6.0"
-                            LuaKey.String "collisionvolumetype", LuaValue.String "cylY"
-                            LuaKey.String "damage", LuaValue.Number 3015.0
-                            LuaKey.String "footprintx", LuaValue.Number 3.0
-                            LuaKey.String "footprintz", LuaValue.Number 3.0
-                            LuaKey.String "height", LuaValue.Number 4.0
-                            LuaKey.String "metal", LuaValue.Number 811.0
-                            LuaKey.String "object", LuaValue.String "Units/arm4X4D.s3o"
-                            LuaKey.String "reclaimable", LuaValue.Bool true
-                            LuaKey.String "resurrectable", LuaValue.Number 0.0
-                        ]
+                range = Some (ValueOrExpr.Concrete 1450.0)
+                reloadTime = Some (ValueOrExpr.Concrete 8.0)
+                weaponVelocity = Some 500.0
+                areaOfEffect = Some 192.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.65
+                impulseFactor = Some 0.5
+                noSelfDamage = Some true
+                soundStart = Some "cannhvy5"
+                soundHit = Some "xplomed2"
+                explosiongenerator = Some "custom:genericshellexplosion-huge"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL GROUNDSCOUT"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "avoidfriendly", "true"
+                    "avoidneutral", "true"
+                    "cegtag", "arty-huge"
+                    "collidefriendly", "false"
+                    "craterareaofeffect", "192.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firetolerance", "5000.0"
+                    "gravityaffected", "true"
+                    "heightboostfactor", "2.8"
+                    "predictboost", "0.25"
+                    "soundhitwet", "splslrg"
+                ] }
+              { name = "shocker_high"
+                displayName = Some "Heavy long-range g2g plasma cannon"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "commanders", 1100.0
+                    "default", 1265.0
+                    "shields", 765.0
+                    "subs", 500.0
                 ]
-            LuaKey.String "sfxtypes", LuaValue.Table [
-                    LuaKey.String "explosiongenerators", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "custom:barrelshot-huge"
-                        ]
+                range = Some (ValueOrExpr.Concrete 1450.0)
+                reloadTime = Some (ValueOrExpr.Concrete 8.0)
+                weaponVelocity = Some 500.0
+                areaOfEffect = Some 192.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.65
+                impulseFactor = Some 0.5
+                noSelfDamage = Some true
+                soundStart = Some "cannhvy5"
+                soundHit = Some "xplomed2"
+                explosiongenerator = Some "custom:genericshellexplosion-huge"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL GROUNDSCOUT"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "avoidfriendly", "true"
+                    "cegtag", "arty-huge"
+                    "collidefriendly", "false"
+                    "craterareaofeffect", "192.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firetolerance", "5000.0"
+                    "gravityaffected", "true"
+                    "heightboostfactor", "2.8"
+                    "hightrajectory", "1.0"
+                    "predictboost", "0.25"
+                    "soundhitwet", "splslrg"
+                ] }
+              { name = "smart_trajectory_dummy"
+                displayName = Some "Heavy long-range g2g plasma cannon"
+                weaponType = Some "Cannon"
+                damage = Map.ofList [
+                    "default", 0.0
                 ]
-            LuaKey.String "sounds", LuaValue.Table [
-                    LuaKey.String "canceldestruct", LuaValue.String "cancel2"
-                    LuaKey.String "underattack", LuaValue.String "warning1"
-                    LuaKey.String "cant", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "cantdo4"
-                        ]
-                    LuaKey.String "count", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "count6"
-                            LuaKey.Int 2, LuaValue.String "count5"
-                            LuaKey.Int 3, LuaValue.String "count4"
-                            LuaKey.Int 4, LuaValue.String "count3"
-                            LuaKey.Int 5, LuaValue.String "count2"
-                            LuaKey.Int 6, LuaValue.String "count1"
-                        ]
-                    LuaKey.String "ok", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "kbarmmov"
-                        ]
-                    LuaKey.String "select", LuaValue.Table [
-                            LuaKey.Int 1, LuaValue.String "kbarmsel"
-                        ]
-                ]
-            LuaKey.String "weapondefs", LuaValue.Table [
-                    LuaKey.String "shocker_high", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 192.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "avoidfriendly", LuaValue.Bool true
-                            LuaKey.String "cegtag", LuaValue.String "arty-huge"
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 192.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.65
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-huge"
-                            LuaKey.String "firetolerance", LuaValue.Number 5000.0
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "heightboostfactor", LuaValue.Number 2.8
-                            LuaKey.String "hightrajectory", LuaValue.Number 1.0
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.5
-                            LuaKey.String "name", LuaValue.String "Heavy long-range g2g plasma cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "predictboost", LuaValue.Number 0.25
-                            LuaKey.String "range", LuaValue.Number 1450.0
-                            LuaKey.String "reloadtime", LuaValue.Number 8.0
-                            LuaKey.String "soundhit", LuaValue.String "xplomed2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splslrg"
-                            LuaKey.String "soundstart", LuaValue.String "cannhvy5"
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 500.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "exclude_preaim", LuaValue.Bool true
-                                    LuaKey.String "smart_backup", LuaValue.Bool true
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "commanders", LuaValue.Number 1100.0
-                                    LuaKey.String "default", LuaValue.Number 1265.0
-                                    LuaKey.String "shields", LuaValue.Number 765.0
-                                    LuaKey.String "subs", LuaValue.Number 500.0
-                                ]
-                        ]
-                    LuaKey.String "shocker_low", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 192.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "avoidfriendly", LuaValue.Bool true
-                            LuaKey.String "avoidneutral", LuaValue.Bool true
-                            LuaKey.String "cegtag", LuaValue.String "arty-huge"
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 192.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.65
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-huge"
-                            LuaKey.String "firetolerance", LuaValue.Number 5000.0
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "heightboostfactor", LuaValue.Number 2.8
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.5
-                            LuaKey.String "name", LuaValue.String "Heavy long-range g2g plasma cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "predictboost", LuaValue.Number 0.25
-                            LuaKey.String "range", LuaValue.Number 1450.0
-                            LuaKey.String "reloadtime", LuaValue.Number 8.0
-                            LuaKey.String "soundhit", LuaValue.String "xplomed2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splslrg"
-                            LuaKey.String "soundstart", LuaValue.String "cannhvy5"
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 500.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "exclude_preaim", LuaValue.Bool true
-                                    LuaKey.String "smart_priority", LuaValue.Bool true
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "commanders", LuaValue.Number 1100.0
-                                    LuaKey.String "default", LuaValue.Number 1265.0
-                                    LuaKey.String "shields", LuaValue.Number 765.0
-                                    LuaKey.String "subs", LuaValue.Number 500.0
-                                ]
-                        ]
-                    LuaKey.String "smart_trajectory_dummy", LuaValue.Table [
-                            LuaKey.String "areaofeffect", LuaValue.Number 192.0
-                            LuaKey.String "avoidfeature", LuaValue.Bool false
-                            LuaKey.String "avoidfriendly", LuaValue.Bool true
-                            LuaKey.String "avoidneutral", LuaValue.Bool true
-                            LuaKey.String "cegtag", LuaValue.String "arty-huge"
-                            LuaKey.String "collidefriendly", LuaValue.Bool false
-                            LuaKey.String "craterareaofeffect", LuaValue.Number 192.0
-                            LuaKey.String "craterboost", LuaValue.Number 0.0
-                            LuaKey.String "cratermult", LuaValue.Number 0.0
-                            LuaKey.String "edgeeffectiveness", LuaValue.Number 0.65
-                            LuaKey.String "explosiongenerator", LuaValue.String "custom:genericshellexplosion-huge"
-                            LuaKey.String "firetolerance", LuaValue.Number 5000.0
-                            LuaKey.String "gravityaffected", LuaValue.String "true"
-                            LuaKey.String "heightboostfactor", LuaValue.Number 2.8
-                            LuaKey.String "impulsefactor", LuaValue.Number 0.5
-                            LuaKey.String "name", LuaValue.String "Heavy long-range g2g plasma cannon"
-                            LuaKey.String "noselfdamage", LuaValue.Bool true
-                            LuaKey.String "predictboost", LuaValue.Number 0.25
-                            LuaKey.String "range", LuaValue.Number 1450.0
-                            LuaKey.String "reloadtime", LuaValue.Number 8.0
-                            LuaKey.String "soundhit", LuaValue.String "xplomed2"
-                            LuaKey.String "soundhitwet", LuaValue.String "splslrg"
-                            LuaKey.String "soundstart", LuaValue.String "cannhvy5"
-                            LuaKey.String "turret", LuaValue.Bool true
-                            LuaKey.String "weapontype", LuaValue.String "Cannon"
-                            LuaKey.String "weaponvelocity", LuaValue.Number 500.0
-                            LuaKey.String "customparams", LuaValue.Table [
-                                    LuaKey.String "exclude_preaim", LuaValue.Bool true
-                                    LuaKey.String "smart_trajectory_checker", LuaValue.Bool true
-                                ]
-                            LuaKey.String "damage", LuaValue.Table [
-                                    LuaKey.String "default", LuaValue.Number 0.0
-                                ]
-                        ]
-                ]
-            LuaKey.String "weapons", LuaValue.Table [
-                    LuaKey.Int 1, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "SHOCKER_LOW"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 2, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "SHOCKER_HIGH"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                    LuaKey.Int 3, LuaValue.Table [
-                            LuaKey.String "badtargetcategory", LuaValue.String "VTOL GROUNDSCOUT"
-                            LuaKey.String "def", LuaValue.String "smart_trajectory_dummy"
-                            LuaKey.String "onlytargetcategory", LuaValue.String "SURFACE"
-                        ]
-                ]
-        ]
+                range = Some (ValueOrExpr.Concrete 1450.0)
+                reloadTime = Some (ValueOrExpr.Concrete 8.0)
+                weaponVelocity = Some 500.0
+                areaOfEffect = Some 192.0
+                accuracy = None
+                turret = Some true
+                tolerance = None
+                edgeEffectiveness = Some 0.65
+                impulseFactor = Some 0.5
+                noSelfDamage = Some true
+                soundStart = Some "cannhvy5"
+                soundHit = Some "xplomed2"
+                explosiongenerator = Some "custom:genericshellexplosion-huge"
+                rgbColor = None
+                onlyTargetCategory = None
+                badTargetCategory = None
+                customParams = Map.empty
+                extras = Map.ofList [
+                    "mount_badtargetcategory", "VTOL GROUNDSCOUT"
+                    "mount_onlytargetcategory", "SURFACE"
+                    "avoidfeature", "false"
+                    "avoidfriendly", "true"
+                    "avoidneutral", "true"
+                    "cegtag", "arty-huge"
+                    "collidefriendly", "false"
+                    "craterareaofeffect", "192.0"
+                    "craterboost", "0.0"
+                    "cratermult", "0.0"
+                    "firetolerance", "5000.0"
+                    "gravityaffected", "true"
+                    "heightboostfactor", "2.8"
+                    "predictboost", "0.25"
+                    "soundhitwet", "splslrg"
+                ] }
+          ]
+          economy = None
+          building = None
+          featureDefs = Some (Map.ofList [
+              "dead",
+              { blocking = Some true
+                category = Some "corpses"
+                collisionVolumeOffsets = Some "-3.37104034424 -1.05229058838 1.8899307251"
+                collisionVolumeScales = Some "64.0154266357 41.4324188232 55.433883667"
+                collisionVolumeType = Some "Box"
+                damage = Some 3000.0
+                featureDead = Some "HEAP"
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 20.0
+                metal = Some 2028.0
+                object_ = Some "Units/armvang_dead.s3o"
+                reclaimable = Some true
+                resurrectable = None }
+              "heap",
+              { blocking = Some false
+                category = Some "heaps"
+                collisionVolumeOffsets = None
+                collisionVolumeScales = Some "85.0 14.0 6.0"
+                collisionVolumeType = Some "cylY"
+                damage = Some 3015.0
+                featureDead = None
+                footprintX = Some 3.0
+                footprintZ = Some 3.0
+                height = Some 4.0
+                metal = Some 811.0
+                object_ = Some "Units/arm4X4D.s3o"
+                reclaimable = Some true
+                resurrectable = Some 0.0 }
+          ])
+          sounds = Some (
+            { build = None
+              repair = None
+              working = None
+              underAttack = Some "warning1"
+              cancelDestruct = Some "cancel2"
+              capture = None
+              cant = ["cantdo4"]
+              count = ["count6"; "count5"; "count4"; "count3"; "count2"; "count1"]
+              ok = ["kbarmmov"]
+              select = ["kbarmsel"] })
+          customParams = Map.ofList [
+              "model_author", "Flaka"
+              "normaltex", "unittextures/Arm_normal.dds"
+              "subfolder", "ArmGantry"
+              "techlevel", "3.0"
+              "unitgroup", "weapon"
+          ]
+          extras = Map.ofList [
+              "cantbetransported", "true"
+              "mass", "3300.0"
+              "movestate", "0.0"
+              "nochasecategory", "VTOL"
+          ] }
 
-    let all : (string * LuaValue) list =
+    let all : (string * UnitDef) list =
         [
             "armbanth", armbanth
             "armlun", armlun

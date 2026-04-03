@@ -11,6 +11,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-03
 - Filesystem only (JSON config, log files, temp directories) (004-live-headless-testsuite)
 - F# / .NET 8.0 (test harness + tests), TDF config format (game-setup.txt) + xUnit (test framework), spring-headless 2025.06.21 (engine), BAR game content (test-29833-ee0f96a) (005-fix-test-failures)
 - Filesystem (config files, reports as markdown) (005-fix-test-failures)
+- F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework) (006-typed-bar-data)
+- Filesystem only (generated .fs source files) (006-typed-bar-data)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -55,9 +57,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 006-typed-bar-data: Added F# / .NET 8.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework)
 - 005-fix-test-failures: Added F# / .NET 8.0 (test harness + tests), TDF config format (game-setup.txt) + xUnit (test framework), spring-headless 2025.06.21 (engine), BAR game content (test-29833-ee0f96a)
 - 004-live-headless-testsuite: Added Bash (scripts), F# / .NET 8.0 (test harness), Python 3.10+ (test harness), Lua (game scenario) + xUnit (F# tests), pytest (Python tests), jq (JSON parsing in shell), pr-downloader (game content)
-- 003-tools-prereqs-test-fixes: Added C11 (proxy), F# / .NET 8.0 (client + tools + tests), Python 3.10+ (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), betterproto (Python), buf CLI (proto generation)
 
 
 <!-- MANUAL ADDITIONS START -->
