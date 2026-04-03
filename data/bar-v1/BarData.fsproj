@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>BarData.V1</RootNamespace>
+    <AssemblyName>BarData.V1</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <OtherFlags>--strict-indentation-</OtherFlags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src/Types.fs" />
+    <Compile Include="src/Commands.fs" />
+    <Compile Include="src/CustomCommands.fs" />
+    <Compile Include="src/ArmAircraft.fs" />
+    <Compile Include="src/ArmAircraft_T2.fs" />
+    <Compile Include="src/ArmBots.fs" />
+    <Compile Include="src/ArmBots_T2.fs" />
+    <Compile Include="src/ArmBuildings_LandDefenceOffence.fs" />
+    <Compile Include="src/ArmBuildings_LandEconomy.fs" />
+    <Compile Include="src/ArmBuildings_LandFactories.fs" />
+    <Compile Include="src/ArmBuildings_LandUtil.fs" />
+    <Compile Include="src/ArmBuildings_SeaDefence.fs" />
+    <Compile Include="src/ArmBuildings_SeaEconomy.fs" />
+    <Compile Include="src/ArmBuildings_SeaFactories.fs" />
+    <Compile Include="src/ArmBuildings_SeaUtil.fs" />
+    <Compile Include="src/ArmGantry.fs" />
+    <Compile Include="src/ArmHovercraft.fs" />
+    <Compile Include="src/ArmSeaplanes.fs" />
+    <Compile Include="src/ArmShips.fs" />
+    <Compile Include="src/ArmShips_T2.fs" />
+    <Compile Include="src/ArmVehicles.fs" />
+    <Compile Include="src/ArmVehicles_T2.fs" />
+    <Compile Include="src/CorAircraft.fs" />
+    <Compile Include="src/CorAircraft_T2.fs" />
+    <Compile Include="src/CorBots.fs" />
+    <Compile Include="src/CorBots_T2.fs" />
+    <Compile Include="src/CorBuildings_LandDefenceOffence.fs" />
+    <Compile Include="src/CorBuildings_LandEconomy.fs" />
+    <Compile Include="src/CorBuildings_LandFactories.fs" />
+    <Compile Include="src/CorBuildings_LandUtil.fs" />
+    <Compile Include="src/CorBuildings_SeaDefence.fs" />
+    <Compile Include="src/CorBuildings_SeaEconomy.fs" />
+    <Compile Include="src/CorBuildings_SeaFactories.fs" />
+    <Compile Include="src/CorBuildings_SeaUtil.fs" />
+    <Compile Include="src/CorGantry.fs" />
+    <Compile Include="src/CorHovercraft.fs" />
+    <Compile Include="src/CorSeaplanes.fs" />
+    <Compile Include="src/CorShips.fs" />
+    <Compile Include="src/CorShips_T2.fs" />
+    <Compile Include="src/CorVehicles.fs" />
+    <Compile Include="src/CorVehicles_T2.fs" />
+    <Compile Include="src/Legion_Air.fs" />
+    <Compile Include="src/Legion_Air_T2_Air.fs" />
+    <Compile Include="src/Legion_Bots.fs" />
+    <Compile Include="src/Legion_Bots_T2_Bots.fs" />
+    <Compile Include="src/Legion_Constructors.fs" />
+    <Compile Include="src/Legion_Defenses.fs" />
+    <Compile Include="src/Legion_Economy.fs" />
+    <Compile Include="src/Legion_Hovercraft.fs" />
+    <Compile Include="src/Legion_Labs.fs" />
+    <Compile Include="src/Legion_Legion_EvoCom.fs" />
+    <Compile Include="src/Legion_Other.fs" />
+    <Compile Include="src/Legion_Other_Commanders.fs" />
+    <Compile Include="src/Legion_SeaDefenses.fs" />
+    <Compile Include="src/Legion_SeaDefenses_T2.fs" />
+    <Compile Include="src/Legion_SeaEconomy.fs" />
+    <Compile Include="src/Legion_SeaEconomy_T2.fs" />
+    <Compile Include="src/Legion_SeaPlanes.fs" />
+    <Compile Include="src/Legion_SeaUtility.fs" />
+    <Compile Include="src/Legion_SeaUtility_T2.fs" />
+    <Compile Include="src/Legion_Ships.fs" />
+    <Compile Include="src/Legion_Ships_T2.fs" />
+    <Compile Include="src/Legion_T3.fs" />
+    <Compile Include="src/Legion_Utilities.fs" />
+    <Compile Include="src/Legion_Vehicles.fs" />
+    <Compile Include="src/Legion_Vehicles_T2_Vehicles.fs" />
+    <Compile Include="src/Root.fs" />
+    <Compile Include="src/Scavengers_Air.fs" />
+    <Compile Include="src/Scavengers_Boss.fs" />
+    <Compile Include="src/Scavengers_Bots.fs" />
+    <Compile Include="src/Scavengers_Buildings_DefenseOffense.fs" />
+    <Compile Include="src/Scavengers_Buildings_Economy.fs" />
+    <Compile Include="src/Scavengers_Buildings_Factories.fs" />
+    <Compile Include="src/Scavengers_Buildings_Utility.fs" />
+    <Compile Include="src/Scavengers_Other.fs" />
+    <Compile Include="src/Scavengers_Ships.fs" />
+    <Compile Include="src/Scavengers_Vehicles.fs" />
+    <Compile Include="src/other.fs" />
+    <Compile Include="src/other_critters.fs" />
+    <Compile Include="src/other_evocom.fs" />
+    <Compile Include="src/other_hats.fs" />
+    <Compile Include="src/other_lootboxes.fs" />
+    <Compile Include="src/other_raptors.fs" />
+    <Compile Include="src/other_raptors_Acid.fs" />
+    <Compile Include="src/other_raptors_Arty.fs" />
+    <Compile Include="src/other_raptors_Assault.fs" />
+    <Compile Include="src/other_raptors_Assault_Advanced.fs" />
+    <Compile Include="src/other_raptors_Assault_Advanced_AllTerrain.fs" />
+    <Compile Include="src/other_raptors_Assault_AllTerrain.fs" />
+    <Compile Include="src/other_raptors_Bomber.fs" />
+    <Compile Include="src/other_raptors_Brood.fs" />
+    <Compile Include="src/other_raptors_Electric.fs" />
+    <Compile Include="src/other_raptors_Fighter.fs" />
+    <Compile Include="src/other_raptors_Flamer.fs" />
+    <Compile Include="src/other_raptors_Healer.fs" />
+    <Compile Include="src/other_raptors_Kamikaze.fs" />
+    <Compile Include="src/other_raptors_Miniqueen.fs" />
+    <Compile Include="src/other_raptors_Overseer.fs" />
+    <Compile Include="src/other_raptors_Scout.fs" />
+    <Compile Include="src/other_raptors_Spectre.fs" />
+    <Compile Include="src/other_raptors_Spiker.fs" />
+    <Compile Include="src/other_raptors_Structures.fs" />
+    <Compile Include="src/other_raptors_Swarmer.fs" />
+    <Compile Include="src/other_raptors_Swarmer_Advanced.fs" />
+    <Compile Include="src/other_raptors_Swarmer_AllTerrain.fs" />
+    <Compile Include="src/AllUnits.fs" />
+  </ItemGroup>
+
+</Project>

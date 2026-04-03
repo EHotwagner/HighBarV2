@@ -1,11 +1,24 @@
-// Auto-generated BAR unit data: other/hats
+// Auto-generated BAR unit data: other/hats (flat per-unit types)
 namespace BarData.Units
 
 open BarData
 
 module other_hats =
 
-    let cor_hat_fightnight : UnitDef =
+    type Cor_hat_fightnight =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let cor_hat_fightnight : Cor_hat_fightnight =
         { name = "cor_hat_fightnight"
           subfolder = "other/hats"
           metalCost = ValueOrExpr.Concrete 1000.0
@@ -15,49 +28,44 @@ module other_hats =
           sightDistance = ValueOrExpr.Concrete 1.0
           footprintX = 1.0
           footprintZ = 1.0
-          objectName = Some "hats/cor_hat_fightnight.s3o"
-          buildPic = Some "ARMSTONE.DDS"
-          script = Some "blank.cob"
-          corpse = None
-          explodeAs = None
-          selfDestructAs = None
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0.1 0.1 0.1"
-          collisionVolumeType = Some "CylY"
-          seismicSignature = Some 0.0
-          category = Some "OBJECT"
-          movement = None
-          builder = None
-          weapons = None
-          economy = None
-          building = None
-          featureDefs = None
-          sounds = None
           customParams = Map.ofList [
-              "nohealthbars", "true"
-              "model_author", "NebuchadnezzarII="
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/hats"
-              "decoration", "1.0"
-          ]
+                "nohealthbars", "true"
+                "model_author", "NebuchadnezzarII="
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/hats"
+                "decoration", "1.0"
+            ]
           extras = Map.ofList [
-              "blocking", "false"
-              "canattack", "false"
-              "cancloak", "true"
-              "capturable", "true"
-              "cantbetransported", "false"
-              "crushresistance", "2500.0"
-              "hidedamage", "true"
-              "autoheal", "100000.0"
-              "mass", "0.0"
-              "reclaimable", "false"
-              "repairable", "false"
-              "sonarstealth", "true"
-              "stealth", "true"
-              "upright", "false"
-          ] }
+                "blocking", "false"
+                "canattack", "false"
+                "cancloak", "true"
+                "capturable", "true"
+                "cantbetransported", "false"
+                "crushresistance", "2500.0"
+                "hidedamage", "true"
+                "autoheal", "100000.0"
+                "mass", "0.0"
+                "reclaimable", "false"
+                "repairable", "false"
+                "sonarstealth", "true"
+                "stealth", "true"
+                "upright", "false"
+            ] }
 
-    let cor_hat_hornet : UnitDef =
+    type Cor_hat_hornet =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let cor_hat_hornet : Cor_hat_hornet =
         { name = "cor_hat_hornet"
           subfolder = "other/hats"
           metalCost = ValueOrExpr.Concrete 1000.0
@@ -67,49 +75,44 @@ module other_hats =
           sightDistance = ValueOrExpr.Concrete 1.0
           footprintX = 1.0
           footprintZ = 1.0
-          objectName = Some "hats/cor_hat_hornet.s3o"
-          buildPic = Some "ARMSTONE.DDS"
-          script = Some "blank.cob"
-          corpse = None
-          explodeAs = None
-          selfDestructAs = None
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0.1 0.1 0.1"
-          collisionVolumeType = Some "CylY"
-          seismicSignature = Some 0.0
-          category = Some "OBJECT"
-          movement = None
-          builder = None
-          weapons = None
-          economy = None
-          building = None
-          featureDefs = None
-          sounds = None
           customParams = Map.ofList [
-              "nohealthbars", "true"
-              "model_author", "Hornet"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/hats"
-              "decoration", "1.0"
-          ]
+                "nohealthbars", "true"
+                "model_author", "Hornet"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/hats"
+                "decoration", "1.0"
+            ]
           extras = Map.ofList [
-              "blocking", "false"
-              "canattack", "false"
-              "cancloak", "true"
-              "capturable", "true"
-              "cantbetransported", "false"
-              "crushresistance", "2500.0"
-              "hidedamage", "true"
-              "autoheal", "100000.0"
-              "mass", "0.0"
-              "reclaimable", "false"
-              "repairable", "false"
-              "sonarstealth", "true"
-              "stealth", "true"
-              "upright", "false"
-          ] }
+                "blocking", "false"
+                "canattack", "false"
+                "cancloak", "true"
+                "capturable", "true"
+                "cantbetransported", "false"
+                "crushresistance", "2500.0"
+                "hidedamage", "true"
+                "autoheal", "100000.0"
+                "mass", "0.0"
+                "reclaimable", "false"
+                "repairable", "false"
+                "sonarstealth", "true"
+                "stealth", "true"
+                "upright", "false"
+            ] }
 
-    let cor_hat_hw : UnitDef =
+    type Cor_hat_hw =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let cor_hat_hw : Cor_hat_hw =
         { name = "cor_hat_hw"
           subfolder = "other/hats"
           metalCost = ValueOrExpr.Concrete 1000.0
@@ -119,49 +122,44 @@ module other_hats =
           sightDistance = ValueOrExpr.Concrete 1.0
           footprintX = 1.0
           footprintZ = 1.0
-          objectName = Some "hats/cor_hat_hw.s3o"
-          buildPic = Some "ARMSTONE.DDS"
-          script = Some "blank.cob"
-          corpse = None
-          explodeAs = None
-          selfDestructAs = None
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0.1 0.1 0.1"
-          collisionVolumeType = Some "CylY"
-          seismicSignature = Some 0.0
-          category = Some "OBJECT"
-          movement = None
-          builder = None
-          weapons = None
-          economy = None
-          building = None
-          featureDefs = None
-          sounds = None
           customParams = Map.ofList [
-              "nohealthbars", "true"
-              "model_author", "Taken from corcom_hw"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/hats"
-              "decoration", "1.0"
-          ]
+                "nohealthbars", "true"
+                "model_author", "Taken from corcom_hw"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/hats"
+                "decoration", "1.0"
+            ]
           extras = Map.ofList [
-              "blocking", "false"
-              "canattack", "false"
-              "cancloak", "true"
-              "capturable", "true"
-              "cantbetransported", "false"
-              "crushresistance", "2500.0"
-              "hidedamage", "true"
-              "autoheal", "100000.0"
-              "mass", "0.0"
-              "reclaimable", "false"
-              "repairable", "false"
-              "sonarstealth", "true"
-              "stealth", "true"
-              "upright", "false"
-          ] }
+                "blocking", "false"
+                "canattack", "false"
+                "cancloak", "true"
+                "capturable", "true"
+                "cantbetransported", "false"
+                "crushresistance", "2500.0"
+                "hidedamage", "true"
+                "autoheal", "100000.0"
+                "mass", "0.0"
+                "reclaimable", "false"
+                "repairable", "false"
+                "sonarstealth", "true"
+                "stealth", "true"
+                "upright", "false"
+            ] }
 
-    let cor_hat_legfn : UnitDef =
+    type Cor_hat_legfn =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let cor_hat_legfn : Cor_hat_legfn =
         { name = "cor_hat_legfn"
           subfolder = "other/hats"
           metalCost = ValueOrExpr.Concrete 1000.0
@@ -171,49 +169,44 @@ module other_hats =
           sightDistance = ValueOrExpr.Concrete 1.0
           footprintX = 1.0
           footprintZ = 1.0
-          objectName = Some "hats/cor_hat_legfn.s3o"
-          buildPic = Some "ARMSTONE.DDS"
-          script = Some "blank.cob"
-          corpse = None
-          explodeAs = None
-          selfDestructAs = None
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0.1 0.1 0.1"
-          collisionVolumeType = Some "CylY"
-          seismicSignature = Some 0.0
-          category = Some "OBJECT"
-          movement = None
-          builder = None
-          weapons = None
-          economy = None
-          building = None
-          featureDefs = None
-          sounds = None
           customParams = Map.ofList [
-              "nohealthbars", "true"
-              "model_author", "NebuchadnezzarII"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/hats"
-              "decoration", "1.0"
-          ]
+                "nohealthbars", "true"
+                "model_author", "NebuchadnezzarII"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/hats"
+                "decoration", "1.0"
+            ]
           extras = Map.ofList [
-              "blocking", "false"
-              "canattack", "false"
-              "cancloak", "true"
-              "capturable", "true"
-              "cantbetransported", "false"
-              "crushresistance", "2500.0"
-              "hidedamage", "true"
-              "autoheal", "100000.0"
-              "mass", "0.0"
-              "reclaimable", "false"
-              "repairable", "false"
-              "sonarstealth", "true"
-              "stealth", "true"
-              "upright", "false"
-          ] }
+                "blocking", "false"
+                "canattack", "false"
+                "cancloak", "true"
+                "capturable", "true"
+                "cantbetransported", "false"
+                "crushresistance", "2500.0"
+                "hidedamage", "true"
+                "autoheal", "100000.0"
+                "mass", "0.0"
+                "reclaimable", "false"
+                "repairable", "false"
+                "sonarstealth", "true"
+                "stealth", "true"
+                "upright", "false"
+            ] }
 
-    let cor_hat_ptaq : UnitDef =
+    type Cor_hat_ptaq =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let cor_hat_ptaq : Cor_hat_ptaq =
         { name = "cor_hat_ptaq"
           subfolder = "other/hats"
           metalCost = ValueOrExpr.Concrete 1000.0
@@ -223,49 +216,44 @@ module other_hats =
           sightDistance = ValueOrExpr.Concrete 1.0
           footprintX = 1.0
           footprintZ = 1.0
-          objectName = Some "hats/cor_hat_ptaq.s3o"
-          buildPic = Some "ARMSTONE.DDS"
-          script = Some "blank.cob"
-          corpse = None
-          explodeAs = None
-          selfDestructAs = None
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0.1 0.1 0.1"
-          collisionVolumeType = Some "CylY"
-          seismicSignature = Some 0.0
-          category = Some "OBJECT"
-          movement = None
-          builder = None
-          weapons = None
-          economy = None
-          building = None
-          featureDefs = None
-          sounds = None
           customParams = Map.ofList [
-              "nohealthbars", "true"
-              "model_author", "Hornet"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/hats"
-              "decoration", "1.0"
-          ]
+                "nohealthbars", "true"
+                "model_author", "Hornet"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/hats"
+                "decoration", "1.0"
+            ]
           extras = Map.ofList [
-              "blocking", "false"
-              "canattack", "false"
-              "cancloak", "true"
-              "capturable", "true"
-              "cantbetransported", "false"
-              "crushresistance", "2500.0"
-              "hidedamage", "true"
-              "autoheal", "100000.0"
-              "mass", "0.0"
-              "reclaimable", "false"
-              "repairable", "false"
-              "sonarstealth", "true"
-              "stealth", "true"
-              "upright", "false"
-          ] }
+                "blocking", "false"
+                "canattack", "false"
+                "cancloak", "true"
+                "capturable", "true"
+                "cantbetransported", "false"
+                "crushresistance", "2500.0"
+                "hidedamage", "true"
+                "autoheal", "100000.0"
+                "mass", "0.0"
+                "reclaimable", "false"
+                "repairable", "false"
+                "sonarstealth", "true"
+                "stealth", "true"
+                "upright", "false"
+            ] }
 
-    let cor_hat_viking : UnitDef =
+    type Cor_hat_viking =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let cor_hat_viking : Cor_hat_viking =
         { name = "cor_hat_viking"
           subfolder = "other/hats"
           metalCost = ValueOrExpr.Concrete 1000.0
@@ -275,54 +263,27 @@ module other_hats =
           sightDistance = ValueOrExpr.Concrete 1.0
           footprintX = 1.0
           footprintZ = 1.0
-          objectName = Some "hats/cor_hat_viking.s3o"
-          buildPic = Some "ARMSTONE.DDS"
-          script = Some "blank.cob"
-          corpse = None
-          explodeAs = None
-          selfDestructAs = None
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0.1 0.1 0.1"
-          collisionVolumeType = Some "CylY"
-          seismicSignature = Some 0.0
-          category = Some "OBJECT"
-          movement = None
-          builder = None
-          weapons = None
-          economy = None
-          building = None
-          featureDefs = None
-          sounds = None
           customParams = Map.ofList [
-              "nohealthbars", "true"
-              "model_author", "Beherith"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/hats"
-              "decoration", "1.0"
-          ]
+                "nohealthbars", "true"
+                "model_author", "Beherith"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/hats"
+                "decoration", "1.0"
+            ]
           extras = Map.ofList [
-              "blocking", "false"
-              "canattack", "false"
-              "cancloak", "true"
-              "capturable", "true"
-              "cantbetransported", "false"
-              "crushresistance", "2500.0"
-              "hidedamage", "true"
-              "autoheal", "100000.0"
-              "mass", "0.0"
-              "reclaimable", "false"
-              "repairable", "false"
-              "sonarstealth", "true"
-              "stealth", "true"
-              "upright", "false"
-          ] }
+                "blocking", "false"
+                "canattack", "false"
+                "cancloak", "true"
+                "capturable", "true"
+                "cantbetransported", "false"
+                "crushresistance", "2500.0"
+                "hidedamage", "true"
+                "autoheal", "100000.0"
+                "mass", "0.0"
+                "reclaimable", "false"
+                "repairable", "false"
+                "sonarstealth", "true"
+                "stealth", "true"
+                "upright", "false"
+            ] }
 
-    let all : (string * UnitDef) list =
-        [
-            "cor_hat_fightnight", cor_hat_fightnight
-            "cor_hat_hornet", cor_hat_hornet
-            "cor_hat_hw", cor_hat_hw
-            "cor_hat_legfn", cor_hat_legfn
-            "cor_hat_ptaq", cor_hat_ptaq
-            "cor_hat_viking", cor_hat_viking
-        ]

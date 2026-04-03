@@ -1,11 +1,36 @@
-// Auto-generated BAR unit data: other/lootboxes
+// Auto-generated BAR unit data: other/lootboxes (flat per-unit types)
 namespace BarData.Units
 
 open BarData
 
 module other_lootboxes =
 
-    let lootboxbronze : UnitDef =
+    type Lootboxbronze =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          speed: ValueOrExpr<float>
+          maxAcc: float
+          maxDec: float
+          turnRate: float
+          movementClass: string
+          maxSlope: float
+          maxWaterDepth: float
+          canMove: bool
+          floater: bool
+          turnInPlace: bool
+          energyMake: ValueOrExpr<float>
+          metalMake: ValueOrExpr<float>
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let lootboxbronze : Lootboxbronze =
         { name = "lootboxbronze"
           subfolder = "other/lootboxes"
           metalCost = ValueOrExpr.Concrete 375.0
@@ -15,75 +40,73 @@ module other_lootboxes =
           sightDistance = ValueOrExpr.Concrete 96.0
           footprintX = 3.0
           footprintZ = 3.0
-          objectName = Some "lootboxes/lootboxv2_bronze.s3o"
-          buildPic = Some "lootboxes/LOOTBOXBRONZE.DDS"
-          script = Some "lootboxes/lootboxv2.cob"
-          corpse = None
-          explodeAs = Some "lootboxExplosion1"
-          selfDestructAs = Some "lootboxExplosion1"
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "32 32 32"
-          collisionVolumeType = Some "box"
-          seismicSignature = Some 0.0
-          category = None
-          movement = Some (
-            { speed = ValueOrExpr.Concrete 0.03
-              maxAcc = 0.0
-              maxDec = 1.0
-              turnRate = 0.0
-              movementClass = Some "HOVER3"
-              maxSlope = Some 10.0
-              maxWaterDepth = Some 0.0
-              canFly = false
-              canMove = true
-              floater = true
-              turnInPlace = Some false
-              turnInPlaceAngleLimit = None
-              turnInPlaceSpeedLimit = None
-              cruiseAltitude = None
-              minWaterDepth = None
-              waterline = None })
-          builder = None
-          weapons = None
-          economy = Some (
-            { energyMake = Some (ValueOrExpr.Concrete 400.0)
-              metalMake = Some (ValueOrExpr.Concrete 20.0)
-              energyStorage = None
-              metalStorage = None
-              extractsMetal = None })
-          building = None
-          featureDefs = None
-          sounds = None
+          speed = ValueOrExpr.Concrete 0.03
+          maxAcc = 0.0
+          maxDec = 1.0
+          turnRate = 0.0
+          movementClass = "HOVER3"
+          maxSlope = 10.0
+          maxWaterDepth = 0.0
+          canMove = true
+          floater = true
+          turnInPlace = false
+          energyMake = ValueOrExpr.Concrete 400.0
+          metalMake = ValueOrExpr.Concrete 20.0
           customParams = Map.ofList [
-              "fall_damage_multiplier", "0.0"
-              "unitgroup", "energy"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/lootboxes"
-              "paratrooper", "true"
-          ]
+                "fall_damage_multiplier", "0.0"
+                "unitgroup", "energy"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/lootboxes"
+                "paratrooper", "true"
+            ]
           extras = Map.ofList [
-              "autoheal", "1.0"
-              "canfight", "false"
-              "canguard", "false"
-              "canhover", "true"
-              "canpatrol", "false"
-              "canselfdestruct", "true"
-              "canstop", "false"
-              "cantbetransported", "false"
-              "capturable", "true"
-              "levelground", "false"
-              "mass", "749.0"
-              "movestate", "0.0"
-              "noautofire", "false"
-              "selfdestructcountdown", "9.0"
-              "transportbyenemy", "true"
-              "unitname", "lootboxbronze"
-              "upright", "true"
-              "usebuildinggrounddecal", "false"
-              "reclaimable", "false"
-          ] }
+                "autoheal", "1.0"
+                "canfight", "false"
+                "canguard", "false"
+                "canhover", "true"
+                "canpatrol", "false"
+                "canselfdestruct", "true"
+                "canstop", "false"
+                "cantbetransported", "false"
+                "capturable", "true"
+                "levelground", "false"
+                "mass", "749.0"
+                "movestate", "0.0"
+                "noautofire", "false"
+                "selfdestructcountdown", "9.0"
+                "transportbyenemy", "true"
+                "unitname", "lootboxbronze"
+                "upright", "true"
+                "usebuildinggrounddecal", "false"
+                "reclaimable", "false"
+            ] }
 
-    let lootboxgold : UnitDef =
+    type Lootboxgold =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          speed: ValueOrExpr<float>
+          maxAcc: float
+          maxDec: float
+          turnRate: float
+          movementClass: string
+          maxSlope: float
+          maxWaterDepth: float
+          canMove: bool
+          floater: bool
+          turnInPlace: bool
+          energyMake: ValueOrExpr<float>
+          metalMake: ValueOrExpr<float>
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let lootboxgold : Lootboxgold =
         { name = "lootboxgold"
           subfolder = "other/lootboxes"
           metalCost = ValueOrExpr.Concrete 1500.0
@@ -93,74 +116,72 @@ module other_lootboxes =
           sightDistance = ValueOrExpr.Concrete 96.0
           footprintX = 4.0
           footprintZ = 4.0
-          objectName = Some "lootboxes/lootboxv2_gold.s3o"
-          buildPic = Some "lootboxes/LOOTBOXGOLD.DDS"
-          script = Some "lootboxes/lootboxv2.cob"
-          corpse = None
-          explodeAs = Some "lootboxExplosion3"
-          selfDestructAs = Some "lootboxExplosion3"
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "64 64 64"
-          collisionVolumeType = Some "box"
-          seismicSignature = Some 0.0
-          category = None
-          movement = Some (
-            { speed = ValueOrExpr.Concrete 0.03
-              maxAcc = 0.0
-              maxDec = 1.0
-              turnRate = 0.0
-              movementClass = Some "HHOVER4"
-              maxSlope = Some 10.0
-              maxWaterDepth = Some 0.0
-              canFly = false
-              canMove = true
-              floater = true
-              turnInPlace = Some false
-              turnInPlaceAngleLimit = None
-              turnInPlaceSpeedLimit = None
-              cruiseAltitude = None
-              minWaterDepth = None
-              waterline = None })
-          builder = None
-          weapons = None
-          economy = Some (
-            { energyMake = Some (ValueOrExpr.Concrete 1600.0)
-              metalMake = Some (ValueOrExpr.Concrete 80.0)
-              energyStorage = None
-              metalStorage = None
-              extractsMetal = None })
-          building = None
-          featureDefs = None
-          sounds = None
+          speed = ValueOrExpr.Concrete 0.03
+          maxAcc = 0.0
+          maxDec = 1.0
+          turnRate = 0.0
+          movementClass = "HHOVER4"
+          maxSlope = 10.0
+          maxWaterDepth = 0.0
+          canMove = true
+          floater = true
+          turnInPlace = false
+          energyMake = ValueOrExpr.Concrete 1600.0
+          metalMake = ValueOrExpr.Concrete 80.0
           customParams = Map.ofList [
-              "fall_damage_multiplier", "0.0"
-              "unitgroup", "energy"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/lootboxes"
-              "paratrooper", "true"
-          ]
+                "fall_damage_multiplier", "0.0"
+                "unitgroup", "energy"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/lootboxes"
+                "paratrooper", "true"
+            ]
           extras = Map.ofList [
-              "autoheal", "1.0"
-              "canfight", "false"
-              "canguard", "false"
-              "canpatrol", "false"
-              "canselfdestruct", "true"
-              "canstop", "false"
-              "cantbetransported", "false"
-              "capturable", "true"
-              "levelground", "false"
-              "mass", "4000.0"
-              "movestate", "0.0"
-              "noautofire", "false"
-              "selfdestructcountdown", "9.0"
-              "transportbyenemy", "true"
-              "unitname", "lootboxgold"
-              "upright", "true"
-              "usebuildinggrounddecal", "false"
-              "reclaimable", "false"
-          ] }
+                "autoheal", "1.0"
+                "canfight", "false"
+                "canguard", "false"
+                "canpatrol", "false"
+                "canselfdestruct", "true"
+                "canstop", "false"
+                "cantbetransported", "false"
+                "capturable", "true"
+                "levelground", "false"
+                "mass", "4000.0"
+                "movestate", "0.0"
+                "noautofire", "false"
+                "selfdestructcountdown", "9.0"
+                "transportbyenemy", "true"
+                "unitname", "lootboxgold"
+                "upright", "true"
+                "usebuildinggrounddecal", "false"
+                "reclaimable", "false"
+            ] }
 
-    let lootboxplatinum : UnitDef =
+    type Lootboxplatinum =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          speed: ValueOrExpr<float>
+          maxAcc: float
+          maxDec: float
+          turnRate: float
+          movementClass: string
+          maxSlope: float
+          maxWaterDepth: float
+          canMove: bool
+          floater: bool
+          turnInPlace: bool
+          energyMake: ValueOrExpr<float>
+          metalMake: ValueOrExpr<float>
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let lootboxplatinum : Lootboxplatinum =
         { name = "lootboxplatinum"
           subfolder = "other/lootboxes"
           metalCost = ValueOrExpr.Concrete 2500.0
@@ -170,74 +191,72 @@ module other_lootboxes =
           sightDistance = ValueOrExpr.Concrete 96.0
           footprintX = 4.0
           footprintZ = 4.0
-          objectName = Some "lootboxes/lootboxv2_platinum.s3o"
-          buildPic = Some "lootboxes/LOOTBOXPLATINUM.DDS"
-          script = Some "lootboxes/lootboxv2.cob"
-          corpse = None
-          explodeAs = Some "lootboxExplosion4"
-          selfDestructAs = Some "lootboxExplosion4"
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "80 80 80"
-          collisionVolumeType = Some "box"
-          seismicSignature = Some 0.0
-          category = None
-          movement = Some (
-            { speed = ValueOrExpr.Concrete 0.03
-              maxAcc = 0.0
-              maxDec = 1.0
-              turnRate = 0.0
-              movementClass = Some "HHOVER4"
-              maxSlope = Some 10.0
-              maxWaterDepth = Some 0.0
-              canFly = false
-              canMove = true
-              floater = true
-              turnInPlace = Some false
-              turnInPlaceAngleLimit = None
-              turnInPlaceSpeedLimit = None
-              cruiseAltitude = None
-              minWaterDepth = None
-              waterline = None })
-          builder = None
-          weapons = None
-          economy = Some (
-            { energyMake = Some (ValueOrExpr.Concrete 2800.0)
-              metalMake = Some (ValueOrExpr.Concrete 140.0)
-              energyStorage = None
-              metalStorage = None
-              extractsMetal = None })
-          building = None
-          featureDefs = None
-          sounds = None
+          speed = ValueOrExpr.Concrete 0.03
+          maxAcc = 0.0
+          maxDec = 1.0
+          turnRate = 0.0
+          movementClass = "HHOVER4"
+          maxSlope = 10.0
+          maxWaterDepth = 0.0
+          canMove = true
+          floater = true
+          turnInPlace = false
+          energyMake = ValueOrExpr.Concrete 2800.0
+          metalMake = ValueOrExpr.Concrete 140.0
           customParams = Map.ofList [
-              "fall_damage_multiplier", "0.0"
-              "unitgroup", "energy"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/lootboxes"
-              "paratrooper", "true"
-          ]
+                "fall_damage_multiplier", "0.0"
+                "unitgroup", "energy"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/lootboxes"
+                "paratrooper", "true"
+            ]
           extras = Map.ofList [
-              "autoheal", "1.0"
-              "canfight", "false"
-              "canguard", "false"
-              "canpatrol", "false"
-              "canselfdestruct", "true"
-              "canstop", "false"
-              "cantbetransported", "false"
-              "capturable", "true"
-              "levelground", "false"
-              "mass", "4000.0"
-              "movestate", "0.0"
-              "noautofire", "false"
-              "selfdestructcountdown", "9.0"
-              "transportbyenemy", "true"
-              "unitname", "lootboxplatinum"
-              "upright", "true"
-              "usebuildinggrounddecal", "false"
-              "reclaimable", "false"
-          ] }
+                "autoheal", "1.0"
+                "canfight", "false"
+                "canguard", "false"
+                "canpatrol", "false"
+                "canselfdestruct", "true"
+                "canstop", "false"
+                "cantbetransported", "false"
+                "capturable", "true"
+                "levelground", "false"
+                "mass", "4000.0"
+                "movestate", "0.0"
+                "noautofire", "false"
+                "selfdestructcountdown", "9.0"
+                "transportbyenemy", "true"
+                "unitname", "lootboxplatinum"
+                "upright", "true"
+                "usebuildinggrounddecal", "false"
+                "reclaimable", "false"
+            ] }
 
-    let lootboxsilver : UnitDef =
+    type Lootboxsilver =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          speed: ValueOrExpr<float>
+          maxAcc: float
+          maxDec: float
+          turnRate: float
+          movementClass: string
+          maxSlope: float
+          maxWaterDepth: float
+          canMove: bool
+          floater: bool
+          turnInPlace: bool
+          energyMake: ValueOrExpr<float>
+          metalMake: ValueOrExpr<float>
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let lootboxsilver : Lootboxsilver =
         { name = "lootboxsilver"
           subfolder = "other/lootboxes"
           metalCost = ValueOrExpr.Concrete 750.0
@@ -247,74 +266,64 @@ module other_lootboxes =
           sightDistance = ValueOrExpr.Concrete 96.0
           footprintX = 3.0
           footprintZ = 3.0
-          objectName = Some "lootboxes/lootboxv2_silver.s3o"
-          buildPic = Some "lootboxes/LOOTBOXSILVER.DDS"
-          script = Some "lootboxes/lootboxv2.cob"
-          corpse = None
-          explodeAs = Some "lootboxExplosion2"
-          selfDestructAs = Some "lootboxExplosion2"
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "48 48 48"
-          collisionVolumeType = Some "box"
-          seismicSignature = Some 0.0
-          category = None
-          movement = Some (
-            { speed = ValueOrExpr.Concrete 0.03
-              maxAcc = 0.0
-              maxDec = 1.0
-              turnRate = 0.0
-              movementClass = Some "HOVER3"
-              maxSlope = Some 10.0
-              maxWaterDepth = Some 0.0
-              canFly = false
-              canMove = true
-              floater = true
-              turnInPlace = Some false
-              turnInPlaceAngleLimit = None
-              turnInPlaceSpeedLimit = None
-              cruiseAltitude = None
-              minWaterDepth = None
-              waterline = None })
-          builder = None
-          weapons = None
-          economy = Some (
-            { energyMake = Some (ValueOrExpr.Concrete 800.0)
-              metalMake = Some (ValueOrExpr.Concrete 40.0)
-              energyStorage = None
-              metalStorage = None
-              extractsMetal = None })
-          building = None
-          featureDefs = None
-          sounds = None
+          speed = ValueOrExpr.Concrete 0.03
+          maxAcc = 0.0
+          maxDec = 1.0
+          turnRate = 0.0
+          movementClass = "HOVER3"
+          maxSlope = 10.0
+          maxWaterDepth = 0.0
+          canMove = true
+          floater = true
+          turnInPlace = false
+          energyMake = ValueOrExpr.Concrete 800.0
+          metalMake = ValueOrExpr.Concrete 40.0
           customParams = Map.ofList [
-              "fall_damage_multiplier", "0.0"
-              "unitgroup", "energy"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/lootboxes"
-              "paratrooper", "true"
-          ]
+                "fall_damage_multiplier", "0.0"
+                "unitgroup", "energy"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/lootboxes"
+                "paratrooper", "true"
+            ]
           extras = Map.ofList [
-              "autoheal", "1.0"
-              "canfight", "false"
-              "canguard", "false"
-              "canpatrol", "false"
-              "canselfdestruct", "true"
-              "canstop", "false"
-              "cantbetransported", "false"
-              "capturable", "true"
-              "levelground", "false"
-              "mass", "749.0"
-              "movestate", "0.0"
-              "noautofire", "false"
-              "selfdestructcountdown", "9.0"
-              "transportbyenemy", "true"
-              "unitname", "lootboxsilver"
-              "upright", "true"
-              "usebuildinggrounddecal", "false"
-              "reclaimable", "false"
-          ] }
+                "autoheal", "1.0"
+                "canfight", "false"
+                "canguard", "false"
+                "canpatrol", "false"
+                "canselfdestruct", "true"
+                "canstop", "false"
+                "cantbetransported", "false"
+                "capturable", "true"
+                "levelground", "false"
+                "mass", "749.0"
+                "movestate", "0.0"
+                "noautofire", "false"
+                "selfdestructcountdown", "9.0"
+                "transportbyenemy", "true"
+                "unitname", "lootboxsilver"
+                "upright", "true"
+                "usebuildinggrounddecal", "false"
+                "reclaimable", "false"
+            ] }
 
-    let lootdroppod_gold : UnitDef =
+    type Lootdroppod_gold =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          energyStorage: float
+          yardMap: string
+          activateWhenBuilt: bool
+          weapons: WeaponDef list
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let lootdroppod_gold : Lootdroppod_gold =
         { name = "lootdroppod_gold"
           subfolder = "other/lootboxes"
           metalCost = ValueOrExpr.Concrete 400.0
@@ -324,94 +333,89 @@ module other_lootboxes =
           sightDistance = ValueOrExpr.Concrete 450.0
           footprintX = 0.0
           footprintZ = 0.0
-          objectName = Some "scavs/cube.s3o"
-          buildPic = Some "lootboxes/lootdrop.DDS"
-          script = Some "scavs/droppod.cob"
-          corpse = None
-          explodeAs = Some ""
-          selfDestructAs = Some ""
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0 0 0"
-          collisionVolumeType = Some "box"
-          seismicSignature = Some 4.0
-          category = None
-          movement = None
-          builder = None
-          weapons = Some [
-              { name = "weapon"
-                displayName = Some "Lootbox"
-                weaponType = Some "MissileLauncher"
-                damage = Map.ofList [
-                    "raptor", 1.0
-                    "default", 1.0
-                ]
-                range = Some (ValueOrExpr.Concrete 59999.0)
-                reloadTime = Some (ValueOrExpr.Concrete 5.0)
-                weaponVelocity = Some 100.0
-                areaOfEffect = Some 500.0
-                accuracy = None
-                turret = None
-                tolerance = None
-                edgeEffectiveness = Some 0.3
-                impulseFactor = Some 0.1
-                noSelfDamage = None
-                soundStart = Some "scavlootdrop"
-                soundHit = Some "scavdroplootspawn"
-                explosiongenerator = Some "custom:dirtpoof"
-                rgbColor = Some "0.95 0.78 0"
-                onlyTargetCategory = None
-                badTargetCategory = None
-                customParams = Map.empty
-                extras = Map.ofList [
-                    "alwaysvisible", "true"
-                    "avoidfriendly", "0.0"
-                    "cegtag", "lootbox-trail"
-                    "collidefriendly", "0.0"
-                    "craterboost", "0.0"
-                    "cratermult", "0.0"
-                    "firestarter", "70.0"
-                    "flighttime", "800.0"
-                    "interceptedbyshieldtype", "4.0"
-                    "metalpershot", "0.0"
-                    "smoketrail", "0.0"
-                    "startvelocity", "1.0"
-                    "weaponacceleration", "50.0"
-                    "weapontimer", "2.0"
-                    "wobble", "50.0"
-                ] }
-          ]
-          economy = Some (
-            { energyMake = None
-              metalMake = None
-              energyStorage = Some 1000.0
-              metalStorage = None
-              extractsMetal = None })
-          building = Some (
-            { yardMap = Some ""
-              activateWhenBuilt = Some true
-              canRepeat = None })
-          featureDefs = None
-          sounds = None
+          energyStorage = 1000.0
+          yardMap = ""
+          activateWhenBuilt = true
+          weapons = [
+                { name = "weapon"
+                  displayName = Some "Lootbox"
+                  weaponType = Some "MissileLauncher"
+                  damage = Map.ofList [
+                      "raptor", 1.0
+                      "default", 1.0
+                  ]
+                  range = Some (ValueOrExpr.Concrete 59999.0)
+                  reloadTime = Some (ValueOrExpr.Concrete 5.0)
+                  weaponVelocity = Some 100.0
+                  areaOfEffect = Some 500.0
+                  accuracy = None
+                  turret = None
+                  tolerance = None
+                  edgeEffectiveness = Some 0.3
+                  impulseFactor = Some 0.1
+                  noSelfDamage = None
+                  soundStart = Some "scavlootdrop"
+                  soundHit = Some "scavdroplootspawn"
+                  explosiongenerator = Some "custom:dirtpoof"
+                  rgbColor = Some "0.95 0.78 0"
+                  onlyTargetCategory = None
+                  badTargetCategory = None
+                  customParams = Map.empty
+                  extras = Map.ofList [
+                      "alwaysvisible", "true"
+                      "avoidfriendly", "0.0"
+                      "cegtag", "lootbox-trail"
+                      "collidefriendly", "0.0"
+                      "craterboost", "0.0"
+                      "cratermult", "0.0"
+                      "firestarter", "70.0"
+                      "flighttime", "800.0"
+                      "interceptedbyshieldtype", "4.0"
+                      "metalpershot", "0.0"
+                      "smoketrail", "0.0"
+                      "startvelocity", "1.0"
+                      "weaponacceleration", "50.0"
+                      "weapontimer", "2.0"
+                      "wobble", "50.0"
+                  ] }
+            ]
           customParams = Map.ofList [
-              "unitgroup", "builder"
-              "isairbase", "true"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/lootboxes"
-          ]
+                "unitgroup", "builder"
+                "isairbase", "true"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/lootboxes"
+            ]
           extras = Map.ofList [
-              "autoheal", "1.8"
-              "capturable", "false"
-              "levelground", "false"
-              "mass", "165.75"
-              "noautofire", "false"
-              "radardistance", "900.0"
-              "selfdestructcountdown", "5.0"
-              "smoothanim", "true"
-              "unitname", "lootdroppod_gold"
-              "upright", "false"
-          ] }
+                "autoheal", "1.8"
+                "capturable", "false"
+                "levelground", "false"
+                "mass", "165.75"
+                "noautofire", "false"
+                "radardistance", "900.0"
+                "selfdestructcountdown", "5.0"
+                "smoothanim", "true"
+                "unitname", "lootdroppod_gold"
+                "upright", "false"
+            ] }
 
-    let lootdroppod_printer : UnitDef =
+    type Lootdroppod_printer =
+        { name: string
+          subfolder: string
+          metalCost: ValueOrExpr<float>
+          energyCost: ValueOrExpr<float>
+          buildTime: ValueOrExpr<float>
+          health: ValueOrExpr<float>
+          sightDistance: ValueOrExpr<float>
+          footprintX: float
+          footprintZ: float
+          energyStorage: float
+          yardMap: string
+          activateWhenBuilt: bool
+          weapons: WeaponDef list
+          customParams: Map<string, string>
+          extras: Map<string, string> }
+
+    let lootdroppod_printer : Lootdroppod_printer =
         { name = "lootdroppod_printer"
           subfolder = "other/lootboxes"
           metalCost = ValueOrExpr.Concrete 400.0
@@ -421,99 +425,68 @@ module other_lootboxes =
           sightDistance = ValueOrExpr.Concrete 450.0
           footprintX = 0.0
           footprintZ = 0.0
-          objectName = Some "scavs/cube.s3o"
-          buildPic = Some "lootboxes/lootdrop.DDS"
-          script = Some "scavs/droppod.cob"
-          corpse = None
-          explodeAs = Some ""
-          selfDestructAs = Some ""
-          collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "0 0 0"
-          collisionVolumeType = Some "box"
-          seismicSignature = Some 4.0
-          category = None
-          movement = None
-          builder = None
-          weapons = Some [
-              { name = "weapon"
-                displayName = Some "Lootbox"
-                weaponType = Some "MissileLauncher"
-                damage = Map.ofList [
-                    "raptor", 1.0
-                    "default", 1.0
-                ]
-                range = Some (ValueOrExpr.Concrete 59999.0)
-                reloadTime = Some (ValueOrExpr.Concrete 5.0)
-                weaponVelocity = Some 100.0
-                areaOfEffect = Some 500.0
-                accuracy = None
-                turret = None
-                tolerance = None
-                edgeEffectiveness = Some 0.3
-                impulseFactor = Some 0.1
-                noSelfDamage = None
-                soundStart = Some "scavlootdrop"
-                soundHit = Some "scavdropspawnprinter"
-                explosiongenerator = Some "custom:dirtpoof"
-                rgbColor = Some "0.95 0.78 0"
-                onlyTargetCategory = None
-                badTargetCategory = None
-                customParams = Map.empty
-                extras = Map.ofList [
-                    "alwaysvisible", "true"
-                    "avoidfriendly", "0.0"
-                    "cegtag", "lootbox-trail"
-                    "collidefriendly", "0.0"
-                    "craterboost", "0.0"
-                    "cratermult", "0.0"
-                    "firestarter", "70.0"
-                    "flighttime", "800.0"
-                    "interceptedbyshieldtype", "4.0"
-                    "metalpershot", "0.0"
-                    "smoketrail", "0.0"
-                    "startvelocity", "1.0"
-                    "weaponacceleration", "50.0"
-                    "weapontimer", "2.0"
-                    "wobble", "50.0"
-                ] }
-          ]
-          economy = Some (
-            { energyMake = None
-              metalMake = None
-              energyStorage = Some 1000.0
-              metalStorage = None
-              extractsMetal = None })
-          building = Some (
-            { yardMap = Some ""
-              activateWhenBuilt = Some true
-              canRepeat = None })
-          featureDefs = None
-          sounds = None
+          energyStorage = 1000.0
+          yardMap = ""
+          activateWhenBuilt = true
+          weapons = [
+                { name = "weapon"
+                  displayName = Some "Lootbox"
+                  weaponType = Some "MissileLauncher"
+                  damage = Map.ofList [
+                      "raptor", 1.0
+                      "default", 1.0
+                  ]
+                  range = Some (ValueOrExpr.Concrete 59999.0)
+                  reloadTime = Some (ValueOrExpr.Concrete 5.0)
+                  weaponVelocity = Some 100.0
+                  areaOfEffect = Some 500.0
+                  accuracy = None
+                  turret = None
+                  tolerance = None
+                  edgeEffectiveness = Some 0.3
+                  impulseFactor = Some 0.1
+                  noSelfDamage = None
+                  soundStart = Some "scavlootdrop"
+                  soundHit = Some "scavdropspawnprinter"
+                  explosiongenerator = Some "custom:dirtpoof"
+                  rgbColor = Some "0.95 0.78 0"
+                  onlyTargetCategory = None
+                  badTargetCategory = None
+                  customParams = Map.empty
+                  extras = Map.ofList [
+                      "alwaysvisible", "true"
+                      "avoidfriendly", "0.0"
+                      "cegtag", "lootbox-trail"
+                      "collidefriendly", "0.0"
+                      "craterboost", "0.0"
+                      "cratermult", "0.0"
+                      "firestarter", "70.0"
+                      "flighttime", "800.0"
+                      "interceptedbyshieldtype", "4.0"
+                      "metalpershot", "0.0"
+                      "smoketrail", "0.0"
+                      "startvelocity", "1.0"
+                      "weaponacceleration", "50.0"
+                      "weapontimer", "2.0"
+                      "wobble", "50.0"
+                  ] }
+            ]
           customParams = Map.ofList [
-              "unitgroup", "builder"
-              "isairbase", "true"
-              "normaltex", "unittextures/cor_normal.dds"
-              "subfolder", "other/lootboxes"
-          ]
+                "unitgroup", "builder"
+                "isairbase", "true"
+                "normaltex", "unittextures/cor_normal.dds"
+                "subfolder", "other/lootboxes"
+            ]
           extras = Map.ofList [
-              "autoheal", "1.8"
-              "capturable", "false"
-              "levelground", "false"
-              "mass", "165.75"
-              "noautofire", "false"
-              "radardistance", "900.0"
-              "selfdestructcountdown", "5.0"
-              "smoothanim", "true"
-              "unitname", "lootdroppod_printer"
-              "upright", "false"
-          ] }
+                "autoheal", "1.8"
+                "capturable", "false"
+                "levelground", "false"
+                "mass", "165.75"
+                "noautofire", "false"
+                "radardistance", "900.0"
+                "selfdestructcountdown", "5.0"
+                "smoothanim", "true"
+                "unitname", "lootdroppod_printer"
+                "upright", "false"
+            ] }
 
-    let all : (string * UnitDef) list =
-        [
-            "lootboxbronze", lootboxbronze
-            "lootboxgold", lootboxgold
-            "lootboxplatinum", lootboxplatinum
-            "lootboxsilver", lootboxsilver
-            "lootdroppod_gold", lootdroppod_gold
-            "lootdroppod_printer", lootdroppod_printer
-        ]

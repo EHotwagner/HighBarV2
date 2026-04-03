@@ -11,6 +11,7 @@
     <Compile Include="src/Types.fs" />
     <Compile Include="src/Commands.fs" />
     <Compile Include="src/CustomCommands.fs" />
+    <Compile Include="src/UnitSummary.fs" />
     <Compile Include="src/ArmAircraft.fs" />
     <Compile Include="src/ArmAircraft_T2.fs" />
     <Compile Include="src/ArmBots.fs" />
