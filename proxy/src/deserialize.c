@@ -30,7 +30,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.options = (short)c->options;
         s.timeOut = c->timeout;
         s.toBuildUnitDefId = c->to_build_unit_def_id;
-        vec3_to_pos(c->build_position, s.buildPos_posF3);
+        float _pos1[3];
+        vec3_to_pos(c->build_position, _pos1);
+        s.buildPos_posF3 = _pos1;
         s.facing = c->facing;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_BUILD_UNIT, &s);
     }
@@ -84,7 +86,7 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        s.unitId2 = c->death_unit_id;
+        s.toDieUnitId = c->death_unit_id;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_DEATH_WAIT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_GATHER_WAIT: {
@@ -105,7 +107,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->to_position, s.toPos_posF3);
+        float _pos2[3];
+        vec3_to_pos(c->to_position, _pos2);
+        s.toPos_posF3 = _pos2;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_MOVE_UNIT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_PATROL: {
@@ -116,7 +120,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->to_position, s.toPos_posF3);
+        float _pos3[3];
+        vec3_to_pos(c->to_position, _pos3);
+        s.toPos_posF3 = _pos3;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_PATROL, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_FIGHT: {
@@ -127,7 +133,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->to_position, s.toPos_posF3);
+        float _pos4[3];
+        vec3_to_pos(c->to_position, _pos4);
+        s.toPos_posF3 = _pos4;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_FIGHT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_ATTACK: {
@@ -149,7 +157,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->attack_position, s.toAttackPos_posF3);
+        float _pos5[3];
+        vec3_to_pos(c->attack_position, _pos5);
+        s.toAttackPos_posF3 = _pos5;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_ATTACK_AREA, &s);
     }
@@ -183,7 +193,7 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        s.toReclaimUnitIdOrFeatureId = c->reclaim_unit_id;
+        s.toReclaimUnitId = c->reclaim_unit_id;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_RECLAIM_UNIT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_AREA: {
@@ -194,7 +204,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos6[3];
+        vec3_to_pos(c->position, _pos6);
+        s.pos_posF3 = _pos6;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_RECLAIM_AREA, &s);
     }
@@ -206,7 +218,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos7[3];
+        vec3_to_pos(c->position, _pos7);
+        s.pos_posF3 = _pos7;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_RESTORE_AREA, &s);
     }
@@ -229,7 +243,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos8[3];
+        vec3_to_pos(c->position, _pos8);
+        s.pos_posF3 = _pos8;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_RESURRECT_IN_AREA, &s);
     }
@@ -252,7 +268,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos9[3];
+        vec3_to_pos(c->position, _pos9);
+        s.pos_posF3 = _pos9;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_CAPTURE_AREA, &s);
     }
@@ -264,7 +282,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->base_position, s.basePos_posF3);
+        float _pos10[3];
+        vec3_to_pos(c->base_position, _pos10);
+        s.basePos_posF3 = _pos10;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_SET_BASE, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_SELF_DESTRUCT: {
@@ -285,7 +305,7 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        s.transportUnitId = c->transport_unit_id;
+        s.transporterUnitId = c->transport_unit_id;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_LOAD_ONTO, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_UNLOAD_UNIT: {
@@ -296,7 +316,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->to_position, s.toPos_posF3);
+        float _pos11[3];
+        vec3_to_pos(c->to_position, _pos11);
+        s.toPos_posF3 = _pos11;
         s.toUnloadUnitId = c->to_unload_unit_id;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_UNLOAD_UNIT, &s);
     }
@@ -308,7 +330,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->to_position, s.toPos_posF3);
+        float _pos12[3];
+        vec3_to_pos(c->to_position, _pos12);
+        s.toPos_posF3 = _pos12;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_UNLOAD_UNITS_AREA, &s);
     }
@@ -354,7 +378,7 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.timeOut = c->timeout;
         s.cmdId = c->command_id;
         s.params = (float *)c->params;
-        s.numParams = (int)c->n_params;
+        s.params_size = (int)c->n_params;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_CUSTOM, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_SET_ON_OFF: {
@@ -464,7 +488,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         struct SGiveMeNewUnitCommand s;
         memset(&s, 0, sizeof(s));
         s.unitDefId = c->unit_def_id;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos13[3];
+        vec3_to_pos(c->position, _pos13);
+        s.pos_posF3 = _pos13;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_GIVE_ME_NEW_UNIT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_CALL_LUA_RULES: {
@@ -498,7 +524,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos14[3];
+        vec3_to_pos(c->position, _pos14);
+        s.pos_posF3 = _pos14;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_RECLAIM_IN_AREA, &s);
     }
@@ -510,7 +538,7 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        s.toReclaimUnitIdOrFeatureId = c->feature_id;
+        s.toReclaimUnitId = c->feature_id;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_RECLAIM_FEATURE, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_LOAD_UNITS_AREA: {
@@ -521,7 +549,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.groupId = c->group_id;
         s.options = (short)c->options;
         s.timeOut = c->timeout;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos15[3];
+        vec3_to_pos(c->position, _pos15);
+        s.pos_posF3 = _pos15;
         s.radius = c->radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_LOAD_UNITS_AREA, &s);
     }
@@ -529,7 +559,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         const Highbar__DrawAddPointCommand *c = cmd->draw_add_point;
         struct SDrawAddPointCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos16[3];
+        vec3_to_pos(c->position, _pos16);
+        s.pos_posF3 = _pos16;
         s.label = c->label;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_DRAW_ADD_POINT, &s);
     }
@@ -537,22 +569,30 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         const Highbar__DrawAddLineCommand *c = cmd->draw_add_line;
         struct SDrawAddLineCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->from_position, s.posFrom_posF3);
-        vec3_to_pos(c->to_position, s.posTo_posF3);
+        float _pos17[3];
+        vec3_to_pos(c->from_position, _pos17);
+        s.posFrom_posF3 = _pos17;
+        float _pos18[3];
+        vec3_to_pos(c->to_position, _pos18);
+        s.posTo_posF3 = _pos18;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_DRAW_ADD_LINE, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_DRAW_REMOVE_POINT: {
         const Highbar__DrawRemovePointCommand *c = cmd->draw_remove_point;
         struct SDrawRemovePointCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos19[3];
+        vec3_to_pos(c->position, _pos19);
+        s.pos_posF3 = _pos19;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_DRAW_REMOVE_POINT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_SET_LAST_POS_MESSAGE: {
         const Highbar__SetLastPosMessageCommand *c = cmd->set_last_pos_message;
         struct SSetLastPosMessageCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos20[3];
+        vec3_to_pos(c->position, _pos20);
+        s.pos_posF3 = _pos20;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_SET_LAST_POS_MESSAGE, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_SET_MY_INCOME_SHARE_DIRECT: {
@@ -591,8 +631,12 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         const Highbar__InitPathCommand *c = cmd->init_path;
         struct SInitPathCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->start_position, s.startPos_posF3);
-        vec3_to_pos(c->end_position, s.endPos_posF3);
+        float _pos21[3];
+        vec3_to_pos(c->start_position, _pos21);
+        s.start_posF3 = _pos21;
+        float _pos22[3];
+        vec3_to_pos(c->end_position, _pos22);
+        s.end_posF3 = _pos22;
         s.pathType = c->path_type;
         s.goalRadius = c->goal_radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_INIT_PATH, &s);
@@ -601,8 +645,12 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         const Highbar__GetApproxLengthCommand *c = cmd->get_approx_length;
         struct SGetApproxLengthCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->start_position, s.startPos_posF3);
-        vec3_to_pos(c->end_position, s.endPos_posF3);
+        float _pos23[3];
+        vec3_to_pos(c->start_position, _pos23);
+        s.start_posF3 = _pos23;
+        float _pos24[3];
+        vec3_to_pos(c->end_position, _pos24);
+        s.end_posF3 = _pos24;
         s.pathType = c->path_type;
         s.goalRadius = c->goal_radius;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_GET_APPROX_LENGTH, &s);
@@ -625,10 +673,18 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         const Highbar__CreateSplineFigureCommand *c = cmd->create_spline_figure;
         struct SCreateSplineFigureCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->position1, s.pos1_posF3);
-        vec3_to_pos(c->position2, s.pos2_posF3);
-        vec3_to_pos(c->position3, s.pos3_posF3);
-        vec3_to_pos(c->position4, s.pos4_posF3);
+        float _pos25[3];
+        vec3_to_pos(c->position1, _pos25);
+        s.pos1_posF3 = _pos25;
+        float _pos26[3];
+        vec3_to_pos(c->position2, _pos26);
+        s.pos2_posF3 = _pos26;
+        float _pos27[3];
+        vec3_to_pos(c->position3, _pos27);
+        s.pos3_posF3 = _pos27;
+        float _pos28[3];
+        vec3_to_pos(c->position4, _pos28);
+        s.pos4_posF3 = _pos28;
         s.width = c->width;
         s.arrow = c->arrow ? 1 : 0;
         s.lifeTime = c->lifespan;
@@ -639,8 +695,12 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         const Highbar__CreateLineFigureCommand *c = cmd->create_line_figure;
         struct SCreateLineFigureCommand s;
         memset(&s, 0, sizeof(s));
-        vec3_to_pos(c->from_position, s.pos1_posF3);
-        vec3_to_pos(c->to_position, s.pos2_posF3);
+        float _pos29[3];
+        vec3_to_pos(c->from_position, _pos29);
+        s.pos1_posF3 = _pos29;
+        float _pos30[3];
+        vec3_to_pos(c->to_position, _pos30);
+        s.pos2_posF3 = _pos30;
         s.width = c->width;
         s.arrow = c->arrow ? 1 : 0;
         s.lifeTime = c->lifespan;
@@ -652,33 +712,39 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         struct SSetFigurePositionCommand s;
         memset(&s, 0, sizeof(s));
         s.figureId = c->figure_id;
-        vec3_to_pos(c->position, s.pos_posF3);
+        float _pos31[3];
+        vec3_to_pos(c->position, _pos31);
+        s.pos_posF3 = _pos31;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_SET_FIGURE_POSITION, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_SET_FIGURE_COLOR: {
         const Highbar__SetFigureColorCommand *c = cmd->set_figure_color;
         struct SSetFigureColorCommand s;
+        short color[3];
         memset(&s, 0, sizeof(s));
-        s.figureId = c->figure_id;
-        s.r = c->r;
-        s.g = c->g;
-        s.b = c->b;
-        s.a = c->a;
+        s.figureGroupId = c->figure_id;
+        color[0] = (short)c->r;
+        color[1] = (short)c->g;
+        color[2] = (short)c->b;
+        s.color_colorS3 = color;
+        s.alpha = (short)c->a;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_SET_FIGURE_COLOR, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_REMOVE_FIGURE: {
         const Highbar__RemoveFigureCommand *c = cmd->remove_figure;
         struct SRemoveFigureCommand s;
         memset(&s, 0, sizeof(s));
-        s.figureId = c->figure_id;
+        s.figureGroupId = c->figure_id;
         return handle_command(skirmish_ai_id, -1, 0, COMMAND_REMOVE_FIGURE, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_DRAW_UNIT: {
         const Highbar__DrawUnitCommand *c = cmd->draw_unit;
         struct SDrawUnitCommand s;
         memset(&s, 0, sizeof(s));
-        s.unitDefId = c->unit_def_id;
-        vec3_to_pos(c->position, s.pos_posF3);
+        s.toDrawUnitDefId = c->unit_def_id;
+        float _pos32[3];
+        vec3_to_pos(c->position, _pos32);
+        s.pos_posF3 = _pos32;
         s.rotation = c->rotation;
         s.lifeTime = c->lifespan;
         s.teamId = c->team_id;

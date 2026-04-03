@@ -1,0 +1,76 @@
+[GAME]
+{
+	GameType=Beyond All Reason test-local;
+	MapName=__MAP_NAME__;
+	ModHash=1;
+	MapHash=1;
+	IsHost=1;
+	MyPlayerName=HighBarV2Test;
+	NoHelperAIs=0;
+	StartPosType=0;
+
+	[MODOPTIONS]
+	{
+		GameMode=3;
+	}
+
+	[MAPOPTIONS]
+	{
+	}
+
+	[PLAYER0]
+	{
+		Name=HighBarV2Test;
+		Team=0;
+		IsFromDemo=0;
+		Spectator=1;
+	}
+
+	[AI0]
+	{
+		Name=HighBarV2;
+		Team=0;
+		ShortName=HighBarV2;
+		Version=0.1;
+		Host=0;
+		[OPTIONS]
+		{
+			socket_path=__SOCKET_PATH__;
+		}
+	}
+
+	[AI1]
+	{
+		Name=NullAI;
+		Team=1;
+		ShortName=NullAI;
+		Version=0.1;
+		Host=0;
+	}
+
+	[TEAM0]
+	{
+		TeamLeader=0;
+		AllyTeam=0;
+	}
+
+	[TEAM1]
+	{
+		TeamLeader=0;
+		AllyTeam=1;
+	}
+
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+
+	[ALLYTEAM1]
+	{
+		NumAllies=0;
+	}
+
+	NumTeams=2;
+	NumAllyTeams=2;
+	NumPlayers=1;
+}

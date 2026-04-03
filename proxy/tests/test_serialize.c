@@ -32,7 +32,7 @@ static void reset(void) {
 // -- Round-trip serialization tests for all 28 event types --
 
 TEST(test_init_event) {
-    struct SInitEvent e = { .team = 5 };
+    struct SInitEvent e = { .skirmishAIId = 5 };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_INIT, &e, &alloc);
     assert(ev != NULL);
@@ -135,9 +135,10 @@ TEST(test_unit_move_failed_event) {
 }
 
 TEST(test_unit_damaged_event) {
+    float dir1[3] = {1.0f, 0.0f, 0.0f};
     struct SUnitDamagedEvent e = {
         .unit = 1, .attacker = 2, .damage = 50.5f,
-        .dir_x = 1.0f, .dir_y = 0.0f, .dir_z = 0.0f,
+        .dir_posF3 = dir1,
         .weaponDefId = 3, .paralyzer = 1
     };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
@@ -158,9 +159,10 @@ TEST(test_unit_damaged_event) {
 }
 
 TEST(test_unit_damaged_no_attacker) {
+    float dir2[3] = {0, 0, 0};
     struct SUnitDamagedEvent e = {
         .unit = 1, .attacker = -1, .damage = 10.0f,
-        .dir_x = 0, .dir_y = 0, .dir_z = 0,
+        .dir_posF3 = dir2,
         .weaponDefId = 0, .paralyzer = 0
     };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
@@ -184,7 +186,7 @@ TEST(test_unit_destroyed_no_attacker) {
 }
 
 TEST(test_unit_given_event) {
-    struct SUnitGivenEvent e = { .unit = 1, .oldTeamId = 2, .newTeamId = 3 };
+    struct SUnitGivenEvent e = { .unitId = 1, .oldTeamId = 2, .newTeamId = 3 };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_UNIT_GIVEN, &e, &alloc);
     assert(ev->unit_given->old_team_id == 2);
@@ -192,7 +194,7 @@ TEST(test_unit_given_event) {
 }
 
 TEST(test_unit_captured_event) {
-    struct SUnitCapturedEvent e = { .unit = 1, .oldTeamId = 2, .newTeamId = 3 };
+    struct SUnitCapturedEvent e = { .unitId = 1, .oldTeamId = 2, .newTeamId = 3 };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_UNIT_CAPTURED, &e, &alloc);
     assert(ev->unit_captured->old_team_id == 2);
@@ -228,9 +230,10 @@ TEST(test_enemy_leave_radar_event) {
 }
 
 TEST(test_enemy_damaged_event) {
+    float dir3[3] = {0, 1, 0};
     struct SEnemyDamagedEvent e = {
         .enemy = 10, .attacker = 5, .damage = 25.0f,
-        .dir_x = 0, .dir_y = 1, .dir_z = 0, .weaponDefId = 7
+        .dir_posF3 = dir3, .weaponDefId = 7
     };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_ENEMY_DAMAGED, &e, &alloc);
@@ -255,7 +258,7 @@ TEST(test_weapon_fired_event) {
 
 TEST(test_player_command_event) {
     int units[] = {1, 2, 3};
-    struct SPlayerCommandEvent e = { .unitIds = units, .numUnitIds = 3, .commandTopicId = 42, .commandId = 99 };
+    struct SPlayerCommandEvent e = { .unitIds = units, .unitIds_size = 3, .commandTopicId = 42, .playerId = 99 };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_PLAYER_COMMAND, &e, &alloc);
     assert(ev->player_command->n_units == 3);
@@ -264,7 +267,8 @@ TEST(test_player_command_event) {
 }
 
 TEST(test_seismic_ping_event) {
-    struct SSeismicPingEvent e = { .pos_posF3 = {100, 200, 300}, .strength = 5.0f };
+    float ping_pos[3] = {100, 200, 300};
+    struct SSeismicPingEvent e = { .pos_posF3 = ping_pos, .strength = 5.0f };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_SEISMIC_PING, &e, &alloc);
     assert(fabsf(ev->seismic_ping->position->x - 100.0f) < 0.01f);
@@ -280,14 +284,14 @@ TEST(test_command_finished_event) {
 }
 
 TEST(test_load_event) {
-    struct SLoadEvent e = { .placeholder = 0 };
+    struct SLoadEvent e = { .file = NULL };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_LOAD, &e, &alloc);
     assert(ev->event_case == HIGHBAR__ENGINE_EVENT__EVENT_LOAD);
 }
 
 TEST(test_save_event) {
-    struct SSaveEvent e = { .placeholder = 0 };
+    struct SSaveEvent e = { .file = NULL };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_SAVE, &e, &alloc);
     assert(ev->event_case == HIGHBAR__ENGINE_EVENT__EVENT_SAVE);
@@ -308,11 +312,10 @@ TEST(test_enemy_finished_event) {
 }
 
 TEST(test_lua_message_event) {
-    struct SLuaMessageEvent e = { .inData = "test_data", .inMessageId = 42 };
+    struct SLuaMessageEvent e = { .inData = "test_data" };
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
     Highbar__EngineEvent *ev = hb_serialize_event(EVENT_LUA_MESSAGE, &e, &alloc);
     assert(strcmp(ev->lua_message->data, "test_data") == 0);
-    assert(ev->lua_message->in_message_id == 42);
 }
 
 int main(void) {

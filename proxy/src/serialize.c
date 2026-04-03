@@ -27,7 +27,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
         Highbar__InitEvent *m = alloc->alloc(alloc->allocator_data, sizeof(Highbar__InitEvent));
         if (!m) return NULL;
         highbar__init_event__init(m);
-        m->team_id = e->team;
+        m->team_id = e->skirmishAIId;
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_INIT;
         event->init = m;
         break;
@@ -113,7 +113,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
             m->attacker_id = e->attacker;
         }
         m->damage = e->damage;
-        m->direction = alloc_vec3(e->dir_x, e->dir_y, e->dir_z, alloc);
+        m->direction = alloc_vec3(e->dir_posF3[0], e->dir_posF3[1], e->dir_posF3[2], alloc);
         m->weapon_def_id = e->weaponDefId;
         m->is_paralyzer = (e->paralyzer != 0);
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_UNIT_DAMAGED;
@@ -139,7 +139,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
         Highbar__UnitGivenEvent *m = alloc->alloc(alloc->allocator_data, sizeof(Highbar__UnitGivenEvent));
         if (!m) return NULL;
         highbar__unit_given_event__init(m);
-        m->unit_id = e->unit;
+        m->unit_id = e->unitId;
         m->old_team_id = e->oldTeamId;
         m->new_team_id = e->newTeamId;
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_UNIT_GIVEN;
@@ -151,7 +151,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
         Highbar__UnitCapturedEvent *m = alloc->alloc(alloc->allocator_data, sizeof(Highbar__UnitCapturedEvent));
         if (!m) return NULL;
         highbar__unit_captured_event__init(m);
-        m->unit_id = e->unit;
+        m->unit_id = e->unitId;
         m->old_team_id = e->oldTeamId;
         m->new_team_id = e->newTeamId;
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_UNIT_CAPTURED;
@@ -209,7 +209,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
             m->attacker_id = e->attacker;
         }
         m->damage = e->damage;
-        m->direction = alloc_vec3(e->dir_x, e->dir_y, e->dir_z, alloc);
+        m->direction = alloc_vec3(e->dir_posF3[0], e->dir_posF3[1], e->dir_posF3[2], alloc);
         m->weapon_def_id = e->weaponDefId;
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_ENEMY_DAMAGED;
         event->enemy_damaged = m;
@@ -245,7 +245,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
         Highbar__PlayerCommandEvent *m = alloc->alloc(alloc->allocator_data, sizeof(Highbar__PlayerCommandEvent));
         if (!m) return NULL;
         highbar__player_command_event__init(m);
-        m->n_units = (size_t)e->numUnitIds;
+        m->n_units = (size_t)e->unitIds_size;
         m->units = alloc->alloc(alloc->allocator_data, sizeof(int32_t) * m->n_units);
         if (m->units) {
             for (size_t i = 0; i < m->n_units; i++) {
@@ -253,7 +253,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
             }
         }
         m->command_topic_id = e->commandTopicId;
-        m->command_id = e->commandId;
+        m->command_id = e->playerId;
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_PLAYER_COMMAND;
         event->player_command = m;
         break;
@@ -323,7 +323,7 @@ Highbar__EngineEvent *hb_serialize_event(int topic_id, const void *data,
         if (!m) return NULL;
         highbar__lua_message_event__init(m);
         m->data = (char *)e->inData;
-        m->in_message_id = e->inMessageId;
+        m->in_message_id = 0; // SLuaMessageEvent has no inMessageId in real engine
         event->event_case = HIGHBAR__ENGINE_EVENT__EVENT_LUA_MESSAGE;
         event->lua_message = m;
         break;

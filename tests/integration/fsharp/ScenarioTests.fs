@@ -16,9 +16,7 @@ type ScenarioTests(engine: EngineFixture) =
     [<Fact>]
     [<Trait("Category", "Scenarios")>]
     member _.``Full AI turn sequence - move build stop``() =
-        use client = new HighBarClient(engine.SocketPath)
-        client.Connect()
-        let hs = client.Handshake()
+        let client = engine.Client
 
         // Track scenario state
         let mutable builderUnitId = None
@@ -73,8 +71,6 @@ type ScenarioTests(engine: EngineFixture) =
         with
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
-        client.Disconnect()
-
         // Verify all steps completed
         Assert.True(stepsCompleted.Contains("unit_found"),
             "Should have found a builder unit")
@@ -87,6 +83,3 @@ type ScenarioTests(engine: EngineFixture) =
         Assert.True(stepsCompleted.Contains("scenario_complete"),
             "Scenario should have completed all phases")
 
-        // Verify handshake was valid
-        Assert.Equal(1u, hs.ProtocolVersion)
-        Assert.True(hs.TeamId >= 0)

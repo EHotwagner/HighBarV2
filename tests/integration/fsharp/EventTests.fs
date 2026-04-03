@@ -9,11 +9,9 @@ open HighBar.Client
 [<Collection("Engine")>]
 type EventTests(engine: EngineFixture) =
 
-    /// Helper: connect, handshake, run for N frames, return all collected events.
+    /// Helper: run for N frames, return all collected events.
     let collectEvents (maxFrames: int) =
-        use client = new HighBarClient(engine.SocketPath)
-        client.Connect()
-        let _hs = client.Handshake()
+        let client = engine.Client
 
         let allEvents = ResizeArray<GameEvent>()
         let allFrames = ResizeArray<GameFrame>()
@@ -31,16 +29,7 @@ type EventTests(engine: EngineFixture) =
         with
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
-        client.Disconnect()
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
-
-    /// Helper: connect, handshake, and get the handshake info.
-    let getHandshakeInfo () =
-        use client = new HighBarClient(engine.SocketPath)
-        client.Connect()
-        let hs = client.Handshake()
-        client.Disconnect()
-        hs
 
     // ---- T018: Init event ----
 

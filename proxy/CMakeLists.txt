@@ -5,6 +5,12 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# The real Recoil engine headers (AISCommands.h, AISEvents.h) define
+# 'const int NUM_CMD_TOPICS' and 'const int NUM_EVENTS' at file scope,
+# which in C has external linkage and produces a definition in every TU
+# that includes them. Tell the linker to tolerate these duplicates.
+add_link_options("LINKER:--allow-multiple-definition")
+
 # Find protobuf-c
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PROTOBUF_C REQUIRED libprotobuf-c)

@@ -10,11 +10,9 @@ open Highbar
 [<Collection("Engine")>]
 type CallbackTests(engine: EngineFixture) =
 
-    /// Helper: connect, handshake, run for N frames, executing a callback on each frame.
+    /// Helper: run for N frames, executing a callback on each frame.
     let runWithCallbackQuery (maxFrames: int) (onFrame: GameFrame -> int -> AICommand list) =
-        use client = new HighBarClient(engine.SocketPath)
-        client.Connect()
-        let _hs = client.Handshake()
+        let client = engine.Client
 
         let allFrames = ResizeArray<GameFrame>()
         let allEvents = ResizeArray<GameEvent>()
@@ -33,7 +31,6 @@ type CallbackTests(engine: EngineFixture) =
         with
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
-        client.Disconnect()
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
 
     // ---- T033: Unit position callback ----

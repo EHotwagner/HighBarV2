@@ -8,7 +8,7 @@
 -- combat event tests (UnitDamaged, EnemyEnterLOS, etc.)
 
 local socketPath = os.getenv("HIGHBAR_SOCKET_PATH") or "/tmp/highbar.sock"
-local mapName = os.getenv("HIGHBAR_TEST_MAP") or "Comet Catcher Remake 1.8"
+local mapName = os.getenv("HIGHBAR_TEST_MAP") or "Comet Catcher Remake"
 
 return {
     ["mapname"] = mapName,

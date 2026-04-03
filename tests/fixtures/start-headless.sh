@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Start a headless BAR engine instance with the HighBarV2 proxy plugin.
+# Start a dedicated BAR engine instance with the HighBarV2 proxy plugin.
 # Usage: start-headless.sh <socket_path> [pid_file] [session_dir]
 #
-# The script launches spring-headless with a minimal game scenario,
+# The script launches spring-dedicated with a minimal game scenario,
 # writes the PID to a file, and exits immediately.
 # If session_dir is provided, engine stdout/stderr are redirected to log
-# files in that directory and --write-dir is passed to the engine.
+# files in that directory.
 
 set -euo pipefail
 
@@ -14,41 +14,48 @@ PID_FILE="${2:-${SOCKET_PATH}.pid}"
 SESSION_DIR="${3:-}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STARTSCRIPT="${SCRIPT_DIR}/game-setup.lua"
+STARTSCRIPT_TEMPLATE="${SCRIPT_DIR}/game-setup.txt"
 
 ENGINE_BIN="${HIGHBAR_TEST_ENGINE:-spring-headless}"
-LOG_LEVEL="${HIGHBAR_LOG_LEVEL:-3}"
+MAP_NAME="${HIGHBAR_TEST_MAP:-Comet Catcher Remake}"
 
 # Export socket path for the AI plugin (read via AIOptions or env var)
 export HIGHBAR_SOCKET_PATH="${SOCKET_PATH}"
 
-# Remove stale socket if no process holds it
-if [ -e "${SOCKET_PATH}" ]; then
-    if [ -f "${PID_FILE}" ] && kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
-        echo "ERROR: Engine already running (PID $(cat "${PID_FILE}"))" >&2
-        exit 1
-    fi
-    rm -f "${SOCKET_PATH}"
+# Check if engine is already running
+if [ -f "${PID_FILE}" ] && kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
+    echo "ERROR: Engine already running (PID $(cat "${PID_FILE}"))" >&2
+    exit 1
 fi
 
-# Build engine arguments
-ENGINE_ARGS=( --headless )
-
+# Set up the instance directory (engine write dir)
 if [ -n "${SESSION_DIR}" ]; then
-    mkdir -p "${SESSION_DIR}"
-    ENGINE_ARGS+=( --write-dir "${SESSION_DIR}" )
+    INSTANCE_DIR="${SESSION_DIR}"
+else
+    INSTANCE_DIR=$(mktemp -d /tmp/highbar-instance-XXXXXX)
 fi
+mkdir -p "${INSTANCE_DIR}"
 
-ENGINE_ARGS+=( "${STARTSCRIPT}" )
+# Generate per-run start script with socket path and map name substituted
+STARTSCRIPT="${INSTANCE_DIR}/script.txt"
+sed -e "s|__SOCKET_PATH__|${SOCKET_PATH}|g" \
+    -e "s|__MAP_NAME__|${MAP_NAME}|g" \
+    "${STARTSCRIPT_TEMPLATE}" > "${STARTSCRIPT}"
+
+# Set SPRING_WRITEDIR so engine writes logs to instance dir
+export SPRING_WRITEDIR="${INSTANCE_DIR}"
 
 # Launch the engine in the background
 if [ -n "${SESSION_DIR}" ]; then
-    "${ENGINE_BIN}" "${ENGINE_ARGS[@]}" \
+    "${ENGINE_BIN}" \
+        "${STARTSCRIPT}" \
         >"${SESSION_DIR}/engine-stdout.log" \
         2>"${SESSION_DIR}/engine-stderr.log" \
         &
 else
-    "${ENGINE_BIN}" "${ENGINE_ARGS[@]}" &
+    "${ENGINE_BIN}" \
+        "${STARTSCRIPT}" \
+        &
 fi
 
 ENGINE_PID=$!

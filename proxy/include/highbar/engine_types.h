@@ -1,445 +1,156 @@
 #ifndef HIGHBAR_ENGINE_TYPES_H
 #define HIGHBAR_ENGINE_TYPES_H
 
-// Minimal definitions of Recoil engine types needed by the proxy.
-// These mirror the engine's AISEvents.h, AISCommands.h, and SSkirmishAICallback.h.
+// Use the real engine AI interface headers for correct ABI compatibility.
+// These are sourced from the Recoil engine (beyond-all-reason/spring).
 
-#include <stdint.h>
+#include "AI/AISEvents.h"
+#include "AI/AISCommands.h"
+#include "AI/SSkirmishAICallback.h"
 
-// -- Event Topics (from AISEvents.h) --
-enum EventTopic {
-    EVENT_NULL            = 0,
-    EVENT_INIT            = 1,
-    EVENT_RELEASE         = 2,
-    EVENT_UPDATE          = 3,
-    EVENT_MESSAGE         = 4,
-    EVENT_UNIT_CREATED    = 5,
-    EVENT_UNIT_FINISHED   = 6,
-    EVENT_UNIT_IDLE       = 7,
-    EVENT_UNIT_MOVE_FAILED = 8,
-    EVENT_UNIT_DAMAGED    = 9,
-    EVENT_UNIT_DESTROYED  = 10,
-    EVENT_UNIT_GIVEN      = 11,
-    EVENT_UNIT_CAPTURED   = 12,
-    EVENT_ENEMY_ENTER_LOS = 13,
-    EVENT_ENEMY_LEAVE_LOS = 14,
-    EVENT_ENEMY_ENTER_RADAR = 15,
-    EVENT_ENEMY_LEAVE_RADAR = 16,
-    EVENT_ENEMY_DAMAGED   = 17,
-    EVENT_ENEMY_DESTROYED = 18,
-    EVENT_WEAPON_FIRED    = 19,
-    EVENT_PLAYER_COMMAND  = 20,
-    EVENT_SEISMIC_PING    = 21,
-    EVENT_COMMAND_FINISHED = 22,
-    EVENT_LOAD            = 23,
-    EVENT_SAVE            = 24,
-    EVENT_ENEMY_CREATED   = 25,
-    EVENT_ENEMY_FINISHED  = 26,
-    EVENT_LUA_MESSAGE     = 27,
-    EVENT_COUNT           = 28
-};
+// ============================================================================
+// Compatibility aliases
+// ============================================================================
+// Our proxy code was written against stub headers with shorter names.
+// These macros map the old names to the real engine names.
 
-// -- Event Structs (from AISEvents.h) --
+// -- Callback field aliases --
+#define Info_getValueByKey SkirmishAI_Info_getValueByKey
+#define Game_getTeamCount Game_getTeams
 
-struct SInitEvent {
-    int team;
-};
+// ============================================================================
+// Command topic aliases (old short names -> real engine enum values)
+// ============================================================================
 
-struct SReleaseEvent {
-    int reason;
-};
+// Unit commands
+#define COMMAND_BUILD_UNIT               COMMAND_UNIT_BUILD
+#define COMMAND_STOP                     COMMAND_UNIT_STOP
+#define COMMAND_WAIT                     COMMAND_UNIT_WAIT
+#define COMMAND_TIMED_WAIT               COMMAND_UNIT_WAIT_TIME
+#define COMMAND_SQUAD_WAIT               COMMAND_UNIT_WAIT_SQUAD
+#define COMMAND_DEATH_WAIT               COMMAND_UNIT_WAIT_DEATH
+#define COMMAND_GATHER_WAIT              COMMAND_UNIT_WAIT_GATHER
+#define COMMAND_MOVE_UNIT                COMMAND_UNIT_MOVE
+#define COMMAND_PATROL                   COMMAND_UNIT_PATROL
+#define COMMAND_FIGHT                    COMMAND_UNIT_FIGHT
+#define COMMAND_ATTACK                   COMMAND_UNIT_ATTACK
+#define COMMAND_ATTACK_AREA              COMMAND_UNIT_ATTACK_AREA
+#define COMMAND_GUARD                    COMMAND_UNIT_GUARD
+#define COMMAND_REPAIR                   COMMAND_UNIT_REPAIR
+#define COMMAND_RECLAIM_UNIT             COMMAND_UNIT_RECLAIM_UNIT
+#define COMMAND_RECLAIM_AREA             COMMAND_UNIT_RECLAIM_AREA
+#define COMMAND_RECLAIM_IN_AREA          COMMAND_UNIT_RECLAIM_AREA
+#define COMMAND_RECLAIM_FEATURE          COMMAND_UNIT_RECLAIM_FEATURE
+#define COMMAND_RESTORE_AREA             COMMAND_UNIT_RESTORE_AREA
+#define COMMAND_RESURRECT                COMMAND_UNIT_RESURRECT
+#define COMMAND_RESURRECT_IN_AREA        COMMAND_UNIT_RESURRECT_AREA
+#define COMMAND_CAPTURE                  COMMAND_UNIT_CAPTURE
+#define COMMAND_CAPTURE_AREA             COMMAND_UNIT_CAPTURE_AREA
+#define COMMAND_SET_BASE                 COMMAND_UNIT_SET_BASE
+#define COMMAND_SELF_DESTRUCT            COMMAND_UNIT_SELF_DESTROY
+#define COMMAND_LOAD_ONTO                COMMAND_UNIT_LOAD_ONTO
+#define COMMAND_UNLOAD_UNIT              COMMAND_UNIT_UNLOAD_UNIT
+#define COMMAND_UNLOAD_UNITS_AREA        COMMAND_UNIT_UNLOAD_UNITS_AREA
+#define COMMAND_SET_WANTED_MAX_SPEED     COMMAND_UNIT_SET_WANTED_MAX_SPEED
+#define COMMAND_STOCKPILE                COMMAND_UNIT_STOCKPILE
+#define COMMAND_DGUN                     COMMAND_UNIT_D_GUN
+#define COMMAND_CUSTOM                   COMMAND_UNIT_CUSTOM
+#define COMMAND_SET_ON_OFF               COMMAND_UNIT_SET_ON_OFF
+#define COMMAND_SET_REPEAT               COMMAND_UNIT_SET_REPEAT
+#define COMMAND_SET_MOVE_STATE            COMMAND_UNIT_SET_MOVE_STATE
+#define COMMAND_SET_FIRE_STATE            COMMAND_UNIT_SET_FIRE_STATE
+#define COMMAND_SET_TRAJECTORY            COMMAND_UNIT_SET_TRAJECTORY
+#define COMMAND_SET_AUTO_REPAIR_LEVEL     COMMAND_UNIT_SET_AUTO_REPAIR_LEVEL
+#define COMMAND_SET_IDLE_MODE             COMMAND_UNIT_SET_IDLE_MODE
+#define COMMAND_LOAD_UNITS_AREA          COMMAND_UNIT_LOAD_UNITS_AREA
 
-struct SUpdateEvent {
-    int frame;
-};
+// Cheat commands
+#define COMMAND_GIVE_ME                  COMMAND_CHEATS_GIVE_ME_RESOURCE
+#define COMMAND_GIVE_ME_NEW_UNIT         COMMAND_CHEATS_GIVE_ME_NEW_UNIT
 
-struct SMessageEvent {
-    int player;
-    const char *message;
-};
+// Drawer commands
+#define COMMAND_DRAW_ADD_POINT           COMMAND_DRAWER_POINT_ADD
+#define COMMAND_DRAW_ADD_LINE            COMMAND_DRAWER_LINE_ADD
+#define COMMAND_DRAW_REMOVE_POINT        COMMAND_DRAWER_POINT_REMOVE
+#define COMMAND_DRAW_UNIT                COMMAND_DRAWER_DRAW_UNIT
+#define COMMAND_CREATE_SPLINE_FIGURE     COMMAND_DRAWER_FIGURE_CREATE_SPLINE
+#define COMMAND_CREATE_LINE_FIGURE       COMMAND_DRAWER_FIGURE_CREATE_LINE
+#define COMMAND_SET_FIGURE_COLOR         COMMAND_DRAWER_FIGURE_SET_COLOR
+#define COMMAND_REMOVE_FIGURE            COMMAND_DRAWER_FIGURE_DELETE
 
-struct SUnitCreatedEvent {
-    int unit;
-    int builder;
-};
+// Path commands
+#define COMMAND_INIT_PATH                COMMAND_PATH_INIT
+#define COMMAND_GET_APPROX_LENGTH        COMMAND_PATH_GET_APPROXIMATE_LENGTH
+#define COMMAND_GET_NEXT_WAYPOINT        COMMAND_PATH_GET_NEXT_WAYPOINT
+#define COMMAND_FREE_PATH                COMMAND_PATH_FREE
 
-struct SUnitFinishedEvent {
-    int unit;
-};
+// Commands that do not exist in real engine -- define unique values
+// above the real enum range (NUM_CMD_TOPICS = 97)
+#define COMMAND_SET_MY_INCOME_SHARE_DIRECT  200
+#define COMMAND_SET_SHARE_LEVEL             201
+#define COMMAND_SET_FIGURE_POSITION         202
+#define COMMAND_PAUSE_TEAM                  203
 
-struct SUnitIdleEvent {
-    int unit;
-};
+// ============================================================================
+// Struct type aliases (old stub names -> real engine struct names)
+// ============================================================================
 
-struct SUnitMoveFailedEvent {
-    int unit;
-};
+// Unit command structs
+#define SStopCommand                     SStopUnitCommand
+#define SWaitCommand                     SWaitUnitCommand
+#define STimedWaitCommand                STimeWaitUnitCommand
+#define SSquadWaitCommand                SSquadWaitUnitCommand
+#define SDeathWaitCommand                SDeathWaitUnitCommand
+#define SGatherWaitCommand               SGatherWaitUnitCommand
+#define SAttackAreaCommand               SAttackAreaUnitCommand
+#define SReclaimUnitCommand              SReclaimUnitUnitCommand
+#define SReclaimAreaCommand              SReclaimAreaUnitCommand
+#define SRestoreAreaCommand              SRestoreAreaUnitCommand
+#define SResurrectCommand                SResurrectUnitCommand
+#define SResurrectAreaCommand            SResurrectAreaUnitCommand
+#define SCaptureAreaCommand              SCaptureAreaUnitCommand
+#define SSetBaseCommand                  SSetBaseUnitCommand
+#define SSelfDestructUnitCommand         SSelfDestroyUnitCommand
+#define SLoadOntoCommand                 SLoadOntoUnitCommand
+#define SUnloadUnitsAreaCommand          SUnloadUnitsAreaUnitCommand
+#define SStockpileCommand                SStockpileUnitCommand
+#define SCustomCommand                   SCustomUnitCommand
+#define SSetOnOffCommand                 SSetOnOffUnitCommand
+#define SSetRepeatCommand                SSetRepeatUnitCommand
+#define SSetMoveStateCommand             SSetMoveStateUnitCommand
+#define SSetFireStateCommand             SSetFireStateUnitCommand
+#define SSetTrajectoryCommand            SSetTrajectoryUnitCommand
+#define SSetAutoRepairLevelCommand       SSetAutoRepairLevelUnitCommand
+#define SSetIdleModeCommand              SSetIdleModeUnitCommand
+#define SLoadUnitsAreaCommand            SLoadUnitsAreaUnitCommand
 
-struct SUnitDamagedEvent {
-    int unit;
-    int attacker;    // -1 if no attacker
-    float damage;
-    float dir_x, dir_y, dir_z;
-    int weaponDefId;
-    int paralyzer;
-};
+// Cheat command structs
+#define SGiveMeCommand                   SGiveMeResourceCheatCommand
+#define SGiveMeNewUnitCommand            SGiveMeNewUnitCheatCommand
 
-struct SUnitDestroyedEvent {
-    int unit;
-    int attacker;    // -1 if no attacker
-};
+// Drawer command structs
+#define SDrawAddPointCommand             SAddPointDrawCommand
+#define SDrawAddLineCommand              SAddLineDrawCommand
+#define SDrawRemovePointCommand          SRemovePointDrawCommand
+#define SDrawUnitCommand                 SDrawUnitDrawerCommand
+#define SCreateSplineFigureCommand       SCreateSplineFigureDrawerCommand
+#define SCreateLineFigureCommand         SCreateLineFigureDrawerCommand
+#define SSetFigureColorCommand           SSetColorFigureDrawerCommand
+#define SRemoveFigureCommand             SDeleteFigureDrawerCommand
 
-struct SUnitGivenEvent {
-    int unit;
-    int oldTeamId;
-    int newTeamId;
-};
+// Path command structs
+#define SGetApproxLengthCommand          SGetApproximateLengthPathCommand
+#define SGetNextWaypointCommand          SGetNextWaypointPathCommand
 
-struct SUnitCapturedEvent {
-    int unit;
-    int oldTeamId;
-    int newTeamId;
-};
+// Group command structs
+#define SGroupRemoveUnitCommand          SGroupClearUnitCommand
 
-struct SEnemyEnterLOSEvent {
-    int enemy;
-};
+// ============================================================================
+// Stub structs for commands that do not exist in the real engine
+// ============================================================================
 
-struct SEnemyLeaveLOSEvent {
-    int enemy;
-};
-
-struct SEnemyEnterRadarEvent {
-    int enemy;
-};
-
-struct SEnemyLeaveRadarEvent {
-    int enemy;
-};
-
-struct SEnemyDamagedEvent {
-    int enemy;
-    int attacker;    // -1 if no attacker
-    float damage;
-    float dir_x, dir_y, dir_z;
-    int weaponDefId;
-};
-
-struct SEnemyDestroyedEvent {
-    int enemy;
-    int attacker;    // -1 if no attacker
-};
-
-struct SWeaponFiredEvent {
-    int unitId;
-    int weaponDefId;
-};
-
-struct SPlayerCommandEvent {
-    int *unitIds;
-    int numUnitIds;
-    int commandTopicId;
-    int commandId;
-};
-
-struct SSeismicPingEvent {
-    float pos_posF3[3];
-    float strength;
-};
-
-struct SCommandFinishedEvent {
-    int unitId;
-    int commandId;
-    int commandTopicId;
-};
-
-struct SLoadEvent {
-    int placeholder;
-};
-
-struct SSaveEvent {
-    int placeholder;
-};
-
-struct SEnemyCreatedEvent {
-    int enemy;
-};
-
-struct SEnemyFinishedEvent {
-    int enemy;
-};
-
-struct SLuaMessageEvent {
-    const char *inData;
-    int inMessageId;
-};
-
-// -- Command Topics (subset, from AISCommands.h) --
-enum CommandTopic {
-    COMMAND_NULL = 0,
-    COMMAND_DRAW_ADD_POINT = 1,
-    COMMAND_DRAW_ADD_LINE = 2,
-    COMMAND_DRAW_REMOVE_POINT = 3,
-    COMMAND_SEND_TEXT_MESSAGE = 4,
-    COMMAND_SET_LAST_POS_MESSAGE = 5,
-    COMMAND_SEND_RESOURCES = 6,
-    COMMAND_SET_MY_INCOME_SHARE_DIRECT = 7,
-    COMMAND_SET_SHARE_LEVEL = 8,
-    COMMAND_PAUSE_TEAM = 9,
-    COMMAND_GROUP_ADD_UNIT = 12,
-    COMMAND_GROUP_REMOVE_UNIT = 13,
-    COMMAND_INIT_PATH = 16,
-    COMMAND_GET_APPROX_LENGTH = 17,
-    COMMAND_GET_NEXT_WAYPOINT = 18,
-    COMMAND_FREE_PATH = 19,
-    COMMAND_GIVE_ME = 20,
-    COMMAND_CALL_LUA_RULES = 21,
-    COMMAND_CREATE_SPLINE_FIGURE = 22,
-    COMMAND_CREATE_LINE_FIGURE = 23,
-    COMMAND_SET_FIGURE_POSITION = 24,
-    COMMAND_SET_FIGURE_COLOR = 25,
-    COMMAND_REMOVE_FIGURE = 26,
-    COMMAND_DRAW_UNIT = 27,
-    COMMAND_BUILD_UNIT = 35,
-    COMMAND_STOP = 36,
-    COMMAND_WAIT = 37,
-    COMMAND_TIMED_WAIT = 38,
-    COMMAND_SQUAD_WAIT = 39,
-    COMMAND_DEATH_WAIT = 40,
-    COMMAND_GATHER_WAIT = 41,
-    COMMAND_MOVE_UNIT = 42,
-    COMMAND_PATROL = 43,
-    COMMAND_FIGHT = 44,
-    COMMAND_ATTACK = 45,
-    COMMAND_ATTACK_AREA = 46,
-    COMMAND_GUARD = 47,
-    COMMAND_REPAIR = 48,
-    COMMAND_RECLAIM_UNIT = 49,
-    COMMAND_RECLAIM_AREA = 50,
-    COMMAND_RECLAIM_IN_AREA = 51,
-    COMMAND_RECLAIM_FEATURE = 52,
-    COMMAND_RESTORE_AREA = 53,
-    COMMAND_RESURRECT = 54,
-    COMMAND_RESURRECT_IN_AREA = 55,
-    COMMAND_CAPTURE = 56,
-    COMMAND_CAPTURE_AREA = 57,
-    COMMAND_SET_BASE = 58,
-    COMMAND_SELF_DESTRUCT = 59,
-    COMMAND_LOAD_UNITS = 60,
-    COMMAND_LOAD_UNITS_AREA = 61,
-    COMMAND_LOAD_ONTO = 62,
-    COMMAND_UNLOAD_UNIT = 63,
-    COMMAND_UNLOAD_UNITS_AREA = 64,
-    COMMAND_SET_WANTED_MAX_SPEED = 65,
-    COMMAND_STOCKPILE = 66,
-    COMMAND_DGUN = 67,
-    COMMAND_CUSTOM = 68,
-    COMMAND_SET_ON_OFF = 69,
-    COMMAND_SET_REPEAT = 70,
-    COMMAND_SET_MOVE_STATE = 71,
-    COMMAND_SET_FIRE_STATE = 72,
-    COMMAND_SET_TRAJECTORY = 73,
-    COMMAND_SET_AUTO_REPAIR_LEVEL = 74,
-    COMMAND_SET_IDLE_MODE = 75,
-    COMMAND_GIVE_ME_NEW_UNIT = 79,
-    COMMAND_CALL_LUA_UI = 96,
-};
-
-// -- Command Structs (subset from AISCommands.h) --
-
-struct SBuildUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toBuildUnitDefId;
-    float buildPos_posF3[3];
-    int facing;
-};
-
-struct SStopCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-};
-
-struct SMoveUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float toPos_posF3[3];
-};
-
-struct SPatrolUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float toPos_posF3[3];
-};
-
-struct SFightUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float toPos_posF3[3];
-};
-
-struct SAttackUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toAttackUnitId;
-};
-
-struct SAttackAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float toAttackPos_posF3[3];
-    float radius;
-};
-
-struct SGuardUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toGuardUnitId;
-};
-
-struct SRepairUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toRepairUnitId;
-};
-
-struct SReclaimUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toReclaimUnitIdOrFeatureId;
-};
-
-struct SReclaimAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float pos_posF3[3];
-    float radius;
-};
-
-struct SRestoreAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float pos_posF3[3];
-    float radius;
-};
-
-struct SResurrectCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toResurrectFeatureId;
-};
-
-struct SResurrectAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float pos_posF3[3];
-    float radius;
-};
-
-struct SCaptureUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toCaptureUnitId;
-};
-
-struct SCaptureAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float pos_posF3[3];
-    float radius;
-};
-
-struct SSetBaseCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float basePos_posF3[3];
-};
-
-struct SSelfDestructUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-};
-
-struct SLoadUnitsCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int *toLoadUnitIds;
-    int numToLoadUnitIds;
-};
-
-struct SLoadUnitsAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float pos_posF3[3];
-    float radius;
-};
-
-struct SLoadOntoCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int transportUnitId;
-};
-
-struct SUnloadUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float toPos_posF3[3];
-    int toUnloadUnitId;
-};
-
-struct SUnloadUnitsAreaCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    float toPos_posF3[3];
-    float radius;
-};
-
+// SSetWantedMaxSpeedCommand -- COMMAND_UNIT_SET_WANTED_MAX_SPEED exists but
+// the struct was removed from the real headers (marked "unused").
 struct SSetWantedMaxSpeedCommand {
     int unitId;
     int groupId;
@@ -448,296 +159,27 @@ struct SSetWantedMaxSpeedCommand {
     float wantedMaxSpeed;
 };
 
-struct SStockpileCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
+// SPauseTeamCommand -- no equivalent in real engine
+struct SPauseTeamCommand {
+    int enable;
 };
 
-struct SDGunUnitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int toAttackUnitId;
-};
-
-struct SCustomCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int cmdId;
-    float *params;
-    int numParams;
-};
-
-struct SWaitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-};
-
-struct STimedWaitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int time;
-};
-
-struct SSquadWaitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int numUnits;
-};
-
-struct SDeathWaitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int unitId2;
-};
-
-struct SGatherWaitCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-};
-
-struct SSetOnOffCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int on;
-};
-
-struct SSetRepeatCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int repeat;
-};
-
-struct SSetMoveStateCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int moveState;
-};
-
-struct SSetFireStateCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int fireState;
-};
-
-struct SSetTrajectoryCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int trajectory;
-};
-
-struct SSetAutoRepairLevelCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int autoRepairLevel;
-};
-
-struct SSetIdleModeCommand {
-    int unitId;
-    int groupId;
-    short options;
-    int timeOut;
-    int idleMode;
-};
-
-struct SSendTextMessageCommand {
-    const char *text;
-    int zone;
-};
-
-struct SSetLastPosMessageCommand {
-    float pos_posF3[3];
-};
-
-struct SSendResourcesCommand {
-    int resourceId;
-    float amount;
-    int receivingTeamId;
-};
-
+// SSetMyIncomeShareDirectCommand -- no equivalent in real engine
 struct SSetMyIncomeShareDirectCommand {
     int resourceId;
     float share;
 };
 
+// SSetShareLevelCommand -- no equivalent in real engine
 struct SSetShareLevelCommand {
     int resourceId;
     float shareLevel;
 };
 
-struct SPauseTeamCommand {
-    int enable;
-};
-
-struct SGroupAddUnitCommand {
-    int unitId;
-    int groupId;
-};
-
-struct SGroupRemoveUnitCommand {
-    int unitId;
-    int groupId;
-};
-
-struct SInitPathCommand {
-    float startPos_posF3[3];
-    float endPos_posF3[3];
-    int pathType;
-    float goalRadius;
-};
-
-struct SGetApproxLengthCommand {
-    float startPos_posF3[3];
-    float endPos_posF3[3];
-    int pathType;
-    float goalRadius;
-};
-
-struct SGetNextWaypointCommand {
-    int pathId;
-};
-
-struct SFreePathCommand {
-    int pathId;
-};
-
-struct SGiveMeCommand {
-    int resourceId;
-    float amount;
-};
-
-struct SGiveMeNewUnitCommand {
-    int unitDefId;
-    float pos_posF3[3];
-};
-
-struct SCallLuaRulesCommand {
-    const char *inData;
-    int inSize;
-};
-
-struct SCallLuaUICommand {
-    const char *inData;
-    int inSize;
-};
-
-struct SCreateSplineFigureCommand {
-    float pos1_posF3[3];
-    float pos2_posF3[3];
-    float pos3_posF3[3];
-    float pos4_posF3[3];
-    float width;
-    int arrow;
-    int lifeTime;
-    int figureGroupId;
-};
-
-struct SCreateLineFigureCommand {
-    float pos1_posF3[3];
-    float pos2_posF3[3];
-    float width;
-    int arrow;
-    int lifeTime;
-    int figureGroupId;
-};
-
+// SSetFigurePositionCommand -- no equivalent in real engine
 struct SSetFigurePositionCommand {
     int figureId;
-    float pos_posF3[3];
-};
-
-struct SSetFigureColorCommand {
-    int figureId;
-    float r, g, b, a;
-};
-
-struct SRemoveFigureCommand {
-    int figureId;
-};
-
-struct SDrawUnitCommand {
-    int unitDefId;
-    float pos_posF3[3];
-    float rotation;
-    int lifeTime;
-    int teamId;
-    int transparent;
-    int drawBorder;
-    int facing;
-};
-
-struct SDrawAddPointCommand {
-    float pos_posF3[3];
-    const char *label;
-};
-
-struct SDrawAddLineCommand {
-    float posFrom_posF3[3];
-    float posTo_posF3[3];
-};
-
-struct SDrawRemovePointCommand {
-    float pos_posF3[3];
-};
-
-// -- Engine Callback Table --
-
-typedef int (*Clb_Engine_handleCommand)(int skirmishAIId, int toId,
-                                        int commandId, int commandTopic,
-                                        void *commandData);
-
-typedef const char* (*Clb_Info_getValueByKey)(int skirmishAIId, const char *key);
-
-typedef void (*Clb_Log_log)(int skirmishAIId, const char *msg);
-
-typedef int (*Clb_Game_getMyTeam)(int skirmishAIId);
-typedef int (*Clb_Game_getMyAllyTeam)(int skirmishAIId);
-typedef int (*Clb_Game_getTeamCount)(int skirmishAIId);
-typedef int (*Clb_Map_getWidth)(int skirmishAIId);
-typedef int (*Clb_Map_getHeight)(int skirmishAIId);
-typedef void (*Clb_Unit_getPos)(int skirmishAIId, int unitId, float *pos);
-typedef float (*Clb_Unit_getHealth)(int skirmishAIId, int unitId);
-typedef float (*Clb_Unit_getMaxHealth)(int skirmishAIId, int unitId);
-
-struct SSkirmishAICallback {
-    Clb_Engine_handleCommand Engine_handleCommand;
-    Clb_Info_getValueByKey Info_getValueByKey;
-    Clb_Log_log Log_log;
-    Clb_Game_getMyTeam Game_getMyTeam;
-    Clb_Game_getMyAllyTeam Game_getMyAllyTeam;
-    Clb_Game_getTeamCount Game_getTeamCount;
-    Clb_Map_getWidth Map_getWidth;
-    Clb_Map_getHeight Map_getHeight;
-    Clb_Unit_getPos Unit_getPos;
-    Clb_Unit_getHealth Unit_getHealth;
-    Clb_Unit_getMaxHealth Unit_getMaxHealth;
+    float *pos_posF3;
 };
 
 #endif // HIGHBAR_ENGINE_TYPES_H

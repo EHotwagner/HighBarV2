@@ -39,13 +39,24 @@ type HighBarClient(socketPath: string) =
             read <- read + s.Read(dataBuf, read, len - read)
         dataBuf
 
-    /// Connect to the proxy Unix domain socket.
+    /// Connect to the proxy Unix domain socket (proxy is the client connecting to us).
     member _.Connect() =
         let endpoint = UnixDomainSocketEndPoint(socketPath)
         let sock = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
         sock.Connect(endpoint)
         socket <- Some sock
         stream <- Some(new NetworkStream(sock, true))
+
+    /// Accept a connection from the proxy on a pre-created listening socket.
+    member _.AcceptFrom(listener: Socket) =
+        let accepted = listener.Accept()
+        socket <- Some accepted
+        stream <- Some(new NetworkStream(accepted, true))
+
+    /// Wrap an already-connected socket (e.g. accepted by the harness).
+    member _.WrapSocket(connectedSocket: Socket) =
+        socket <- Some connectedSocket
+        stream <- Some(new NetworkStream(connectedSocket, false))
 
     /// Perform handshake — wait for Handshake, send HandshakeResponse.
     member _.Handshake() =
@@ -128,5 +139,29 @@ type HighBarClient(socketPath: string) =
     static member Connect(socketPath: string) =
         let client = new HighBarClient(socketPath)
         client.Connect()
+        client.Handshake() |> ignore
+        client
+
+    /// Create a listening socket, accept the proxy's connection, handshake, and return the client.
+    /// This is the correct flow for live engine testing where the proxy connects to us.
+    static member AcceptFromProxy(socketPath: string, timeoutMs: int) =
+        // Clean up stale socket
+        if File.Exists(socketPath) then File.Delete(socketPath)
+
+        // Create listening socket
+        let listener = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
+        let endpoint = UnixDomainSocketEndPoint(socketPath)
+        listener.Bind(endpoint)
+        listener.Listen(1)
+
+        // Wait for proxy to connect with timeout
+        if not (listener.Poll(timeoutMs * 1000, SelectMode.SelectRead)) then
+            listener.Close()
+            if File.Exists(socketPath) then File.Delete(socketPath)
+            failwith $"Proxy did not connect within {timeoutMs}ms"
+
+        let client = new HighBarClient(socketPath)
+        client.AcceptFrom(listener)
+        listener.Close() // Stop listening, we only need one connection
         client.Handshake() |> ignore
         client

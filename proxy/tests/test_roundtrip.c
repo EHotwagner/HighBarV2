@@ -28,9 +28,10 @@ TEST(test_frame_roundtrip) {
 
     // Create a few events
     struct SUnitCreatedEvent e1 = { .unit = 10, .builder = 5 };
+    float dir_rt[3] = {1.0f, 0.0f, 0.0f};
     struct SUnitDamagedEvent e2 = {
         .unit = 1, .attacker = 2, .damage = 50.5f,
-        .dir_x = 1.0f, .dir_y = 0.0f, .dir_z = 0.0f,
+        .dir_posF3 = dir_rt,
         .weaponDefId = 3, .paralyzer = 0
     };
     struct SUpdateEvent e3 = { .frame = 100 };

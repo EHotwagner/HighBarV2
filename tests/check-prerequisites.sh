@@ -84,6 +84,13 @@ fi
 # Check 2: Engine version (only if binary was found)
 if [ -n "${RESOLVED_ENGINE}" ]; then
     ACTUAL_VERSION=$("${RESOLVED_ENGINE}" --sync-version 2>/dev/null || echo "UNKNOWN")
+    # spring-dedicated returns empty for --sync-version; try spring-headless as fallback
+    if [ -z "${ACTUAL_VERSION}" ]; then
+        HEADLESS_BIN=$(command -v spring-headless 2>/dev/null || true)
+        if [ -n "${HEADLESS_BIN}" ]; then
+            ACTUAL_VERSION=$("${HEADLESS_BIN}" --sync-version 2>/dev/null || echo "UNKNOWN")
+        fi
+    fi
     if [ "${ACTUAL_VERSION}" = "${ENGINE_VERSION}" ]; then
         CHECKS+=("{\"name\":\"engine_version\",\"passed\":true,\"detail\":\"Engine version matches: ${ENGINE_VERSION}\"}")
     else

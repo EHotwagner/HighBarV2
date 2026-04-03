@@ -11,12 +11,10 @@ open Highbar
 [<Collection("Engine")>]
 type CommandTests(engine: EngineFixture) =
 
-    /// Helper: connect, handshake, run for N frames collecting events,
+    /// Helper: run for N frames collecting events,
     /// optionally sending commands on specific frames via a callback.
     let runWithCommands (maxFrames: int) (onFrame: GameFrame -> int -> Highbar.AICommand list) =
-        use client = new HighBarClient(engine.SocketPath)
-        client.Connect()
-        let _hs = client.Handshake()
+        let client = engine.Client
 
         let allFrames = ResizeArray<GameFrame>()
         let allEvents = ResizeArray<GameEvent>()
@@ -35,7 +33,6 @@ type CommandTests(engine: EngineFixture) =
         with
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
-        client.Disconnect()
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
 
     /// Helper: get the first builder unit ID from events.
