@@ -34,6 +34,10 @@ dist/
 .vscode/
 .idea/
 
+# Cloned repos (generated at build time)
+bar-repo/
+squashfs-root/
+
 # OS
 .DS_Store
 Thumbs.db
