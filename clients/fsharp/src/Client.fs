@@ -17,6 +17,7 @@ type HighBarClient(socketPath: string) =
     let mutable socket: Socket option = None
     let mutable stream: NetworkStream option = None
     let protocolVersion = 1u
+    let mutable nextRequestId = 1u
 
     let sendMessage (s: NetworkStream) (msg: IMessage) =
         let data = msg.ToByteArray()
@@ -124,6 +125,94 @@ type HighBarClient(socketPath: string) =
                     sendMessage s resp
 
                 | _ -> ()
+
+    /// Send a callback request and receive the response.
+    /// Must be called when the client has an active stream (during frame processing or init).
+    member _.SendCallback(callbackId: uint32, callbackParams: CallbackParam list) : CallbackResponse =
+        match stream with
+        | None -> failwith "Not connected"
+        | Some s ->
+            let req = CallbackRequest()
+            req.RequestId <- nextRequestId
+            nextRequestId <- nextRequestId + 1u
+            req.CallbackId <- callbackId
+            for p in callbackParams do
+                req.Params.Add(p)
+            let msg = AIMessage()
+            msg.CallbackRequest <- req
+            sendMessage s msg
+
+            let respBytes = recvBytes s
+            let proxyMsg = ProxyMessage.Parser.ParseFrom(respBytes)
+            match proxyMsg.MessageCase with
+            | ProxyMessage.MessageOneofCase.CallbackResponse ->
+                proxyMsg.CallbackResponse
+            | other -> failwith $"Expected CallbackResponse, got {other}"
+
+    /// Get all valid unitDefId values from the engine.
+    member this.GetUnitDefs(maxCount: int) : int array =
+        let p = CallbackParam()
+        p.IntValue <- maxCount
+        let resp = this.SendCallback(uint32 CallbackId.CallbackGetUnitDefs, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntArrayValue then
+            resp.Result.IntArrayValue.Values |> Seq.map int |> Seq.toArray
+        else [||]
+
+    /// Get the engine name for a unitDefId.
+    member this.GetUnitDefName(defId: int) : string =
+        let p = CallbackParam()
+        p.IntValue <- defId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitdefGetName, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.StringValue then
+            resp.Result.StringValue
+        else ""
+
+    /// Get build options (buildable defIds) for a unitDefId.
+    member this.GetBuildOptions(defId: int) : int array =
+        let p1 = CallbackParam()
+        p1.IntValue <- defId
+        let p2 = CallbackParam()
+        p2.IntValue <- 256
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitdefGetBuildOptions, [p1; p2])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntArrayValue then
+            resp.Result.IntArrayValue.Values |> Seq.map int |> Seq.toArray
+        else [||]
+
+    /// Get the max weapon range for a unitDefId (0.0 = unarmed).
+    member this.GetMaxWeaponRange(defId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- defId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitdefGetMaxWeaponRange, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the build speed for a unitDefId (0.0 = not a builder).
+    member this.GetBuildSpeed(defId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- defId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitdefGetBuildSpeed, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the defId for a live unit instance.
+    member this.GetUnitDef(unitId: int) : int =
+        let p = CallbackParam()
+        p.IntValue <- unitId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitGetDef, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue
+        else -1
+
+    /// Enable or disable cheat events. Returns previous state.
+    member this.SetCheatEventsEnabled(enabled: bool) : bool =
+        let p = CallbackParam()
+        p.IntValue <- if enabled then 1 else 0
+        let resp = this.SendCallback(uint32 CallbackId.CallbackCheatsSetEventsEnabled, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue <> 0
+        else false
 
     /// Disconnect from the proxy.
     member _.Disconnect() =

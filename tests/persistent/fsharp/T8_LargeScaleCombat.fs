@@ -7,7 +7,7 @@ open Xunit.Abstractions
 open HighBar.Client
 open HighBar.Client.Commands
 
-/// Tier 8: Large-scale combat scenarios — stress-test with multiple units.
+/// Tier 8: Large-scale combat scenarios — stress-test with multiple units and event assertions.
 [<Collection("PersistentEngine")>]
 [<TestCaseOrderer("HighBar.PersistentTests.PriorityOrderer", "HighBar.PersistentTests")>]
 type T8_LargeScaleCombat(engine: PersistentEngineFixture, output: ITestOutputHelper) =

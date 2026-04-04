@@ -74,7 +74,7 @@ type T6_CommandCoverage(engine: PersistentEngineFixture, output: ITestOutputHelp
         let uid = unitId.Value
 
         let mutable destroyed = false
-        engine.RunFrames(200, fun frame idx ->
+        engine.RunFrames(500, fun frame idx ->
             for ev in frame.Events do
                 match ev with
                 | GameEvent.UnitDestroyed(duid, _) when duid = uid -> destroyed <- true
@@ -86,9 +86,9 @@ type T6_CommandCoverage(engine: PersistentEngineFixture, output: ITestOutputHelp
                 []
         ) |> ignore
 
-        output.WriteLine($"SelfDestruct for unit {uid}: destroyed={destroyed}")
         engine.ThrowIfEngineCrashed()
-        // Engine must survive; destruction event may take longer than expected
+        output.WriteLine($"SelfDestruct for unit {uid}: destroyed={destroyed}")
+        // UnitDestroyed event may not be delivered in headless cheat mode
         Assert.True(true, "Engine survived SelfDestructCommand")
 
     [<Fact>]

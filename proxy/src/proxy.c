@@ -267,6 +267,12 @@ int init(int skirmishAIId, const struct SSkirmishAICallback *callback) {
         proxy_log(HB_LOG_INFO, "Cheats enabled");
     }
 
+    // Enable cheat events so enemy-related events are still delivered in cheat mode
+    if (callback && callback->Cheats_setEventsEnabled) {
+        callback->Cheats_setEventsEnabled(skirmishAIId, true);
+        proxy_log(HB_LOG_INFO, "Cheat events enabled");
+    }
+
     return 0;
 }
 
@@ -362,6 +368,8 @@ int handleEvent(int skirmishAIId, int topicId, const void *data) {
     if (g_state->config.frame_mode == HB_FRAME_BATCHED) {
         if (g_state->pending_event_count < MAX_EVENTS_PER_FRAME) {
             g_state->pending_events[g_state->pending_event_count++] = event;
+        } else {
+            proxy_log(HB_LOG_WARN, "Event buffer full, dropping event");
         }
 
         // UPDATE event triggers frame send

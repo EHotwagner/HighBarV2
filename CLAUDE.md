@@ -18,6 +18,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-04
 - F# / .NET 8.0 + Google.Protobuf (generated types from `proto/highbar/commands.proto`) (010-cheat-command-builders)
 - F# / .NET 8.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28 (011-persistent-engine-tests)
 - Filesystem (session logs, temp directories) (011-persistent-engine-tests)
+- C11 (proxy), F# / .NET 8.0 (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), xUnit 2.x (tests), BarData (in-repo) (013-diagnose-fix-test-gaps)
+- Filesystem (Unix domain sockets, log files, temp directories) (013-diagnose-fix-test-gaps)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -62,9 +64,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 013-diagnose-fix-test-gaps: Added C11 (proxy), F# / .NET 8.0 (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), xUnit 2.x (tests), BarData (in-repo)
 - 012-harden-persistent-tests: Added F# / .NET 8.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28
 - 011-persistent-engine-tests: Added F# / .NET 8.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28
-- 010-cheat-command-builders: Added F# / .NET 8.0 + Google.Protobuf (generated types from `proto/highbar/commands.proto`)
 
 
 <!-- MANUAL ADDITIONS START -->

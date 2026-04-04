@@ -8,7 +8,6 @@ open System.Threading.Tasks
 open Xunit
 open HighBar.Client
 open HighBar.Client.Commands
-open BarData
 
 /// Per-unitDefId discovery result.
 type UnitDefInfo =
@@ -65,6 +64,8 @@ type PersistentEngineFixture() =
     let mutable initialEvents: GameEvent list = []
     let mutable initElapsed: TimeSpan = TimeSpan.Zero
     let mutable registry: UnitDefRegistry option = None
+    let mutable commanderBuildOptions: int array = [||]
+    let mutable hasEnemy: bool = false
 
     // Track all unit IDs we know about from events
     let knownUnitIds = System.Collections.Generic.HashSet<int>()
@@ -124,89 +125,45 @@ type PersistentEngineFixture() =
     /// The discovered UnitDef registry.
     member _.Registry = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
 
-    /// UnitDefId for a ground builder unit (prefers non-flying).
+    /// Build options discovered for the commander unit.
+    member _.CommanderBuildOptions = commanderBuildOptions
+
+    /// Whether an enemy unit was detected during initialization.
+    member _.HasEnemy = hasEnemy
+
+    /// UnitDefId for a builder unit.
     member _.BuilderDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-        let groundBuilder =
-            r.Builders
-            |> List.tryFind (fun defId ->
-                match r.Entries |> Map.tryFind defId with
-                | Some info ->
-                    let bu = BarData.AllUnits.all.[defId - 1]
-                    not bu.canFly
-                | None -> false)
-        groundBuilder
-        |> Option.orElseWith (fun () -> r.Builders |> List.tryHead)
-        |> Option.defaultWith (fun () -> failwith "No builder discovered")
+        r.Builders |> List.tryHead |> Option.defaultWith (fun () -> failwith "No builder discovered")
 
-    /// UnitDefId for a ground armed unit (prefers non-flying, higher health).
+    /// UnitDefId for an armed unit.
     member _.ArmedUnitDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-        let barUnits = BarData.AllUnits.all
-        // Prefer ground armed units with decent health (>200 HP)
-        let strongGroundArmed =
-            r.ArmedUnits
-            |> List.tryFind (fun defId ->
-                let bu = barUnits.[defId - 1]
-                not bu.canFly &&
-                (match bu.health with
-                 | BarData.ValueOrExpr.Concrete h -> h > 200.0
-                 | _ -> false))
-        let groundArmed =
-            r.ArmedUnits
-            |> List.tryFind (fun defId ->
-                let bu = barUnits.[defId - 1]
-                not bu.canFly)
-        strongGroundArmed
-        |> Option.orElse groundArmed
-        |> Option.orElseWith (fun () -> r.ArmedUnits |> List.tryHead)
-        |> Option.defaultWith (fun () -> failwith "No armed unit discovered")
+        r.ArmedUnits |> List.tryHead |> Option.defaultWith (fun () -> failwith "No armed unit discovered")
 
-    /// UnitDefId for a ground mobile unit (prefers non-flying).
+    /// UnitDefId for a mobile unit.
     member _.MobileUnitDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-        let groundMobile =
-            r.MobileUnits
-            |> List.tryFind (fun defId ->
-                let bu = BarData.AllUnits.all.[defId - 1]
-                not bu.canFly)
-        groundMobile
-        |> Option.orElseWith (fun () -> r.MobileUnits |> List.tryHead)
-        |> Option.defaultWith (fun () -> failwith "No mobile unit discovered")
+        r.MobileUnits |> List.tryHead |> Option.defaultWith (fun () -> failwith "No mobile unit discovered")
 
     /// UnitDefId for a building.
     member _.BuildingDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
         r.Buildings |> List.tryHead |> Option.defaultWith (fun () -> failwith "No building discovered")
 
-    /// UnitDefId for a buildable structure (a cheap T1 building a ground constructor can build).
+    /// UnitDefId for a buildable structure (from commander's build options).
     member _.BuildableStructureDefId =
-        // Search full BarData for a cheap, static building (T1 structure)
-        let barUnits = BarData.AllUnits.all
-        let cheapBuilding =
-            barUnits
-            |> List.mapi (fun i u -> (i + 1, u))
-            |> List.tryFind (fun (_, u) ->
-                u.isBuilding && not u.isMobile && not u.canFly &&
-                (match u.metalCost with
-                 | ValueOrExpr.Concrete c -> c < 200.0
-                 | _ -> false) &&
-                not u.isArmed)  // Prefer non-defense structures (solar, mex)
-        let fallback =
-            barUnits
-            |> List.mapi (fun i u -> (i + 1, u))
-            |> List.tryFind (fun (_, u) ->
-                u.isBuilding && not u.isMobile &&
-                (match u.metalCost with
-                 | ValueOrExpr.Concrete c -> c < 500.0
-                 | _ -> false))
-        let defId =
-            cheapBuilding
-            |> Option.orElse fallback
-            |> Option.map fst
-        defId |> Option.defaultWith (fun () ->
-            let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-            r.Buildings |> List.tryHead |> Option.defaultWith (fun () -> failwith "No buildable structure discovered"))
+        let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
+        // Prefer a building from commander's build options
+        let fromBuildOptions =
+            commanderBuildOptions
+            |> Array.tryFind (fun defId ->
+                match r.Entries |> Map.tryFind defId with
+                | Some info -> info.IsBuilding && not info.IsMobile
+                | None -> false)
+        fromBuildOptions
+        |> Option.orElseWith (fun () -> r.Buildings |> List.tryHead)
+        |> Option.defaultWith (fun () -> failwith "No buildable structure discovered")
 
     /// Check if the engine process is still alive.
     member _.IsEngineAlive =
@@ -263,6 +220,38 @@ type PersistentEngineFixture() =
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
+
+    /// Run N frames and return an event type distribution log.
+    /// Returns (frames, allEvents, eventCounts) where eventCounts maps event type name to count.
+    member this.RunFramesWithEventLog(n: int, ?onFrame: GameFrame -> int -> Highbar.AICommand list) =
+        let eventCounts = System.Collections.Generic.Dictionary<string, int>()
+        let handler = defaultArg onFrame (fun _ _ -> [])
+        let (frames, events) =
+            this.RunFrames(n, fun frame idx ->
+                for ev in frame.Events do
+                    let name =
+                        match ev with
+                        | GameEvent.Init _ -> "Init"
+                        | GameEvent.Update _ -> "Update"
+                        | GameEvent.UnitCreated _ -> "UnitCreated"
+                        | GameEvent.UnitFinished _ -> "UnitFinished"
+                        | GameEvent.UnitIdle _ -> "UnitIdle"
+                        | GameEvent.UnitDamaged _ -> "UnitDamaged"
+                        | GameEvent.UnitDestroyed _ -> "UnitDestroyed"
+                        | GameEvent.EnemyEnterLOS _ -> "EnemyEnterLOS"
+                        | GameEvent.EnemyLeaveLOS _ -> "EnemyLeaveLOS"
+                        | GameEvent.EnemyDamaged _ -> "EnemyDamaged"
+                        | GameEvent.EnemyDestroyed _ -> "EnemyDestroyed"
+                        | GameEvent.EnemyCreated _ -> "EnemyCreated"
+                        | GameEvent.EnemyFinished _ -> "EnemyFinished"
+                        | GameEvent.WeaponFired _ -> "WeaponFired"
+                        | _ -> "Other"
+                    match eventCounts.TryGetValue(name) with
+                    | true, c -> eventCounts.[name] <- c + 1
+                    | _ -> eventCounts.[name] <- 1
+                handler frame idx
+            )
+        (frames, events, eventCounts |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq)
 
     /// Reset game state between tests:
     /// 1. Send destroy text commands for instant unit removal (cheats enabled)
@@ -391,111 +380,106 @@ type PersistentEngineFixture() =
             initialEvents <- initialFrames |> List.collect (fun f -> f.Events)
             client <- Some c
 
-            // UnitDefId discovery: probe IDs 1-20 in a batch, cross-reference with BarData
-            let barUnits = BarData.AllUnits.all
-            let maxProbe = min 20 barUnits.Length
-            let discoveredIds = System.Collections.Generic.Dictionary<int, bool>()
+            // Check for enemy units in initial events (cheat events should be enabled via proxy init)
+            hasEnemy <-
+                initialEvents
+                |> List.exists (function
+                    | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> true
+                    | _ -> false)
 
-            // Spawn IDs 1-20, run frames, collect which ones produce UnitCreated
-            let createdDefIds = System.Collections.Generic.HashSet<int>()
-            let mutable probeSent = false
-            try
-                c.Run(fun frame ->
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.UnitCreated(uid, _) ->
-                            knownUnitIds.Add(uid) |> ignore
-                            createdDefIds.Add(uid) |> ignore
-                        | GameEvent.UnitDestroyed(uid, _) ->
-                            knownUnitIds.Remove(uid) |> ignore
-                        | _ -> ()
-
-                    if not probeSent then
-                        probeSent <- true
-                        [ for defId in 1..maxProbe ->
-                            GiveMeNewUnitCommand defId (1000.0f + float32 defId * 50.0f) 100.0f 3500.0f ]
-                    elif frame.Events |> List.exists (function GameEvent.UnitCreated _ -> true | _ -> false) then
-                        []
-                    else
-                        failwith "CAPTURED_ENOUGH"
-                        []
-                )
-            with
-            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
-
-            // Run extra frames to collect all UnitCreated events
-            let probeCreated = ResizeArray<int * int>()  // (unitId, index in spawn order)
-            let mutable probeFramesSent = false
-            try
-                c.Run(fun frame ->
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.UnitCreated(uid, _) ->
-                            knownUnitIds.Add(uid) |> ignore
-                        | GameEvent.UnitDestroyed(uid, _) ->
-                            knownUnitIds.Remove(uid) |> ignore
-                        | _ -> ()
-
-                    if not probeFramesSent then
-                        probeFramesSent <- true
-                        []
-                    else
-                        failwith "CAPTURED_ENOUGH"
-                        []
-                )
-            with
-            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
-
-            // Cross-reference with BarData: assume unitDefIds are 1-indexed matching sorted AllUnits
-            // We consider IDs 1..maxProbe as successfully spawned (engine accepted all cheat spawns)
+            // UnitDefId discovery via engine callbacks (must happen INSIDE c.Run frame loop)
+            // The proxy only processes CallbackRequests during frame response handling.
+            let allDefIds = ResizeArray<int>()
             let entries = System.Collections.Generic.Dictionary<int, UnitDefInfo>()
             let builders = ResizeArray<int>()
             let armedUnits = ResizeArray<int>()
             let mobileUnits = ResizeArray<int>()
             let buildings = ResizeArray<int>()
             let economyUnits = ResizeArray<int>()
+            let mutable discoveryDone = false
 
-            for defId in 1..maxProbe do
-                if defId <= barUnits.Length then
-                    let bu = barUnits.[defId - 1]
-                    let info =
-                        { UnitDefId = defId
-                          Name = Some bu.name
-                          IsBuilder = bu.isBuilder
-                          IsArmed = bu.isArmed
-                          IsMobile = bu.isMobile
-                          IsBuilding = bu.isBuilding
-                          SpawnSuccess = true }
-                    entries.[defId] <- info
-                    if bu.isBuilder then builders.Add(defId)
-                    if bu.isArmed then armedUnits.Add(defId)
-                    if bu.isMobile then mobileUnits.Add(defId)
-                    if bu.isBuilding then buildings.Add(defId)
-                    if bu.hasEconomy then economyUnits.Add(defId)
+            try
+                c.Run(fun frame ->
+                    // Track events
+                    for ev in frame.Events do
+                        match ev with
+                        | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> hasEnemy <- true
+                        | GameEvent.UnitCreated(uid, _) ->
+                            knownUnitIds.Add(uid) |> ignore
+                            initialUnitIds.Add(uid) |> ignore
+                        | _ -> ()
 
-            // If any category is missing, extend probing to 1-50
-            let needExtend =
-                builders.Count = 0 || armedUnits.Count = 0 || mobileUnits.Count = 0 || buildings.Count = 0
+                    if not discoveryDone then
+                        discoveryDone <- true
 
-            if needExtend then
-                let extendMax = min 50 barUnits.Length
-                for defId in (maxProbe + 1)..extendMax do
-                    if defId <= barUnits.Length then
-                        let bu = barUnits.[defId - 1]
-                        let info =
-                            { UnitDefId = defId
-                              Name = Some bu.name
-                              IsBuilder = bu.isBuilder
-                              IsArmed = bu.isArmed
-                              IsMobile = bu.isMobile
-                              IsBuilding = bu.isBuilding
-                              SpawnSuccess = true }
-                        entries.[defId] <- info
-                        if bu.isBuilder then builders.Add(defId)
-                        if bu.isArmed then armedUnits.Add(defId)
-                        if bu.isMobile then mobileUnits.Add(defId)
-                        if bu.isBuilding then buildings.Add(defId)
-                        if bu.hasEconomy then economyUnits.Add(defId)
+                        // Enable cheat events from F# side as fallback
+                        try c.SetCheatEventsEnabled(true) |> ignore with _ -> ()
+
+                        // Get all valid defIds from engine
+                        let ids = c.GetUnitDefs(1024)
+                        allDefIds.AddRange(ids)
+
+                        // Query metadata for each defId
+                        for defId in ids do
+                            let name = c.GetUnitDefName(defId)
+                            let buildSpeed = c.GetBuildSpeed(defId)
+                            let weaponRange = c.GetMaxWeaponRange(defId)
+                            let isBuilder = buildSpeed > 0.0f
+                            let isArmed = weaponRange > 0.0f
+                            let isMobile = isBuilder || isArmed
+                            let isBuilding = not isMobile
+                            let info =
+                                { UnitDefId = defId
+                                  Name = if String.IsNullOrEmpty(name) then None else Some name
+                                  IsBuilder = isBuilder
+                                  IsArmed = isArmed
+                                  IsMobile = isMobile
+                                  IsBuilding = isBuilding
+                                  SpawnSuccess = true }
+                            entries.[defId] <- info
+                            if isBuilder then builders.Add(defId)
+                            if isArmed then armedUnits.Add(defId)
+                            if isMobile then mobileUnits.Add(defId)
+                            if isBuilding then buildings.Add(defId)
+                            if isBuilding && not isArmed then economyUnits.Add(defId)
+
+                        // Discover commander build options
+                        let commanderUnitId =
+                            initialEvents
+                            |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None)
+                        match commanderUnitId with
+                        | Some cmdUid ->
+                            let cmdDefId = c.GetUnitDef(cmdUid)
+                            if cmdDefId > 0 then
+                                commanderBuildOptions <- c.GetBuildOptions(cmdDefId)
+                        | None -> ()
+
+                        failwith "CAPTURED_ENOUGH"
+                        []
+                    else
+                        failwith "CAPTURED_ENOUGH"
+                        []
+                )
+            with
+            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+
+            // Run a few more frames to check for enemy events if not seen yet
+            if not hasEnemy then
+                let mutable recheckFrames = 0
+                try
+                    c.Run(fun frame ->
+                        for ev in frame.Events do
+                            match ev with
+                            | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> hasEnemy <- true
+                            | GameEvent.UnitCreated(uid, _) ->
+                                knownUnitIds.Add(uid) |> ignore
+                                initialUnitIds.Add(uid) |> ignore
+                            | _ -> ()
+                        recheckFrames <- recheckFrames + 1
+                        if recheckFrames >= 30 then failwith "CAPTURED_ENOUGH"
+                        []
+                    )
+                with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
             registry <- Some
                 { Entries = entries |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
@@ -505,48 +489,6 @@ type PersistentEngineFixture() =
                   Buildings = buildings |> Seq.toList
                   EconomyUnits = economyUnits |> Seq.toList
                   FailedIds = [] }
-
-            // Clean up probed units
-            // Send destroy commands for all spawned units that aren't initial
-            let mutable cleanSent = false
-            try
-                c.Run(fun frame ->
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.UnitDestroyed(uid, _) -> knownUnitIds.Remove(uid) |> ignore
-                        | GameEvent.UnitCreated(uid, _) -> knownUnitIds.Add(uid) |> ignore
-                        | _ -> ()
-
-                    if not cleanSent then
-                        cleanSent <- true
-                        let unitsToDestroy =
-                            knownUnitIds
-                            |> Seq.filter (fun uid -> not (initialUnitIds.Contains(uid)))
-                            |> Seq.toList
-                        unitsToDestroy
-                        |> List.map (fun uid -> SendTextMessageCommand $".destroy {uid}" 0)
-                    else
-                        failwith "CAPTURED_ENOUGH"
-                        []
-                )
-            with
-            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
-
-            // Run a few cleanup frames
-            try
-                let mutable cleanFrames = 0
-                c.Run(fun frame ->
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.UnitDestroyed(uid, _) -> knownUnitIds.Remove(uid) |> ignore
-                        | _ -> ()
-                    cleanFrames <- cleanFrames + 1
-                    if cleanFrames >= 10 then
-                        failwith "CAPTURED_ENOUGH"
-                    []
-                )
-            with
-            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
 
             sw.Stop()
             initElapsed <- sw.Elapsed
