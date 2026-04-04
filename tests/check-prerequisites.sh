@@ -53,8 +53,20 @@ GAME_NAME=$(jq -r '.game.name' "${CONFIG_FILE}")
 RAPID_TAG=$(jq -r '.game.rapidTag' "${CONFIG_FILE}")
 MAP_NAME=$(jq -r '.map.name' "${CONFIG_FILE}")
 
-# Determine data directory
-DATA_DIR="${SPRING_DATADIR:-${HOME}/.spring}"
+# Determine data directory — auto-detect from engine binary location if not set
+DATA_DIR="${SPRING_DATADIR:-}"
+if [ -z "${DATA_DIR}" ]; then
+    # Try to detect from engine binary location (BAR AppImage layout)
+    _ENGINE_PATH="${HIGHBAR_TEST_ENGINE:-$(command -v "${ENGINE_BINARY}" 2>/dev/null || true)}"
+    if [ -n "${_ENGINE_PATH}" ] && [ -x "${_ENGINE_PATH}" ]; then
+        _ENGINE_DIR="$(dirname "$(readlink -f "${_ENGINE_PATH}")")"
+        _CANDIDATE="$(dirname "$(dirname "${_ENGINE_DIR}")")"
+        if [ -d "${_CANDIDATE}/maps" ] && [ -d "${_CANDIDATE}/packages" ]; then
+            DATA_DIR="${_CANDIDATE}"
+        fi
+    fi
+    DATA_DIR="${DATA_DIR:-${HOME}/.spring}"
+fi
 
 ALL_PASSED=true
 CHECKS=()

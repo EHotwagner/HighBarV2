@@ -27,6 +27,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-04
 - F# / .NET 8.0 + HighBar.Client (in-repo), BarData (in-repo), GameRunner (in-repo), xUnit 2.9.x, Google.Protobuf 3.28 (016-verify-headless-combat)
 - Filesystem (markdown reports, temp directories, Unix domain sockets) (016-verify-headless-combat)
 - C11 (proxy), F# / .NET 8.0 (client) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#) (017-fix-unit-commands)
+- Bash (test runner scripts), F# / .NET 8.0 (primary test code), Python 3.10+ (secondary tests), C11 (proxy tests) + xUnit 2.9.x (F# tests), pytest (Python tests), CTest/CMake (C tests), jq (JSON parsing in scripts) (018-consolidate-test-framework)
+- Filesystem (Markdown reports, JSON config, temp directories) (018-consolidate-test-framework)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -61,6 +63,18 @@ cd clients/python && pip install -e .
 
 # Run C tests
 cd build && ctest
+
+# Run all tests (unified runner — auto-detects engine)
+./tests/run-all.sh
+
+# Run specific test category
+./tests/run-all.sh --category unit       # F# unit tests only
+./tests/run-all.sh --category proxy      # C proxy tests only
+./tests/run-all.sh --category integration # F# integration (needs engine)
+./tests/run-all.sh --category persistent  # Persistent engine tests (needs engine)
+
+# Check engine prerequisites
+./tests/check-prerequisites.sh
 ```
 
 ## Code Style
@@ -71,9 +85,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 018-consolidate-test-framework: Added Bash (test runner scripts), F# / .NET 8.0 (primary test code), Python 3.10+ (secondary tests), C11 (proxy tests) + xUnit 2.9.x (F# tests), pytest (Python tests), CTest/CMake (C tests), jq (JSON parsing in scripts)
 - 017-fix-unit-commands: Added C11 (proxy), F# / .NET 8.0 (client) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#)
 - 016-verify-headless-combat: Added F# / .NET 8.0 + HighBar.Client (in-repo), BarData (in-repo), GameRunner (in-repo), xUnit 2.9.x, Google.Protobuf 3.28
-- 015-ai-validation-tests: Added F# / .NET 8.0 + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.9.x
 
 
 <!-- MANUAL ADDITIONS START -->

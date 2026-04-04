@@ -27,7 +27,6 @@
     <Compile Include="EventTests.fs" />
     <Compile Include="CommandTests.fs" />
     <Compile Include="CallbackTests.fs" />
-    <Compile Include="ScenarioTests.fs" />
     <Compile Include="UnitDataTests.fs" />
   </ItemGroup>
 

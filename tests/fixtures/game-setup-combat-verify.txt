@@ -1,6 +1,6 @@
 [GAME]
 {
-	GameType=Beyond All Reason test-29833-ee0f96a;
+	GameType=__GAME_TYPE__;
 	MapName=__MAP_NAME__;
 	ModHash=1;
 	MapHash=1;
