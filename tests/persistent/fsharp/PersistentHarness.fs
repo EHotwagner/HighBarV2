@@ -523,8 +523,13 @@ type PersistentEngineFixture() =
             if File.Exists(socketPath) then File.Delete(socketPath)
             if File.Exists(pidFile) then File.Delete(pidFile)
 
-            if not (String.IsNullOrEmpty(sessionDir)) && Directory.Exists(sessionDir) then
-                try Directory.Delete(sessionDir, true) with _ -> ()
+            // Preserve session dir if HIGHBAR_KEEP_LOGS is set (for debugging)
+            let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
+            if String.IsNullOrEmpty(keepLogs) then
+                if not (String.IsNullOrEmpty(sessionDir)) && Directory.Exists(sessionDir) then
+                    try Directory.Delete(sessionDir, true) with _ -> ()
+            else
+                eprintfn $"Keeping session dir: {sessionDir}"
 
             Task.CompletedTask
 
