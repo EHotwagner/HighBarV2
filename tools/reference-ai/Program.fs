@@ -11,16 +11,15 @@ let main argv =
         | [| path |] -> path
         | _ -> "/tmp/highbar.sock"
 
-    printfn "Reference AI starting, connecting to %s..." socketPath
+    printfn "Reference AI listening on %s..." socketPath
+    printfn "Start a game with HighBarV2 bot in the BAR lobby."
 
     let mutable firstUnit = -1
     let mutable builtFactory = false
     let mutable knownEnemies = Set.empty<int>
 
-    use client = new HighBarClient(socketPath)
-    client.Connect()
-    let hs = client.Handshake()
-    printfn "Playing as team %d on %s" hs.TeamId hs.MapName
+    use client = HighBarClient.AcceptFromProxy(socketPath, 600_000)
+    printfn "Proxy connected! Game starting."
 
     client.Run(fun frame ->
         let mutable commands = []
