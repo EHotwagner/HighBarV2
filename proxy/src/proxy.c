@@ -305,9 +305,25 @@ int release(int skirmishAIId) {
     return 0;
 }
 
+static int topic_counts[50] = {0};
+
 int handleEvent(int skirmishAIId, int topicId, const void *data) {
     (void)skirmishAIId;
     if (!g_state || !g_state->conn.connected) return -1;
+
+    if (topicId >= 0 && topicId < 50) topic_counts[topicId]++;
+    if (topicId == EVENT_UPDATE) {
+        const struct SUpdateEvent *upd = (const struct SUpdateEvent *)data;
+        if (upd->frame > 0 && upd->frame % 50 == 0) {
+            char buf[512];
+            int pos = snprintf(buf, sizeof(buf), "Event topics at frame %d:", upd->frame);
+            for (int i = 0; i < 50; i++) {
+                if (topic_counts[i] > 0)
+                    pos += snprintf(buf + pos, sizeof(buf) - pos, " %d=%d", i, topic_counts[i]);
+            }
+            proxy_log(HB_LOG_INFO, buf);
+        }
+    }
 
     // Handle save/load specially
     if (topicId == EVENT_SAVE) {
