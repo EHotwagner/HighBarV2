@@ -44,8 +44,8 @@ Thumbs.db
 *.tmp
 *.swp
 
-# AI validation reports (generated)
-reports/
+# AI validation reports (generated, keep testreports out)
+reports/testreports/
 tests/ai/fsharp/reports/*.md
 
 # Environment
