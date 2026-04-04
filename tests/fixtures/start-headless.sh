@@ -39,6 +39,25 @@ if [ -z "${SPRING_DATADIR:-}" ]; then
     fi
 fi
 
+# Verify the installed proxy binary matches the build output (prevents stale binary issues).
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+BUILD_SO="${REPO_ROOT}/build/libSkirmishAI.so"
+if [ -f "${BUILD_SO}" ]; then
+    BUILD_HASH=$(md5sum "${BUILD_SO}" 2>/dev/null | cut -d' ' -f1)
+    ENGINE_DIR="$(dirname "$(readlink -f "${ENGINE_BIN}")")"
+    for installed_so in "${ENGINE_DIR}/AI/Skirmish/HighBarV2"/*/libSkirmishAI.so; do
+        if [ -f "$installed_so" ]; then
+            INSTALLED_HASH=$(md5sum "$installed_so" 2>/dev/null | cut -d' ' -f1)
+            if [ "$BUILD_HASH" != "$INSTALLED_HASH" ]; then
+                echo "WARNING: Stale proxy binary detected!" >&2
+                echo "  Build:     ${BUILD_SO} (${BUILD_HASH})" >&2
+                echo "  Installed: ${installed_so} (${INSTALLED_HASH})" >&2
+                echo "  Run: cmake --build build  (auto-deploys on build)" >&2
+            fi
+        fi
+    done
+fi
+
 # Export socket path for the AI plugin (read via AIOptions or env var)
 export HIGHBAR_SOCKET_PATH="${SOCKET_PATH}"
 

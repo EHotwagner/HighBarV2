@@ -54,6 +54,14 @@ target_compile_options(SkirmishAI PRIVATE
 # Install target
 install(TARGETS SkirmishAI LIBRARY DESTINATION lib)
 
+# Post-build: auto-deploy proxy to all engine AI directories.
+# This prevents the stale-binary problem where engine loads an old .so
+# from a version directory (e.g. 0.1/) that wasn't updated.
+add_custom_command(TARGET SkirmishAI POST_BUILD
+    COMMAND bash "${CMAKE_SOURCE_DIR}/scripts/deploy-proxy.sh" "$<TARGET_FILE:SkirmishAI>" "${CMAKE_SOURCE_DIR}"
+    COMMENT "Auto-deploying proxy to engine AI directories"
+)
+
 # Tests
 enable_testing()
 
