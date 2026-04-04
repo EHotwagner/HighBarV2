@@ -101,6 +101,5 @@ BAR commanders never fire `EVENT_UNIT_IDLE` because BAR gadgets (idle_guard, com
 
 ## Remaining Issues / Follow-Up
 
-- **Python harness**: Out of scope per clarification. The Python test harness has not been updated.
 - **UnitIdle event**: BAR commanders never go idle due to gadget behavior. If a future test needs actual UnitIdle verification, it would need to spawn a non-commander unit or disable BAR's idle-guard gadget.
 - **Test count**: The actual test count is 22 (not 23 as estimated in the spec). This is the correct count across ConnectionTests (6), EventTests (6), CommandTests (6), and CallbackTests (4).

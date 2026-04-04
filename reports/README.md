@@ -11,8 +11,16 @@ Iteration reports documenting the development of the headless integration test s
 | 003 | [Event Delivery](003-event-delivery.md) | Event timing, combat scenario expansion | Phase 4 |
 | 004 | [Command Execution](004-command-execution.md) | Move/Stop/Build commands, multi-step scenarios | Phase 5 |
 | 005 | [Callback Queries](005-callback-queries.md) | Callback architecture, indirect validation approach | Phase 6 |
-| 006 | [Python Tests](006-python-tests.md) | Cross-language compatibility, client maturity gap | Phase 7 |
-| 007 | [Test Suite Overview](007-test-suite-overview.md) | Final summary, coverage, known limitations | Phase 8 |
+| 007 | [Test Suite Overview](007-test-suite-overview.md) | Final summary, coverage, known limitations | Phase 7 |
+| 008 | [BAR Headless Mode](008-bar-headless-mode.md) | Running BAR in headless mode for testing | Phase 8 |
+| 009 | [Live Engine Integration](009-live-engine-integration.md) | First successful proxy connection to real engine | Phase 9 |
+| 010 | [Remaining Test Failures](010-remaining-test-failures.md) | Root cause analysis of unit spawn failures | Phase 10 |
+| 011 | [Test Fix Results](011-test-fix-results.md) | All 22 tests passing after spawn/init fixes | Phase 11 |
+| 012 | [Harden Persistent Tests](012-harden-persistent-tests.md) | Persistent engine test hardening | Phase 12 |
+| 013 | [Diagnose Fix Test Gaps](013-diagnose-fix-test-gaps.md) | Test gap analysis and fixes | Phase 13 |
+| 014 | [Live Game AI Installation](014-live-game-ai-installation.md) | AI installation into live BAR game | Phase 14 |
+| 015 | [Unit Commands Root Cause](015-fix-unit-commands-root-cause.md) | INTERNAL_ORDER flag fix for unit commands | Phase 15 |
+| 016 | [Visual Game Test Validated](016-visual-game-test-validated.md) | Graphical test validation complete | Phase 16 |
 
 ## Template
 

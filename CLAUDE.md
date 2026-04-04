@@ -3,38 +3,27 @@
 Auto-generated from all feature plans. Last updated: 2026-04-04
 
 ## Active Technologies
-- F# / .NET 10.0 (primary language), C11 (proxy under test) + Google.Protobuf (F#), xUnit (F# test framework) (002-headless-test-suite)
-- Filesystem only (reports as markdown, no database) (002-headless-test-suite)
-- C11 (proxy), F# / .NET 10.0 (client + tools + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), buf CLI (proto generation) (003-tools-prereqs-test-fixes)
-- Filesystem only (reports as markdown) (003-tools-prereqs-test-fixes)
-- Bash (scripts), F# / .NET 10.0 (test harness), Lua (game scenario) + xUnit (F# tests), jq (JSON parsing in shell), pr-downloader (game content) (004-live-headless-testsuite)
-- Filesystem only (JSON config, log files, temp directories) (004-live-headless-testsuite)
-- F# / .NET 10.0 (test harness + tests), TDF config format (game-setup.txt) + xUnit (test framework), spring-headless 2025.06.21 (engine), BAR game content (test-29833-ee0f96a) (005-fix-test-failures)
-- Filesystem (config files, reports as markdown) (005-fix-test-failures)
-- F# / .NET 10.0 (generator script, data library, tests) + XParsec (Lua parser in generator), xUnit (test framework) (006-typed-bar-data)
-- Filesystem only (generated .fs source files) (006-typed-bar-data)
-- F# / .NET 10.0 + BarData library (in-repo), Google.Protobuf 3.28 (existing client dep), xUnit 2.9.3 (tests) (009-client-unit-types)
-- N/A (static in-memory data from generated F# records) (009-client-unit-types)
-- F# / .NET 10.0 + Google.Protobuf (generated types from `proto/highbar/commands.proto`) (010-cheat-command-builders)
-- F# / .NET 10.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28 (011-persistent-engine-tests)
-- Filesystem (session logs, temp directories) (011-persistent-engine-tests)
-- C11 (proxy), F# / .NET 10.0 (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), xUnit 2.x (tests), BarData (in-repo) (013-diagnose-fix-test-gaps)
-- Filesystem (Unix domain sockets, log files, temp directories) (013-diagnose-fix-test-gaps)
-- F# / .NET 10.0 (AI logic + tests), C11 (existing proxy — no changes needed) + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.x (014-bar-ai-competitive-assessment)
-- Filesystem only (structured decision logs as JSON lines, game outcome reports as markdown) (014-bar-ai-competitive-assessment)
-- F# / .NET 10.0 + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.9.x (015-ai-validation-tests)
-- Filesystem only (markdown reports, JSON lines decision logs, temp directories) (015-ai-validation-tests)
-- F# / .NET 10.0 + HighBar.Client (in-repo), BarData (in-repo), GameRunner (in-repo), xUnit 2.9.x, Google.Protobuf 3.28 (016-verify-headless-combat)
-- Filesystem (markdown reports, temp directories, Unix domain sockets) (016-verify-headless-combat)
-- C11 (proxy), F# / .NET 10.0 (client) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#) (017-fix-unit-commands)
-- Bash (test runner scripts), F# / .NET 10.0 (primary test code), C11 (proxy tests) + xUnit 2.9.x (F# tests), CTest/CMake (C tests), jq (JSON parsing in scripts) (018-consolidate-test-framework)
-- Filesystem (Markdown reports, JSON config, temp directories) (018-consolidate-test-framework)
-- F# / .NET 10.0, C11 + Google.Protobuf 3.28.*, xUnit 2.9.x, Microsoft.NET.Test.Sdk 17.x, System.Text.Json 8.x (019-remove-python-dotnet10)
-- Filesystem only (config files, reports, Unix domain sockets) (019-remove-python-dotnet10)
 
-- C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
-- F# / .NET 10.0, Google.Protobuf (primary client) (001-native-proxy-bridge)
-- buf (proto linting + code generation) (001-native-proxy-bridge)
+| Category | Technology | Purpose |
+|----------|-----------|---------|
+| **Languages** | F# / .NET 10.0 | Primary language (client, tests, tools, data library) |
+| | C11 | Proxy shared library (Recoil engine AI plugin) |
+| | Bash | Test runner scripts, deployment scripts |
+| | Lua | Game scenario config, proxy AI options |
+| **Serialization** | Google.Protobuf 3.28 | F# client protobuf bindings |
+| | protobuf-c | C proxy protobuf bindings |
+| | buf CLI | Proto linting and code generation |
+| **Testing** | xUnit 2.9.x | F# test framework (unit, integration, persistent, AI) |
+| | CTest / CMake | C proxy test framework and build system |
+| | Microsoft.NET.Test.Sdk | .NET test runner integration |
+| **In-Repo Libraries** | HighBar.Client | F# client library (`clients/fsharp/`) |
+| | BarData | Generated game data library (`data/bar/`) |
+| | GameRunner | Engine lifecycle management (`tools/game-runner/`) |
+| **Tooling** | jq | JSON parsing in shell scripts |
+| | XParsec | Lua parser for data generation script |
+| **Game Integration** | spring-headless | Recoil engine for headless testing |
+| | BAR game content | Beyond All Reason game data and maps |
+| **Storage** | Filesystem only | Config files, reports, Unix domain sockets, temp dirs |
 
 ## Project Structure
 
@@ -82,8 +71,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
-- 019-remove-python-dotnet10: Removed Python, upgraded all projects to .NET 10.0
-- 018-consolidate-test-framework: Added Bash (test runner scripts), F# / .NET 10.0 (primary test code), C11 (proxy tests) + xUnit 2.9.x (F# tests), CTest/CMake (C tests), jq (JSON parsing in scripts)
+- 020-repo-cleanup: Repository cleanup — removed stale docs, consolidated CLAUDE.md, archived verbose spec artifacts
+- 019-remove-python-dotnet10: Removed Python client, upgraded all projects to .NET 10.0
+- 018-consolidate-test-framework: Unified test runner (`run-all.sh`), added CTest for C proxy tests
 
 
 <!-- MANUAL ADDITIONS START -->

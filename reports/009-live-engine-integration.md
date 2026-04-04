@@ -5,7 +5,7 @@
 
 ## Context
 
-Feature 004 (Live Headless Engine Test Suite) was implemented and merged: engine version pinning, prerequisites check, session-based log capture, crash detection, and diagnostic surfacing for both F# and Python harnesses. The next step was to actually run the integration tests against a real Recoil (BAR) engine. This session covered engine installation, game content provisioning, ABI compatibility fixes for the proxy, and harness architecture changes to support the proxy's connection model.
+Feature 004 (Live Headless Engine Test Suite) was implemented and merged: engine version pinning, prerequisites check, session-based log capture, crash detection, and diagnostic surfacing for the F# harness. The next step was to actually run the integration tests against a real Recoil (BAR) engine. This session covered engine installation, game content provisioning, ABI compatibility fixes for the proxy, and harness architecture changes to support the proxy's connection model.
 
 ## Problems Encountered
 
@@ -87,7 +87,7 @@ Skirmish AI <HighBar V2 - Native Proxy Bridge-0.1>: Connected to AI process
 
 ### 7. Proxy Connection Architecture (Chicken-and-Egg)
 
-**Discovery**: The proxy is a **client** that `connect()`s to a Unix socket. The external AI process (F#/Python) must be a **server** that `bind()`s and `listen()`s on the socket **before** the engine starts. The old harness assumed the proxy was the server — it started the engine first, then tried to connect.
+**Discovery**: The proxy is a **client** that `connect()`s to a Unix socket. The external AI process must be a **server** that `bind()`s and `listen()`s on the socket **before** the engine starts. The old harness assumed the proxy was the server — it started the engine first, then tried to connect.
 
 **Fix**: Rewrote the F# harness (`Harness.fs`) to:
 1. Create a listening socket at the test socket path
@@ -144,7 +144,6 @@ Updated `start-headless.sh` to not delete the socket file (since the harness pre
 ### Known Issues
 - Game archive is built from source without textures (missing `.png`, `.dds`, `.tga`). This causes non-fatal warnings but the game loads. Some Lua gadgets fail to initialize due to missing unit definitions that depend on textures.
 - `pr-downloader` rapid repos are globally down (`repos.springrts.com` returns 404). No automated game content download path exists until this is resolved or a direct download URL is found.
-- Python harness (`conftest.py`) has not been updated for the listen→accept architecture yet.
 - The old `game-setup.lua` is now unused (replaced by `game-setup.txt` TDF format).
 
 ## Hypotheses

@@ -1,7 +1,7 @@
-# Specification Quality Checklist: Headless Test Suite
+# Specification Quality Checklist: Repository Cleanup
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
-**Created**: 2026-04-02
+**Created**: 2026-04-04
 **Feature**: [spec.md](../spec.md)
 
 ## Content Quality
@@ -31,7 +31,6 @@
 
 ## Notes
 
-- All 16/16 items pass validation after clarification session on 2026-04-02.
-- Key clarification: "headless bar server" refers to the real BAR engine running in headless mode, not a mock server. Tests are live integration tests against the full stack.
-- Test suite manages engine lifecycle automatically (start/stop).
-- F# is the primary test language; Python added after F# basics are stable.
+- All items pass validation. Spec is ready for `/speckit.clarify` or `/speckit.plan`.
+- The spec references specific file counts (139 specs files, 40+ CLAUDE.md lines) as baselines for measurable outcomes — these were verified against the current repository state.
+- Reports referencing Python were identified by auditing all 16 tracked reports (8 contain Python references).

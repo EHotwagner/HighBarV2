@@ -22,14 +22,6 @@ obj/
 *.suo
 packages/
 
-# Python
-__pycache__/
-*.pyc
-.venv/
-venv/
-dist/
-*.egg-info/
-
 # IDE
 .vscode/
 .idea/

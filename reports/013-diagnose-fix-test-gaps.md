@@ -180,7 +180,6 @@ The graphical `spring` client (`/home/developer/.local/state/Beyond All Reason/e
 | `tests/persistent/fsharp/T8_LargeScaleCombat.fs` | Engine-survival assertion |
 | `tests/fixtures/game-setup.txt` | Added `debugcommands`, `deathmode=neverend`, `MinSpeed/MaxSpeed=100`, `HostIP`, `FixedRNGSeed` |
 | `tests/fixtures/start-live.sh` | New: launch graphical engine for diagnostics |
-| `tests/fixtures/dummy-client.py` | New: minimal Python socket client for diagnostic runs |
 | `reports/013-diagnose-fix-test-gaps.md` | This report |
 
 ## Lessons Learned

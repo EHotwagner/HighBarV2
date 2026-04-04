@@ -28,7 +28,7 @@ HighBar V2 is a **native C shared library** that acts as a proxy between the Rec
 │              External AI Process     │                          │
 │                                      │                          │
 │  ┌───────────────────────────────────┴─────────────────────┐    │
-│  │  HighBar Client Library (F# / Python / C++ / any lang)  │    │
+│  │  HighBar Client Library (F# / any protobuf language)     │    │
 │  │                                                          │    │
 │  │  - Deserialize FrameUpdate events                        │    │
 │  │  - Serialize CommandBatch responses                      │    │
@@ -178,7 +178,7 @@ This allows the AI to access the full `SSkirmishAICallback` interface without th
 Thin wrappers around socket I/O + protobuf deserialization. Generated from `.proto` files.
 
 **Primary target**: F# / .NET
-**Secondary targets**: Python, C++, Rust
+**Secondary targets**: C++, Rust (Python support was planned but removed in feature 019)
 
 Each client library provides:
 - Connection management (connect, reconnect, shutdown)
@@ -250,8 +250,7 @@ HighBarV2/
 │   └── include/
 ├── client/                    # Client libraries
 │   ├── fsharp/                # F# client
-│   ├── python/                # Python client  
-│   └── cpp/                   # C++ client
+│   └── cpp/                   # C++ client (planned)
 ├── AI/Skirmish/HighBar/       # Installable AI directory
 │   ├── AIInfo.lua
 │   ├── AIOptions.lua
@@ -271,7 +270,7 @@ HighBarV2/
 | Engine modification | None (pure Lua) | None (standard AI plugin) |
 | Latency | ~1-5ms per frame | ~100-500us per frame |
 | Binary data | base64 encoded | Native protobuf bytes |
-| Client languages | Python only | Any (protobuf codegen) |
+| Client languages | Python only | Any (protobuf codegen); currently F# |
 
 ## Open Questions
 

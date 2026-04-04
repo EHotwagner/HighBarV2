@@ -1,6 +1,6 @@
 # HighBarV2 Test Suite
 
-Comprehensive test infrastructure for the HighBarV2 AI proxy bridge. Tests exercise the full stack: C proxy plugin, F# and Python clients, and live headless BAR (Recoil) engine integration.
+Comprehensive test infrastructure for the HighBarV2 AI proxy bridge. Tests exercise the full stack: C proxy plugin, F# client, and live headless BAR (Recoil) engine integration.
 
 ## Quick Start
 
@@ -28,7 +28,6 @@ Comprehensive test infrastructure for the HighBarV2 AI proxy bridge. Tests exerc
 | **data** | `data/bar.tests/` | No | xUnit | BarData library validation |
 | **integration** | `tests/integration/fsharp/` | Yes | xUnit | Connection, events, commands, callbacks |
 | **persistent** | `tests/persistent/fsharp/` | Yes | xUnit | 40 tests sharing one engine (T0-T8 tiers) |
-| **python** | `tests/integration/python/` | Yes | pytest | Cross-language protocol validation |
 | **ai** | `tests/ai/fsharp/` | Yes | xUnit | AI validation (opt-in, long-running) |
 
 ## Configuration
@@ -80,8 +79,7 @@ Reports include environment details, per-tier results, failure diagnostics, and 
    cmake --build build
    ```
 3. **Game content** — maps and game archives in the BAR data directory
-4. **.NET 8 SDK** (for F# tests)
-5. **Python 3.10+** with client installed (for Python tests): `cd clients/python && pip install -e .`
+4. **.NET 10 SDK** (for F# tests)
 
 ## How It Works
 

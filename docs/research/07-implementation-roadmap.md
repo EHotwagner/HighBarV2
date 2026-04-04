@@ -5,7 +5,7 @@
 ### 1.1 Protobuf Schema
 - Define `.proto` files for all 28 events, 97 commands, and common types
 - Set up buf.build for linting and code generation
-- Generate C++, F#, and Python bindings
+- Generate C++ and F# bindings (Python support removed in feature 019)
 - Write schema validation tests
 
 ### 1.2 Transport Layer
@@ -75,16 +75,10 @@
 - Typed command builders
 - Async frame processing with `Async<CommandBatch>`
 
-### 4.2 Python Client
-- Generated protobuf bindings via `grpcio-tools`
-- `HighBarClient` class mirroring F# API
-- Synchronous and asyncio variants
-- Suitable for RL/ML workflows (gym-like interface)
-
-### 4.3 Example AI
+### 4.2 Example AI
 - Simple economy/build order AI as reference implementation
 - Demonstrates event handling, state queries, command issuance
-- Both F# and Python versions
+- F# implementation
 
 **Deliverable**: Ready-to-use client libraries with example AIs.
 
@@ -112,7 +106,7 @@
 - Build system (CMake) for proxy library
 - Cross-compilation support (Linux .so, Windows .dll)
 - Installation script (copy to BAR AI directory)
-- NuGet package for F# client, PyPI package for Python client
+- NuGet package for F# client
 
 **Deliverable**: Production-ready proxy with client packages.
 
@@ -150,7 +144,6 @@
 | CMake | C++ build system | 3.16+ |
 | .NET SDK | F# client | 10.0+ |
 | protobuf-net / Google.Protobuf | F# protobuf | Latest |
-| Python protobuf | Python client | 4.x+ |
 | Recoil Engine headers | AI interface definitions | BAR release |
 
 ## Risk Assessment

@@ -145,5 +145,4 @@ Alternative: study how the `recoil-autohost` configures single-player/AI test ga
 1. **Research BAR spawn modoptions**: Read `game_initial_spawn.lua` from the BAR game source to determine exact modoptions needed for headless AI games
 2. **Update game-setup.txt**: Add required modoptions for commander spawning
 3. **Fix Init event tests**: Adjust test expectations or buffer the first frame
-4. **Update Python harness**: Port the listen→accept architecture to `conftest.py`
-5. **Add stale process cleanup**: Kill any `recoil-main` processes holding port 8452 before launching
+4. **Add stale process cleanup**: Kill any `recoil-main` processes holding port 8452 before launching

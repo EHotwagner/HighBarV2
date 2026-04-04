@@ -148,19 +148,7 @@ Type-safe wrappers over the protobuf protocol.
 
 ---
 
-## 4. Python Client Bindings — `clients/python/`
-
-Python dataclass-based wrappers.
-
-| File | Contents |
-|------|----------|
-| `events.py` | 28 event dataclasses mirroring the protobuf events |
-| `commands.py` | Command builder functions returning dicts, `Position` dataclass |
-| `client.py` | Client connection and frame loop |
-
----
-
-## 5. C Proxy Plugin — `proxy/`
+## 4. C Proxy Plugin — `proxy/`
 
 The native shared library loaded by the Recoil engine.
 
@@ -178,7 +166,7 @@ The native shared library loaded by the Recoil engine.
 
 ---
 
-## 6. Engine & Architecture Research — `docs/research/`
+## 5. Engine & Architecture Research — `docs/research/`
 
 | Document | Key Data |
 |----------|----------|
@@ -188,7 +176,7 @@ The native shared library loaded by the Recoil engine.
 
 ---
 
-## 7. Test Fixtures — `tests/`
+## 6. Test Fixtures — `tests/`
 
 | File | Contents |
 |------|----------|
@@ -198,7 +186,7 @@ The native shared library loaded by the Recoil engine.
 
 ---
 
-## 8. Feature Specifications — `specs/`
+## 7. Feature Specifications — `specs/`
 
 | Spec | Relevant Data |
 |------|---------------|
@@ -224,7 +212,6 @@ The native shared library loaded by the Recoil engine.
 | What the AI can query at runtime | `proto/highbar/callbacks.proto` |
 | Proxy configuration options | `proxy/data/AIOptions.lua` |
 | How to issue a command in F# | `clients/fsharp/src/Commands.fs` — `Commands.MoveCommand`, etc. |
-| How to issue a command in Python | `clients/python/commands.py` |
 | Full engine AI API reference | `docs/research/01-recoil-engine-ai-interface.md` |
 | Wire protocol format | `specs/001-native-proxy-bridge/contracts/protocol.md` |
 | Regenerate unit data | `dotnet fsi tools/generate-bar-data.fsx` |
