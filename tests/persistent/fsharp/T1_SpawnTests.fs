@@ -20,7 +20,7 @@ type T1_SpawnTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
         let mutable createdUnitId = None
         let (_, events) = engine.RunFrames(20, fun frame idx ->
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 1536.0f 100.0f 4096.0f ]
+                [ GiveMeNewUnitCommand engine.MobileUnitDefId 1536.0f 100.0f 4096.0f ]
             else
                 for ev in frame.Events do
                     match ev with
@@ -49,8 +49,9 @@ type T1_SpawnTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
                 | _ -> ()
 
             if idx = 0 then
+                let defId = engine.MobileUnitDefId
                 [ for i in 0..spawnCount-1 ->
-                    GiveMeNewUnitCommand 1 (1536.0f + float32 i * 100.0f) 100.0f 4096.0f ]
+                    GiveMeNewUnitCommand defId (1536.0f + float32 i * 100.0f) 100.0f 4096.0f ]
             else
                 []
         ) |> ignore
@@ -76,8 +77,9 @@ type T1_SpawnTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
                 | _ -> ()
 
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 500.0f 100.0f 500.0f
-                  GiveMeNewUnitCommand 1 4000.0f 100.0f 4000.0f ]
+                let defId = engine.MobileUnitDefId
+                [ GiveMeNewUnitCommand defId 500.0f 100.0f 500.0f
+                  GiveMeNewUnitCommand defId 4000.0f 100.0f 4000.0f ]
             else
                 []
         ) |> ignore
@@ -100,8 +102,8 @@ type T1_SpawnTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
                 | _ -> ()
 
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 1536.0f 100.0f 4000.0f
-                  GiveMeNewUnitCommand 2 1636.0f 100.0f 4000.0f ]
+                [ GiveMeNewUnitCommand engine.MobileUnitDefId 1536.0f 100.0f 4000.0f
+                  GiveMeNewUnitCommand engine.BuilderDefId 1636.0f 100.0f 4000.0f ]
             else
                 []
         ) |> ignore

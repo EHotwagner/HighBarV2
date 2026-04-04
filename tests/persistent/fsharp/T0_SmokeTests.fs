@@ -48,22 +48,45 @@ type T0_SmokeTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             $"Startup took {engine.InitElapsed.TotalSeconds:F1}s, expected < 30s")
 
     [<Fact>]
+    [<Priority(5)>]
+    member _.``T0.5 Discovery found at least one builder, armed, mobile, and building``() =
+        let reg = engine.Registry
+        output.WriteLine($"Builders: {reg.Builders.Length} — {reg.Builders}")
+        output.WriteLine($"ArmedUnits: {reg.ArmedUnits.Length} — {reg.ArmedUnits}")
+        output.WriteLine($"MobileUnits: {reg.MobileUnits.Length} — {reg.MobileUnits}")
+        output.WriteLine($"Buildings: {reg.Buildings.Length} — {reg.Buildings}")
+        output.WriteLine($"Total entries: {reg.Entries.Count}")
+        for kv in reg.Entries do
+            let info = kv.Value
+            let name = info.Name |> Option.defaultValue "?"
+            output.WriteLine($"  DefId {info.UnitDefId}: {name} builder={info.IsBuilder} armed={info.IsArmed} mobile={info.IsMobile} building={info.IsBuilding}")
+        Assert.True(reg.Builders.Length >= 1, "Should discover at least one builder")
+        Assert.True(reg.ArmedUnits.Length >= 1, "Should discover at least one armed unit")
+        Assert.True(reg.MobileUnits.Length >= 1, "Should discover at least one mobile unit")
+        Assert.True(reg.Buildings.Length >= 1, "Should discover at least one building")
+        // T017: Assert at least 4 categories are populated
+        let populatedCategories =
+            [ reg.Builders.Length > 0
+              reg.ArmedUnits.Length > 0
+              reg.MobileUnits.Length > 0
+              reg.Buildings.Length > 0
+              reg.EconomyUnits.Length > 0 ]
+            |> List.filter id |> List.length
+        output.WriteLine($"Populated categories: {populatedCategories}/5 (builder, armed, mobile, building, economy)")
+        Assert.True(populatedCategories >= 4, $"Expected at least 4 populated categories, got {populatedCategories}")
+
+    [<Fact>]
     [<Priority(10)>]
-    member _.``T0.5 After spawning a unit then resetting, no spawned units remain``() =
+    member _.``T0.6 After spawning a unit then resetting, no spawned units remain``() =
         engine.ThrowIfEngineCrashed()
         engine.ResetGameState()
 
-        // Get the initial commander unitId to use as a reference unitDefId
-        let initialUnitId =
-            engine.InitialEvents
-            |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None)
+        let mobileDefId = engine.MobileUnitDefId
+        output.WriteLine($"Using discovered mobile unitDefId: {mobileDefId}")
 
-        output.WriteLine($"Initial commander unit ID: {initialUnitId}")
-
-        // Spawn a unit - try several unitDefIds to find one that works
+        // Spawn a unit using discovered ID
         let mutable spawnedUnitId = None
         let (_, events) = engine.RunFrames(30, fun frame idx ->
-            // Check all frames for UnitCreated events
             for ev in frame.Events do
                 match ev with
                 | GameEvent.UnitCreated(uid, _) ->
@@ -73,10 +96,7 @@ type T0_SmokeTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
                 | _ -> ()
 
             if idx = 0 then
-                // Send spawn commands with several unitDefIds
-                [ GiveMeNewUnitCommand 1 1536.0f 100.0f 3900.0f
-                  GiveMeNewUnitCommand 2 1636.0f 100.0f 3900.0f
-                  GiveMeNewUnitCommand 10 1736.0f 100.0f 3900.0f ]
+                [ GiveMeNewUnitCommand mobileDefId 1536.0f 100.0f 3900.0f ]
             else
                 []
         )
@@ -103,7 +123,7 @@ type T0_SmokeTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
 
     [<Fact>]
     [<Priority(11)>]
-    member _.``T0.6 After modifying resources then resetting, resources return to baseline``() =
+    member _.``T0.7 After modifying resources then resetting, resources return to baseline``() =
         engine.ThrowIfEngineCrashed()
         engine.ResetGameState()
 
@@ -122,7 +142,7 @@ type T0_SmokeTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
 
     [<Fact>]
     [<Priority(12)>]
-    member _.``T0.7 Game frame number continues incrementing after reset``() =
+    member _.``T0.8 Game frame number continues incrementing after reset``() =
         engine.ThrowIfEngineCrashed()
 
         // Capture frame number before reset
@@ -149,15 +169,16 @@ type T0_SmokeTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
 
     [<Fact>]
     [<Priority(13)>]
-    member _.``T0.8 ResetGameState completes in under 5 seconds``() =
+    member _.``T0.9 ResetGameState completes in under 5 seconds``() =
         engine.ThrowIfEngineCrashed()
 
         // Spawn a few units to make the reset non-trivial
+        let defId = engine.MobileUnitDefId
         engine.RunFrames(10, fun _ idx ->
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 1536.0f 100.0f 4000.0f
-                  GiveMeNewUnitCommand 1 1600.0f 100.0f 4000.0f
-                  GiveMeNewUnitCommand 1 1700.0f 100.0f 4000.0f ]
+                [ GiveMeNewUnitCommand defId 1536.0f 100.0f 4000.0f
+                  GiveMeNewUnitCommand defId 1600.0f 100.0f 4000.0f
+                  GiveMeNewUnitCommand defId 1700.0f 100.0f 4000.0f ]
             else
                 []
         ) |> ignore

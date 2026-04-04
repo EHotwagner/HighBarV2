@@ -21,7 +21,7 @@ type T2_MovementTests(engine: PersistentEngineFixture, output: ITestOutputHelper
                     unitId <- Some uid
                 | _ -> ()
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 1536.0f 100.0f 4096.0f ]
+                [ GiveMeNewUnitCommand engine.MobileUnitDefId 1536.0f 100.0f 4096.0f ]
             else
                 []
         ) |> ignore

@@ -1,6 +1,6 @@
 # HighBarV2 Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-03
+Auto-generated from all feature plans. Last updated: 2026-04-04
 
 ## Active Technologies
 - F# / .NET 8.0 (primary test language), Python 3.10+ (secondary), C11 (proxy under test) + Google.Protobuf (F#), betterproto (Python), xUnit (F# test framework), pytest (Python test framework) (002-headless-test-suite)
@@ -62,9 +62,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 012-harden-persistent-tests: Added F# / .NET 8.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28
 - 011-persistent-engine-tests: Added F# / .NET 8.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28
 - 010-cheat-command-builders: Added F# / .NET 8.0 + Google.Protobuf (generated types from `proto/highbar/commands.proto`)
-- 009-client-unit-types: Added F# / .NET 8.0 + BarData library (in-repo), Google.Protobuf 3.28 (existing client dep), xUnit 2.9.3 (tests)
 
 
 <!-- MANUAL ADDITIONS START -->

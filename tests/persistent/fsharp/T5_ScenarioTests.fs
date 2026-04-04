@@ -21,7 +21,7 @@ type T5_ScenarioTests(engine: PersistentEngineFixture, output: ITestOutputHelper
                     unitId <- Some uid
                 | _ -> ()
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 x 100.0f z ]
+                [ GiveMeNewUnitCommand engine.MobileUnitDefId x 100.0f z ]
             else
                 []
         ) |> ignore
@@ -57,7 +57,7 @@ type T5_ScenarioTests(engine: PersistentEngineFixture, output: ITestOutputHelper
                 buildSent <- true
                 stepsCompleted.Add("build_sent")
                 // Build a structure nearby
-                [ BuildCommand uid 2 1536.0f 100.0f 4200.0f 0 ]
+                [ BuildCommand uid engine.BuildableStructureDefId 1536.0f 100.0f 4200.0f 0 ]
             else
                 []
         ) |> ignore
@@ -94,7 +94,7 @@ type T5_ScenarioTests(engine: PersistentEngineFixture, output: ITestOutputHelper
                 [ BuildCommand buid 2 1536.0f 100.0f 4200.0f 0 ]
             elif idx = 20 && guardUnit.IsNone then
                 // Spawn a guard unit
-                [ GiveMeNewUnitCommand 1 1600.0f 100.0f 4096.0f ]
+                [ GiveMeNewUnitCommand engine.MobileUnitDefId 1600.0f 100.0f 4096.0f ]
             elif idx = 35 && not guardSent then
                 // Find the last created unit as the guard
                 let lastCreated = if createdUnits.Count > 0 then Some(createdUnits.[createdUnits.Count - 1]) else None
@@ -127,9 +127,10 @@ type T5_ScenarioTests(engine: PersistentEngineFixture, output: ITestOutputHelper
                 | _ -> ()
 
             if idx = 0 then
-                [ GiveMeNewUnitCommand 1 1400.0f 100.0f 4096.0f
-                  GiveMeNewUnitCommand 1 1536.0f 100.0f 4096.0f
-                  GiveMeNewUnitCommand 1 1672.0f 100.0f 4096.0f ]
+                let defId = engine.MobileUnitDefId
+                [ GiveMeNewUnitCommand defId 1400.0f 100.0f 4096.0f
+                  GiveMeNewUnitCommand defId 1536.0f 100.0f 4096.0f
+                  GiveMeNewUnitCommand defId 1672.0f 100.0f 4096.0f ]
             else
                 []
         ) |> ignore

@@ -30,6 +30,9 @@
     <Compile Include="T3_BuildTests.fs" />
     <Compile Include="T4_CombatTests.fs" />
     <Compile Include="T5_ScenarioTests.fs" />
+    <Compile Include="T6_CommandCoverage.fs" />
+    <Compile Include="T7_ExhaustiveSpawn.fs" />
+    <Compile Include="T8_LargeScaleCombat.fs" />
   </ItemGroup>
 
 </Project>
