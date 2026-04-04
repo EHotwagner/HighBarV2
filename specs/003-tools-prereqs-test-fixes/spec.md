@@ -17,7 +17,7 @@ A developer clones the HighBarV2 repository onto a fresh machine and wants to bu
 
 **Acceptance Scenarios**:
 
-1. **Given** a clean repository checkout with required system dependencies installed (CMake 3.20+, .NET 8.0 SDK, Python 3.10+, C11 compiler, protobuf-c, buf CLI), **When** the developer follows the documented build steps, **Then** the proxy shared library (libSkirmishAI.so), F# client library, Python client package, and all three tools (EchoAI, ReferenceAI, Replay) are built successfully.
+1. **Given** a clean repository checkout with required system dependencies installed (CMake 3.20+, .NET 10.0 SDK, Python 3.10+, C11 compiler, protobuf-c, buf CLI), **When** the developer follows the documented build steps, **Then** the proxy shared library (libSkirmishAI.so), F# client library, Python client package, and all three tools (EchoAI, ReferenceAI, Replay) are built successfully.
 2. **Given** a clean checkout, **When** generated protobuf code is missing, **Then** running `buf generate` produces the required generated sources for both C and Python before downstream builds proceed.
 3. **Given** all components are built, **When** the developer lists the build artifacts, **Then** each artifact exists at its expected output path and is non-empty.
 
@@ -94,7 +94,7 @@ After running the test suite, any test failures are either fixed (if the issue i
 
 ## Assumptions
 
-- The developer machine has the required system-level dependencies installed: CMake 3.20+, a C11 compiler, .NET 8.0 SDK, Python 3.10+, protobuf-c library, and buf CLI.
+- The developer machine has the required system-level dependencies installed: CMake 3.20+, a C11 compiler, .NET 10.0 SDK, Python 3.10+, protobuf-c library, and buf CLI.
 - The headless BAR engine binary may not be available in all environments; integration tests that require it will be skipped or documented when absent.
 - Generated protobuf code is not checked into version control and must be regenerated as part of the build process.
 - The focus is on building existing code and running existing tests, not writing new tests or new tools.

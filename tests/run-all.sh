@@ -2,7 +2,7 @@
 # Unified test runner for HighBarV2.
 # Usage: run-all.sh [--category CATEGORY] [--graphical] [--help]
 #
-# Categories: proxy, unit, data, integration, persistent, python, ai, all (default)
+# Categories: proxy, unit, data, integration, persistent, ai, all (default)
 # AI tests are opt-in only (must explicitly pass --category ai).
 
 set -euo pipefail
@@ -36,7 +36,7 @@ Usage: run-all.sh [OPTIONS]
 
 Options:
   --category CAT   Run only tests in category CAT
-                   Categories: proxy, unit, data, integration, persistent, python, ai, all
+                   Categories: proxy, unit, data, integration, persistent, ai, all
                    Default: all (excludes ai — ai must be requested explicitly)
   --graphical      Launch full graphical BAR game with AI for visual validation
   --help           Show this help
@@ -173,7 +173,7 @@ run_tier() {
 
     TIER_OUTPUT[$tier]="$output"
 
-    # Parse pass/fail counts from output (works for dotnet test, ctest, pytest)
+    # Parse pass/fail counts from output (works for dotnet test, ctest)
     local passed=0 failed=0
     # dotnet test format: "Passed: N" / "Failed: N"
     local dp df
@@ -189,13 +189,8 @@ run_tier() {
     else
         cp=""
     fi
-    # pytest format: "N passed" / "N failed"
-    local pp pf
-    pp=$(echo "$output" | grep -oP '\d+(?= passed)' | tail -1 || true)
-    pf=$(echo "$output" | grep -oP '\d+(?= failed)' | tail -1 || true)
-
-    passed=${dp:-${cp:-${pp:-0}}}
-    failed=${df:-${cf:-${pf:-0}}}
+    passed=${dp:-${cp:-0}}
+    failed=${df:-${cf:-0}}
     [ -z "$passed" ] && passed=0
     [ -z "$failed" ] && failed=0
 
@@ -272,7 +267,7 @@ generate_report() {
 |------|--------|--------|--------|---------|
 EOF
 
-    for tier in proxy unit data integration persistent python ai; do
+    for tier in proxy unit data integration persistent ai; do
         if [ -n "${TIER_STATUS[$tier]:-}" ]; then
             local status_mark="✓"
             [ "${TIER_STATUS[$tier]}" = "fail" ] && status_mark="✗"
@@ -311,7 +306,7 @@ EOF
                 echo '```' >> "$report_file"
 
                 # Include engine logs for engine-dependent tiers
-                if [[ "$tier" =~ ^(integration|persistent|python|ai)$ ]]; then
+                if [[ "$tier" =~ ^(integration|persistent|ai)$ ]]; then
                     local session_dir
                     session_dir=$(find /tmp -maxdepth 1 -name "highbar-test-*" -type d 2>/dev/null | sort -r | head -1)
                     if [ -n "$session_dir" ] && [ -f "$session_dir/infolog.txt" ]; then
@@ -407,7 +402,7 @@ main() {
     # ── Engine-dependent tiers ──
 
     local engine_tiers_requested=false
-    for t in integration persistent python ai; do
+    for t in integration persistent ai; do
         should_run "$t" && engine_tiers_requested=true
     done
 
@@ -435,18 +430,6 @@ main() {
             run_tier "persistent" "F# Persistent Tests" dotnet test "${REPO_ROOT}/tests/persistent/fsharp/" --verbosity quiet
         else
             skip_tier "persistent" "F# Persistent Tests" "Engine prerequisites not met"
-        fi
-    fi
-
-    if should_run "python"; then
-        if $ENGINE_AVAILABLE; then
-            if command -v pytest &>/dev/null; then
-                run_tier "python" "Python Integration Tests" pytest "${REPO_ROOT}/tests/integration/python/" -v
-            else
-                skip_tier "python" "Python Integration Tests" "pytest not installed"
-            fi
-        else
-            skip_tier "python" "Python Integration Tests" "Engine prerequisites not met"
         fi
     fi
 

@@ -9,7 +9,7 @@ Create a new F# xUnit test suite that runs against a single persistent game engi
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0  
+**Language/Version**: F# / .NET 10.0  
 **Primary Dependencies**: xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28  
 **Storage**: Filesystem (session logs, temp directories)  
 **Testing**: xUnit with custom test case orderer  

@@ -9,15 +9,15 @@ Build all HighBarV2 project components (C proxy, F# client, Python client, devel
 
 ## Technical Context
 
-**Language/Version**: C11 (proxy), F# / .NET 8.0 (client + tools + tests), Python 3.10+ (client + tests)
-**Primary Dependencies**: protobuf-c (C proxy), Google.Protobuf 3.28 (F#), betterproto (Python), buf CLI (proto generation)
+**Language/Version**: C11 (proxy), F# / .NET 10.0 (client + tools + tests)
+**Primary Dependencies**: protobuf-c (C proxy), Google.Protobuf 3.28 (F#), buf CLI (proto generation)
 **Storage**: Filesystem only (reports as markdown)
-**Testing**: ctest (C unit tests), xUnit via `dotnet test` (F# integration), pytest (Python integration)
+**Testing**: ctest (C unit tests), xUnit via `dotnet test` (F# integration)
 **Target Platform**: Linux (primary)
 **Project Type**: Multi-language library + development tools
 **Performance Goals**: N/A (build/test task, not hot-path work)
 **Constraints**: Headless BAR engine may not be available; integration tests require it
-**Scale/Scope**: 4 C unit tests, 22 F# integration tests, 12 Python integration tests, 3 developer tools
+**Scale/Scope**: 4 C unit tests, 22 F# integration tests, 3 developer tools
 
 ## Constitution Check
 

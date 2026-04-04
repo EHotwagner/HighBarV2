@@ -9,10 +9,10 @@ Build an iterative, layered integration test suite that exercises the full HighB
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0 (primary test language), Python 3.10+ (secondary), C11 (proxy under test)
-**Primary Dependencies**: Google.Protobuf (F#), betterproto (Python), xUnit (F# test framework), pytest (Python test framework)
+**Language/Version**: F# / .NET 10.0 (primary test language), C11 (proxy under test)
+**Primary Dependencies**: Google.Protobuf (F#), xUnit (F# test framework)
 **Storage**: Filesystem only (reports as markdown, no database)
-**Testing**: xUnit for F# tests, pytest for Python tests, run via `dotnet test` and `pytest`
+**Testing**: xUnit for F# tests, run via `dotnet test`
 **Target Platform**: Linux (headless BAR engine requires Linux for CI; developer machines)
 **Project Type**: Test suite + test harness
 **Performance Goals**: Full F# suite completes in < 60 seconds including engine startup/shutdown

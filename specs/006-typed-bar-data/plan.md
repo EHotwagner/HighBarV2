@@ -9,11 +9,11 @@ Replace the `LuaValue.Table`-based BAR unit data representation with idiomatic F
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0 (generator script, data library, tests)
+**Language/Version**: F# / .NET 10.0 (generator script, data library, tests)
 **Primary Dependencies**: XParsec (Lua parser in generator), xUnit (test framework)
 **Storage**: Filesystem only (generated .fs source files)
 **Testing**: xUnit via `dotnet test`
-**Target Platform**: .NET 8.0 class library (cross-platform)
+**Target Platform**: .NET 10.0 class library (cross-platform)
 **Project Type**: Code generator + data library + test suite
 **Performance Goals**: N/A (compile-time generated static data, no runtime performance concerns)
 **Constraints**: Generated code must compile; generator must handle ~953 unit files without failure

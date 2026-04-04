@@ -9,10 +9,10 @@ Enable the existing HighBarV2 integration test suite (F# xUnit + Python pytest) 
 
 ## Technical Context
 
-**Language/Version**: Bash (scripts), F# / .NET 8.0 (test harness), Python 3.10+ (test harness), Lua (game scenario)
-**Primary Dependencies**: xUnit (F# tests), pytest (Python tests), jq (JSON parsing in shell), pr-downloader (game content)
+**Language/Version**: Bash (scripts), F# / .NET 10.0 (test harness), Lua (game scenario)
+**Primary Dependencies**: xUnit (F# tests), jq (JSON parsing in shell), pr-downloader (game content)
 **Storage**: Filesystem only (JSON config, log files, temp directories)
-**Testing**: xUnit (F#), pytest (Python) — both against live `spring-headless`
+**Testing**: xUnit (F#) against live `spring-headless`
 **Target Platform**: Linux (primary); `spring-headless` is Linux-native
 **Project Type**: Test infrastructure (scripts + harness extensions)
 **Performance Goals**: Prerequisites check < 5s; engine startup overhead < 15s

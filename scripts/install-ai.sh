@@ -53,7 +53,7 @@ cp "$REPO_ROOT/proxy/data/AIOptions.lua" "$INSTALL_DIR/"
 
 # Register AI in Chobby lobby config (patch rapid pool files)
 echo "==> Registering AI in Chobby lobby..."
-python3 "$REPO_ROOT/scripts/patch-chobby-ai.py" "$BAR_DATA_DIR"
+"$REPO_ROOT/scripts/patch-chobby-ai.sh" "$BAR_DATA_DIR"
 
 echo "==> Done. HighBarV2 AI installed."
 echo ""

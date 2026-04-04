@@ -9,7 +9,7 @@ Run the Feature 015 AI validation test suite, fix any compilation or runtime err
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0  
+**Language/Version**: F# / .NET 10.0  
 **Primary Dependencies**: HighBar.Client (in-repo), BarData (in-repo), GameRunner (in-repo), xUnit 2.9.x, Google.Protobuf 3.28  
 **Storage**: Filesystem (markdown reports, temp directories, Unix domain sockets)  
 **Testing**: xUnit + `dotnet test`, spring-headless 2025.06.21  

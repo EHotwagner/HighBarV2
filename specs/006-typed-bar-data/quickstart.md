@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- .NET 8.0 SDK
+- .NET 10.0 SDK
 - BAR repo clone at `bar-repo/` (or run generator without `--skip-clone`)
 
 ## Build

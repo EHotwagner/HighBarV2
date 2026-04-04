@@ -9,7 +9,7 @@
 2. **Game content**: BAR `test-29833-ee0f96a` in `/home/developer/.spring/`
 3. **Map**: `Comet Catcher Remake` in `/home/developer/.spring/maps/`
 4. **Proxy**: `build/libSkirmishAI.so` built
-5. **.NET 8.0 SDK** installed
+5. **.NET 10.0 SDK** installed
 
 Verify all prerequisites:
 ```bash

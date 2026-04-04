@@ -14,12 +14,12 @@
 | Proto Generation (C#) | **PASS** | `proto/gen/csharp/` (5 files) | — |
 | Proto Generation (Python) | **PASS** | `proto/gen/python/` (2 files) | Warning: betterproto plugin doesn't advertise proto3 optional support (output is valid) |
 | C Proxy (libSkirmishAI.so) | **PASS** | `build/libSkirmishAI.so` (326KB) | 4 test binaries also produced |
-| F# Client | **PASS** | `clients/fsharp/bin/Debug/net8.0/HighBar.Client.dll` | 0 warnings, 0 errors |
+| F# Client | **PASS** | `clients/fsharp/bin/Debug/net10.0/HighBar.Client.dll` | 0 warnings, 0 errors |
 | Python Client | **PASS (fixed)** | `.venv/` editable install | Fixed dataclass field ordering for Python 3.14 compatibility |
-| EchoAI Tool | **PASS** | `tools/echo-ai/bin/Debug/net8.0/EchoAI.dll` | — |
-| ReferenceAI Tool | **PASS** | `tools/reference-ai/bin/Debug/net8.0/ReferenceAI.dll` | — |
-| Replay Tool | **PASS (fixed)** | `tools/replay/bin/Debug/net8.0/Replay.dll` | Fixed `UnixDomainSocketEndPoint` namespace reference |
-| F# Integration Tests | **PASS** | `tests/integration/fsharp/bin/Debug/net8.0/HighBar.Tests.dll` | Build only; requires .NET runtime roll-forward |
+| EchoAI Tool | **PASS** | `tools/echo-ai/bin/Debug/net10.0/EchoAI.dll` | — |
+| ReferenceAI Tool | **PASS** | `tools/reference-ai/bin/Debug/net10.0/ReferenceAI.dll` | — |
+| Replay Tool | **PASS (fixed)** | `tools/replay/bin/Debug/net10.0/Replay.dll` | Fixed `UnixDomainSocketEndPoint` namespace reference |
+| F# Integration Tests | **PASS** | `tests/integration/fsharp/bin/Debug/net10.0/HighBar.Tests.dll` | Build only; requires .NET runtime roll-forward |
 
 ---
 
@@ -104,8 +104,8 @@ All 12 tests error at fixture setup: `Engine socket not ready after 30s`
 ### Fix 3: .NET Runtime Compatibility
 
 - **File**: `Directory.Build.props` (new)
-- **Issue**: All projects target `net8.0` but only .NET 10.0 runtime is installed. Builds succeed (SDK handles cross-targeting) but test execution fails because the `net8.0` runtime is required.
-- **Fix**: Added `Directory.Build.props` with `<RollForward>LatestMajor</RollForward>` to allow `net8.0` binaries to run on .NET 10.0.
+- **Issue**: All projects target `net10.0` but only .NET 10.0 runtime is installed. Builds succeed (SDK handles cross-targeting) but test execution fails because the `net10.0` runtime is required.
+- **Fix**: Added `Directory.Build.props` with `<RollForward>LatestMajor</RollForward>` to allow `net10.0` binaries to run on .NET 10.0.
 
 ---
 

@@ -9,7 +9,7 @@ Unit commands (move, patrol, fight, etc.) sent by the HighBarV2 proxy are silent
 
 ## Technical Context
 
-**Language/Version**: C11 (proxy), F# / .NET 8.0 (client)
+**Language/Version**: C11 (proxy), F# / .NET 10.0 (client)
 **Primary Dependencies**: protobuf-c (C proxy), Google.Protobuf 3.28 (F#)
 **Storage**: N/A
 **Testing**: CTest (C proxy tests), xUnit (F# tests)

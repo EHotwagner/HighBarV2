@@ -9,7 +9,7 @@ Add four missing builder functions to the F# Commands module: `GiveMeResourceCom
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0  
+**Language/Version**: F# / .NET 10.0  
 **Primary Dependencies**: Google.Protobuf (generated types from `proto/highbar/commands.proto`)  
 **Storage**: N/A  
 **Testing**: xUnit (integration tests against headless engine), plus new unit-level tests for field population  

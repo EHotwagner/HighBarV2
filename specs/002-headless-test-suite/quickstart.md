@@ -27,7 +27,7 @@
    buf generate proto/
    ```
 
-4. **.NET 8 SDK** installed (for F# tests):
+4. **.NET 10 SDK** installed (for F# tests):
    ```bash
    dotnet --version  # Must be 8.0+
    ```

@@ -127,7 +127,6 @@ if [ ${ACTIONS_TAKEN} -eq 0 ]; then
     echo "All components are present. Ready to run tests!"
     echo ""
     echo "  dotnet test tests/integration/fsharp/"
-    echo "  cd tests/integration/python && pytest"
 else
     echo "${ACTIONS_TAKEN} component(s) need attention. See above for details."
     echo "After resolving, run: ./tests/check-prerequisites.sh"

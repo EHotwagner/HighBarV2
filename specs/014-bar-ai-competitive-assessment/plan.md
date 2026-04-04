@@ -9,11 +9,11 @@ Build a competitive AI for Beyond All Reason (BAR) that plays complete games —
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0 (AI logic + tests), C11 (existing proxy — no changes needed)
+**Language/Version**: F# / .NET 10.0 (AI logic + tests), C11 (existing proxy — no changes needed)
 **Primary Dependencies**: HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.x
 **Storage**: Filesystem only (structured decision logs as JSON lines, game outcome reports as markdown)
 **Testing**: xUnit (F# tests), headless engine for non-combat tests, Xvfb + live engine for combat tests
-**Target Platform**: Linux (primary), cross-platform via .NET 8.0
+**Target Platform**: Linux (primary), cross-platform via .NET 10.0
 **Project Type**: Library (AI decision engine) + executable (game runner)
 **Performance Goals**: AI frame response < 25ms (within proxy's 33ms frame budget at 30fps)
 **Constraints**: < 1ms proxy overhead (per constitution), AI decision logic gets remaining ~25ms budget. No heap allocation in proxy hot path (existing constraint). AI client-side allocations are unconstrained.

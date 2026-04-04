@@ -9,15 +9,15 @@ Build a native C shared library that plugs into the Recoil engine's Skirmish AI 
 
 ## Technical Context
 
-**Language/Version**: C11 (proxy shared library), F# / .NET 8 (primary client), Python 3.10+ (secondary client)
-**Primary Dependencies**: protobuf-c (C runtime + codegen), Google.Protobuf (NuGet, .NET), betterproto (Python), buf (proto tooling)
+**Language/Version**: C11 (proxy shared library), F# / .NET 10.0 (primary client)
+**Primary Dependencies**: protobuf-c (C runtime + codegen), Google.Protobuf (NuGet, .NET), buf (proto tooling)
 **Storage**: N/A (filesystem for config only — AIOptions.lua, environment variables)
 **Testing**: Mock engine harness (C), round-trip serialization property tests, integration tests via echo-test AI
 **Target Platform**: Linux (.so) primary, Windows (.dll) cross-platform via CMake
 **Project Type**: Shared library (engine plugin) + protocol schema + client libraries
 **Performance Goals**: <1ms total proxy overhead per frame, <100us event serialization, <500us socket round-trip
 **Constraints**: Single-threaded, arena allocation (no hot-path heap alloc), 8MB max message size, 25ms default frame timeout
-**Scale/Scope**: 28 event types, 97 command types, 200+ callback functions, 2 client languages
+**Scale/Scope**: 28 event types, 97 command types, 200+ callback functions, 1 client language (F#)
 
 ## Constitution Check
 

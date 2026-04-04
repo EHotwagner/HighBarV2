@@ -22,7 +22,7 @@
 - [X] T003 [P] Create engine shutdown shell script at tests/fixtures/stop-headless.sh that reads PID file, sends SIGTERM, waits 5s, sends SIGKILL if needed, removes socket file and PID file
 - [X] T004 [P] Create minimal Lua startscript at tests/fixtures/game-setup.lua that defines a small map, 2 teams (HighBarV2 AI on team 0, null/passive AI on team 1), and 1 builder unit per team
 - [X] T005 Create reports directory at reports/ with a report template file at reports/TEMPLATE.md containing sections: Date, Iteration, Context, Problem, Investigation, Root Cause, Solution, Hypotheses, Lessons Learned
-- [X] T006 [P] Create test suite README at tests/README.md documenting prerequisites (spring-headless, proxy plugin, .NET 8, protobuf codegen), how to run tests, configuration env vars, and troubleshooting tips per quickstart.md
+- [X] T006 [P] Create test suite README at tests/README.md documenting prerequisites (spring-headless, proxy plugin, .NET 10, protobuf codegen), how to run tests, configuration env vars, and troubleshooting tips per quickstart.md
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- .NET 8.0 SDK
+- .NET 10.0 SDK
 - CMake + C compiler
 - Spring headless engine (`spring-headless`) in PATH
 - BAR game content installed (`test-29833-ee0f96a`)

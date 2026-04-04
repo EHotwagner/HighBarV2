@@ -79,7 +79,7 @@ An AI developer wants to find all units that have a specific capability (e.g., a
 - **FR-005**: System MUST provide a shared `UnitSummary` record type for indexing and capability queries, generated alongside the unique per-unit types. The summary record enables filtering all units by capability (e.g., find all builders, all armed units, all flying units).
 - **FR-006**: System MUST preserve the `ValueOrExpr<'T>` pattern for fields that may contain Lua runtime expressions.
 - **FR-007**: System MUST generate the flat types via a new dedicated generator script (`tools/generate-bar-data-flat.fsx`), reusing the Lua parsing logic from the feature-006 generator, consuming the same BAR Lua source data.
-- **FR-008**: The generated library MUST compile without errors or warnings under .NET 8.0.
+- **FR-008**: The generated library MUST compile without errors or warnings under .NET 10.0.
 - **FR-009**: System MUST generate an index or lookup mechanism to access any unit definition by name.
 
 ### Key Entities

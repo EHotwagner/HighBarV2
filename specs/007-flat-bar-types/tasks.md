@@ -39,7 +39,7 @@
 **⚠️ CRITICAL**: Phase 1 (Archive) MUST complete before this phase — data/bar/ path must be free
 
 - [X] T007 Create tools/generate-bar-data-flat.fsx by copying Lua parsing phases (XParsec parser, LVal AST, expression fallback, file discovery) from tools/generate-bar-data.fsx — remove all v1 code emission functions
-- [X] T008 Create data/bar/BarData.fsproj targeting net8.0 with RootNamespace BarData, matching compiler flags from data/bar-v1/BarData.fsproj (--strict-indentation-)
+- [X] T008 Create data/bar/BarData.fsproj targeting net10.0 with RootNamespace BarData, matching compiler flags from data/bar-v1/BarData.fsproj (--strict-indentation-)
 - [X] T009 [P] Create data/bar/src/Types.fs with shared sub-types: ValueOrExpr<'T>, SoundDef, FeatureDef, WeaponDef — copy from data/bar-v1/src/Types.fs but remove UnitDef, MovementDef, BuilderDef, EconomyDef, and BuildingDef records (movement/builder/economy/building fields are flattened into per-unit types)
 - [X] T010 [P] Copy data/bar-v1/src/Commands.fs to data/bar/src/Commands.fs
 - [X] T011 Verify data/bar/BarData.fsproj compiles with Types.fs and Commands.fs only via `dotnet build data/bar/BarData.fsproj`

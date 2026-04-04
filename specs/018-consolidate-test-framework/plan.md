@@ -9,10 +9,10 @@ Consolidate the fragmented test infrastructure into a unified system with a sing
 
 ## Technical Context
 
-**Language/Version**: Bash (test runner scripts), F# / .NET 8.0 (primary test code), Python 3.10+ (secondary tests), C11 (proxy tests)
-**Primary Dependencies**: xUnit 2.9.x (F# tests), pytest (Python tests), CTest/CMake (C tests), jq (JSON parsing in scripts)
+**Language/Version**: Bash (test runner scripts), F# / .NET 10.0 (primary test code), C11 (proxy tests)
+**Primary Dependencies**: xUnit 2.9.x (F# tests), CTest/CMake (C tests), jq (JSON parsing in scripts)
 **Storage**: Filesystem (Markdown reports, JSON config, temp directories)
-**Testing**: dotnet test (F#), pytest (Python), ctest (C proxy)
+**Testing**: dotnet test (F#), ctest (C proxy)
 **Target Platform**: Linux (Arch-based dev workstation, CI)
 **Project Type**: Test infrastructure / tooling
 **Performance Goals**: Full headless test suite completes in < 10 minutes

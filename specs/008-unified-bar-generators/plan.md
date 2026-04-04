@@ -9,11 +9,11 @@ Merge the two separate BAR data generator scripts and two separate F# libraries 
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0 (generator script, data library, tests)
+**Language/Version**: F# / .NET 10.0 (generator script, data library, tests)
 **Primary Dependencies**: XParsec (Lua parser in generator), xUnit (test framework)
 **Storage**: Filesystem only (generated .fs source files)
 **Testing**: xUnit (F# test framework), `dotnet test`
-**Target Platform**: .NET 8.0 (cross-platform library)
+**Target Platform**: .NET 10.0 (cross-platform library)
 **Project Type**: Library (code-generated F# data library)
 **Performance Goals**: N/A (compile-time data, no runtime hot path)
 **Constraints**: Must compile with zero errors/warnings; ~953 unit types to generate; round-trip conversion must be lossless

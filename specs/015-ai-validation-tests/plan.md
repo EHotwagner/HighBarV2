@@ -9,7 +9,7 @@ Implement deferred validation tasks from feature 014: end-to-end game testing ag
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0  
+**Language/Version**: F# / .NET 10.0  
 **Primary Dependencies**: HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.9.x  
 **Storage**: Filesystem only (markdown reports, JSON lines decision logs, temp directories)  
 **Testing**: xUnit (F# test framework), `spring-headless` (headless engine), `spring` (live graphical engine via Xvfb)  

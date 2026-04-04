@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-- .NET 8.0 SDK installed
+- .NET 10.0 SDK installed
 - Repository cloned and on branch `009-client-unit-types`
 
 ## Build

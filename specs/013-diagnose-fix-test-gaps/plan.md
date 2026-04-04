@@ -9,7 +9,7 @@ Fix the 4 root causes that prevented 012-harden-persistent-tests from achieving 
 
 ## Technical Context
 
-**Language/Version**: C11 (proxy), F# / .NET 8.0 (client + tests)  
+**Language/Version**: C11 (proxy), F# / .NET 10.0 (client + tests)  
 **Primary Dependencies**: protobuf-c (C proxy), Google.Protobuf 3.28 (F#), xUnit 2.x (tests), BarData (in-repo)  
 **Storage**: Filesystem (Unix domain sockets, log files, temp directories)  
 **Testing**: xUnit (F# persistent engine tests), Spring headless engine  

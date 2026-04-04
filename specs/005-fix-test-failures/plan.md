@@ -9,7 +9,7 @@ Fix 12 failing F# integration tests caused by two root causes: (1) missing BAR-s
 
 ## Technical Context
 
-**Language/Version**: F# / .NET 8.0 (test harness + tests), TDF config format (game-setup.txt)
+**Language/Version**: F# / .NET 10.0 (test harness + tests), TDF config format (game-setup.txt)
 **Primary Dependencies**: xUnit (test framework), spring-headless 2025.06.21 (engine), BAR game content (test-29833-ee0f96a)
 **Storage**: Filesystem (config files, reports as markdown)
 **Testing**: xUnit via `dotnet test` — 23 integration tests against live engine

@@ -18,7 +18,7 @@
 **Purpose**: Create the new test project with dependencies and build configuration
 
 - [x] T001 Create project directory at tests/persistent/fsharp/
-- [x] T002 Create HighBar.PersistentTests.fsproj at tests/persistent/fsharp/HighBar.PersistentTests.fsproj with .NET 8.0 target, xUnit 2.x dependencies, and project references to HighBar.Client and BarData
+- [x] T002 Create HighBar.PersistentTests.fsproj at tests/persistent/fsharp/HighBar.PersistentTests.fsproj with .NET 10.0 target, xUnit 2.x dependencies, and project references to HighBar.Client and BarData
 - [x] T003 Verify the project builds with `dotnet build` in tests/persistent/fsharp/
 
 ---

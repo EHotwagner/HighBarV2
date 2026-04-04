@@ -8,7 +8,7 @@
 Ensure these are installed:
 - CMake 3.20+
 - C11 compiler (gcc or clang)
-- .NET 8.0 SDK
+- .NET 10.0 SDK
 - Python 3.10+
 - protobuf-c library (`pkg-config --exists libprotobuf-c`)
 - buf CLI (`buf --version`)

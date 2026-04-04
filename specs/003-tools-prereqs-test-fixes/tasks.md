@@ -19,7 +19,7 @@
 
 **Purpose**: Verify system-level prerequisites are available before attempting builds
 
-- [x] T001 Verify system prerequisites: check that `cmake`, `dotnet`, `python3`, `gcc`/`clang`, `pkg-config`, and `buf` are installed and meet minimum version requirements (CMake 3.20+, .NET 8.0, Python 3.10+, C11 compiler)
+- [x] T001 Verify system prerequisites: check that `cmake`, `dotnet`, `python3`, `gcc`/`clang`, `pkg-config`, and `buf` are installed and meet minimum version requirements (CMake 3.20+, .NET 10.0, Python 3.10+, C11 compiler)
 - [x] T002 Verify protobuf-c library is available via `pkg-config --exists libprotobuf-c` and report version
 - [x] T003 Check headless engine availability: detect if `spring-headless` is on PATH or `HIGHBAR_TEST_ENGINE` environment variable is set; record availability for downstream test phases
 
