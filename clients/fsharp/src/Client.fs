@@ -205,6 +205,154 @@ type HighBarClient(socketPath: string) =
             resp.Result.IntValue
         else -1
 
+    /// Get the metal cost for a unitDefId.
+    member this.GetUnitDefCost(defId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- defId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitdefGetCost, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the build time for a unitDefId.
+    member this.GetUnitDefBuildTime(defId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- defId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitdefGetBuildTime, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the map width in elmos.
+    member this.GetMapWidth() : int =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetWidth, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue
+        else 0
+
+    /// Get the map height in elmos.
+    member this.GetMapHeight() : int =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetHeight, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue
+        else 0
+
+    /// Get the start position for a team.
+    member this.GetStartPos(teamId: int) : (float32 * float32 * float32) =
+        let p = CallbackParam()
+        p.IntValue <- teamId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetStartPos, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.VectorValue then
+            let v = resp.Result.VectorValue
+            (v.X, v.Y, v.Z)
+        else (0.0f, 0.0f, 0.0f)
+
+    /// Get metal spots on the map. Returns array of (x, y, z, value) tuples.
+    member this.GetMetalSpots() : (float32 * float32 * float32 * float32) array =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetMetalSpots, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatArrayValue then
+            let vals = resp.Result.FloatArrayValue.Values
+            // Metal spots come as groups of 4 floats: x, y, z, value
+            [| for i in 0 .. 4 .. vals.Count - 4 do
+                yield (vals.[i], vals.[i+1], vals.[i+2], vals.[i+3]) |]
+        else [||]
+
+    /// Get the current resource amount. resourceId: 0=metal, 1=energy.
+    member this.GetEconomyCurrent(resourceId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- resourceId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackEconomyGetCurrent, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the resource income per second. resourceId: 0=metal, 1=energy.
+    member this.GetEconomyIncome(resourceId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- resourceId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackEconomyGetIncome, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the resource usage per second. resourceId: 0=metal, 1=energy.
+    member this.GetEconomyUsage(resourceId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- resourceId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackEconomyGetUsage, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the resource storage capacity. resourceId: 0=metal, 1=energy.
+    member this.GetEconomyStorage(resourceId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- resourceId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackEconomyGetStorage, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get position of a live unit. Returns (x, y, z).
+    member this.GetUnitPos(unitId: int) : (float32 * float32 * float32) =
+        let p = CallbackParam()
+        p.IntValue <- unitId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitGetPos, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.VectorValue then
+            let v = resp.Result.VectorValue
+            (v.X, v.Y, v.Z)
+        else (0.0f, 0.0f, 0.0f)
+
+    /// Get health of a live unit.
+    member this.GetUnitHealth(unitId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- unitId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitGetHealth, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get max health of a live unit.
+    member this.GetUnitMaxHealth(unitId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- unitId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitGetMaxHealth, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get the team ID for a unit.
+    member this.GetUnitTeam(unitId: int) : int =
+        let p = CallbackParam()
+        p.IntValue <- unitId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitGetTeam, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue
+        else -1
+
+    /// Get the max speed for a unitDefId.
+    member this.GetUnitMaxSpeed(unitId: int) : float32 =
+        let p = CallbackParam()
+        p.IntValue <- unitId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackUnitGetMaxSpeed, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatValue then
+            resp.Result.FloatValue
+        else 0.0f
+
+    /// Get our team ID.
+    member this.GetMyTeam() : int =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackGameGetMyTeam, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue
+        else -1
+
+    /// Get our ally team ID.
+    member this.GetMyAllyTeam() : int =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackGameGetMyAllyTeam, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntValue then
+            resp.Result.IntValue
+        else -1
+
     /// Enable or disable cheat events. Returns previous state.
     member this.SetCheatEventsEnabled(enabled: bool) : bool =
         let p = CallbackParam()

@@ -11,10 +11,38 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Core types (no internal dependencies) -->
     <Compile Include="src/Units.fs" />
     <Compile Include="src/Events.fs" />
     <Compile Include="src/Commands.fs" />
     <Compile Include="src/Client.fs" />
+    <!-- AI: Task types -->
+    <Compile Include="src/Tasks/UnitTask.fs" />
+    <!-- AI: Logging -->
+    <Compile Include="src/Logging/DecisionLog.fs" />
+    <!-- AI: Strategy types -->
+    <Compile Include="src/Strategy/StrategyController.fs" />
+    <Compile Include="src/Strategy/MapAnalysis.fs" />
+    <Compile Include="src/Strategy/BuildOrder.fs" />
+    <!-- AI: Core models -->
+    <Compile Include="src/UnitRegistry.fs" />
+    <Compile Include="src/EconomyModel.fs" />
+    <Compile Include="src/ThreatMap.fs" />
+    <!-- AI: Manager framework -->
+    <Compile Include="src/Managers/ManagerBase.fs" />
+    <Compile Include="src/Tasks/TaskAssigner.fs" />
+    <!-- AI: Domain managers -->
+    <Compile Include="src/Managers/EconomyManager.fs" />
+    <Compile Include="src/Managers/BuildManager.fs" />
+    <Compile Include="src/Managers/ProductionManager.fs" />
+    <Compile Include="src/Managers/MilitaryManager.fs" />
+    <Compile Include="src/Managers/ScoutManager.fs" />
+    <!-- AI: GameState (depends on all above) -->
+    <Compile Include="src/GameState.fs" />
   </ItemGroup>
 
   <ItemGroup>
