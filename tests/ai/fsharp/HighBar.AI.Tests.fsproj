@@ -15,6 +15,7 @@
     <Compile Include="CompetitiveTests.fs" />
     <Compile Include="NonCombatTests.fs" />
     <Compile Include="CombatTests.fs" />
+    <Compile Include="HeadlessCombatVerification.fs" />
   </ItemGroup>
 
   <ItemGroup>

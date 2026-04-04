@@ -132,23 +132,6 @@ module GameOrchestrator =
             listenSock.Close()
             client.Handshake() |> ignore
 
-            // Capture Init event for teamId
-            let initFrame = ref None
-            try
-                client.Run(fun frame ->
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.Init teamId -> initFrame.Value <- Some teamId
-                        | _ -> ()
-                    failwith "CAPTURED_ENOUGH"
-                    []
-                )
-            with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
-
-            let teamId = initFrame.Value |> Option.defaultValue 0
-            let gs = GameState.init client teamId logPath
-            let frameHandler = GameState.createFrameHandler gs
-
             // Track game metrics
             let mutable frameCount = 0
             let mutable unitsProduced = 0
@@ -170,6 +153,10 @@ module GameOrchestrator =
             let mutable gameResult = GameResult.Timeout
             let mutable crashMessage: string option = None
             let mutable gameOver = false
+
+            // Lazy init: GameState and frame handler are created on the Init event
+            let mutable gs: GameState option = None
+            let mutable frameHandler: (GameFrame -> Highbar.AICommand list) option = None
 
             let classifyFinishedUnit (unitId: int) =
                 let defId = client.GetUnitDef(unitId)
@@ -205,6 +192,16 @@ module GameOrchestrator =
                 client.Run(fun frame ->
                     frameCount <- frameCount + 1
 
+                    // Initialize GameState on Init event (first frame)
+                    for ev in frame.Events do
+                        match ev with
+                        | GameEvent.Init teamId when gs.IsNone ->
+                            let newGs = GameState.init client teamId logPath
+                            gs <- Some newGs
+                            frameHandler <- Some(GameState.createFrameHandler newGs)
+                        | _ -> ()
+
+                    // Track metrics from all events
                     for ev in frame.Events do
                         match ev with
                         | GameEvent.UnitCreated _ ->
@@ -228,13 +225,22 @@ module GameOrchestrator =
                         | _ -> ()
 
                     if gameOver then
-                        let friendlyAlive =
-                            gs.UnitRegistry.GetFriendlyByClass(UnitClass.Commander)
-                            |> List.exists (fun u -> u.Lifecycle = UnitLifecycle.Ready || u.Lifecycle = UnitLifecycle.Alive)
-                        gameResult <- if friendlyAlive then GameResult.Win else GameResult.Loss
+                        match gs with
+                        | Some g ->
+                            let friendlyAlive =
+                                g.UnitRegistry.GetFriendlyByClass(UnitClass.Commander)
+                                |> List.exists (fun u -> u.Lifecycle = UnitLifecycle.Ready || u.Lifecycle = UnitLifecycle.Alive)
+                            gameResult <- if friendlyAlive then GameResult.Win else GameResult.Loss
+                        | None ->
+                            gameResult <- GameResult.Loss
                         failwith "GAME_ENDED"
 
-                    let cmds = frameHandler frame
+                    // Run AI brain if initialized
+                    let cmds =
+                        match frameHandler with
+                        | Some handler -> handler frame
+                        | None -> []
+
                     if cmds.IsEmpty then
                         zeroCommandFrames <- zeroCommandFrames + 1
                     else
@@ -265,7 +271,7 @@ module GameOrchestrator =
 
             // Cleanup engine
             try client.Disconnect() with _ -> ()
-            try gs.DecisionLog.Close() with _ -> ()
+            gs |> Option.iter (fun g -> try g.DecisionLog.Close() with _ -> ())
 
             let stopPsi = ProcessStartInfo()
             stopPsi.FileName <- "/usr/bin/env"
