@@ -14,7 +14,7 @@ PID_FILE="${2:-${SOCKET_PATH}.pid}"
 SESSION_DIR="${3:-}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STARTSCRIPT_TEMPLATE="${SCRIPT_DIR}/game-setup.txt"
+STARTSCRIPT_TEMPLATE="${HIGHBAR_GAME_SETUP:-${SCRIPT_DIR}/game-setup.txt}"
 
 ENGINE_BIN="${HIGHBAR_TEST_ENGINE:-spring-headless}"
 MAP_NAME="${HIGHBAR_TEST_MAP:-Comet Catcher Remake}"

@@ -22,6 +22,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-04
 - Filesystem (Unix domain sockets, log files, temp directories) (013-diagnose-fix-test-gaps)
 - F# / .NET 8.0 (AI logic + tests), C11 (existing proxy — no changes needed) + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.x (014-bar-ai-competitive-assessment)
 - Filesystem only (structured decision logs as JSON lines, game outcome reports as markdown) (014-bar-ai-competitive-assessment)
+- F# / .NET 8.0 + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.9.x (015-ai-validation-tests)
+- Filesystem only (markdown reports, JSON lines decision logs, temp directories) (015-ai-validation-tests)
 
 - C11, protobuf-c, CMake (proxy shared library) (001-native-proxy-bridge)
 - F# / .NET 8, Google.Protobuf (primary client) (001-native-proxy-bridge)
@@ -66,9 +68,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 015-ai-validation-tests: Added F# / .NET 8.0 + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.9.x
 - 014-bar-ai-competitive-assessment: Added F# / .NET 8.0 (AI logic + tests), C11 (existing proxy — no changes needed) + HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28, xUnit 2.x
 - 013-diagnose-fix-test-gaps: Added C11 (proxy), F# / .NET 8.0 (client + tests) + protobuf-c (C proxy), Google.Protobuf 3.28 (F#), xUnit 2.x (tests), BarData (in-repo)
-- 012-harden-persistent-tests: Added F# / .NET 8.0 + xUnit 2.x, HighBar.Client (in-repo), BarData (in-repo), Google.Protobuf 3.28
 
 
 <!-- MANUAL ADDITIONS START -->
