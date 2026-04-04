@@ -260,6 +260,13 @@ int init(int skirmishAIId, const struct SSkirmishAICallback *callback) {
     }
 
     proxy_log(HB_LOG_INFO, "Handshake complete");
+
+    // Enable cheats so cheat commands (GiveMeNewUnit, GiveMeResource) work
+    if (callback && callback->Cheats_setEnabled) {
+        callback->Cheats_setEnabled(skirmishAIId, true);
+        proxy_log(HB_LOG_INFO, "Cheats enabled");
+    }
+
     return 0;
 }
 
