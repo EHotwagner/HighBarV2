@@ -72,7 +72,7 @@ module CombatAssertions =
 [<Collection("AICombat")>]
 type CombatSuiteTests(fixture: LiveAiFixture) =
 
-    [<Fact(Skip = "Requires DISPLAY and BARb installed")>]
+    [<Fact>]
     [<Trait("Category", "Combat")>]
     member _.``10-game combat validation suite`` () =
         if not fixture.IsAvailable then

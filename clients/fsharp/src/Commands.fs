@@ -12,10 +12,14 @@ module Commands =
     let private baseCmd unitId groupId options timeout =
         (unitId, groupId, uint32 options, timeout)
 
+    /// INTERNAL_ORDER flag (1 << 3 = 8) marks commands as programmatic AI orders.
+    let [<Literal>] private INTERNAL_ORDER = 8u
+
     let MoveCommand (unitId: int) (x: float32) (y: float32) (z: float32) : AICommand =
         let cmd = AICommand()
         let m = MoveUnitCommand()
         m.UnitId <- unitId
+        m.Options <- INTERNAL_ORDER
         m.ToPosition <- vec3 x y z
         m.Timeout <- 2147483647
         cmd.MoveUnit <- m

@@ -27,6 +27,7 @@
     <Compile Include="T0_SmokeTests.fs" />
     <Compile Include="T1_SpawnTests.fs" />
     <Compile Include="T2_MovementTests.fs" />
+    <Compile Include="T2b_MoveVerifyTest.fs" />
     <Compile Include="T3_BuildTests.fs" />
     <Compile Include="T4_CombatTests.fs" />
     <Compile Include="T5_ScenarioTests.fs" />

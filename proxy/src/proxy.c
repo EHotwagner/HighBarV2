@@ -214,6 +214,25 @@ static int send_frame_and_process_response(ProxyState *state) {
                 char cmd_dbg[256];
                 snprintf(cmd_dbg, sizeof(cmd_dbg), "Cmd %zu: case=%d", i, (int)c->command_case);
                 proxy_log(HB_LOG_INFO, cmd_dbg);
+                // Debug: log move command details
+                {
+                    char any_dbg[128];
+                    snprintf(any_dbg, sizeof(any_dbg), "CMD_DETAIL case=%d enum_move=%d",
+                        (int)c->command_case, (int)HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT);
+                    proxy_log(HB_LOG_INFO, any_dbg);
+                }
+                if (c->command_case == HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT && c->move_unit) {
+                    const Highbar__MoveUnitCommand *mv = c->move_unit;
+                    char mv_dbg[256];
+                    snprintf(mv_dbg, sizeof(mv_dbg),
+                        "MOVE uid=%d grp=%d opt=%u to=(%.1f,%.1f,%.1f) timeout=%d",
+                        mv->unit_id, mv->group_id, mv->options,
+                        mv->to_position ? mv->to_position->x : -1,
+                        mv->to_position ? mv->to_position->y : -1,
+                        mv->to_position ? mv->to_position->z : -1,
+                        mv->timeout);
+                    proxy_log(HB_LOG_INFO, mv_dbg);
+                }
                 int cmd_rc = hb_deserialize_and_execute(
                     c,
                     state->skirmish_ai_id,

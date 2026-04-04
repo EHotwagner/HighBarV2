@@ -3,6 +3,7 @@
 #include "highbar/commands.pb-c.h"
 
 #include <string.h>
+#include <stdio.h>
 
 // Pool of static position buffers for Engine_handleCommand.
 // The engine may copy the command struct and dereference float* pointers
@@ -116,6 +117,10 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.options = (short)c->options;
         s.timeOut = c->timeout;
         s.toPos_posF3 = vec3_to_pos(c->to_position);
+        fprintf(stderr, "[HB] MOVE uid=%d grp=%d opt=%d to=(%.1f,%.1f,%.1f) timeout=%d\n",
+                s.unitId, s.groupId, s.options,
+                s.toPos_posF3[0], s.toPos_posF3[1], s.toPos_posF3[2],
+                s.timeOut);
         return handle_command(skirmish_ai_id, -1, COMMAND_ID_UNTRACKED, COMMAND_MOVE_UNIT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_PATROL: {
