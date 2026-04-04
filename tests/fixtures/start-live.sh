@@ -60,8 +60,8 @@ echo "Socket:  ${SOCKET_PATH}"
 echo "Session: ${SESSION_DIR}"
 echo ""
 
-# Clean up
-rm -f "${SOCKET_PATH}" "${PID_FILE}"
+# Clean up (don't remove socket — the AI client may already be listening on it)
+rm -f "${PID_FILE}"
 rm -rf "${SESSION_DIR}"
 mkdir -p "${SESSION_DIR}"
 

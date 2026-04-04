@@ -1,10 +1,7 @@
 open System
 open HighBar.Client
 
-/// Simple reference AI with logging:
-/// 1. Discovers unit defs from the engine
-/// 2. Orders commander to move toward map center
-/// 3. When idle, patrols forward
+/// Patrol demo: commander walks back and forth between two points forever.
 [<EntryPoint>]
 let main argv =
     let socketPath =
@@ -12,105 +9,75 @@ let main argv =
         | [| path |] -> path
         | _ -> "/tmp/highbar.sock"
 
-    printfn "Reference AI listening on %s..." socketPath
-    printfn "Start a game with HighBarV2 bot in the BAR lobby."
+    printfn "Patrol demo AI listening on %s..." socketPath
 
     use client = HighBarClient.AcceptFromProxy(socketPath, 600_000)
     printfn "Proxy connected! Game starting."
 
-    let mutable initialized = false
-    let mutable myTeam = -1
-    let mutable frameCount = 0
     let mutable commanderUnitId = -1
-    let mutable sentInitialCommand = false
+    let mutable startX = 0.0f
+    let mutable startZ = 0.0f
+    let mutable startY = 0.0f
+    let mutable goingToB = false
+    let mutable lastSentFrame = -1
+    let mutable started = false
+
+    // Target B: map center
+    let mutable targetBx = 0.0f
+    let mutable targetBz = 0.0f
 
     client.Run(fun frame ->
         let mutable commands = []
-        frameCount <- frameCount + 1
 
         for event in frame.Events do
             match event with
             | GameEvent.Init teamId ->
-                myTeam <- teamId
-                printfn "[Frame %d] Init: team %d" frame.FrameNumber myTeam
-
-                // Query map info
-                let mapW = client.GetMapWidth()
-                let mapH = client.GetMapHeight()
-                printfn "[Frame %d] Map size: %d x %d" frame.FrameNumber mapW mapH
-
-                initialized <- true
-
-            | GameEvent.UnitCreated(unitId, builderId) ->
-                let defId = client.GetUnitDef(unitId)
-                let defName = client.GetUnitDefName(defId)
-                printfn "[Frame %d] UnitCreated: id=%d def=%s builderId=%d" frame.FrameNumber unitId defName builderId
-
-            | GameEvent.UnitFinished unitId ->
-                let defId = client.GetUnitDef(unitId)
-                let defName = client.GetUnitDefName(defId)
-                let (px, py, pz) = client.GetUnitPos(unitId)
-                printfn "[Frame %d] UnitFinished: id=%d def=%s pos=(%.0f, %.0f, %.0f)" frame.FrameNumber unitId defName px py pz
-                if commanderUnitId < 0 then
-                    commanderUnitId <- unitId
-
-            | GameEvent.UnitIdle unitId ->
-                let defId = client.GetUnitDef(unitId)
-                let defName = client.GetUnitDefName(defId)
-                let (px, py, pz) = client.GetUnitPos(unitId)
-                printfn "[Frame %d] UnitIdle: id=%d def=%s pos=(%.0f, %.0f, %.0f)" frame.FrameNumber unitId defName px py pz
-
-                // Move toward map center (sent on idle, after game truly starts)
+                printfn "[Frame %d] Init: team %d" frame.FrameNumber teamId
                 let mapW = float32 (client.GetMapWidth()) * 4.0f
                 let mapH = float32 (client.GetMapHeight()) * 4.0f
-                printfn "[Frame %d] Sending MoveCommand unit %d to (%.0f, %.0f, %.0f)" frame.FrameNumber unitId mapW py mapH
-                commands <- Commands.MoveCommand unitId mapW py mapH :: commands
-                commands <- Commands.SendTextMessageCommand (sprintf "HighBarV2: moving %s to center!" defName) 0 :: commands
+                targetBx <- mapW
+                targetBz <- mapH
+                printfn "[Frame %d] Map center: (%.0f, %.0f)" frame.FrameNumber targetBx targetBz
 
-            | GameEvent.EnemyEnterLOS enemyId ->
-                printfn "[Frame %d] EnemyEnterLOS: %d" frame.FrameNumber enemyId
+            | GameEvent.UnitFinished unitId when commanderUnitId < 0 ->
+                let defId = client.GetUnitDef(unitId)
+                let defName = client.GetUnitDefName(defId)
+                let (px, py, pz) = client.GetUnitPos(unitId)
+                commanderUnitId <- unitId
+                startX <- px
+                startY <- py
+                startZ <- pz
+                printfn "[Frame %d] Commander: %s (id=%d) at (%.0f, %.0f)" frame.FrameNumber defName unitId px pz
 
-            | GameEvent.EnemyDestroyed(enemyId, _) ->
-                printfn "[Frame %d] EnemyDestroyed: %d" frame.FrameNumber enemyId
-
-            | GameEvent.UnitDamaged(unitId, attackerId, damage, _, _) ->
-                printfn "[Frame %d] UnitDamaged: id=%d attacker=%A dmg=%.0f" frame.FrameNumber unitId attackerId damage
-
-            | GameEvent.UnitDestroyed(unitId, attackerId) ->
-                printfn "[Frame %d] UnitDestroyed: id=%d attacker=%A" frame.FrameNumber unitId attackerId
-
+            | GameEvent.UnitIdle unitId when unitId = commanderUnitId ->
+                // Arrived at destination — flip direction
+                let (px, _, pz) = client.GetUnitPos(unitId)
+                if goingToB then
+                    printfn "[Frame %d] Arrived at B (%.0f, %.0f) — heading back to A" frame.FrameNumber px pz
+                    commands <- Commands.MoveCommand unitId startX startY startZ :: commands
+                    goingToB <- false
+                else
+                    printfn "[Frame %d] Arrived at A (%.0f, %.0f) — heading to B" frame.FrameNumber px pz
+                    commands <- Commands.MoveCommand unitId targetBx startY targetBz :: commands
+                    goingToB <- true
             | GameEvent.Update f ->
-                // Send initial command at frame 60 (2 seconds after game start)
-                if f = 300 && commanderUnitId >= 0 && not sentInitialCommand then
-                    sentInitialCommand <- true
-                    let (px, py, pz) = client.GetUnitPos(commanderUnitId)
-                    let defId = client.GetUnitDef(commanderUnitId)
+                // Kick off the first move at frame 60
+                if f = 60 && commanderUnitId >= 0 && not started then
+                    printfn "[Frame %d] Starting patrol: A(%.0f,%.0f) <-> B(%.0f,%.0f)" f startX startZ targetBx targetBz
+                    commands <- Commands.MoveCommand commanderUnitId targetBx startY targetBz :: commands
+                    goingToB <- true
+                    started <- true
 
-                    // Spawn a second commander via cheat
-                    printfn "[Frame %d] GiveMeNewUnit defId=%d at (%.0f,%.0f,%.0f)" f defId (px + 200.0f) py pz
-                    commands <- Commands.GiveMeNewUnitCommand defId (px + 200.0f) py pz :: commands
-
-                    // Move commander
-                    let mapW = float32 (client.GetMapWidth()) * 4.0f
-                    let mapH = float32 (client.GetMapHeight()) * 4.0f
-                    let moveCmd = Commands.MoveCommand commanderUnitId mapW py mapH
-                    let mc = moveCmd.MoveUnit
-                    printfn "[Frame %d] MoveCommand: unit %d to (%.0f,%.0f,%.0f) timeout=%d" f mc.UnitId mc.ToPosition.X mc.ToPosition.Y mc.ToPosition.Z mc.Timeout
-                    commands <- moveCmd :: commands
-
-                    // Chat message
-                    commands <- Commands.SendTextMessageCommand "HighBarV2: commands sent!" 0 :: commands
-
-                if f % 900 = 0 then
-                    printfn "[Frame %d] Update tick" f
+                // Position log every 10 seconds
+                if f > 0 && f % 300 = 0 && commanderUnitId >= 0 then
+                    let (px, _, pz) = client.GetUnitPos(commanderUnitId)
+                    let dir = if goingToB then "-> B" else "-> A"
+                    printfn "[Frame %d] Position: (%.0f, %.0f) %s" f px pz dir
 
             | _ -> ()
-
-        if frameCount = 1 then
-            printfn "[Frame %d] Returning %d commands from first frame" frame.FrameNumber commands.Length
 
         commands
     )
 
-    printfn "Reference AI finished."
+    printfn "Patrol demo finished."
     0

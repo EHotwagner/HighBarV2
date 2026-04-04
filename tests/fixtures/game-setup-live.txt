@@ -19,8 +19,8 @@
 		draft_mode=disabled;
 		teamfaction_0=armada;
 		teamfaction_1=cortex;
-		MinSpeed=100;
-		MaxSpeed=100;
+		MinSpeed=1;
+		MaxSpeed=1;
 		deathmode=neverend;
 		debugcommands=1:cheat|3:globallos;
 	}
