@@ -82,5 +82,9 @@ cd build && ctest
 - This environment has a full BAR (Beyond All Reason) installation.
 - GPU passthrough is enabled.
 - A headless BAR installation is available for running tests without a display.
+- BAR AppImage: `/home/developer/applications/Beyond-All-Reason-1.2988.0.AppImage` (v1.2988.0, 118MB)
+  - Dependencies: All installed (sdl2, fuse2, openal, gtk3, alsa-lib, nss, binutils)
+  - Launch: `/home/developer/applications/Beyond-All-Reason-1.2988.0.AppImage`
+  - **MUST be started in windowed mode** (not fullscreen)
 
 <!-- MANUAL ADDITIONS END -->
