@@ -5,6 +5,7 @@
 // Mock engine state
 static int mock_handle_command_call_count = 0;
 static int mock_last_command_topic = -1;
+static int mock_last_command_id = 0;
 static int mock_my_team = 1;
 static int mock_my_ally_team = 0;
 static int mock_team_count = 2;
@@ -16,6 +17,7 @@ static int mock_map_height = 512;
 static struct {
     int command_topic;
     int unit_id;
+    int command_id;
 } mock_recorded_commands[MAX_RECORDED_COMMANDS];
 static int mock_recorded_count = 0;
 
@@ -26,13 +28,14 @@ static int mock_engine_handle_command(int skirmishAIId, int toId,
                                        void *commandData) {
     (void)skirmishAIId;
     (void)toId;
-    (void)commandId;
     (void)commandData;
     mock_handle_command_call_count++;
     mock_last_command_topic = commandTopic;
+    mock_last_command_id = commandId;
 
     if (mock_recorded_count < MAX_RECORDED_COMMANDS) {
         mock_recorded_commands[mock_recorded_count].command_topic = commandTopic;
+        mock_recorded_commands[mock_recorded_count].command_id = commandId;
         // Extract unit_id from first field of most command structs
         if (commandData) {
             mock_recorded_commands[mock_recorded_count].unit_id = *(int *)commandData;
@@ -118,6 +121,7 @@ struct SSkirmishAICallback *mock_engine_create(void) {
 void mock_engine_reset(void) {
     mock_handle_command_call_count = 0;
     mock_last_command_topic = -1;
+    mock_last_command_id = 0;
     mock_recorded_count = 0;
 }
 
@@ -138,6 +142,17 @@ int mock_engine_get_recorded_topic(int index) {
         return mock_recorded_commands[index].command_topic;
     }
     return -1;
+}
+
+int mock_engine_get_last_command_id(void) {
+    return mock_last_command_id;
+}
+
+int mock_engine_get_recorded_command_id(int index) {
+    if (index >= 0 && index < mock_recorded_count) {
+        return mock_recorded_commands[index].command_id;
+    }
+    return 0;
 }
 
 void mock_engine_set_team(int team) {

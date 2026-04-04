@@ -14,6 +14,8 @@ int mock_engine_get_command_count(void);
 int mock_engine_get_last_command_topic(void);
 int mock_engine_get_recorded_count(void);
 int mock_engine_get_recorded_topic(int index);
+int mock_engine_get_last_command_id(void);
+int mock_engine_get_recorded_command_id(int index);
 
 // Configure mock state.
 void mock_engine_set_team(int team);

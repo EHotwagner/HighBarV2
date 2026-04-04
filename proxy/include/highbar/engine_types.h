@@ -9,6 +9,15 @@
 #include "AI/SSkirmishAICallback.h"
 
 // ============================================================================
+// Command ID constants
+// ============================================================================
+// Pass COMMAND_ID_UNTRACKED (-1) as the commandId parameter to
+// Engine_handleCommand so the engine sends NETMSG_AICOMMAND packets
+// (handled by GameServer) instead of NETMSG_AICOMMAND_TRACKED packets
+// (silently dropped by GameServer).
+#define COMMAND_ID_UNTRACKED (-1)
+
+// ============================================================================
 // Compatibility aliases
 // ============================================================================
 // Our proxy code was written against stub headers with shorter names.

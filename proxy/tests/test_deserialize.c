@@ -34,6 +34,7 @@ TEST(test_move_command) {
     assert(rc == 0);
     assert(mock_engine_get_command_count() == 1);
     assert(mock_engine_get_last_command_topic() == COMMAND_MOVE_UNIT);
+    assert(mock_engine_get_last_command_id() == -1);
 }
 
 TEST(test_build_command) {
@@ -66,6 +67,7 @@ TEST(test_patrol_command) {
     int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
     assert(rc == 0);
     assert(mock_engine_get_last_command_topic() == COMMAND_PATROL);
+    assert(mock_engine_get_last_command_id() == -1);
 }
 
 TEST(test_attack_command) {
@@ -79,6 +81,7 @@ TEST(test_attack_command) {
     int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
     assert(rc == 0);
     assert(mock_engine_get_last_command_topic() == COMMAND_ATTACK);
+    assert(mock_engine_get_last_command_id() == -1);
 }
 
 TEST(test_stop_command) {
@@ -176,6 +179,65 @@ TEST(test_send_text_message_command) {
     assert(mock_engine_get_last_command_topic() == COMMAND_SEND_TEXT_MESSAGE);
 }
 
+TEST(test_fight_command) {
+    Highbar__AICommand cmd = HIGHBAR__AICOMMAND__INIT;
+    Highbar__FightCommand fight = HIGHBAR__FIGHT_COMMAND__INIT;
+    Highbar__Vector3 pos = HIGHBAR__VECTOR3__INIT;
+    pos.x = 500; pos.y = 0; pos.z = 600;
+    fight.unit_id = 4;
+    fight.to_position = &pos;
+    cmd.command_case = HIGHBAR__AICOMMAND__COMMAND_FIGHT;
+    cmd.fight = &fight;
+
+    int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
+    assert(rc == 0);
+    assert(mock_engine_get_last_command_topic() == COMMAND_FIGHT);
+    assert(mock_engine_get_last_command_id() == -1);
+}
+
+TEST(test_self_destruct_command) {
+    Highbar__AICommand cmd = HIGHBAR__AICOMMAND__INIT;
+    Highbar__SelfDestructCommand sd = HIGHBAR__SELF_DESTRUCT_COMMAND__INIT;
+    sd.unit_id = 6;
+    cmd.command_case = HIGHBAR__AICOMMAND__COMMAND_SELF_DESTRUCT;
+    cmd.self_destruct = &sd;
+
+    int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
+    assert(rc == 0);
+    assert(mock_engine_get_last_command_topic() == COMMAND_SELF_DESTRUCT);
+    assert(mock_engine_get_last_command_id() == -1);
+}
+
+TEST(test_give_me_new_unit_command) {
+    Highbar__AICommand cmd = HIGHBAR__AICOMMAND__INIT;
+    Highbar__GiveMeNewUnitCommand give = HIGHBAR__GIVE_ME_NEW_UNIT_COMMAND__INIT;
+    Highbar__Vector3 pos = HIGHBAR__VECTOR3__INIT;
+    pos.x = 100; pos.y = 0; pos.z = 100;
+    give.unit_def_id = 42;
+    give.position = &pos;
+    cmd.command_case = HIGHBAR__AICOMMAND__COMMAND_GIVE_ME_NEW_UNIT;
+    cmd.give_me_new_unit = &give;
+
+    int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
+    assert(rc == 0);
+    assert(mock_engine_get_last_command_topic() == COMMAND_GIVE_ME_NEW_UNIT);
+    assert(mock_engine_get_last_command_id() == -1);
+}
+
+TEST(test_give_me_command) {
+    Highbar__AICommand cmd = HIGHBAR__AICOMMAND__INIT;
+    Highbar__GiveMeCommand give = HIGHBAR__GIVE_ME_COMMAND__INIT;
+    give.resource_id = 0;
+    give.amount = 1000.0f;
+    cmd.command_case = HIGHBAR__AICOMMAND__COMMAND_GIVE_ME;
+    cmd.give_me = &give;
+
+    int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
+    assert(rc == 0);
+    assert(mock_engine_get_last_command_topic() == COMMAND_GIVE_ME);
+    assert(mock_engine_get_last_command_id() == -1);
+}
+
 TEST(test_multiple_commands) {
     // Test batch of commands
     Highbar__AICommand cmd1 = HIGHBAR__AICOMMAND__INIT;
@@ -198,6 +260,8 @@ TEST(test_multiple_commands) {
     assert(mock_engine_get_command_count() == 2);
     assert(mock_engine_get_recorded_topic(0) == COMMAND_STOP);
     assert(mock_engine_get_recorded_topic(1) == COMMAND_MOVE_UNIT);
+    assert(mock_engine_get_recorded_command_id(0) == -1);
+    assert(mock_engine_get_recorded_command_id(1) == -1);
 }
 
 TEST(test_unknown_command) {
@@ -223,9 +287,13 @@ int main(void) {
     RUN(test_set_on_off_command);
     RUN(test_draw_add_point_command);
     RUN(test_send_text_message_command);
+    RUN(test_fight_command);
+    RUN(test_self_destruct_command);
+    RUN(test_give_me_new_unit_command);
+    RUN(test_give_me_command);
     RUN(test_multiple_commands);
     RUN(test_unknown_command);
 
-    printf("All %d deserialization tests passed!\n", 13);
+    printf("All %d deserialization tests passed!\n", 17);
     return 0;
 }

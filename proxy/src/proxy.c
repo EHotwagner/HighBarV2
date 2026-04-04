@@ -112,6 +112,12 @@ static int do_handshake(ProxyState *state) {
 static int send_frame_and_process_response(ProxyState *state) {
     ProtobufCAllocator alloc = hb_arena_allocator(&state->arena);
 
+    {
+        char dbg[128];
+        snprintf(dbg, sizeof(dbg), "send_frame: frame=%u events=%d", state->frame_number, state->pending_event_count);
+        proxy_log(HB_LOG_INFO, dbg);
+    }
+
     // Build Frame message
     Highbar__Frame frame = HIGHBAR__FRAME__INIT;
     frame.frame_number = state->frame_number;
@@ -198,13 +204,24 @@ static int send_frame_and_process_response(ProxyState *state) {
             && ai_msg->frame_response) {
             // Execute command batch
             Highbar__FrameResponse *fr = ai_msg->frame_response;
+            if (fr->n_commands > 0) {
+                char log_buf[128];
+                snprintf(log_buf, sizeof(log_buf), "Executing %zu commands at frame %u", fr->n_commands, state->frame_number);
+                proxy_log(HB_LOG_INFO, log_buf);
+            }
             for (size_t i = 0; i < fr->n_commands; i++) {
+                Highbar__AICommand *c = fr->commands[i];
+                char cmd_dbg[256];
+                snprintf(cmd_dbg, sizeof(cmd_dbg), "Cmd %zu: case=%d", i, (int)c->command_case);
+                proxy_log(HB_LOG_INFO, cmd_dbg);
                 int cmd_rc = hb_deserialize_and_execute(
-                    fr->commands[i],
+                    c,
                     state->skirmish_ai_id,
                     state->callback->Engine_handleCommand);
-                if (cmd_rc != 0) {
-                    proxy_log(HB_LOG_WARN, "Command execution failed, continuing batch");
+                {
+                    char rc_buf[128];
+                    snprintf(rc_buf, sizeof(rc_buf), "Cmd %zu: rc=%d", i, cmd_rc);
+                    proxy_log(HB_LOG_INFO, rc_buf);
                 }
             }
             highbar__aimessage__free_unpacked(ai_msg, NULL);
@@ -370,6 +387,7 @@ int handleEvent(int skirmishAIId, int topicId, const void *data) {
     if (topicId == EVENT_UPDATE) {
         const struct SUpdateEvent *update = (const struct SUpdateEvent *)data;
         g_state->frame_number = (uint32_t)update->frame;
+
     }
 
     // Serialize event

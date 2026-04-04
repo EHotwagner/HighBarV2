@@ -17,7 +17,7 @@ module Commands =
         let m = MoveUnitCommand()
         m.UnitId <- unitId
         m.ToPosition <- vec3 x y z
-        m.Timeout <- -1
+        m.Timeout <- 2147483647
         cmd.MoveUnit <- m
         cmd
 
@@ -28,7 +28,7 @@ module Commands =
         b.ToBuildUnitDefId <- unitDefId
         b.BuildPosition <- vec3 x y z
         b.Facing <- facing
-        b.Timeout <- -1
+        b.Timeout <- 2147483647
         cmd.BuildUnit <- b
         cmd
 
@@ -37,7 +37,7 @@ module Commands =
         let p = PatrolCommand()
         p.UnitId <- unitId
         p.ToPosition <- vec3 x y z
-        p.Timeout <- -1
+        p.Timeout <- 2147483647
         cmd.Patrol <- p
         cmd
 
@@ -46,7 +46,7 @@ module Commands =
         let a = AttackCommand()
         a.UnitId <- unitId
         a.TargetUnitId <- targetUnitId
-        a.Timeout <- -1
+        a.Timeout <- 2147483647
         cmd.Attack <- a
         cmd
 
@@ -55,7 +55,7 @@ module Commands =
         let g = GuardCommand()
         g.UnitId <- unitId
         g.GuardUnitId <- guardUnitId
-        g.Timeout <- -1
+        g.Timeout <- 2147483647
         cmd.Guard <- g
         cmd
 
@@ -63,7 +63,7 @@ module Commands =
         let cmd = AICommand()
         let s = StopCommand()
         s.UnitId <- unitId
-        s.Timeout <- -1
+        s.Timeout <- 2147483647
         cmd.Stop <- s
         cmd
 
@@ -72,7 +72,7 @@ module Commands =
         let r = RepairCommand()
         r.UnitId <- unitId
         r.RepairUnitId <- repairUnitId
-        r.Timeout <- -1
+        r.Timeout <- 2147483647
         cmd.Repair <- r
         cmd
 
@@ -81,7 +81,7 @@ module Commands =
         let r = ReclaimUnitCommand()
         r.UnitId <- unitId
         r.ReclaimUnitId <- reclaimUnitId
-        r.Timeout <- -1
+        r.Timeout <- 2147483647
         cmd.ReclaimUnit <- r
         cmd
 
@@ -90,7 +90,7 @@ module Commands =
         let f = FightCommand()
         f.UnitId <- unitId
         f.ToPosition <- vec3 x y z
-        f.Timeout <- -1
+        f.Timeout <- 2147483647
         cmd.Fight <- f
         cmd
 
@@ -99,7 +99,7 @@ module Commands =
         let s = SetWantedMaxSpeedCommand()
         s.UnitId <- unitId
         s.WantedMaxSpeed <- speed
-        s.Timeout <- -1
+        s.Timeout <- 2147483647
         cmd.SetWantedMaxSpeed <- s
         cmd
 
@@ -107,7 +107,7 @@ module Commands =
         let cmd = AICommand()
         let s = SelfDestructCommand()
         s.UnitId <- unitId
-        s.Timeout <- -1
+        s.Timeout <- 2147483647
         cmd.SelfDestruct <- s
         cmd
 
@@ -124,7 +124,7 @@ module Commands =
         let c = CustomCommand()
         c.UnitId <- unitId
         c.CommandId <- commandId
-        c.Timeout <- -1
+        c.Timeout <- 2147483647
         for p in parameters do
             c.Params.Add(p)
         cmd.Custom <- c

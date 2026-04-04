@@ -5,7 +5,7 @@
 void hb_config_defaults(HB_Config *config) {
     strncpy(config->socket_path, "/tmp/highbar.sock", sizeof(config->socket_path) - 1);
     config->socket_path[sizeof(config->socket_path) - 1] = '\0';
-    config->timeout_ms = 25;
+    config->timeout_ms = 500;
     config->log_level = HB_LOG_INFO;
     config->frame_mode = HB_FRAME_BATCHED;
     config->push_state = false;
