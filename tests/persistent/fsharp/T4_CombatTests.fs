@@ -20,7 +20,7 @@ type T4_CombatTests(engine: PersistentEngineFixture, output: ITestOutputHelper) 
         let armedDefId = engine.ArmedUnitDefId
         output.WriteLine($"Using armed unitDefId={armedDefId}, HasEnemy={engine.HasEnemy}")
 
-        // Spawn 5 armed units near enemy start position
+        // Spawn 5 armed units AT the enemy start position for immediate engagement
         let createdIds = ResizeArray<int>()
         engine.RunFrames(20, fun frame idx ->
             for ev in frame.Events do
@@ -29,19 +29,19 @@ type T4_CombatTests(engine: PersistentEngineFixture, output: ITestOutputHelper) 
                 | _ -> ()
             if idx = 0 then
                 [ for i in 0..4 ->
-                    GiveMeNewUnitCommand armedDefId (4500.0f + float32 i * 50.0f) 100.0f 4096.0f ]
+                    GiveMeNewUnitCommand armedDefId (4608.0f + float32 i * 30.0f) 100.0f 4096.0f ]
             else []
         ) |> ignore
 
         Assert.True(createdIds.Count >= 1, $"Should spawn armed units, got {createdIds.Count}")
 
-        // Issue FightCommand toward enemy and collect combat events
+        // Issue FightCommand toward enemy and collect combat events over 900 frames (~30s)
         let mutable fightSent = false
         let mutable damageEvents = 0
         let mutable losEvents = 0
         let mutable destroyEvents = 0
 
-        let (frames, _, eventCounts) = engine.RunFramesWithEventLog(300, fun frame idx ->
+        let (frames, _, eventCounts) = engine.RunFramesWithEventLog(900, fun frame idx ->
             for ev in frame.Events do
                 match ev with
                 | GameEvent.UnitDamaged _ | GameEvent.EnemyDamaged _ -> damageEvents <- damageEvents + 1
@@ -61,8 +61,10 @@ type T4_CombatTests(engine: PersistentEngineFixture, output: ITestOutputHelper) 
         output.WriteLine($"Event distribution: {evtSummary}")
         output.WriteLine($"Combat: damage={damageEvents}, LOS={losEvents}, destroyed={destroyEvents}")
 
-        // Engine must survive; combat events may not be delivered in headless cheat mode
-        Assert.True(frames.Length >= 300, $"Engine should survive FightCommand, ran {frames.Length} frames")
+        // spring-headless does not simulate weapon physics — combat events (UnitDamaged,
+        // EnemyDamaged, WeaponFired) are never generated. Only LOS events work with globallos.
+        // Engine must survive the FightCommand.
+        Assert.True(frames.Length >= 900, $"Engine should survive FightCommand, ran {frames.Length} frames")
 
     [<Fact>]
     [<Priority(2)>]

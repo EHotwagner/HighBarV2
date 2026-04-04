@@ -5,9 +5,13 @@
 	ModHash=1;
 	MapHash=1;
 	IsHost=1;
+	HostIP=127.0.0.1;
+	HostPort=0;
 	MyPlayerName=HighBarV2Test;
 	NoHelperAIs=0;
 	StartPosType=0;
+	GameStartDelay=0;
+	FixedRNGSeed=1;
 
 	[MODOPTIONS]
 	{
@@ -18,7 +22,7 @@
 		MinSpeed=100;
 		MaxSpeed=100;
 		deathmode=neverend;
-		debugcommands=1:cheat|2:godmode|3:globallos;
+		debugcommands=1:cheat|3:globallos;
 	}
 
 	[MAPOPTIONS]

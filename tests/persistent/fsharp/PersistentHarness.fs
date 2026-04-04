@@ -136,10 +136,23 @@ type PersistentEngineFixture() =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
         r.Builders |> List.tryHead |> Option.defaultWith (fun () -> failwith "No builder discovered")
 
-    /// UnitDefId for an armed unit.
+    /// UnitDefId for a ground-attack armed unit (prefers known assault units over AA).
     member _.ArmedUnitDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-        r.ArmedUnits |> List.tryHead |> Option.defaultWith (fun () -> failwith "No armed unit discovered")
+        // Prefer known ground combat units (tanks, kbots with ground weapons)
+        let knownGroundNames = ["armpw"; "corpw"; "armham"; "corham"; "armrock"; "corrock"; "armwar"; "corwar"; "armstump"; "corstump"; "armflash"; "armbull"]
+        let groundUnit =
+            r.ArmedUnits
+            |> List.tryFind (fun defId ->
+                match r.Entries |> Map.tryFind defId with
+                | Some info ->
+                    match info.Name with
+                    | Some name -> knownGroundNames |> List.exists (fun gn -> name = gn)
+                    | None -> false
+                | None -> false)
+        groundUnit
+        |> Option.orElseWith (fun () -> r.ArmedUnits |> List.tryHead)
+        |> Option.defaultWith (fun () -> failwith "No armed unit discovered")
 
     /// UnitDefId for a mobile unit.
     member _.MobileUnitDefId =
