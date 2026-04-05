@@ -20,5 +20,6 @@ int mock_engine_get_recorded_command_id(int index);
 // Configure mock state.
 void mock_engine_set_team(int team);
 void mock_engine_set_map_size(int width, int height);
+void mock_engine_set_los_return_count(int count);
 
 #endif // MOCK_ENGINE_H

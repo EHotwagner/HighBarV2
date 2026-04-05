@@ -5,6 +5,8 @@
 #include "mock_engine.h"
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 static HB_Arena arena;
@@ -117,6 +119,190 @@ TEST(test_unit_pos_no_param) {
     assert(resp->success == 0); // Should fail — no unit_id param
 }
 
+// -- Map data callback tests (T007-T009, T012-T013, T016-T017, T018-T020) --
+
+TEST(test_get_height_map) {
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 100;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_HEIGHT_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_ARRAY_VALUE);
+    assert(resp->result->float_array_value->n_values == 16);
+    assert(fabsf(resp->result->float_array_value->values[0] - 1.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[15] - 16.0f) < 0.01f);
+}
+
+TEST(test_get_slope_map) {
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 101;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_SLOPE_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_ARRAY_VALUE);
+    assert(resp->result->float_array_value->n_values == 4); // (4/2)*(4/2)
+    assert(fabsf(resp->result->float_array_value->values[0] - 0.1f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[3] - 0.4f) < 0.01f);
+}
+
+TEST(test_get_resource_map) {
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 102;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_RESOURCE_MAP;
+
+    // Param: resource ID = 0 (metal)
+    Highbar__CallbackParam param = HIGHBAR__CALLBACK_PARAM__INIT;
+    param.value_case = HIGHBAR__CALLBACK_PARAM__VALUE_INT_VALUE;
+    param.int_value = 0;
+    Highbar__CallbackParam *params[] = { &param };
+    req.params = params;
+    req.n_params = 1;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_INT_ARRAY_VALUE);
+    assert(resp->result->int_array_value->n_values == 4); // (4/2)*(4/2)
+    // Verify short->int widening: mock_resourcemap = {100, 200, 0, 150}
+    assert(resp->result->int_array_value->values[0] == 100);
+    assert(resp->result->int_array_value->values[1] == 200);
+    assert(resp->result->int_array_value->values[2] == 0);
+    assert(resp->result->int_array_value->values[3] == 150);
+}
+
+TEST(test_get_los_map) {
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 103;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_LOS_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_INT_ARRAY_VALUE);
+    assert(resp->result->int_array_value->n_values == 16);
+    // mock_losmap[0] = 1, [1] = 0
+    assert(resp->result->int_array_value->values[0] == 1);
+    assert(resp->result->int_array_value->values[1] == 0);
+}
+
+TEST(test_get_radar_map) {
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 104;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_RADAR_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_INT_ARRAY_VALUE);
+    assert(resp->result->int_array_value->n_values == 16);
+    // mock_radarmap[0] = 0, [1] = 1
+    assert(resp->result->int_array_value->values[0] == 0);
+    assert(resp->result->int_array_value->values[1] == 1);
+}
+
+TEST(test_get_start_pos) {
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 105;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_START_POS;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_VECTOR_VALUE);
+    assert(fabsf(resp->result->vector_value->x - 1024.0f) < 0.01f);
+    assert(fabsf(resp->result->vector_value->y - 80.0f) < 0.01f);
+    assert(fabsf(resp->result->vector_value->z - 2048.0f) < 0.01f);
+}
+
+TEST(test_get_metal_spots) {
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 106;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_METAL_SPOTS;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_ARRAY_VALUE);
+    // 2 spots * 4 floats (x,y,z,income) = 8
+    assert(resp->result->float_array_value->n_values == 8);
+    // Spot 0: x=512, y=40, z=768, income=2.5
+    assert(fabsf(resp->result->float_array_value->values[0] - 512.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[1] - 40.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[2] - 768.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[3] - 2.5f) < 0.01f);
+    // Spot 1: x=1536, y=60, z=1280, income=2.5
+    assert(fabsf(resp->result->float_array_value->values[4] - 1536.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[7] - 2.5f) < 0.01f);
+}
+
+TEST(test_large_heightmap) {
+    mock_engine_set_map_size(64, 64);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 107;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_HEIGHT_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_ARRAY_VALUE);
+    assert(resp->result->float_array_value->n_values == 4096); // 64*64
+    // First 16 values should match mock_heightmap, rest are index values
+    assert(fabsf(resp->result->float_array_value->values[0] - 1.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[16] - 16.0f) < 0.01f);
+    mock_engine_set_map_size(4, 4); // restore
+}
+
+TEST(test_null_function_pointer) {
+    // Create a callback struct with Map_getHeightMap = NULL
+    struct SSkirmishAICallback null_cb;
+    memset(&null_cb, 0, sizeof(null_cb));
+    null_cb.Map_getWidth = cb->Map_getWidth;
+    null_cb.Map_getHeight = cb->Map_getHeight;
+    // Map_getHeightMap is NULL
+
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 108;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_HEIGHT_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, &null_cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 0); // Error — callback not available
+}
+
+TEST(test_zero_count_response) {
+    mock_engine_set_map_size(4, 4);
+    mock_engine_set_los_return_count(0);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 109;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_LOS_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_INT_ARRAY_VALUE);
+    assert(resp->result->int_array_value->n_values == 0);
+}
+
 int main(void) {
     cb = mock_engine_create();
     hb_arena_init(&arena, 1024 * 64);
@@ -130,7 +316,19 @@ int main(void) {
     RUN(test_unknown_callback);
     RUN(test_unit_pos_no_param);
 
-    printf("All %d callback tests passed!\n", 7);
+    // Map data callbacks (021-map-callbacks-proxy)
+    RUN(test_get_height_map);
+    RUN(test_get_slope_map);
+    RUN(test_get_resource_map);
+    RUN(test_get_los_map);
+    RUN(test_get_radar_map);
+    RUN(test_get_start_pos);
+    RUN(test_get_metal_spots);
+    RUN(test_large_heightmap);
+    RUN(test_null_function_pointer);
+    RUN(test_zero_count_response);
+
+    printf("All %d callback tests passed!\n", 17);
     hb_arena_destroy(&arena);
     return 0;
 }

@@ -1,8 +1,9 @@
 # HighBarV2 Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-04
+Auto-generated from all feature plans. Last updated: 2026-04-05
 
 ## Active Technologies
+- C11 + protobuf-c, engine SSkirmishAICallback API (021-map-callbacks-proxy)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -71,9 +72,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 021-map-callbacks-proxy: Added C11 + protobuf-c, engine SSkirmishAICallback API
 - 020-repo-cleanup: Repository cleanup — removed stale docs, consolidated CLAUDE.md, archived verbose spec artifacts
 - 019-remove-python-dotnet10: Removed Python client, upgraded all projects to .NET 10.0
-- 018-consolidate-test-framework: Unified test runner (`run-all.sh`), added CTest for C proxy tests
 
 
 <!-- MANUAL ADDITIONS START -->

@@ -37,6 +37,42 @@ The `spring-headless` engine binary does not fully simulate weapon physics. Comb
 
 The proxy implements the most commonly needed callbacks (unit queries, map data, economy, cheats). The full `SSkirmishAICallback` table has 135+ callbacks, of which a subset is currently dispatched. Unsupported callbacks return an error response.
 
+### Callback Frame Interleaving During Initialization
+
+When an AI client sends `CallbackRequest` messages outside the frame processing window (e.g., during initialization after `Step()` completes), the proxy may have already sent the next `Frame` message. The client's `sendCallback` then reads a `Frame` instead of the expected `CallbackResponse`, causing protocol desynchronization.
+
+**Root cause:** After `Step()` returns (receiveFrame → sendFrameResponse), the engine immediately triggers the next `EVENT_UPDATE`, causing the proxy to send the next `Frame`. If the client sends a `CallbackRequest` instead of calling `receiveFrame`, it reads the buffered `Frame` message.
+
+**Client-side workaround (deployed in FSBarV1):** `Protocol.sendCallback` loops until it receives a `CallbackResponse`, auto-responding to any interleaved `Frame` messages with empty commands:
+
+```fsharp
+let rec readUntilCallback (attempts: int) =
+    let respBytes = Connection.recvBytes stream
+    let proxyMsg = decode<ProxyMessage> respBytes
+    match proxyMsg.Message with
+    | ProxyMessage.MessageCase.CallbackResponse resp -> resp
+    | ProxyMessage.MessageCase.Frame _ ->
+        sendFrameResponse stream []
+        readUntilCallback (attempts + 1)
+    | other -> failwith $"Expected CallbackResponse, got {other}"
+```
+
+**Side effects:** Frames consumed during callback sequences are responded to with empty commands — the game advances without AI input. Multiple sequential callbacks (e.g., `loadFromEngine` doing 7 callbacks) may silently consume several frames.
+
+**Status:** A proxy-side protocol fix is deferred to a future feature. The client-side workaround is functional and sufficient for current use cases.
+
+### Max Message Size for Large Maps
+
+The default `max_message_size` is 8 MB. Map data arrays for large maps (32x32 SMU) can exceed this:
+
+| Map Size | HeightMap Size |
+|----------|---------------|
+| 8x8 SMU | ~1 MB |
+| 16x16 SMU | ~4 MB |
+| 32x32 SMU | ~16 MB |
+
+For 32x32 maps, set `HIGHBAR_MAX_MSG_SIZE=16777216` (16 MB) in the environment, or `max_message_size = 16777216` in `AIOptions.lua`.
+
 ### Single Connection
 
 The proxy supports one AI client connection at a time. If the AI process disconnects, the proxy will report an error to the engine on the next frame. There is no automatic reconnection.
