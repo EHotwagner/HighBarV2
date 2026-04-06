@@ -210,6 +210,21 @@ Highbar__CallbackResponse *hb_callback_dispatch(
         }
         break;
     }
+    case HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_CORNERS_HEIGHT_MAP: {
+        if (callback->Map_getCornersHeightMap && callback->Map_getWidth && callback->Map_getHeight) {
+            int w = callback->Map_getWidth(skirmish_ai_id);
+            int h = callback->Map_getHeight(skirmish_ai_id);
+            int array_size = (w + 1) * (h + 1);
+            float *corners = malloc(array_size * sizeof(float));
+            if (!corners) return make_error_response(req_id, "Alloc failed for corners heightmap", alloc);
+            int returned = callback->Map_getCornersHeightMap(skirmish_ai_id, corners, array_size);
+            Highbar__CallbackResponse *resp = make_float_array_response(
+                req_id, corners, (size_t)(returned > 0 ? returned : 0), alloc);
+            free(corners);
+            return resp;
+        }
+        break;
+    }
     case HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_SLOPE_MAP: {
         if (callback->Map_getSlopeMap && callback->Map_getWidth && callback->Map_getHeight) {
             int w = callback->Map_getWidth(skirmish_ai_id);

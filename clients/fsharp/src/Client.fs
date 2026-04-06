@@ -273,6 +273,13 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
             resp.Result.FloatArrayValue.Values |> Seq.toArray
         else [||]
 
+    /// Get the corners height map as a flat float array. Size is (width+1)*(height+1). Returns empty array if not supported.
+    member this.GetCornersHeightMap() : float32 array =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetCornersHeightMap, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatArrayValue then
+            resp.Result.FloatArrayValue.Values |> Seq.toArray
+        else [||]
+
     /// Get the slope map as a flat float array. Values in [0, 1]. Returns empty array if not supported.
     member this.GetSlopeMap() : float32 array =
         let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetSlopeMap, [])

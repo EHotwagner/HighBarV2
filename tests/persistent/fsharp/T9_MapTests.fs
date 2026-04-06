@@ -117,6 +117,28 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
 
     [<Fact>]
     [<Priority(5)>]
+    member _.``T9.9 Corners height map — non-empty array with valid float values and correct dimensions``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let width = queryInFrame (fun c -> c.GetMapWidth())
+        let height = queryInFrame (fun c -> c.GetMapHeight())
+        let cornersMap = queryInFrame (fun c -> c.GetCornersHeightMap())
+
+        match cornersMap, width, height with
+        | Some cm, Some w, Some h when cm.Length > 0 ->
+            let expectedSize = (w + 1) * (h + 1)
+            output.WriteLine($"Corners height map: {cm.Length} values (expected {expectedSize}), range [{cm |> Array.min:F1}, {cm |> Array.max:F1}]")
+            Assert.Equal(expectedSize, cm.Length)
+            for v in cm do
+                Assert.True(v > -5000.0f && v < 50000.0f, $"Corner height value {v} out of expected range")
+        | Some _, _, _ ->
+            Assert.Fail("Corners height map returned empty — proxy should return data")
+        | None, _, _ ->
+            Assert.Fail("Corners height map callback should be supported by proxy")
+
+    [<Fact>]
+    [<Priority(5)>]
     member _.``T9.5 Slope map — non-empty array with values in [0, 1]``() =
         engine.ThrowIfEngineCrashed()
         engine.ResetGameState()

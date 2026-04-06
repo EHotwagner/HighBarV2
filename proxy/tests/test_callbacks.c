@@ -137,6 +137,22 @@ TEST(test_get_height_map) {
     assert(fabsf(resp->result->float_array_value->values[15] - 16.0f) < 0.01f);
 }
 
+TEST(test_get_corners_height_map) {
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 120;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_CORNERS_HEIGHT_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_ARRAY_VALUE);
+    assert(resp->result->float_array_value->n_values == 25); // (4+1)*(4+1)
+    assert(fabsf(resp->result->float_array_value->values[0] - 1.0f) < 0.01f);
+    assert(fabsf(resp->result->float_array_value->values[24] - 25.0f) < 0.01f);
+}
+
 TEST(test_get_slope_map) {
     mock_engine_set_map_size(4, 4);
     ProtobufCAllocator alloc = hb_arena_allocator(&arena);
@@ -288,6 +304,25 @@ TEST(test_null_function_pointer) {
     assert(resp->success == 0); // Error — callback not available
 }
 
+TEST(test_get_corners_height_map_unavailable) {
+    // Create a callback struct with Map_getCornersHeightMap = NULL
+    struct SSkirmishAICallback null_cb;
+    memset(&null_cb, 0, sizeof(null_cb));
+    null_cb.Map_getWidth = cb->Map_getWidth;
+    null_cb.Map_getHeight = cb->Map_getHeight;
+    // Map_getCornersHeightMap is NULL
+
+    mock_engine_set_map_size(4, 4);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 121;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_MAP_GET_CORNERS_HEIGHT_MAP;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, &null_cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 0); // Error — callback not available
+}
+
 TEST(test_zero_count_response) {
     mock_engine_set_map_size(4, 4);
     mock_engine_set_los_return_count(0);
@@ -316,8 +351,9 @@ int main(void) {
     RUN(test_unknown_callback);
     RUN(test_unit_pos_no_param);
 
-    // Map data callbacks (021-map-callbacks-proxy)
+    // Map data callbacks (021-map-callbacks-proxy, 026-corners-heightmap-callback)
     RUN(test_get_height_map);
+    RUN(test_get_corners_height_map);
     RUN(test_get_slope_map);
     RUN(test_get_resource_map);
     RUN(test_get_los_map);
@@ -326,9 +362,10 @@ int main(void) {
     RUN(test_get_metal_spots);
     RUN(test_large_heightmap);
     RUN(test_null_function_pointer);
+    RUN(test_get_corners_height_map_unavailable);
     RUN(test_zero_count_response);
 
-    printf("All %d callback tests passed!\n", 17);
+    printf("All %d callback tests passed!\n", 19);
     hb_arena_destroy(&arena);
     return 0;
 }

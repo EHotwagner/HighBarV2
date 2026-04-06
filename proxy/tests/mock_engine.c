@@ -23,6 +23,13 @@ static float mock_slopemap[4] = { 0.1f, 0.2f, 0.3f, 0.4f };
 static int mock_losmap[16] = { 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1 };
 static int mock_radarmap[16] = { 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0 };
 static short mock_resourcemap[4] = { 100, 200, 0, 150 };
+static float mock_corners_heightmap[25] = {
+    1.0f, 2.0f, 3.0f, 4.0f, 5.0f,
+    6.0f, 7.0f, 8.0f, 9.0f, 10.0f,
+    11.0f, 12.0f, 13.0f, 14.0f, 15.0f,
+    16.0f, 17.0f, 18.0f, 19.0f, 20.0f,
+    21.0f, 22.0f, 23.0f, 24.0f, 25.0f
+};
 static float mock_start_pos[3] = { 1024.0f, 80.0f, 2048.0f };
 static float mock_metal_spot_positions[6] = {
     512.0f, 40.0f, 768.0f,   // spot 0
@@ -132,6 +139,16 @@ static int mock_map_get_height_map(int skirmishAIId, float *heights, int heights
     return count;
 }
 
+static int mock_map_get_corners_height_map(int skirmishAIId, float *cornerHeights, int cornerHeights_sizeMax) {
+    (void)skirmishAIId;
+    int count = (mock_map_width + 1) * (mock_map_height + 1);
+    if (count > cornerHeights_sizeMax) count = cornerHeights_sizeMax;
+    for (int i = 0; i < count; i++) {
+        cornerHeights[i] = (i < 25) ? mock_corners_heightmap[i] : (float)i;
+    }
+    return count;
+}
+
 static int mock_map_get_slope_map(int skirmishAIId, float *slopes, int slopes_sizeMax) {
     (void)skirmishAIId;
     int count = (mock_map_width / 2) * (mock_map_height / 2);
@@ -220,6 +237,7 @@ struct SSkirmishAICallback *mock_engine_create(void) {
     cb.Unit_getHealth = mock_unit_get_health;
     cb.Unit_getMaxHealth = mock_unit_get_max_health;
     cb.Map_getHeightMap = mock_map_get_height_map;
+    cb.Map_getCornersHeightMap = mock_map_get_corners_height_map;
     cb.Map_getSlopeMap = mock_map_get_slope_map;
     cb.Map_getLosMap = mock_map_get_los_map;
     cb.Map_getRadarMap = mock_map_get_radar_map;
