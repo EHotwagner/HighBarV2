@@ -61,10 +61,18 @@ type T4_CombatTests(engine: PersistentEngineFixture, output: ITestOutputHelper) 
         output.WriteLine($"Event distribution: {evtSummary}")
         output.WriteLine($"Combat: damage={damageEvents}, LOS={losEvents}, destroyed={destroyEvents}")
 
-        // spring-headless does not simulate weapon physics — combat events (UnitDamaged,
-        // EnemyDamaged, WeaponFired) are never generated. Only LOS events work with globallos.
-        // Engine must survive the FightCommand.
+        // Engine must survive the FightCommand over 900 frames
         Assert.True(frames.Length >= 900, $"Engine should survive FightCommand, ran {frames.Length} frames")
+
+        // Armed units near enemy position should trigger LOS events (globallos is enabled)
+        if engine.HasEnemy && losEvents = 0 then
+            output.WriteLine("WARNING: No EnemyEnterLOS events despite HasEnemy=true and globallos. May indicate engine state issue.")
+
+        // Diagnostic: headless engine may not simulate weapon physics
+        if damageEvents = 0 then
+            output.WriteLine("NOTE: Zero combat damage events — headless engine does not simulate weapon physics (known limitation)")
+        if destroyEvents = 0 then
+            output.WriteLine("NOTE: Zero destroy events — consistent with headless physics limitation")
 
     [<Fact>]
     [<Priority(2)>]
@@ -104,6 +112,9 @@ type T4_CombatTests(engine: PersistentEngineFixture, output: ITestOutputHelper) 
         engine.ThrowIfEngineCrashed()
         output.WriteLine($"AttackCommand: unit={uid}, damageEvents={damageEvents}, frames={frames.Length}")
         Assert.True(frames.Length >= 100, "Engine should survive AttackCommand")
+
+        // Single armed unit near enemy should survive full frame run without crash
+        Assert.True(engine.IsEngineAlive, "Engine must be alive after AttackCommand test")
 
     [<Fact>]
     [<Priority(3)>]

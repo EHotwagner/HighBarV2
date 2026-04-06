@@ -64,7 +64,7 @@ type T8_LargeScaleCombat(engine: PersistentEngineFixture, output: ITestOutputHel
         sw.Stop()
 
         output.WriteLine($"Frames run, damage={damageEvents}, destroyed={destroyedEvents}, time={sw.Elapsed.TotalSeconds:F1}s")
-        Assert.True(engine.IsEngineAlive, "Engine should survive large-scale test")
+        Assert.True(engine.IsEngineAlive, "Engine should survive large-scale 500-frame combat test")
 
     [<Fact>]
     [<Priority(2)>]

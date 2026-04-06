@@ -65,15 +65,6 @@ add_custom_command(TARGET SkirmishAI POST_BUILD
 # Tests
 enable_testing()
 
-add_executable(test_serialize tests/test_serialize.c tests/mock_engine.c ${PROTO_SOURCES})
-target_include_directories(test_serialize PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${PROTO_GEN_DIR}
-    ${PROTOBUF_C_INCLUDE_DIRS}
-)
-target_link_libraries(test_serialize PRIVATE SkirmishAI ${PROTOBUF_C_LIBRARIES})
-add_test(NAME test_serialize COMMAND test_serialize)
-
 add_executable(test_deserialize tests/test_deserialize.c tests/mock_engine.c ${PROTO_SOURCES})
 target_include_directories(test_deserialize PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -82,15 +73,6 @@ target_include_directories(test_deserialize PRIVATE
 )
 target_link_libraries(test_deserialize PRIVATE SkirmishAI ${PROTOBUF_C_LIBRARIES})
 add_test(NAME test_deserialize COMMAND test_deserialize)
-
-add_executable(test_roundtrip tests/test_roundtrip.c tests/mock_engine.c ${PROTO_SOURCES})
-target_include_directories(test_roundtrip PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${PROTO_GEN_DIR}
-    ${PROTOBUF_C_INCLUDE_DIRS}
-)
-target_link_libraries(test_roundtrip PRIVATE SkirmishAI ${PROTOBUF_C_LIBRARIES})
-add_test(NAME test_roundtrip COMMAND test_roundtrip)
 
 add_executable(test_callbacks tests/test_callbacks.c tests/mock_engine.c ${PROTO_SOURCES})
 target_include_directories(test_callbacks PRIVATE

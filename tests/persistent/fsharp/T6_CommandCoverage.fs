@@ -234,3 +234,61 @@ type T6_CommandCoverage(engine: PersistentEngineFixture, output: ITestOutputHelp
 
         output.WriteLine($"CallLuaUICommand sent, ran {frames.Length} frames")
         Assert.True(frames.Length >= 20, "Engine should survive CallLuaUICommand")
+
+    [<Fact>]
+    [<Priority(10)>]
+    member _.``T6.10 AllCommandsSmokeTest — send all command types in one test``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let unitId = spawnMobile()
+        Assert.True(unitId.IsSome, "Should have spawned a unit for smoke test")
+        let uid = unitId.Value
+
+        // Spawn a second unit as attack target
+        let targetId = spawnMobile()
+        Assert.True(targetId.IsSome, "Should have spawned a target unit")
+        let tid = targetId.Value
+
+        let (frames, _) = engine.RunFrames(30, fun _ idx ->
+            if idx = 0 then
+                [ MoveCommand uid 2000.0f 100.0f 2000.0f
+                  GiveMeResourceCommand 0 1000.0f
+                  GiveMeNewUnitCommand engine.MobileUnitDefId 1700.0f 100.0f 4096.0f
+                  CallLuaRulesCommand "test"
+                  CallLuaUICommand "test" ]
+            else
+                []
+        )
+
+        output.WriteLine($"T6.10 AllCommandsSmokeTest: {frames.Length} frames, 5 command types sent")
+        Assert.True(frames.Length >= 30, "Engine should survive multiple command types in single frame")
+
+    [<Fact>]
+    [<Priority(11)>]
+    member _.``T6.11 AttackCommand — attack target unit, no crash``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let unitId = spawnMobile()
+        Assert.True(unitId.IsSome, "Should have spawned attacker")
+        let uid = unitId.Value
+
+        // Spawn a target to attack
+        let targetId = spawnMobile()
+        Assert.True(targetId.IsSome, "Should have spawned target")
+        let tid = targetId.Value
+
+        let (frames, _) = engine.RunFrames(30, fun _ idx ->
+            if idx = 0 then
+                [ AttackCommand uid tid ]
+            else
+                []
+        )
+
+        output.WriteLine($"AttackCommand: attacker={uid}, target={tid}, frames={frames.Length}")
+        Assert.True(frames.Length >= 30, "Engine should survive AttackCommand")
+
+    // T6.12 SetOnOffCommand and T6.13 DrawAddPointCommand are covered by C proxy mock
+    // tests (test_deserialize.c). Live engine validation skipped because BAR's Lua rules
+    // reject these commands with a nil options error, causing engine instability.

@@ -3,6 +3,7 @@ namespace HighBar.AI.Tests
 open System
 open System.IO
 open Xunit
+open Xunit.Abstractions
 
 [<CollectionDefinition("AICombatVerification")>]
 type AICombatVerificationCollection() =
@@ -10,7 +11,7 @@ type AICombatVerificationCollection() =
 
 
 [<Collection("AICombatVerification")>]
-type HeadlessCombatVerificationTests(fixture: HeadlessAiFixture) =
+type HeadlessCombatVerificationTests(fixture: HeadlessAiFixture, output: ITestOutputHelper) =
 
     let generateCombatVerificationReport (outcomes: GameOutcome list) (reportsDir: string) =
         let totalFrames = outcomes |> List.sumBy (fun o -> o.DurationFrames)
@@ -102,6 +103,15 @@ type HeadlessCombatVerificationTests(fixture: HeadlessAiFixture) =
         Assert.True((completedGames = outcomes.Length), $"All games should complete without crashes. Completed: {completedGames}/{outcomes.Length}")
         Assert.True(totalUnitsProduced > 0, $"AI should produce units. Total: {totalUnitsProduced}")
 
-        // The combat verification result is in the report — this test records the finding
-        // regardless of whether combat events are observed
-        Assert.True(true, $"Combat verification complete. Total combat events: {totalCombatEvents}. Report: {reportPath}")
+        // Assertive validation: if combat events are observed, verify outcome-level correctness
+        if totalCombatEvents > 0 then
+            // Combat occurred — verify the correct side takes casualties
+            let totalEnemyDestroyed = outcomes |> List.sumBy (fun o -> o.EnemyDestroyedCount)
+            Assert.True(totalEnemyDestroyed > 0, $"Combat events observed ({totalCombatEvents}) but no enemies destroyed — expected outcome-level correctness")
+        else
+            // No combat events — headless physics limitation (Feature 014 confirmed)
+            // Mark as inconclusive rather than silent pass
+            // No combat events — headless physics limitation (Feature 014 confirmed)
+            // Output diagnostic rather than silent pass
+            output.WriteLine($"INCONCLUSIVE: Zero combat events across {outcomes.Length} games ({outcomes |> List.sumBy (fun o -> o.DurationFrames)} frames). Headless engine does not simulate weapon physics (Feature 014 limitation).")
+            output.WriteLine($"Report: {reportPath}")

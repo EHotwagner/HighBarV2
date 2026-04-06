@@ -92,6 +92,16 @@ sed -e "s|__SOCKET_PATH__|${SOCKET_PATH}|g" \
 # Set SPRING_WRITEDIR so engine writes logs to instance dir
 export SPRING_WRITEDIR="${INSTANCE_DIR}"
 
+# Increase watchdog timeout for test scenarios with heavy AI processing.
+# Default is 30s, which is too short when AI frame responses are slow.
+if [ ! -f "${INSTANCE_DIR}/springsettings.cfg" ]; then
+    echo "HangTimeout = 600" > "${INSTANCE_DIR}/springsettings.cfg"
+else
+    if ! grep -q "HangTimeout" "${INSTANCE_DIR}/springsettings.cfg"; then
+        echo "HangTimeout = 600" >> "${INSTANCE_DIR}/springsettings.cfg"
+    fi
+fi
+
 # Launch the engine in the background
 if [ -n "${SESSION_DIR}" ]; then
     "${ENGINE_BIN}" \

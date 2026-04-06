@@ -237,6 +237,13 @@ type HighBarClient(socketPath: string) =
             resp.Result.IntValue
         else 0
 
+    /// Get the height map as a flat float array. Returns empty array if not supported.
+    member this.GetHeightMap() : float32 array =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetHeightMap, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatArrayValue then
+            resp.Result.FloatArrayValue.Values |> Seq.toArray
+        else [||]
+
     /// Get the start position for a team.
     member this.GetStartPos(teamId: int) : (float32 * float32 * float32) =
         let p = CallbackParam()

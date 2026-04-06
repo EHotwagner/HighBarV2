@@ -4,6 +4,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-05
 
 ## Active Technologies
 - C11 + protobuf-c, engine SSkirmishAICallback API (021-map-callbacks-proxy)
+- F# / .NET 10.0 (test projects), C11 (proxy tests) + xUnit 2.9.x, CTest/CMake, spring-headless engine (022-live-headless-tests)
+- Filesystem only (Unix domain sockets, temp dirs) (022-live-headless-tests)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -64,6 +66,12 @@ cd build && ctest
 ./tests/check-prerequisites.sh
 ```
 
+## Testing Philosophy
+
+- Prefer live engine tests over mocks wherever possible. This environment has a full BAR installation with headless engine available.
+- Use `./tests/run-all.sh --category integration` or `--category persistent` for live engine tests.
+- Mock-based C proxy tests (CTest) are acceptable for fast feedback during development, but live engine validation is the authoritative test.
+
 ## Code Style
 
 - C: C11 standard, no heap allocation on hot path, arena allocation for protobuf
@@ -72,9 +80,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 022-live-headless-tests: Added F# / .NET 10.0 (test projects), C11 (proxy tests) + xUnit 2.9.x, CTest/CMake, spring-headless engine
 - 021-map-callbacks-proxy: Added C11 + protobuf-c, engine SSkirmishAICallback API
 - 020-repo-cleanup: Repository cleanup — removed stale docs, consolidated CLAUDE.md, archived verbose spec artifacts
-- 019-remove-python-dotnet10: Removed Python client, upgraded all projects to .NET 10.0
 
 
 <!-- MANUAL ADDITIONS START -->

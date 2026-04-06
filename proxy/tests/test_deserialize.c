@@ -1,3 +1,19 @@
+/*
+ * C proxy deserialization tests.
+ *
+ * RETAINED edge-case tests (2):
+ *   - test_unknown_command: validates error path for unset command_case
+ *   - test_multiple_commands: validates batch ordering of sequential commands
+ *   These exercise defensive code paths that cannot be triggered via live engine.
+ *
+ * SUPPLEMENTED standard command tests (15):
+ *   MoveUnit, BuildUnit, Patrol, Attack, Stop, Guard, Repair, Custom,
+ *   SetOnOff, DrawAddPoint, SendTextMessage, Fight, SelfDestruct,
+ *   GiveMeNewUnit, GiveMe
+ *   These are retained here for fast feedback during proxy development. Live
+ *   engine validation in persistent tier (T2, T3, T4, T5, T6) provides
+ *   authoritative coverage.
+ */
 #include "highbar/deserialize.h"
 #include "highbar/engine_types.h"
 #include "highbar/commands.pb-c.h"

@@ -161,6 +161,24 @@ module Commands =
         cmd.GiveMeNewUnit <- g
         cmd
 
+    let SetOnOffCommand (unitId: int) (on: bool) : AICommand =
+        let cmd = AICommand()
+        let s = SetOnOffCommand()
+        s.UnitId <- unitId
+        s.Options <- INTERNAL_ORDER
+        s.On <- on
+        s.Timeout <- 2147483647
+        cmd.SetOnOff <- s
+        cmd
+
+    let DrawAddPointCommand (x: float32) (y: float32) (z: float32) (label: string) : AICommand =
+        let cmd = AICommand()
+        let d = DrawAddPointCommand()
+        d.Position <- vec3 x y z
+        d.Label <- label
+        cmd.DrawAddPoint <- d
+        cmd
+
     let CallLuaRulesCommand (data: string) : AICommand =
         let cmd = AICommand()
         let c = CallLuaRulesCommand()
