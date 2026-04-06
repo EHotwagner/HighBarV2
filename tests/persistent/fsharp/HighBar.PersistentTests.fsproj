@@ -36,6 +36,7 @@
     <Compile Include="T8_LargeScaleCombat.fs" />
     <Compile Include="T9_MapTests.fs" />
     <Compile Include="T10_EngineKillTests.fs" />
+    <Compile Include="T11_MapDataExport.fs" />
   </ItemGroup>
 
 </Project>

@@ -38,6 +38,7 @@ Thumbs.db
 
 # AI validation reports (generated, keep testreports out)
 reports/testreports/
+reports/map-data/
 tests/ai/fsharp/reports/*.md
 
 # Environment

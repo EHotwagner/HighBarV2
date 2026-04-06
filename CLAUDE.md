@@ -12,6 +12,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-06
 - F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x (025-fix-map-test-reliability)
 - C11 (proxy), F# / .NET 10.0 (client, tests), Protobuf (proto schema) + protobuf-c (C proxy), Google.Protobuf 3.28 (F# client), buf CLI (proto linting/codegen) (026-corners-heightmap-callback)
 - N/A (read-only engine query, no persistence) (026-corners-heightmap-callback)
+- F# / .NET 10.0 (test project), leveraging existing HighBar.Client + HighBar.Client, xUnit 2.9.x, Google.Protobuf 3.28, System.IO (027-extract-save-map-data)
+- Filesystem — output files written to session directory and a persistent reports directory (027-extract-save-map-data)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -87,9 +89,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 027-extract-save-map-data: Added F# / .NET 10.0 (test project), leveraging existing HighBar.Client + HighBar.Client, xUnit 2.9.x, Google.Protobuf 3.28, System.IO
 - 026-corners-heightmap-callback: Added C11 (proxy), F# / .NET 10.0 (client, tests), Protobuf (proto schema) + protobuf-c (C proxy), Google.Protobuf 3.28 (F# client), buf CLI (proto linting/codegen)
 - 025-fix-map-test-reliability: Added F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x
-- 024-fix-persistent-test-gaps: Added F# / .NET 10.0 (test projects) + xUnit 2.9.x, HighBar.Client (with EngineDisconnectedException from 023)
 
 
 <!-- MANUAL ADDITIONS START -->
