@@ -24,7 +24,13 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
                         output.WriteLine($"Map callback not supported: {ex.Message}")
                 []
             ) |> ignore
-        with _ -> ()
+        with
+        | :? HighBar.Client.EngineDisconnectedException ->
+            output.WriteLine("Map query caused proxy disconnect — callback not supported")
+        | :? System.IO.IOException ->
+            output.WriteLine("Map query caused connection error — callback not supported")
+        | ex when ex.Message.Contains("Engine disconnected") ->
+            output.WriteLine($"Map query caused engine disconnect: {ex.Message}")
         result
 
     [<Fact>]
@@ -45,9 +51,10 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             output.WriteLine("SKIP: Proxy does not support map dimension callbacks")
 
     [<Fact>]
-    [<Priority(2)>]
+    [<Priority(4)>]
     member _.``T9.2 Height map — non-empty array with valid float values``() =
         engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
 
         let heightMap = queryInFrame (fun c -> c.GetHeightMap())
 
@@ -64,9 +71,10 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             output.WriteLine("SKIP: Proxy does not support height map callback")
 
     [<Fact>]
-    [<Priority(3)>]
+    [<Priority(2)>]
     member _.``T9.3 Start position — valid coordinates within map bounds``() =
         engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
 
         let width = queryInFrame (fun c -> c.GetMapWidth())
         let height = queryInFrame (fun c -> c.GetMapHeight())
@@ -84,9 +92,10 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             output.WriteLine("SKIP: Proxy does not support start position or map dimension callbacks")
 
     [<Fact>]
-    [<Priority(4)>]
+    [<Priority(3)>]
     member _.``T9.4 Metal spots — at least 1 spot with positive income``() =
         engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
 
         let spots = queryInFrame (fun c -> c.GetMetalSpots())
 

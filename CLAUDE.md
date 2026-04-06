@@ -1,11 +1,14 @@
 # HighBarV2 Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-05
+Auto-generated from all feature plans. Last updated: 2026-04-06
 
 ## Active Technologies
 - C11 + protobuf-c, engine SSkirmishAICallback API (021-map-callbacks-proxy)
 - F# / .NET 10.0 (test projects), C11 (proxy tests) + xUnit 2.9.x, CTest/CMake, spring-headless engine (022-live-headless-tests)
 - Filesystem only (Unix domain sockets, temp dirs) (022-live-headless-tests)
+- F# / .NET 10.0 (client library and test harness) + Google.Protobuf 3.28, xUnit 2.9.x, System.Net.Sockets (023-fix-client-socket-hang)
+- Filesystem only (Unix domain sockets) (023-fix-client-socket-hang)
+- F# / .NET 10.0 (test projects) + xUnit 2.9.x, HighBar.Client (with EngineDisconnectedException from 023) (024-fix-persistent-test-gaps)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -80,9 +83,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 024-fix-persistent-test-gaps: Added F# / .NET 10.0 (test projects) + xUnit 2.9.x, HighBar.Client (with EngineDisconnectedException from 023)
+- 023-fix-client-socket-hang: Added F# / .NET 10.0 (client library and test harness) + Google.Protobuf 3.28, xUnit 2.9.x, System.Net.Sockets
 - 022-live-headless-tests: Added F# / .NET 10.0 (test projects), C11 (proxy tests) + xUnit 2.9.x, CTest/CMake, spring-headless engine
-- 021-map-callbacks-proxy: Added C11 + protobuf-c, engine SSkirmishAICallback API
-- 020-repo-cleanup: Repository cleanup — removed stale docs, consolidated CLAUDE.md, archived verbose spec artifacts
 
 
 <!-- MANUAL ADDITIONS START -->

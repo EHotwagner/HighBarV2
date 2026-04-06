@@ -35,6 +35,7 @@
     <Compile Include="T7_ExhaustiveSpawn.fs" />
     <Compile Include="T8_LargeScaleCombat.fs" />
     <Compile Include="T9_MapTests.fs" />
+    <Compile Include="T10_EngineKillTests.fs" />
   </ItemGroup>
 
 </Project>

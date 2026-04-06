@@ -6,6 +6,13 @@ open System.Net.Sockets
 open Google.Protobuf
 open Highbar
 
+/// Exception thrown when the engine proxy connection is lost.
+type EngineDisconnectedException(message: string, ?lastFrameNumber: uint32, ?innerException: exn) =
+    inherit IOException(
+        message,
+        match innerException with Some ex -> ex | None -> null)
+    member _.LastFrameNumber = lastFrameNumber
+
 /// Typed frame received from the proxy, containing parsed events.
 type GameFrame = {
     FrameNumber: uint32
@@ -13,11 +20,18 @@ type GameFrame = {
 }
 
 /// Client connection to the HighBar proxy.
-type HighBarClient(socketPath: string) =
+type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
     let mutable socket: Socket option = None
     let mutable stream: NetworkStream option = None
     let protocolVersion = 1u
     let mutable nextRequestId = 1u
+    let timeoutMs =
+        match readTimeoutMs with
+        | Some t -> t
+        | None ->
+            match Environment.GetEnvironmentVariable("HIGHBAR_CLIENT_TIMEOUT_MS") with
+            | null | "" -> 10000
+            | v -> Int32.Parse(v)
 
     let sendMessage (s: NetworkStream) (msg: IMessage) =
         let data = msg.ToByteArray()
@@ -28,16 +42,25 @@ type HighBarClient(socketPath: string) =
         s.Flush()
 
     let recvBytes (s: NetworkStream) : byte[] =
+        let readFully (buf: byte[]) (offset: int) (count: int) =
+            let mutable read = 0
+            while read < count do
+                let n =
+                    try
+                        s.Read(buf, offset + read, count - read)
+                    with
+                    | :? IOException as ex ->
+                        raise (EngineDisconnectedException("Engine proxy read timeout", innerException = ex))
+                if n = 0 then
+                    raise (EngineDisconnectedException("Engine proxy closed connection"))
+                read <- read + n
+
         let headerBuf = Array.zeroCreate<byte> 4
-        let mutable read = 0
-        while read < 4 do
-            read <- read + s.Read(headerBuf, read, 4 - read)
+        readFully headerBuf 0 4
         if not BitConverter.IsLittleEndian then Array.Reverse(headerBuf)
         let len = BitConverter.ToInt32(headerBuf, 0)
         let dataBuf = Array.zeroCreate<byte> len
-        read <- 0
-        while read < len do
-            read <- read + s.Read(dataBuf, read, len - read)
+        readFully dataBuf 0 len
         dataBuf
 
     /// Connect to the proxy Unix domain socket (proxy is the client connecting to us).
@@ -46,18 +69,24 @@ type HighBarClient(socketPath: string) =
         let sock = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
         sock.Connect(endpoint)
         socket <- Some sock
-        stream <- Some(new NetworkStream(sock, true))
+        let ns = new NetworkStream(sock, true)
+        ns.ReadTimeout <- timeoutMs
+        stream <- Some ns
 
     /// Accept a connection from the proxy on a pre-created listening socket.
     member _.AcceptFrom(listener: Socket) =
         let accepted = listener.Accept()
         socket <- Some accepted
-        stream <- Some(new NetworkStream(accepted, true))
+        let ns = new NetworkStream(accepted, true)
+        ns.ReadTimeout <- timeoutMs
+        stream <- Some ns
 
     /// Wrap an already-connected socket (e.g. accepted by the harness).
     member _.WrapSocket(connectedSocket: Socket) =
         socket <- Some connectedSocket
-        stream <- Some(new NetworkStream(connectedSocket, false))
+        let ns = new NetworkStream(connectedSocket, false)
+        ns.ReadTimeout <- timeoutMs
+        stream <- Some ns
 
     /// Perform handshake — wait for Handshake, send HandshakeResponse.
     member _.Handshake() =

@@ -188,7 +188,12 @@ type PersistentEngineFixture() =
         if not this.IsEngineAlive then
             let mutable diagInfo = $"Engine process has exited unexpectedly.\nSocket: {socketPath}\n"
             match engineProcess with
-            | Some p -> diagInfo <- diagInfo + $"PID: {p.Id}, Exit code: {p.ExitCode}\n"
+            | Some p ->
+                try
+                    diagInfo <- diagInfo + $"PID: {p.Id}, Exit code: {p.ExitCode}\n"
+                with
+                | :? InvalidOperationException ->
+                    diagInfo <- diagInfo + $"PID: {p.Id}, Exit code: unknown (process not owned)\n"
             | None -> ()
 
             if not (String.IsNullOrEmpty(sessionDir)) then
@@ -231,6 +236,9 @@ type PersistentEngineFixture() =
             )
         with
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+        | :? EngineDisconnectedException as ex ->
+            let lastFrame = if allFrames.Count > 0 then allFrames.[allFrames.Count - 1].FrameNumber else 0u
+            failwith $"Engine disconnected during RunFrames at frame {lastFrame} after {frameIdx} frames: {ex.Message}"
 
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
 
@@ -272,6 +280,7 @@ type PersistentEngineFixture() =
     /// 3. Run verification frames
     member this.ResetGameState() =
         this.ThrowIfEngineCrashed()
+        if not this.IsEngineAlive then () else
 
         // Phase 1: Destroy all non-initial units via text commands + reset resources
         let unitsToDestroy =
@@ -308,12 +317,14 @@ type PersistentEngineFixture() =
             )
         with
         | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+        | :? EngineDisconnectedException ->
+            failwith "Engine disconnected during ResetGameState — engine has crashed"
 
         // Phase 2: Run verification frames to let engine process commands
         this.RunFrames(10) |> ignore
 
     interface IAsyncLifetime with
-        member _.InitializeAsync() = task {
+        member this.InitializeAsync() = task {
             let sw = Stopwatch.StartNew()
             sessionDir <- Path.Combine(Path.GetTempPath(), $"highbar-persistent-{guid}")
             Directory.CreateDirectory(sessionDir) |> ignore
@@ -373,21 +384,26 @@ type PersistentEngineFixture() =
             // Warm-up: capture initial frames
             let warmupFrames = ResizeArray<GameFrame>()
             try
-                c.Run(fun frame ->
-                    warmupFrames.Add(frame)
-                    // Track initial unit IDs
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.UnitCreated(uid, _) ->
-                            knownUnitIds.Add(uid) |> ignore
-                            initialUnitIds.Add(uid) |> ignore
-                        | _ -> ()
-                    if warmupFrames.Count >= 30 then
-                        failwith "CAPTURED_ENOUGH"
-                    []
-                )
+                try
+                    c.Run(fun frame ->
+                        warmupFrames.Add(frame)
+                        // Track initial unit IDs
+                        for ev in frame.Events do
+                            match ev with
+                            | GameEvent.UnitCreated(uid, _) ->
+                                knownUnitIds.Add(uid) |> ignore
+                                initialUnitIds.Add(uid) |> ignore
+                            | _ -> ()
+                        if warmupFrames.Count >= 30 then
+                            failwith "CAPTURED_ENOUGH"
+                        []
+                    )
+                with
+                | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
             with
-            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+            | :? EngineDisconnectedException ->
+                this.ThrowIfEngineCrashed()
+                failwith $"Engine disconnected during warm-up. Socket: {socketPath}"
 
             initialFrames <- warmupFrames |> Seq.toList
             initialEvents <- initialFrames |> List.collect (fun f -> f.Events)
@@ -412,75 +428,9 @@ type PersistentEngineFixture() =
             let mutable discoveryDone = false
 
             try
-                c.Run(fun frame ->
-                    // Track events
-                    for ev in frame.Events do
-                        match ev with
-                        | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> hasEnemy <- true
-                        | GameEvent.UnitCreated(uid, _) ->
-                            knownUnitIds.Add(uid) |> ignore
-                            initialUnitIds.Add(uid) |> ignore
-                        | _ -> ()
-
-                    if not discoveryDone then
-                        discoveryDone <- true
-
-                        // Enable cheat events from F# side as fallback
-                        try c.SetCheatEventsEnabled(true) |> ignore with _ -> ()
-
-                        // Get all valid defIds from engine
-                        let ids = c.GetUnitDefs(1024)
-                        allDefIds.AddRange(ids)
-
-                        // Query metadata for each defId
-                        for defId in ids do
-                            let name = c.GetUnitDefName(defId)
-                            let buildSpeed = c.GetBuildSpeed(defId)
-                            let weaponRange = c.GetMaxWeaponRange(defId)
-                            let isBuilder = buildSpeed > 0.0f
-                            let isArmed = weaponRange > 0.0f
-                            let isMobile = isBuilder || isArmed
-                            let isBuilding = not isMobile
-                            let info =
-                                { UnitDefId = defId
-                                  Name = if String.IsNullOrEmpty(name) then None else Some name
-                                  IsBuilder = isBuilder
-                                  IsArmed = isArmed
-                                  IsMobile = isMobile
-                                  IsBuilding = isBuilding
-                                  SpawnSuccess = true }
-                            entries.[defId] <- info
-                            if isBuilder then builders.Add(defId)
-                            if isArmed then armedUnits.Add(defId)
-                            if isMobile then mobileUnits.Add(defId)
-                            if isBuilding then buildings.Add(defId)
-                            if isBuilding && not isArmed then economyUnits.Add(defId)
-
-                        // Discover commander build options
-                        let commanderUnitId =
-                            initialEvents
-                            |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None)
-                        match commanderUnitId with
-                        | Some cmdUid ->
-                            let cmdDefId = c.GetUnitDef(cmdUid)
-                            if cmdDefId > 0 then
-                                commanderBuildOptions <- c.GetBuildOptions(cmdDefId)
-                        | None -> ()
-
-                        failwith "CAPTURED_ENOUGH"
-                        []
-                    else
-                        failwith "CAPTURED_ENOUGH"
-                        []
-                )
-            with
-            | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
-
-            // Run a few more frames to check for enemy events if not seen yet
-            if not hasEnemy then
-                let mutable recheckFrames = 0
                 try
                     c.Run(fun frame ->
+                        // Track events
                         for ev in frame.Events do
                             match ev with
                             | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> hasEnemy <- true
@@ -488,11 +438,87 @@ type PersistentEngineFixture() =
                                 knownUnitIds.Add(uid) |> ignore
                                 initialUnitIds.Add(uid) |> ignore
                             | _ -> ()
-                        recheckFrames <- recheckFrames + 1
-                        if recheckFrames >= 30 then failwith "CAPTURED_ENOUGH"
-                        []
+
+                        if not discoveryDone then
+                            discoveryDone <- true
+
+                            // Enable cheat events from F# side as fallback
+                            try c.SetCheatEventsEnabled(true) |> ignore with _ -> ()
+
+                            // Get all valid defIds from engine
+                            let ids = c.GetUnitDefs(1024)
+                            allDefIds.AddRange(ids)
+
+                            // Query metadata for each defId
+                            for defId in ids do
+                                let name = c.GetUnitDefName(defId)
+                                let buildSpeed = c.GetBuildSpeed(defId)
+                                let weaponRange = c.GetMaxWeaponRange(defId)
+                                let isBuilder = buildSpeed > 0.0f
+                                let isArmed = weaponRange > 0.0f
+                                let isMobile = isBuilder || isArmed
+                                let isBuilding = not isMobile
+                                let info =
+                                    { UnitDefId = defId
+                                      Name = if String.IsNullOrEmpty(name) then None else Some name
+                                      IsBuilder = isBuilder
+                                      IsArmed = isArmed
+                                      IsMobile = isMobile
+                                      IsBuilding = isBuilding
+                                      SpawnSuccess = true }
+                                entries.[defId] <- info
+                                if isBuilder then builders.Add(defId)
+                                if isArmed then armedUnits.Add(defId)
+                                if isMobile then mobileUnits.Add(defId)
+                                if isBuilding then buildings.Add(defId)
+                                if isBuilding && not isArmed then economyUnits.Add(defId)
+
+                            // Discover commander build options
+                            let commanderUnitId =
+                                initialEvents
+                                |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None)
+                            match commanderUnitId with
+                            | Some cmdUid ->
+                                let cmdDefId = c.GetUnitDef(cmdUid)
+                                if cmdDefId > 0 then
+                                    commanderBuildOptions <- c.GetBuildOptions(cmdDefId)
+                            | None -> ()
+
+                            failwith "CAPTURED_ENOUGH"
+                            []
+                        else
+                            failwith "CAPTURED_ENOUGH"
+                            []
                     )
-                with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+                with
+                | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+            with
+            | :? EngineDisconnectedException ->
+                this.ThrowIfEngineCrashed()
+                failwith $"Engine disconnected during UnitDef discovery. Socket: {socketPath}"
+
+            // Run a few more frames to check for enemy events if not seen yet
+            if not hasEnemy then
+                let mutable recheckFrames = 0
+                try
+                    try
+                        c.Run(fun frame ->
+                            for ev in frame.Events do
+                                match ev with
+                                | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> hasEnemy <- true
+                                | GameEvent.UnitCreated(uid, _) ->
+                                    knownUnitIds.Add(uid) |> ignore
+                                    initialUnitIds.Add(uid) |> ignore
+                                | _ -> ()
+                            recheckFrames <- recheckFrames + 1
+                            if recheckFrames >= 30 then failwith "CAPTURED_ENOUGH"
+                            []
+                        )
+                    with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+                with
+                | :? EngineDisconnectedException ->
+                    this.ThrowIfEngineCrashed()
+                    failwith $"Engine disconnected during enemy recheck. Socket: {socketPath}"
 
             registry <- Some
                 { Entries = entries |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
