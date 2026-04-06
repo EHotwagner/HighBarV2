@@ -99,9 +99,15 @@ cd build && ctest
 - This environment has a full BAR (Beyond All Reason) installation.
 - GPU passthrough is enabled.
 - A headless BAR installation is available for running tests without a display.
-- BAR AppImage: `/home/developer/applications/Beyond-All-Reason-1.2988.0.AppImage` (v1.2988.0, 118MB)
+- BAR AppImage: `/home/developer/.local/bin/beyond-all-reason` (bind-mounted from host `~/.local/bin/beyond-all-reason`, ~117MB)
   - Dependencies: All installed (sdl2, fuse2, openal, gtk3, alsa-lib, nss, binutils)
-  - Launch: `/home/developer/applications/Beyond-All-Reason-1.2988.0.AppImage`
+  - Launch: `beyond-all-reason --appimage-extract-and-run --no-sandbox` (FUSE unavailable in rootless container)
   - **MUST be started in windowed mode** (not fullscreen)
+- BAR data directory: `~/.local/state/Beyond All Reason/`
+  - Engine: `~/.local/state/Beyond All Reason/engine/recoil_2025.06.19/`
+  - spring-headless: `~/.local/state/Beyond All Reason/engine/recoil_2025.06.19/spring-headless` (v2025.06.19)
+  - Game packages (rapid/pool): `~/.local/state/Beyond All Reason/packages/`
+- AI registration: `devmode.txt` + `simpleAiList = false` in `IGL_data.lua` (see `docs/bar-info.md` for details)
+- **Do NOT patch rapid pool files** — it crashes Chobby
 
 <!-- MANUAL ADDITIONS END -->
