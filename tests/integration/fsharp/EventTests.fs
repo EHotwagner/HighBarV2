@@ -2,13 +2,14 @@ namespace HighBar.Tests
 
 open System
 open Xunit
+open Xunit.Abstractions
 open HighBar.Client
 open HighBar.Client.Commands
 
 /// Event delivery integration tests.
 /// Validates that real engine events arrive correctly in the F# client with properly populated fields.
 [<Collection("Engine")>]
-type EventTests(engine: EngineFixture) =
+type EventTests(engine: EngineFixture, output: ITestOutputHelper) =
 
     /// Helper: run for N frames, return all collected events.
     let collectEvents (maxFrames: int) =
@@ -166,4 +167,4 @@ type EventTests(engine: EngineFixture) =
                 | GameEvent.EnemyEnterLOS enemyId -> Some enemyId
                 | _ -> None)
         // LOS events are optional -- depends on map size and unit placement
-        Assert.True(losEvents.Length >= 0, "LOS events count should be non-negative")
+        output.WriteLine($"LOS events: {losEvents.Length} (optional — depends on map size and unit placement)")

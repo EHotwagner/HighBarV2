@@ -92,10 +92,10 @@ static Highbar__CallbackResponse *make_int_array_response(
     Highbar__IntArray *arr = alloc->alloc(alloc->allocator_data, sizeof(Highbar__IntArray));
     if (!arr) return resp;
     highbar__int_array__init(arr);
-    arr->n_values = count;
     if (count > 0) {
         arr->values = alloc->alloc(alloc->allocator_data, count * sizeof(int32_t));
         if (arr->values) {
+            arr->n_values = count;
             memcpy(arr->values, values, count * sizeof(int32_t));
         }
     }
@@ -119,10 +119,10 @@ static Highbar__CallbackResponse *make_float_array_response(
     Highbar__FloatArray *arr = alloc->alloc(alloc->allocator_data, sizeof(Highbar__FloatArray));
     if (!arr) return resp;
     highbar__float_array__init(arr);
-    arr->n_values = count;
     if (count > 0) {
         arr->values = alloc->alloc(alloc->allocator_data, count * sizeof(float));
         if (arr->values) {
+            arr->n_values = count;
             memcpy(arr->values, values, count * sizeof(float));
         }
     }

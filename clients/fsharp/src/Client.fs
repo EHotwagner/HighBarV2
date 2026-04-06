@@ -273,6 +273,36 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
             resp.Result.FloatArrayValue.Values |> Seq.toArray
         else [||]
 
+    /// Get the slope map as a flat float array. Values in [0, 1]. Returns empty array if not supported.
+    member this.GetSlopeMap() : float32 array =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetSlopeMap, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.FloatArrayValue then
+            resp.Result.FloatArrayValue.Values |> Seq.toArray
+        else [||]
+
+    /// Get the LOS (line-of-sight) map as a flat int array. Returns empty array if not supported.
+    member this.GetLosMap() : int array =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetLosMap, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntArrayValue then
+            resp.Result.IntArrayValue.Values |> Seq.map int |> Seq.toArray
+        else [||]
+
+    /// Get the radar map as a flat int array. Returns empty array if not supported.
+    member this.GetRadarMap() : int array =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetRadarMap, [])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntArrayValue then
+            resp.Result.IntArrayValue.Values |> Seq.map int |> Seq.toArray
+        else [||]
+
+    /// Get the resource map as a flat int array. resourceId: 0=metal, 1=energy. Returns empty array if not supported.
+    member this.GetResourceMap(resourceId: int) : int array =
+        let p = CallbackParam()
+        p.IntValue <- resourceId
+        let resp = this.SendCallback(uint32 CallbackId.CallbackMapGetResourceMap, [p])
+        if resp.Success && resp.Result <> null && resp.Result.ValueCase = CallbackResult.ValueOneofCase.IntArrayValue then
+            resp.Result.IntArrayValue.Values |> Seq.map int |> Seq.toArray
+        else [||]
+
     /// Get the start position for a team.
     member this.GetStartPos(teamId: int) : (float32 * float32 * float32) =
         let p = CallbackParam()

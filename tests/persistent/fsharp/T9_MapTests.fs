@@ -48,7 +48,7 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             Assert.True(w > 0, $"Map width should be positive, got {w}")
             Assert.True(h > 0, $"Map height should be positive, got {h}")
         | _ ->
-            output.WriteLine("SKIP: Proxy does not support map dimension callbacks")
+            Assert.Fail("Map dimension callbacks should be supported by proxy")
 
     [<Fact>]
     [<Priority(4)>]
@@ -66,9 +66,9 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             for h in hm do
                 Assert.True(h > -5000.0f && h < 50000.0f, $"Height value {h} out of expected range")
         | Some _ ->
-            output.WriteLine("SKIP: Height map returned empty — proxy may not support height map callback")
+            Assert.Fail("Height map returned empty — proxy should return data")
         | None ->
-            output.WriteLine("SKIP: Proxy does not support height map callback")
+            Assert.Fail("Height map callback should be supported by proxy")
 
     [<Fact>]
     [<Priority(2)>]
@@ -89,7 +89,7 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
             Assert.True(sx >= 0.0f && sx <= mapWidthElmos, $"Start X={sx} should be within [0, {mapWidthElmos}]")
             Assert.True(sz >= 0.0f && sz <= mapHeightElmos, $"Start Z={sz} should be within [0, {mapHeightElmos}]")
         | _ ->
-            output.WriteLine("SKIP: Proxy does not support start position or map dimension callbacks")
+            Assert.Fail("Start position and map dimension callbacks should be supported by proxy")
 
     [<Fact>]
     [<Priority(3)>]
@@ -111,6 +111,78 @@ type T9_MapTests(engine: PersistentEngineFixture, output: ITestOutputHelper) =
                 Assert.True(income > 0.0f, $"Metal spot income={income} should be positive")
                 output.WriteLine($"  Spot: ({x:F0}, {y:F0}, {z:F0}) income={income:F2}")
         | Some _ ->
-            output.WriteLine("SKIP: No metal spots returned — proxy may not support metal spot callback")
+            Assert.Fail("Metal spots should be non-empty on a real map")
         | None ->
-            output.WriteLine("SKIP: Proxy does not support metal spot callback")
+            Assert.Fail("Metal spots callback should be supported by proxy")
+
+    [<Fact>]
+    [<Priority(5)>]
+    member _.``T9.5 Slope map — non-empty array with values in [0, 1]``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let slopeMap = queryInFrame (fun c -> c.GetSlopeMap())
+
+        match slopeMap with
+        | Some sm when sm.Length > 0 ->
+            output.WriteLine($"Slope map: {sm.Length} values, range [{sm |> Array.min:F3}, {sm |> Array.max:F3}]")
+            for v in sm do
+                Assert.True(v >= 0.0f && v <= 1.0f, $"Slope value {v} should be in [0, 1]")
+        | Some _ ->
+            Assert.Fail("Slope map returned empty — proxy should return data")
+        | None ->
+            Assert.Fail("Slope map callback should be supported by proxy")
+
+    [<Fact>]
+    [<Priority(6)>]
+    member _.``T9.6 LOS map — non-empty int array``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let losMap = queryInFrame (fun c -> c.GetLosMap())
+
+        match losMap with
+        | Some lm when lm.Length > 0 ->
+            output.WriteLine($"LOS map: {lm.Length} values, range [{lm |> Array.min}, {lm |> Array.max}]")
+            for v in lm do
+                Assert.True(v >= 0, $"LOS value {v} should be non-negative")
+        | Some _ ->
+            Assert.Fail("LOS map returned empty — proxy should return data")
+        | None ->
+            Assert.Fail("LOS map callback should be supported by proxy")
+
+    [<Fact>]
+    [<Priority(7)>]
+    member _.``T9.7 Radar map — non-empty int array``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let radarMap = queryInFrame (fun c -> c.GetRadarMap())
+
+        match radarMap with
+        | Some rm when rm.Length > 0 ->
+            output.WriteLine($"Radar map: {rm.Length} values, range [{rm |> Array.min}, {rm |> Array.max}]")
+            for v in rm do
+                Assert.True(v >= 0, $"Radar value {v} should be non-negative")
+        | Some _ ->
+            Assert.Fail("Radar map returned empty — proxy should return data")
+        | None ->
+            Assert.Fail("Radar map callback should be supported by proxy")
+
+    [<Fact>]
+    [<Priority(8)>]
+    member _.``T9.8 Resource map — metal density non-empty with non-negative values``() =
+        engine.ThrowIfEngineCrashed()
+        engine.ResetGameState()
+
+        let resourceMap = queryInFrame (fun c -> c.GetResourceMap(0))
+
+        match resourceMap with
+        | Some rm when rm.Length > 0 ->
+            output.WriteLine($"Resource map (metal): {rm.Length} values, range [{rm |> Array.min}, {rm |> Array.max}]")
+            for v in rm do
+                Assert.True(v >= 0, $"Resource value {v} should be non-negative")
+        | Some _ ->
+            Assert.Fail("Resource map returned empty — proxy should return data")
+        | None ->
+            Assert.Fail("Resource map callback should be supported by proxy")

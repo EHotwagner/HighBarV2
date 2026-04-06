@@ -14,7 +14,7 @@
 #include <string.h>
 
 #define HIGHBAR_PROTOCOL_VERSION 1
-#define ARENA_DEFAULT_CAPACITY (1024 * 1024) // 1MB
+#define ARENA_DEFAULT_CAPACITY (32 * 1024 * 1024) // 32MB — large enough for map array callbacks on biggest BAR maps
 #define MAX_EVENTS_PER_FRAME 256
 
 // Proxy singleton state

@@ -9,6 +9,7 @@ Auto-generated from all feature plans. Last updated: 2026-04-06
 - F# / .NET 10.0 (client library and test harness) + Google.Protobuf 3.28, xUnit 2.9.x, System.Net.Sockets (023-fix-client-socket-hang)
 - Filesystem only (Unix domain sockets) (023-fix-client-socket-hang)
 - F# / .NET 10.0 (test projects) + xUnit 2.9.x, HighBar.Client (with EngineDisconnectedException from 023) (024-fix-persistent-test-gaps)
+- F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x (025-fix-map-test-reliability)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -74,6 +75,7 @@ cd build && ctest
 - Prefer live engine tests over mocks wherever possible. This environment has a full BAR installation with headless engine available.
 - Use `./tests/run-all.sh --category integration` or `--category persistent` for live engine tests.
 - Mock-based C proxy tests (CTest) are acceptable for fast feedback during development, but live engine validation is the authoritative test.
+- If a test cannot pass due to an out-of-scope issue (e.g. a bug in another component, missing infrastructure), it must be reported as skipped or have its assertion relaxed — never silently marked as passing or worked around by fixing out-of-scope code.
 
 ## Code Style
 
@@ -83,9 +85,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 025-fix-map-test-reliability: Added F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x
 - 024-fix-persistent-test-gaps: Added F# / .NET 10.0 (test projects) + xUnit 2.9.x, HighBar.Client (with EngineDisconnectedException from 023)
 - 023-fix-client-socket-hang: Added F# / .NET 10.0 (client library and test harness) + Google.Protobuf 3.28, xUnit 2.9.x, System.Net.Sockets
-- 022-live-headless-tests: Added F# / .NET 10.0 (test projects), C11 (proxy tests) + xUnit 2.9.x, CTest/CMake, spring-headless engine
 
 
 <!-- MANUAL ADDITIONS START -->
