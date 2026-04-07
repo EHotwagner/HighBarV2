@@ -95,6 +95,11 @@ An idiomatic F# client that connects to the proxy and implements a complete AI g
 
 **Core layer:**
 - `HighBarClient` — Socket connection, handshake, frame loop, callback queries
+- `EngineSession` — Unified engine lifecycle (start, connect, step, stop) with state machine
+- `EngineConfig` — Configuration record loaded from `engine-version.json` with env var overrides
+- `EngineLauncher` — Engine process spawning, data directory detection, SIGTERM/SIGKILL shutdown
+- `ScriptGenerator` — Programmatic TDF game script generation from config
+- `SessionDiagnostics` — Engine log extraction for post-mortem error reporting
 - `GameEvent` — Discriminated union wrapping all 28 engine event types
 - `Commands` — Builder functions for all 17 frequently-used command types
 - `UnitRegistry` — Runtime unit tracking with lifecycle state (Alive → Ready → Dead → LastKnown)

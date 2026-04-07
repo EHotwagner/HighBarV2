@@ -100,5 +100,6 @@ Issues from previous features that have been addressed:
 - **.NET 10.0 upgrade** (Feature 019) — All projects migrated from .NET 8.0
 - **Unit command INTERNAL_ORDER flag** (Feature 017) — All command builders now set the flag correctly
 - **Test framework unified** (Feature 018) — Single `run-all.sh` runner with category support
+- **Test harness unified** (Feature 028) — Three duplicated harness implementations replaced with single `EngineSession` abstraction. Shell scripts (`start-headless.sh`, `stop-headless.sh`, `game-setup.txt`) replaced with F# modules (`EngineLauncher`, `ScriptGenerator`). PID-based orphan tracking prevents leaked engine processes. `SendCallback` now handles interleaved Frame messages (matching FSBarV1 pattern).
 
 See also: [Testing](testing.md) | [Architecture](architecture.md)

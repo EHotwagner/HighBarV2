@@ -387,23 +387,41 @@ Two tests against BARb AI are defined but skipped (require `DISPLAY` and BARb AI
 
 ## Test Infrastructure
 
-### Test Harness Pattern
+### Engine Lifecycle (`EngineSession`)
 
-All engine-dependent tests use a shared fixture pattern:
-1. Check prerequisites (`check-prerequisites.sh`)
-2. Start engine via bash script with game-setup.lua configuration
-3. Accept proxy connection on Unix domain socket
-4. Handshake and warm up
-5. Run test frames
-6. Clean up engine process on exit
+All engine-dependent tests use the unified `EngineSession` abstraction from `HighBar.Client`:
 
-### Game Setup (`tests/fixtures/game-setup.lua`)
+1. **Configuration** — `EngineConfig.fromVersionFile("tests/engine-version.json")` loads engine binary, map, game type, and timeouts from a single JSON file, with environment variable overrides (`HIGHBAR_TEST_ENGINE`, `HIGHBAR_TEST_MAP`, `SPRING_DATADIR`, etc.)
+2. **Launch** — `EngineLauncher.launch(config, scriptContent)` spawns the engine process directly from F#, writes a PID file for orphan tracking, redirects stdout/stderr to the session directory, and sets up `SPRING_WRITEDIR`/`SPRING_DATADIR` environment variables.
+3. **Script generation** — `ScriptGenerator.generate(config)` produces the Spring TDF-format game setup script programmatically from the config record (map, factions, socket path, opponent AI, cheat commands). No shell `sed` templates.
+4. **Connection** — `EngineSession.Start()` creates a Unix domain socket listener, launches the engine, waits for the proxy to connect, and completes the protobuf handshake.
+5. **Frame loop** — Tests use `session.Client.Run(handler)` for continuous frame processing or `session.StepWith(handler)` for single-frame operations. Callbacks (e.g., `GetUnitDefs`, `GetUnitPos`) work inside frame handlers — `SendCallback` handles interleaved Frame messages automatically.
+6. **Cleanup** — `EngineSession.Stop(preserveSession)` sends SIGTERM (with configurable grace period), falls back to SIGKILL, and cleans up socket/PID files. Session directories are preserved on test failure for post-mortem inspection, cleaned up on success.
+7. **Orphan prevention** — `EngineLauncher.cleanupStaleProcesses()` scans `/tmp/highbar-*.pid` files on startup, kills stale processes, and warns about untracked `spring-headless` processes.
 
-Configures test scenarios:
-- Small map with 2 teams (HighBarV2 AI vs NullAI)
-- Close spawn positions for combat engagement
-- Game mode 3 (disable victory conditions)
-- Configurable map and socket path via environment variables
+### Test Fixtures
+
+| Fixture | Collection | Engine Lifecycle | Purpose |
+|---------|-----------|-----------------|---------|
+| `EngineFixture` | `Engine` | Shared (one engine for all integration tests) | Warm-up capture, provides `Client` |
+| `PersistentEngineFixture` | `PersistentEngine` | Shared (one engine, state reset between tests) | UnitDef discovery, `ResetGameState()`, `RunFrames()` |
+| `EngineKillFixture` | `EngineKill` | Dedicated (separate engine for kill tests) | Tests disconnect detection |
+| `HeadlessAiFixture` | `AIEndToEnd`/`AINonCombat` | Per-game (fresh engine each game via `GameOrchestrator`) | AI validation |
+| `LiveAiFixture` | `AICompetitive`/`AICombat` | Per-game (graphical engine) | Combat/competitive AI tests |
+
+### Configuration (`tests/engine-version.json`)
+
+Single source of truth for engine and game settings:
+
+```json
+{
+  "engine": { "version": "2025.06.21", "binary": "spring-headless" },
+  "game": { "name": "Beyond All Reason test-29871-90f4bc1" },
+  "map": { "name": "Avalanche 3.4" }
+}
+```
+
+Override any value via environment variables for CI or local customization.
 
 ### Report Generation
 

@@ -36,9 +36,12 @@ let client = HighBarClient.AcceptFromProxy("/tmp/highbar.sock", timeoutMs = 3000
 
 ```fsharp
 member Run(onFrame: GameFrame -> AICommand list) : unit
+member StepFrame(onFrame: GameFrame -> AICommand list) : GameFrame option
 ```
 
-Runs the main game loop. Receives frames from the proxy, calls `onFrame` with parsed events, and sends back the returned commands. Exits on `Shutdown` message.
+`Run` runs the continuous game loop — receives frames, calls `onFrame`, sends commands. Exits on `Shutdown`.
+
+`StepFrame` processes a single frame: receives one Frame, calls handler, sends response, returns `Some frame` or `None` on Shutdown. Useful for controlled frame-by-frame operation.
 
 ```fsharp
 client.Run(fun frame ->
@@ -526,5 +529,127 @@ type DecisionLogEntry = {
     Context: Map<string, string>
 }
 ```
+
+---
+
+## Engine Lifecycle Management
+
+Modules for launching, configuring, and managing the BAR engine process. Used by test fixtures and can be used by any F# application that needs to orchestrate engine sessions.
+
+### EngineConfig
+
+Configuration record for an engine session. All fields have sensible defaults.
+
+```fsharp
+type EngineMode = Headless | Graphical
+
+type EngineConfig = {
+    Mode: EngineMode
+    SocketPath: string          // Auto-generated: /tmp/highbar-{guid}.sock
+    MapName: string             // From engine-version.json or HIGHBAR_TEST_MAP
+    GameType: string            // From engine-version.json
+    EngineBin: string           // "spring-headless" or HIGHBAR_TEST_ENGINE
+    DataDir: string option      // Auto-detected or SPRING_DATADIR
+    OpponentAI: string          // "NullAI"
+    OpponentSide: string        // "Cortex"
+    OurSide: string             // "Armada"
+    AcceptTimeoutMs: int        // 30000 or HIGHBAR_TEST_TIMEOUT * 1000
+    ReadTimeoutMs: int          // 10000 or HIGHBAR_CLIENT_TIMEOUT_MS
+    GameSpeed: int              // 10
+    ShutdownGraceMs: int        // 5000
+}
+```
+
+**Factory functions:**
+
+| Function | Description |
+|----------|-------------|
+| `EngineConfig.defaultConfig()` | Defaults with unique GUID socket path |
+| `EngineConfig.fromVersionFile(path)` | Load from `engine-version.json`, apply env var overrides |
+| `EngineConfig.validate(config)` | Fail fast on invalid values (empty strings, negative timeouts) |
+
+### EngineSession
+
+Unified lifecycle abstraction — manages engine process, socket, handshake, frame loop, and cleanup.
+
+```fsharp
+type SessionState = Idle | Starting | Connected | Running | Stopped | Error of string
+
+type EngineSession(config: EngineConfig) =
+    member Start() : unit                                    // Launch engine, connect, handshake
+    member Step() : GameFrame                                // Receive one frame (no commands)
+    member StepWith(handler) : GameFrame                     // Receive frame, send commands
+    member Run(count, handler) : GameFrame list              // Run N frames
+    member RunUntil(predicate, handler) : GameFrame list     // Run until condition met
+    member Stop(preserveSession: bool) : unit                // Cleanup (preserve logs on failure)
+    member GetDiagnostics() : SessionDiagnostics             // Collect log excerpts
+    member ThrowIfEngineCrashed() : unit                     // Raise with diagnostic context
+    member Client : HighBarClient                            // Direct client access for callbacks
+    member IsEngineAlive : bool
+    member State : SessionState
+    member SessionDir : string
+    interface IDisposable
+```
+
+**Usage:**
+
+```fsharp
+let config = EngineConfig.fromVersionFile "tests/engine-version.json" |> EngineConfig.validate
+use session = new EngineSession(config)
+session.Start()
+
+// Run 30 warm-up frames
+let frames = session.Run(30, fun _ -> [])
+
+// Use client for callbacks inside frame handlers
+session.Client.Run(fun frame ->
+    let pos = session.Client.GetUnitPos(unitId)
+    [ Commands.MoveCommand unitId pos.X pos.Y pos.Z ]
+)
+
+session.Stop(preserveSession = false)
+```
+
+### EngineLauncher
+
+Process management: spawning, data directory detection, graceful shutdown, orphan cleanup.
+
+| Function | Description |
+|----------|-------------|
+| `launch(config, scriptContent)` | Spawn engine process, write PID file, redirect logs |
+| `stop(socketPath, proc, graceMs)` | SIGTERM → wait → SIGKILL, clean up files |
+| `detectDataDir(engineBin)` | Walk up from binary, fall back to standard BAR paths |
+| `getSessionDir(config)` | Derive `/tmp/highbar-{guid}/` from socket path |
+| `cleanupStaleProcesses()` | Scan PID files, kill dead processes, warn about untracked ones |
+
+### ScriptGenerator
+
+Generates Spring engine TDF-format startup scripts programmatically from `EngineConfig`.
+
+```fsharp
+let script = ScriptGenerator.generate config
+// Produces complete [GAME] block with map, factions, teams, AI config, socket path, cheats
+```
+
+### SessionDiagnostics
+
+Collects engine log excerpts for error reporting.
+
+```fsharp
+type SessionDiagnostics = {
+    SessionDir: string
+    SocketPath: string
+    LastFrameNumber: uint32
+    EngineExitCode: int option
+    StdoutTail: string list     // Last 50 lines
+    StderrTail: string list
+    InfologTail: string list
+}
+```
+
+| Function | Description |
+|----------|-------------|
+| `collect(sessionDir, socketPath, lastFrame, proc)` | Read log tails from session directory |
+| `formatReport(diag)` | Human-readable multi-line diagnostic string |
 
 See also: [Architecture](architecture.md) | [Protocol](protocol.md) | [Game Data](game-data.md)
