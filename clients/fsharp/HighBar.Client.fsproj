@@ -20,6 +20,12 @@
     <Compile Include="src/Events.fs" />
     <Compile Include="src/Commands.fs" />
     <Compile Include="src/Client.fs" />
+    <!-- Engine lifecycle management -->
+    <Compile Include="src/EngineConfig.fs" />
+    <Compile Include="src/SessionDiagnostics.fs" />
+    <Compile Include="src/ScriptGenerator.fs" />
+    <Compile Include="src/EngineLauncher.fs" />
+    <Compile Include="src/EngineSession.fs" />
     <!-- AI: Task types -->
     <Compile Include="src/Tasks/UnitTask.fs" />
     <!-- AI: Logging -->

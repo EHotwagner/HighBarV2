@@ -3,7 +3,6 @@ namespace HighBar.PersistentTests
 open System
 open System.Diagnostics
 open System.IO
-open System.Net.Sockets
 open System.Threading.Tasks
 open Xunit
 open Xunit.Abstractions
@@ -13,46 +12,51 @@ open HighBar.Client
 /// Starts its own engine instance (separate from PersistentEngineFixture)
 /// so that killing the engine doesn't affect other tests.
 type EngineKillFixture() =
-    let guid = Guid.NewGuid().ToString("N")[..7]
-    let socketPath = $"/tmp/highbar-kill-{guid}.sock"
-    let pidFile = $"{socketPath}.pid"
+    let mutable session: EngineSession option = None
     let mutable engineProcess: Process option = None
-    let mutable sessionDir: string = ""
-    let mutable listener: Socket option = None
-    let mutable client: HighBarClient option = None
 
-    let testsDir =
+    let configPath =
         let assemblyDir = Path.GetDirectoryName(typeof<EngineKillFixture>.Assembly.Location)
         let testProjectDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."))
-        Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
+        let testsDir = Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
+        Path.Combine(testsDir, "engine-version.json")
 
-    let fixturesDir = Path.Combine(testsDir, "fixtures")
-    let startScript = Path.Combine(fixturesDir, "start-headless.sh")
-    let stopScript = Path.Combine(fixturesDir, "stop-headless.sh")
-    let checkPrereqScript = Path.Combine(testsDir, "check-prerequisites.sh")
+    let checkPrerequisites () =
+        let testsDir =
+            let assemblyDir = Path.GetDirectoryName(typeof<EngineKillFixture>.Assembly.Location)
+            let testProjectDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."))
+            Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
+        let checkPrereqScript = Path.Combine(testsDir, "check-prerequisites.sh")
+        let psi = ProcessStartInfo()
+        psi.FileName <- "/usr/bin/env"
+        psi.ArgumentList.Add("bash")
+        psi.ArgumentList.Add(checkPrereqScript)
+        psi.ArgumentList.Add("--json")
+        psi.UseShellExecute <- false
+        psi.RedirectStandardOutput <- true
+        psi.RedirectStandardError <- true
+        let proc = Process.Start(psi)
+        let stdout = proc.StandardOutput.ReadToEnd()
+        let stderr = proc.StandardError.ReadToEnd()
+        proc.WaitForExit()
+        if proc.ExitCode = 2 then
+            failwith $"Prerequisites check error: {stderr}{stdout}"
+        elif proc.ExitCode <> 0 then
+            failwith $"Prerequisites not met — skipping engine-kill tests.\n{stdout}"
 
-    let timeoutSeconds =
-        match Environment.GetEnvironmentVariable("HIGHBAR_TEST_TIMEOUT") with
-        | null | "" -> 30
-        | v -> Int32.Parse(v)
+    member _.Client =
+        match session with
+        | Some s -> s.Client
+        | None -> failwith "Client not initialized"
 
-    /// Resolve the engine binary path for environment setup.
-    /// start-headless.sh needs HIGHBAR_TEST_ENGINE to correctly auto-detect SPRING_DATADIR.
-    let resolveEnginePath () =
-        match Environment.GetEnvironmentVariable("HIGHBAR_TEST_ENGINE") with
-        | null | "" ->
-            // Search standard BAR AppImage locations
-            let pattern = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "state", "Beyond All Reason", "engine", "*", "spring-headless")
-            let candidates = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(pattern)), "spring-headless", SearchOption.AllDirectories)
-            candidates |> Array.tryHead
-        | v -> Some v
-
-    member _.Client = client |> Option.defaultWith (fun () -> failwith "Client not initialized")
-    member _.SocketPath = socketPath
+    member _.SocketPath =
+        match session with
+        | Some s -> s.Config.SocketPath
+        | None -> ""
 
     member _.IsEngineAlive =
-        match engineProcess with
-        | Some p -> not p.HasExited
+        match session with
+        | Some s -> s.IsEngineAlive
         | None -> false
 
     /// Kill the engine process with SIGKILL.
@@ -64,128 +68,40 @@ type EngineKillFixture() =
 
     interface IAsyncLifetime with
         member _.InitializeAsync() = task {
-            sessionDir <- Path.Combine(Path.GetTempPath(), $"highbar-kill-{guid}")
-            Directory.CreateDirectory(sessionDir) |> ignore
+            checkPrerequisites()
 
-            // Check prerequisites
-            let psi = ProcessStartInfo()
-            psi.FileName <- "/usr/bin/env"
-            psi.ArgumentList.Add("bash")
-            psi.ArgumentList.Add(checkPrereqScript)
-            psi.ArgumentList.Add("--json")
-            psi.UseShellExecute <- false
-            psi.RedirectStandardOutput <- true
-            psi.RedirectStandardError <- true
-            let proc = Process.Start(psi)
-            let stdout = proc.StandardOutput.ReadToEnd()
-            let stderr = proc.StandardError.ReadToEnd()
-            proc.WaitForExit()
-            if proc.ExitCode = 2 then
-                failwith $"Prerequisites check error: {stderr}{stdout}"
-            elif proc.ExitCode <> 0 then
-                failwith $"Prerequisites not met — skipping engine-kill tests.\n{stdout}"
+            let config = EngineConfig.fromVersionFile configPath |> EngineConfig.validate
+            let s = new EngineSession(config)
+            s.Start()
+            session <- Some s
 
-            if File.Exists(socketPath) then
-                File.Delete(socketPath)
-
-            let listenSock = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
-            let endpoint = UnixDomainSocketEndPoint(socketPath)
-            listenSock.Bind(endpoint)
-            listenSock.Listen(1)
-            listener <- Some listenSock
-
-            // Start engine
-            let startPsi = ProcessStartInfo()
-            startPsi.FileName <- "/usr/bin/env"
-            startPsi.ArgumentList.Add("bash")
-            startPsi.ArgumentList.Add(startScript)
-            startPsi.ArgumentList.Add(socketPath)
-            startPsi.ArgumentList.Add(pidFile)
-            startPsi.ArgumentList.Add(sessionDir)
-            startPsi.UseShellExecute <- false
-            startPsi.RedirectStandardOutput <- true
-            startPsi.RedirectStandardError <- true
-            startPsi.Environment.["HIGHBAR_SOCKET_PATH"] <- socketPath
-            match resolveEnginePath() with
-            | Some enginePath -> startPsi.Environment.["HIGHBAR_TEST_ENGINE"] <- enginePath
-            | None -> ()
-
-            let startProc = Process.Start(startPsi)
-            startProc.WaitForExit()
-            if startProc.ExitCode <> 0 then
-                let stderrOut = startProc.StandardError.ReadToEnd()
-                listenSock.Close()
-                failwith $"start-headless.sh failed (exit {startProc.ExitCode}): {stderrOut}"
-
+            // Capture the engine process for kill testing
+            // We need to get the PID from the PID file
+            let pidFile = $"{config.SocketPath}.pid"
             if File.Exists(pidFile) then
                 let pid = File.ReadAllText(pidFile).Trim() |> Int32.Parse
-                try
-                    engineProcess <- Some(Process.GetProcessById(pid))
-                with
-                | :? ArgumentException ->
-                    listenSock.Close()
-                    failwith $"Engine process {pid} not found after start"
-
-            let timeoutUs = timeoutSeconds * 1_000_000
-            if not (listenSock.Poll(timeoutUs, SelectMode.SelectRead)) then
-                listenSock.Close()
-                failwith $"Proxy did not connect within {timeoutSeconds}s at {socketPath}"
-
-            let c = new HighBarClient(socketPath)
-            c.AcceptFrom(listenSock)
-            listenSock.Close()
-            listener <- None
-
-            c.Handshake() |> ignore
+                try engineProcess <- Some(Process.GetProcessById(pid))
+                with :? ArgumentException -> ()
 
             // Warm-up: run a few frames to ensure stable connection
             let mutable warmup = 0
             try
-                c.Run(fun _ ->
+                s.Client.Run(fun _ ->
                     warmup <- warmup + 1
                     if warmup >= 10 then failwith "CAPTURED_ENOUGH"
                     []
                 )
             with
             | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
-
-            client <- Some c
         }
 
-        member this.DisposeAsync() =
-            client |> Option.iter (fun c -> try c.Disconnect() with _ -> ())
-            client <- None
-
-            listener |> Option.iter (fun l -> try l.Close() with _ -> ())
-            listener <- None
-
-            // Try graceful stop first
-            let psi = ProcessStartInfo()
-            psi.FileName <- "/usr/bin/env"
-            psi.ArgumentList.Add("bash")
-            psi.ArgumentList.Add(stopScript)
-            psi.ArgumentList.Add(socketPath)
-            psi.ArgumentList.Add(pidFile)
-            psi.UseShellExecute <- false
-            psi.RedirectStandardOutput <- true
-            psi.RedirectStandardError <- true
-            let proc = Process.Start(psi)
-            proc.WaitForExit(10_000) |> ignore
-
-            engineProcess |> Option.iter (fun p ->
-                if not p.HasExited then
-                    try p.Kill() with _ -> ()
-            )
+        member _.DisposeAsync() =
+            session |> Option.iter (fun s ->
+                let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
+                let preserve = not (String.IsNullOrEmpty(keepLogs))
+                s.Stop(preserve))
+            session <- None
             engineProcess <- None
-
-            if File.Exists(socketPath) then File.Delete(socketPath)
-            if File.Exists(pidFile) then File.Delete(pidFile)
-
-            let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
-            if String.IsNullOrEmpty(keepLogs) then
-                if not (String.IsNullOrEmpty(sessionDir)) && Directory.Exists(sessionDir) then
-                    try Directory.Delete(sessionDir, true) with _ -> ()
-
             Task.CompletedTask
 
 

@@ -155,8 +155,55 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
 
                 | _ -> ()
 
+    /// Process a single frame: receive one Frame message, call handler, send response.
+    /// Returns Some(GameFrame) if a frame was processed, or None if a Shutdown was received.
+    /// SaveRequest messages are handled automatically.
+    member _.StepFrame(onFrame: GameFrame -> AICommand list) : GameFrame option =
+        match stream with
+        | None -> failwith "Not connected"
+        | Some s ->
+            let mutable result: GameFrame option = None
+            let mutable keepReading = true
+            while keepReading do
+                let proxyMsg = ProxyMessage.Parser.ParseFrom(recvBytes s)
+                match proxyMsg.MessageCase with
+                | ProxyMessage.MessageOneofCase.Frame ->
+                    let frame = proxyMsg.Frame
+                    let events =
+                        frame.Events
+                        |> Seq.map Events.fromProto
+                        |> Seq.toList
+                    let gameFrame = {
+                        FrameNumber = frame.FrameNumber
+                        Events = events
+                    }
+                    let commands = onFrame gameFrame
+                    let resp = AIMessage()
+                    let fr = FrameResponse()
+                    for cmd in commands do
+                        fr.Commands.Add(cmd)
+                    resp.FrameResponse <- fr
+                    sendMessage s resp
+                    result <- Some gameFrame
+                    keepReading <- false
+
+                | ProxyMessage.MessageOneofCase.Shutdown ->
+                    keepReading <- false
+
+                | ProxyMessage.MessageOneofCase.SaveRequest ->
+                    let resp = AIMessage()
+                    let sr = SaveResponse()
+                    sr.StateData <- Google.Protobuf.ByteString.Empty
+                    resp.SaveResponse <- sr
+                    sendMessage s resp
+                    // Continue reading for the next Frame
+
+                | _ -> ()
+            result
+
     /// Send a callback request and receive the response.
-    /// Must be called when the client has an active stream (during frame processing or init).
+    /// Handles interleaved Frame messages by auto-responding with empty commands,
+    /// since the engine may push frames while we're waiting for the callback response.
     member _.SendCallback(callbackId: uint32, callbackParams: CallbackParam list) : CallbackResponse =
         match stream with
         | None -> failwith "Not connected"
@@ -171,12 +218,31 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
             msg.CallbackRequest <- req
             sendMessage s msg
 
-            let respBytes = recvBytes s
-            let proxyMsg = ProxyMessage.Parser.ParseFrom(respBytes)
-            match proxyMsg.MessageCase with
-            | ProxyMessage.MessageOneofCase.CallbackResponse ->
-                proxyMsg.CallbackResponse
-            | other -> failwith $"Expected CallbackResponse, got {other}"
+            let rec readUntilCallback (attempts: int) =
+                if attempts > 100 then
+                    failwith "SendCallback: exceeded 100 attempts waiting for CallbackResponse"
+                let respBytes = recvBytes s
+                let proxyMsg = ProxyMessage.Parser.ParseFrom(respBytes)
+                match proxyMsg.MessageCase with
+                | ProxyMessage.MessageOneofCase.CallbackResponse ->
+                    proxyMsg.CallbackResponse
+                | ProxyMessage.MessageOneofCase.Frame ->
+                    // Engine sent a frame while we're waiting for callback response.
+                    // Respond with empty commands and keep reading.
+                    let resp = AIMessage()
+                    let fr = FrameResponse()
+                    resp.FrameResponse <- fr
+                    sendMessage s resp
+                    readUntilCallback (attempts + 1)
+                | ProxyMessage.MessageOneofCase.SaveRequest ->
+                    let resp = AIMessage()
+                    let sr = SaveResponse()
+                    sr.StateData <- Google.Protobuf.ByteString.Empty
+                    resp.SaveResponse <- sr
+                    sendMessage s resp
+                    readUntilCallback (attempts + 1)
+                | other -> failwith $"Expected CallbackResponse, got {other}"
+            readUntilCallback 0
 
     /// Get all valid unitDefId values from the engine.
     member this.GetUnitDefs(maxCount: int) : int array =

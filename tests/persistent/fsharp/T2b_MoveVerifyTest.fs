@@ -33,7 +33,11 @@ type T2b_MoveVerifyTest(engine: PersistentEngineFixture, output: ITestOutputHelp
 
         Assert.True(unitId.IsSome, "Should have spawned a unit")
         let uid = unitId.Value
-        output.WriteLine($"Spawned unit {uid}")
+        let defId = engine.Client.GetUnitDef(uid)
+        let defName = engine.Client.GetUnitDefName(defId)
+        let speed = engine.Client.GetUnitMaxSpeed(uid)
+        output.WriteLine($"Spawned unit {uid} defId={defId} name={defName} maxSpeed={speed}")
+        output.WriteLine($"MobileUnitDefId={engine.MobileUnitDefId}")
 
         // Step 2: Get initial position
         let (x0, y0, z0) = engine.Client.GetUnitPos(uid)
@@ -45,11 +49,14 @@ type T2b_MoveVerifyTest(engine: PersistentEngineFixture, output: ITestOutputHelp
         output.WriteLine($"Sending MoveCommand to ({targetX}, 100, {targetZ})")
 
         let mutable moveSent = false
-        engine.RunFrames(120, fun _ idx ->
+        engine.RunFrames(120, fun frame idx ->
             if idx = 0 && not moveSent then
                 moveSent <- true
                 [ MoveCommand uid targetX 100.0f targetZ ]
             else
+                if idx % 30 = 0 then
+                    let (px, _, pz) = engine.Client.GetUnitPos(uid)
+                    output.WriteLine($"  [frame {frame.FrameNumber}, idx={idx}] pos=({px}, {pz})")
                 []
         ) |> ignore
 

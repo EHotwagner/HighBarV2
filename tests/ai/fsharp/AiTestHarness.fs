@@ -3,7 +3,6 @@ namespace HighBar.AI.Tests
 open System
 open System.Diagnostics
 open System.IO
-open System.Net.Sockets
 open System.Threading.Tasks
 open Xunit
 open HighBar.Client
@@ -16,9 +15,6 @@ module GameOrchestrator =
         let testProjectDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."))
         Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
 
-    let fixturesDir = Path.Combine(testsDir, "fixtures")
-    let private startHeadlessScript = Path.Combine(fixturesDir, "start-headless.sh")
-    let private stopScript = Path.Combine(fixturesDir, "stop-headless.sh")
     let private checkPrereqScript = Path.Combine(testsDir, "check-prerequisites.sh")
 
     let reportsDir =
@@ -57,6 +53,8 @@ module GameOrchestrator =
           WeaponFiredCount = 0; UnitDamagedCount = 0; EnemyDamagedCount = 0
           UnitDestroyedCount = 0; EnemyDestroyedCount = 0 }
 
+    let private configPath = Path.Combine(testsDir, "engine-version.json")
+
     /// Run a single game: launch engine, connect, run AI brain, collect outcome.
     let runSingleGame
         (gameNumber: int)
@@ -65,72 +63,20 @@ module GameOrchestrator =
         (engineBin: string option)
         : GameOutcome =
 
-        let guid = Guid.NewGuid().ToString("N")[..7]
-        let socketPath = $"/tmp/highbar-ai-{guid}.sock"
-        let pidFile = $"{socketPath}.pid"
-        let sessionDir = Path.Combine(Path.GetTempPath(), $"highbar-ai-{guid}")
-        Directory.CreateDirectory(sessionDir) |> ignore
-        let logPath = Path.Combine(sessionDir, "decisions.jsonl")
+        let config =
+            let base' = EngineConfig.fromVersionFile configPath
+            let withEngine =
+                match engineBin with
+                | Some bin -> { base' with EngineBin = bin }
+                | None -> base'
+            withEngine |> EngineConfig.validate
 
-        if File.Exists(socketPath) then File.Delete(socketPath)
-
-        let listenSock = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
-        let endpoint = UnixDomainSocketEndPoint(socketPath)
-        listenSock.Bind(endpoint)
-        listenSock.Listen(1)
-
-        let setupFilePath = Path.Combine(fixturesDir, setupFile)
-
-        let cleanup () =
-            if File.Exists(socketPath) then try File.Delete(socketPath) with _ -> ()
-            if File.Exists(pidFile) then try File.Delete(pidFile) with _ -> ()
-            let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
-            if String.IsNullOrEmpty(keepLogs) then
-                if Directory.Exists(sessionDir) then
-                    try Directory.Delete(sessionDir, true) with _ -> ()
+        let session = new EngineSession(config)
+        let logPath = Path.Combine(session.SessionDir, "decisions.jsonl")
 
         try
-            // Launch engine
-            let psi = ProcessStartInfo()
-            psi.FileName <- "/usr/bin/env"
-            psi.ArgumentList.Add("bash")
-            psi.ArgumentList.Add(startHeadlessScript)
-            psi.ArgumentList.Add(socketPath)
-            psi.ArgumentList.Add(pidFile)
-            psi.ArgumentList.Add(sessionDir)
-            psi.UseShellExecute <- false
-            psi.RedirectStandardOutput <- true
-            psi.RedirectStandardError <- true
-            psi.Environment.["HIGHBAR_SOCKET_PATH"] <- socketPath
-            psi.Environment.["HIGHBAR_GAME_SETUP"] <- setupFilePath
-            match engineBin with
-            | Some bin -> psi.Environment.["HIGHBAR_TEST_ENGINE"] <- bin
-            | None -> ()
-
-            let proc = Process.Start(psi)
-            proc.WaitForExit()
-
-            if proc.ExitCode <> 0 then
-                let stderr = proc.StandardError.ReadToEnd()
-                failwith $"start-headless.sh failed (exit {proc.ExitCode}): {stderr}"
-
-            let mutable engineProcess: Process option = None
-            if File.Exists(pidFile) then
-                let pid = File.ReadAllText(pidFile).Trim() |> Int32.Parse
-                try engineProcess <- Some(Process.GetProcessById(pid))
-                with :? ArgumentException ->
-                    failwith $"Engine process {pid} not found after start"
-
-            // Wait for proxy connection (30s timeout)
-            let timeoutUs = 30 * 1_000_000
-            if not (listenSock.Poll(timeoutUs, SelectMode.SelectRead)) then
-                failwith $"Proxy did not connect within 30s at {socketPath}"
-
-            // Accept and handshake
-            let client = new HighBarClient(socketPath)
-            client.AcceptFrom(listenSock)
-            listenSock.Close()
-            client.Handshake() |> ignore
+            session.Start()
+            let client = session.Client
 
             // Track game metrics
             let mutable frameCount = 0
@@ -154,7 +100,7 @@ module GameOrchestrator =
             let mutable crashMessage: string option = None
             let mutable gameOver = false
 
-            // Lazy init: GameState and frame handler are created on the Init event
+            // Lazy init: GameState and frame handler
             let mutable gs: GameState option = None
             let mutable frameHandler: (GameFrame -> Highbar.AICommand list) option = None
 
@@ -262,34 +208,18 @@ module GameOrchestrator =
             | :? IOException as ex ->
                 gameResult <- GameResult.Crash
                 crashMessage <- Some ex.Message
-            | :? SocketException as ex ->
+            | :? System.Net.Sockets.SocketException as ex ->
                 gameResult <- GameResult.Crash
                 crashMessage <- Some ex.Message
             | ex ->
                 gameResult <- GameResult.Crash
                 crashMessage <- Some ex.Message
 
-            // Cleanup engine
-            try client.Disconnect() with _ -> ()
+            // Cleanup
             gs |> Option.iter (fun g -> try g.DecisionLog.Close() with _ -> ())
-
-            let stopPsi = ProcessStartInfo()
-            stopPsi.FileName <- "/usr/bin/env"
-            stopPsi.ArgumentList.Add("bash")
-            stopPsi.ArgumentList.Add(stopScript)
-            stopPsi.ArgumentList.Add(socketPath)
-            stopPsi.ArgumentList.Add(pidFile)
-            stopPsi.UseShellExecute <- false
-            stopPsi.RedirectStandardOutput <- true
-            stopPsi.RedirectStandardError <- true
-            let stopProc = Process.Start(stopPsi)
-            stopProc.WaitForExit(10_000) |> ignore
-
-            engineProcess |> Option.iter (fun p ->
-                if not p.HasExited then try p.Kill() with _ -> ()
-            )
-
-            cleanup()
+            let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
+            let preserve = not (String.IsNullOrEmpty(keepLogs)) || gameResult = GameResult.Crash
+            session.Stop(preserve)
 
             { GameNumber = gameNumber
               Result = gameResult
@@ -313,8 +243,7 @@ module GameOrchestrator =
               EnemyDestroyedCount = enemyDestroyedCount }
 
         with ex ->
-            listenSock.Close()
-            cleanup()
+            session.Stop(false)
             emptyOutcome gameNumber ex.Message
 
     /// Run N sequential games, each with a fresh engine instance.

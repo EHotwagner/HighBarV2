@@ -3,7 +3,6 @@ namespace HighBar.PersistentTests
 open System
 open System.Diagnostics
 open System.IO
-open System.Net.Sockets
 open System.Threading.Tasks
 open Xunit
 open HighBar.Client
@@ -53,13 +52,7 @@ type BattleMetrics =
 /// Uses cheat commands (SendTextMessageCommand ".destroy", GiveMeResourceCommand) to
 /// reset game state without restarting the engine process.
 type PersistentEngineFixture() =
-    let guid = Guid.NewGuid().ToString("N")[..7]
-    let socketPath = $"/tmp/highbar-persistent-{guid}.sock"
-    let pidFile = $"{socketPath}.pid"
-    let mutable engineProcess: Process option = None
-    let mutable sessionDir: string = ""
-    let mutable listener: Socket option = None
-    let mutable client: HighBarClient option = None
+    let mutable session: EngineSession option = None
     let mutable initialFrames: GameFrame list = []
     let mutable initialEvents: GameEvent list = []
     let mutable initElapsed: TimeSpan = TimeSpan.Zero
@@ -72,22 +65,18 @@ type PersistentEngineFixture() =
     // Track the initial commander unit IDs (from warm-up) so we know baseline
     let initialUnitIds = System.Collections.Generic.HashSet<int>()
 
-    let testsDir =
+    let configPath =
         let assemblyDir = Path.GetDirectoryName(typeof<PersistentEngineFixture>.Assembly.Location)
         let testProjectDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."))
-        Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
-
-    let fixturesDir = Path.Combine(testsDir, "fixtures")
-    let startScript = Path.Combine(fixturesDir, "start-headless.sh")
-    let stopScript = Path.Combine(fixturesDir, "stop-headless.sh")
-    let checkPrereqScript = Path.Combine(testsDir, "check-prerequisites.sh")
-
-    let timeoutSeconds =
-        match Environment.GetEnvironmentVariable("HIGHBAR_TEST_TIMEOUT") with
-        | null | "" -> 30
-        | v -> Int32.Parse(v)
+        let testsDir = Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
+        Path.Combine(testsDir, "engine-version.json")
 
     let checkPrerequisites () =
+        let testsDir =
+            let assemblyDir = Path.GetDirectoryName(typeof<PersistentEngineFixture>.Assembly.Location)
+            let testProjectDir = Path.GetFullPath(Path.Combine(assemblyDir, "..", "..", ".."))
+            Path.GetFullPath(Path.Combine(testProjectDir, "..", ".."))
+        let checkPrereqScript = Path.Combine(testsDir, "check-prerequisites.sh")
         let psi = ProcessStartInfo()
         psi.FileName <- "/usr/bin/env"
         psi.ArgumentList.Add("bash")
@@ -96,19 +85,20 @@ type PersistentEngineFixture() =
         psi.UseShellExecute <- false
         psi.RedirectStandardOutput <- true
         psi.RedirectStandardError <- true
-
         let proc = Process.Start(psi)
         let stdout = proc.StandardOutput.ReadToEnd()
         let stderr = proc.StandardError.ReadToEnd()
         proc.WaitForExit()
-
         if proc.ExitCode = 2 then
             failwith $"Prerequisites check script error: {stderr}{stdout}"
         elif proc.ExitCode <> 0 then
             failwith $"Prerequisites not met — skipping live engine tests.\n{stdout}"
 
     /// The shared client connected to the proxy.
-    member _.Client = client |> Option.defaultWith (fun () -> failwith "Client not initialized")
+    member _.Client =
+        match session with
+        | Some s -> s.Client
+        | None -> failwith "Client not initialized"
 
     /// Frames captured during initial warm-up.
     member _.InitialFrames = initialFrames
@@ -117,7 +107,10 @@ type PersistentEngineFixture() =
     member _.InitialEvents = initialEvents
 
     /// The session directory containing engine logs.
-    member _.SessionDir = sessionDir
+    member _.SessionDir =
+        match session with
+        | Some s -> s.SessionDir
+        | None -> ""
 
     /// How long InitializeAsync took.
     member _.InitElapsed = initElapsed
@@ -139,7 +132,6 @@ type PersistentEngineFixture() =
     /// UnitDefId for a ground-attack armed unit (prefers known assault units over AA).
     member _.ArmedUnitDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-        // Prefer known ground combat units (tanks, kbots with ground weapons)
         let knownGroundNames = ["armpw"; "corpw"; "armham"; "corham"; "armrock"; "corrock"; "armwar"; "corwar"; "armstump"; "corstump"; "armflash"; "armbull"]
         let groundUnit =
             r.ArmedUnits
@@ -167,7 +159,6 @@ type PersistentEngineFixture() =
     /// UnitDefId for a buildable structure (from commander's build options).
     member _.BuildableStructureDefId =
         let r = registry |> Option.defaultWith (fun () -> failwith "Registry not initialized")
-        // Prefer a building from commander's build options
         let fromBuildOptions =
             commanderBuildOptions
             |> Array.tryFind (fun defId ->
@@ -180,37 +171,20 @@ type PersistentEngineFixture() =
 
     /// Check if the engine process is still alive.
     member _.IsEngineAlive =
-        match engineProcess with
-        | Some p -> not p.HasExited
+        match session with
+        | Some s -> s.IsEngineAlive
         | None -> false
 
     member this.ThrowIfEngineCrashed() =
-        if not this.IsEngineAlive then
-            let mutable diagInfo = $"Engine process has exited unexpectedly.\nSocket: {socketPath}\n"
-            match engineProcess with
-            | Some p ->
-                try
-                    diagInfo <- diagInfo + $"PID: {p.Id}, Exit code: {p.ExitCode}\n"
-                with
-                | :? InvalidOperationException ->
-                    diagInfo <- diagInfo + $"PID: {p.Id}, Exit code: unknown (process not owned)\n"
-            | None -> ()
-
-            if not (String.IsNullOrEmpty(sessionDir)) then
-                for logFile in ["engine-stderr.log"; "infolog.txt"] do
-                    let path = Path.Combine(sessionDir, logFile)
-                    if File.Exists(path) then
-                        let lines = File.ReadAllLines(path)
-                        let tail = lines |> Array.skip (max 0 (lines.Length - 50))
-                        diagInfo <- diagInfo + $"\n--- {logFile} (last {tail.Length} lines) ---\n"
-                        diagInfo <- diagInfo + (String.Join("\n", tail)) + "\n"
-
-            failwith diagInfo
+        match session with
+        | Some s -> s.ThrowIfEngineCrashed()
+        | None -> failwith "Session not initialized"
 
     /// Run N frames, collecting all events and optionally sending commands.
+    /// Uses c.Run internally to support callbacks during frame processing.
     /// Returns (frames, allEvents).
     member _.RunFrames(n: int, ?onFrame: GameFrame -> int -> Highbar.AICommand list) =
-        let c = client |> Option.defaultWith (fun () -> failwith "Client not initialized")
+        let c = (session |> Option.defaultWith (fun () -> failwith "Session not initialized")).Client
         let allFrames = ResizeArray<GameFrame>()
         let allEvents = ResizeArray<GameEvent>()
         let mutable frameIdx = 0
@@ -243,7 +217,6 @@ type PersistentEngineFixture() =
         (allFrames |> Seq.toList, allEvents |> Seq.toList)
 
     /// Run N frames and return an event type distribution log.
-    /// Returns (frames, allEvents, eventCounts) where eventCounts maps event type name to count.
     member this.RunFramesWithEventLog(n: int, ?onFrame: GameFrame -> int -> Highbar.AICommand list) =
         let eventCounts = System.Collections.Generic.Dictionary<string, int>()
         let handler = defaultArg onFrame (fun _ _ -> [])
@@ -277,10 +250,12 @@ type PersistentEngineFixture() =
     /// Reset game state between tests:
     /// 1. Send destroy text commands for instant unit removal (cheats enabled)
     /// 2. Reset resources via GiveMeResourceCommand
-    /// 3. Run verification frames
+    /// 3. Run verification frames and confirm unit count returns to initial
     member this.ResetGameState() =
         this.ThrowIfEngineCrashed()
         if not this.IsEngineAlive then () else
+
+        let s = session |> Option.defaultWith (fun () -> failwith "Session not initialized")
 
         // Phase 1: Destroy all non-initial units via text commands + reset resources
         let unitsToDestroy =
@@ -288,9 +263,9 @@ type PersistentEngineFixture() =
             |> Seq.filter (fun uid -> not (initialUnitIds.Contains(uid)))
             |> Seq.toList
 
+        let c = s.Client
         let mutable sent = false
         try
-            let c = client |> Option.defaultWith (fun () -> failwith "Client not initialized")
             c.Run(fun frame ->
                 for ev in frame.Events do
                     match ev with
@@ -300,7 +275,6 @@ type PersistentEngineFixture() =
 
                 if not sent then
                     sent <- true
-                    // Use SendTextMessageCommand to instantly destroy units via engine cheat
                     let destroyCmds =
                         unitsToDestroy
                         |> List.map (fun uid -> SendTextMessageCommand $".destroy {uid}" 0)
@@ -320,66 +294,35 @@ type PersistentEngineFixture() =
         | :? EngineDisconnectedException ->
             failwith "Engine disconnected during ResetGameState — engine has crashed"
 
-        // Phase 2: Run verification frames to let engine process commands
+        // Phase 2: Run verification frames to let engine process commands,
+        // tracking unit events to confirm reset took effect
         this.RunFrames(10) |> ignore
+
+        // Verify non-initial units were destroyed
+        let nonInitialCount =
+            knownUnitIds
+            |> Seq.filter (fun uid -> not (initialUnitIds.Contains(uid)))
+            |> Seq.length
+
+        if nonInitialCount > 0 then
+            let remaining =
+                knownUnitIds
+                |> Seq.filter (fun uid -> not (initialUnitIds.Contains(uid)))
+                |> Seq.toList
+            eprintfn $"WARNING: ResetGameState: {remaining.Length} non-initial units remain after reset: {remaining |> List.truncate 10}"
 
     interface IAsyncLifetime with
         member this.InitializeAsync() = task {
             let sw = Stopwatch.StartNew()
-            sessionDir <- Path.Combine(Path.GetTempPath(), $"highbar-persistent-{guid}")
-            Directory.CreateDirectory(sessionDir) |> ignore
 
+            EngineLauncher.cleanupStaleProcesses()
             checkPrerequisites()
 
-            if File.Exists(socketPath) then
-                File.Delete(socketPath)
-
-            let listenSock = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)
-            let endpoint = UnixDomainSocketEndPoint(socketPath)
-            listenSock.Bind(endpoint)
-            listenSock.Listen(1)
-            listener <- Some listenSock
-
-            let psi = ProcessStartInfo()
-            psi.FileName <- "/usr/bin/env"
-            psi.ArgumentList.Add("bash")
-            psi.ArgumentList.Add(startScript)
-            psi.ArgumentList.Add(socketPath)
-            psi.ArgumentList.Add(pidFile)
-            psi.ArgumentList.Add(sessionDir)
-            psi.UseShellExecute <- false
-            psi.RedirectStandardOutput <- true
-            psi.RedirectStandardError <- true
-            psi.Environment.["HIGHBAR_SOCKET_PATH"] <- socketPath
-
-            let proc = Process.Start(psi)
-            proc.WaitForExit()
-
-            if proc.ExitCode <> 0 then
-                let stderr = proc.StandardError.ReadToEnd()
-                listenSock.Close()
-                failwith $"start-headless.sh failed (exit {proc.ExitCode}): {stderr}"
-
-            if File.Exists(pidFile) then
-                let pid = File.ReadAllText(pidFile).Trim() |> Int32.Parse
-                try
-                    engineProcess <- Some(Process.GetProcessById(pid))
-                with
-                | :? ArgumentException ->
-                    listenSock.Close()
-                    failwith $"Engine process {pid} not found after start"
-
-            let timeoutUs = timeoutSeconds * 1_000_000
-            if not (listenSock.Poll(timeoutUs, SelectMode.SelectRead)) then
-                listenSock.Close()
-                failwith $"Proxy did not connect within {timeoutSeconds}s at {socketPath}"
-
-            let c = new HighBarClient(socketPath)
-            c.AcceptFrom(listenSock)
-            listenSock.Close()
-            listener <- None
-
-            c.Handshake() |> ignore
+            let config = EngineConfig.fromVersionFile configPath |> EngineConfig.validate
+            let s = new EngineSession(config)
+            s.Start()
+            session <- Some s
+            let c = s.Client
 
             // Warm-up: capture initial frames
             let warmupFrames = ResizeArray<GameFrame>()
@@ -387,7 +330,6 @@ type PersistentEngineFixture() =
                 try
                     c.Run(fun frame ->
                         warmupFrames.Add(frame)
-                        // Track initial unit IDs
                         for ev in frame.Events do
                             match ev with
                             | GameEvent.UnitCreated(uid, _) ->
@@ -398,26 +340,23 @@ type PersistentEngineFixture() =
                             failwith "CAPTURED_ENOUGH"
                         []
                     )
-                with
-                | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+                with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
             with
             | :? EngineDisconnectedException ->
-                this.ThrowIfEngineCrashed()
-                failwith $"Engine disconnected during warm-up. Socket: {socketPath}"
+                s.ThrowIfEngineCrashed()
+                failwith $"Engine disconnected during warm-up. Socket: {config.SocketPath}"
 
             initialFrames <- warmupFrames |> Seq.toList
             initialEvents <- initialFrames |> List.collect (fun f -> f.Events)
-            client <- Some c
 
-            // Check for enemy units in initial events (cheat events should be enabled via proxy init)
+            // Check for enemy units in initial events
             hasEnemy <-
                 initialEvents
                 |> List.exists (function
                     | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> true
                     | _ -> false)
 
-            // UnitDefId discovery via engine callbacks (must happen INSIDE c.Run frame loop)
-            // The proxy only processes CallbackRequests during frame response handling.
+            // UnitDefId discovery via engine callbacks
             let allDefIds = ResizeArray<int>()
             let entries = System.Collections.Generic.Dictionary<int, UnitDefInfo>()
             let builders = ResizeArray<int>()
@@ -427,10 +366,10 @@ type PersistentEngineFixture() =
             let economyUnits = ResizeArray<int>()
             let mutable discoveryDone = false
 
+            // Run discovery inside c.Run so callbacks work
             try
                 try
                     c.Run(fun frame ->
-                        // Track events
                         for ev in frame.Events do
                             match ev with
                             | GameEvent.EnemyCreated _ | GameEvent.EnemyFinished _ -> hasEnemy <- true
@@ -456,32 +395,36 @@ type PersistentEngineFixture() =
                                 let weaponRange = c.GetMaxWeaponRange(defId)
                                 let isBuilder = buildSpeed > 0.0f
                                 let isArmed = weaponRange > 0.0f
-                                let isMobile = isBuilder || isArmed
-                                let isBuilding = not isMobile
+                                let isBuilding = not isBuilder && not isArmed
                                 let info =
                                     { UnitDefId = defId
                                       Name = if String.IsNullOrEmpty(name) then None else Some name
                                       IsBuilder = isBuilder
                                       IsArmed = isArmed
-                                      IsMobile = isMobile
+                                      IsMobile = false
                                       IsBuilding = isBuilding
                                       SpawnSuccess = true }
                                 entries.[defId] <- info
                                 if isBuilder then builders.Add(defId)
                                 if isArmed then armedUnits.Add(defId)
-                                if isMobile then mobileUnits.Add(defId)
                                 if isBuilding then buildings.Add(defId)
                                 if isBuilding && not isArmed then economyUnits.Add(defId)
 
-                            // Discover commander build options
+                            // Determine mobility for commander
                             let commanderUnitId =
                                 initialEvents
                                 |> List.tryPick (function GameEvent.UnitCreated(uid, _) -> Some uid | _ -> None)
+                            let mutable commanderDefId = 0
                             match commanderUnitId with
                             | Some cmdUid ->
                                 let cmdDefId = c.GetUnitDef(cmdUid)
                                 if cmdDefId > 0 then
+                                    commanderDefId <- cmdDefId
                                     commanderBuildOptions <- c.GetBuildOptions(cmdDefId)
+                                    mobileUnits.Insert(0, cmdDefId)
+                                    match entries.TryGetValue(cmdDefId) with
+                                    | true, info -> entries.[cmdDefId] <- { info with IsMobile = true }
+                                    | _ -> ()
                             | None -> ()
 
                             failwith "CAPTURED_ENOUGH"
@@ -490,12 +433,48 @@ type PersistentEngineFixture() =
                             failwith "CAPTURED_ENOUGH"
                             []
                     )
-                with
-                | ex when ex.Message = "CAPTURED_ENOUGH" -> ()
+                with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
             with
             | :? EngineDisconnectedException ->
-                this.ThrowIfEngineCrashed()
-                failwith $"Engine disconnected during UnitDef discovery. Socket: {socketPath}"
+                s.ThrowIfEngineCrashed()
+                failwith $"Engine disconnected during UnitDef discovery. Socket: {config.SocketPath}"
+
+            // Spawn-test builder defIds to find additional mobile units
+            let commanderDefId =
+                entries |> Seq.tryFind (fun kv -> kv.Value.IsMobile && kv.Value.IsBuilder)
+                |> Option.map (fun kv -> kv.Key) |> Option.defaultValue 0
+
+            for defId in builders |> Seq.toList do
+                if defId <> commanderDefId then
+                    let mutable testUid = None
+                    try
+                        this.RunFrames(10, fun frame _ ->
+                            for ev in frame.Events do
+                                match ev with
+                                | GameEvent.UnitCreated(uid, _) when testUid.IsNone -> testUid <- Some uid
+                                | _ -> ()
+                            if testUid.IsNone then
+                                [ Commands.GiveMeNewUnitCommand defId 1536.0f 100.0f 4096.0f ]
+                            else []
+                        ) |> ignore
+                    with _ -> ()
+                    match testUid with
+                    | Some uid ->
+                        // GetUnitMaxSpeed must be called inside a frame handler (callbacks only work during frame processing)
+                        let mutable speed = 0.0f
+                        try
+                            this.RunFrames(1, fun _ _ ->
+                                speed <- c.GetUnitMaxSpeed(uid)
+                                [ Commands.SelfDestructCommand uid ]
+                            ) |> ignore
+                            this.RunFrames(5) |> ignore
+                        with _ -> ()
+                        if speed > 0.0f then
+                            mobileUnits.Add(defId)
+                            match entries.TryGetValue(defId) with
+                            | true, info -> entries.[defId] <- { info with IsMobile = true }
+                            | _ -> ()
+                    | None -> ()
 
             // Run a few more frames to check for enemy events if not seen yet
             if not hasEnemy then
@@ -517,8 +496,8 @@ type PersistentEngineFixture() =
                     with ex when ex.Message = "CAPTURED_ENOUGH" -> ()
                 with
                 | :? EngineDisconnectedException ->
-                    this.ThrowIfEngineCrashed()
-                    failwith $"Engine disconnected during enemy recheck. Socket: {socketPath}"
+                    s.ThrowIfEngineCrashed()
+                    failwith "Engine disconnected during enemy recheck"
 
             registry <- Some
                 { Entries = entries |> Seq.map (fun kv -> kv.Key, kv.Value) |> Map.ofSeq
@@ -533,43 +512,12 @@ type PersistentEngineFixture() =
             initElapsed <- sw.Elapsed
         }
 
-        member this.DisposeAsync() =
-            client |> Option.iter (fun c -> c.Disconnect())
-            client <- None
-
-            listener |> Option.iter (fun l -> try l.Close() with _ -> ())
-            listener <- None
-
-            let psi = ProcessStartInfo()
-            psi.FileName <- "/usr/bin/env"
-            psi.ArgumentList.Add("bash")
-            psi.ArgumentList.Add(stopScript)
-            psi.ArgumentList.Add(socketPath)
-            psi.ArgumentList.Add(pidFile)
-            psi.UseShellExecute <- false
-            psi.RedirectStandardOutput <- true
-            psi.RedirectStandardError <- true
-
-            let proc = Process.Start(psi)
-            proc.WaitForExit(10_000) |> ignore
-
-            engineProcess |> Option.iter (fun p ->
-                if not p.HasExited then
-                    try p.Kill() with _ -> ()
-            )
-            engineProcess <- None
-
-            if File.Exists(socketPath) then File.Delete(socketPath)
-            if File.Exists(pidFile) then File.Delete(pidFile)
-
-            // Preserve session dir if HIGHBAR_KEEP_LOGS is set (for debugging)
-            let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
-            if String.IsNullOrEmpty(keepLogs) then
-                if not (String.IsNullOrEmpty(sessionDir)) && Directory.Exists(sessionDir) then
-                    try Directory.Delete(sessionDir, true) with _ -> ()
-            else
-                eprintfn $"Keeping session dir: {sessionDir}"
-
+        member _.DisposeAsync() =
+            session |> Option.iter (fun s ->
+                let keepLogs = Environment.GetEnvironmentVariable("HIGHBAR_KEEP_LOGS")
+                let preserve = not (String.IsNullOrEmpty(keepLogs))
+                s.Stop(preserve))
+            session <- None
             Task.CompletedTask
 
 
