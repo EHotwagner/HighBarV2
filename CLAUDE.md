@@ -18,6 +18,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-12
 - Filesystem (Unix domain sockets, session directories in /tmp, PID files) (028-adapt-test-harness)
 - C11 (proxy), F# / .NET 10.0 (client and live tests), Protobuf3 (proto schema) + protobuf-c (C proxy serialization), Google.Protobuf 3.28 (F# client), Recoil engine SSkirmishAI plugin interface (vendored headers in `proxy/include/AI/`), spring-headless 2025.06.19 (live tests) (029-fix-trainer-issues)
 - Filesystem only — Unix domain sockets for IPC, session directories under `/tmp` for live tests, `engine.infolog` files for trainer sessions (029-fix-trainer-issues)
+- N/A (documentation-only feature; references C11 proxy and protobuf3 schema) + Existing proxy source (`proxy/src/proxy.c`, `proxy/src/deserialize.c`), protobuf schema (`proto/highbar/messages.proto`) (030-proxy-contract-docs)
+- Filesystem only (markdown contract documents) (030-proxy-contract-docs)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -94,9 +96,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 030-proxy-contract-docs: Added N/A (documentation-only feature; references C11 proxy and protobuf3 schema) + Existing proxy source (`proxy/src/proxy.c`, `proxy/src/deserialize.c`), protobuf schema (`proto/highbar/messages.proto`)
 - 029-fix-trainer-issues: Added C11 (proxy), F# / .NET 10.0 (client and live tests), Protobuf3 (proto schema) + protobuf-c (C proxy serialization), Google.Protobuf 3.28 (F# client), Recoil engine SSkirmishAI plugin interface (vendored headers in `proxy/include/AI/`), spring-headless 2025.06.19 (live tests)
 - 028-adapt-test-harness: Added F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x, System.Diagnostics.Process, System.Net.Sockets
-- 027-extract-save-map-data: Added F# / .NET 10.0 (test project), leveraging existing HighBar.Client + HighBar.Client, xUnit 2.9.x, Google.Protobuf 3.28, System.IO
 
 
 <!-- MANUAL ADDITIONS START -->

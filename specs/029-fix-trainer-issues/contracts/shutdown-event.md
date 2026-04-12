@@ -182,3 +182,7 @@ member _.``T029.3 GameOver fires Shutdown to surviving AI``() =
 ```
 
 This satisfies FR-018 and SC-003.
+
+## See Also
+
+For the complete Shutdown wire shape documentation — including message sequencing, all `ShutdownReason` trigger conditions, and recommended client handling patterns — see [030-proxy-contract-docs/contracts/shutdown-wire-shape.md](../../030-proxy-contract-docs/contracts/shutdown-wire-shape.md).
