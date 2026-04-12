@@ -51,10 +51,11 @@ specs/          # Feature specifications and plans
 ## Commands
 
 ```bash
-# Build proxy
-cmake -B build -DCMAKE_BUILD_TYPE=Release proxy/ && cmake --build build
+# Build proxy (auto-deploys to engine AI directories via post-build script)
+# Prerequisites: cmake, protobuf-c, buf
+cmake -B build -DCMAKE_BUILD_TYPE=Release -S proxy && cmake --build build
 
-# Proto linting and code generation (run from proto/ directory)
+# Proto linting and code generation (run from proto/ directory, required before first proxy build)
 cd proto && buf lint && buf generate && cd ..
 
 # F# client
