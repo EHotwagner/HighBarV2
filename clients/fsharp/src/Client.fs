@@ -397,6 +397,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         else [||]
 
     /// Get the current resource amount. resourceId: 0=metal, 1=energy.
+    /// Returns Single.NaN for invalid resourceId; use Single.IsNaN to detect.
     member this.GetEconomyCurrent(resourceId: int) : float32 =
         let p = CallbackParam()
         p.IntValue <- resourceId
@@ -406,6 +407,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         else 0.0f
 
     /// Get the resource income per second. resourceId: 0=metal, 1=energy.
+    /// Returns Single.NaN for invalid resourceId; use Single.IsNaN to detect.
     member this.GetEconomyIncome(resourceId: int) : float32 =
         let p = CallbackParam()
         p.IntValue <- resourceId
@@ -415,6 +417,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         else 0.0f
 
     /// Get the resource usage per second. resourceId: 0=metal, 1=energy.
+    /// Returns Single.NaN for invalid resourceId; use Single.IsNaN to detect.
     member this.GetEconomyUsage(resourceId: int) : float32 =
         let p = CallbackParam()
         p.IntValue <- resourceId
@@ -424,6 +427,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         else 0.0f
 
     /// Get the resource storage capacity. resourceId: 0=metal, 1=energy.
+    /// Returns Single.NaN for invalid resourceId; use Single.IsNaN to detect.
     member this.GetEconomyStorage(resourceId: int) : float32 =
         let p = CallbackParam()
         p.IntValue <- resourceId

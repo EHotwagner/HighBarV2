@@ -28,6 +28,7 @@
     <Compile Include="CommandTests.fs" />
     <Compile Include="CallbackTests.fs" />
     <Compile Include="UnitDataTests.fs" />
+    <Compile Include="NonMoveCommandEffectTests.fs" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 // Helper to create a success response with an int result
 static Highbar__CallbackResponse *make_int_response(
@@ -442,6 +443,52 @@ Highbar__CallbackResponse *hb_callback_dispatch(
             return make_int_array_response(req_id, ids, (size_t)count, alloc);
         }
         break;
+    }
+
+    // Economy callbacks — NaN sentinel for invalid resourceId (>1 or <0)
+    case HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_CURRENT: {
+        if (!callback->Economy_getCurrent) {
+            return make_error_response(req_id, "Economy_getCurrent unavailable", alloc);
+        }
+        int rid = get_int_param(request, 0, 0);
+        if (rid < 0 || rid > 1) {
+            return make_float_response(req_id, NAN, alloc);
+        }
+        return make_float_response(req_id,
+            callback->Economy_getCurrent(skirmish_ai_id, rid), alloc);
+    }
+    case HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_INCOME: {
+        if (!callback->Economy_getIncome) {
+            return make_error_response(req_id, "Economy_getIncome unavailable", alloc);
+        }
+        int rid = get_int_param(request, 0, 0);
+        if (rid < 0 || rid > 1) {
+            return make_float_response(req_id, NAN, alloc);
+        }
+        return make_float_response(req_id,
+            callback->Economy_getIncome(skirmish_ai_id, rid), alloc);
+    }
+    case HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_USAGE: {
+        if (!callback->Economy_getUsage) {
+            return make_error_response(req_id, "Economy_getUsage unavailable", alloc);
+        }
+        int rid = get_int_param(request, 0, 0);
+        if (rid < 0 || rid > 1) {
+            return make_float_response(req_id, NAN, alloc);
+        }
+        return make_float_response(req_id,
+            callback->Economy_getUsage(skirmish_ai_id, rid), alloc);
+    }
+    case HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_STORAGE: {
+        if (!callback->Economy_getStorage) {
+            return make_error_response(req_id, "Economy_getStorage unavailable", alloc);
+        }
+        int rid = get_int_param(request, 0, 0);
+        if (rid < 0 || rid > 1) {
+            return make_float_response(req_id, NAN, alloc);
+        }
+        return make_float_response(req_id,
+            callback->Economy_getStorage(skirmish_ai_id, rid), alloc);
     }
 
     // Cheats callbacks

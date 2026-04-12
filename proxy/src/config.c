@@ -12,6 +12,7 @@ void hb_config_defaults(HB_Config *config) {
     config->max_message_size = 8388608; // 8MB
     config->transport = HB_TRANSPORT_UNIX;
     config->tcp_port = 17432;
+    config->verbose_commands = false;
 }
 
 static const char *get_info_or_env(int skirmish_ai_id, HB_InfoGetValueFn info_fn,
@@ -81,5 +82,11 @@ void hb_config_load(HB_Config *config, int skirmish_ai_id, HB_InfoGetValueFn inf
     if (val) {
         int v = atoi(val);
         if (v >= 1024 && v <= 65535) config->tcp_port = (uint16_t)v;
+    }
+
+    val = get_info_or_env(skirmish_ai_id, info_fn, "verbose_commands", "HIGHBAR_VERBOSE_COMMANDS");
+    if (val) {
+        config->verbose_commands = (strcmp(val, "true") == 0 || strcmp(val, "1") == 0
+                                    || strcmp(val, "yes") == 0);
     }
 }

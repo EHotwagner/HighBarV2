@@ -38,6 +38,18 @@ static float mock_metal_spot_positions[6] = {
 static float mock_metal_avg_income = 2.5f;
 static int mock_los_return_count = -1; // -1 = use default (w*h)
 
+// Economy state — keyed by resourceId 0 (metal) and 1 (energy).
+#define MOCK_ECONOMY_MAX_RESOURCES 4
+static float mock_economy_current[MOCK_ECONOMY_MAX_RESOURCES] = { 0.0f };
+static float mock_economy_income[MOCK_ECONOMY_MAX_RESOURCES]  = { 0.0f };
+static float mock_economy_usage[MOCK_ECONOMY_MAX_RESOURCES]   = { 0.0f };
+static float mock_economy_storage[MOCK_ECONOMY_MAX_RESOURCES] = { 0.0f };
+
+// Shutdown recording — the EVENT_RELEASE test asserts the proxy emits
+// exactly one Shutdown message per session with the mapped reason.
+static int mock_shutdown_count = 0;
+static int mock_last_shutdown_reason = -1;
+
 // Tracking for command verification
 #define MAX_RECORDED_COMMANDS 64
 static struct {
@@ -124,6 +136,30 @@ static float mock_unit_get_health(int skirmishAIId, int unitId) {
 static float mock_unit_get_max_health(int skirmishAIId, int unitId) {
     (void)skirmishAIId;
     return (float)(unitId * 100);
+}
+
+static float mock_economy_get_current(int skirmishAIId, int resourceId) {
+    (void)skirmishAIId;
+    if (resourceId < 0 || resourceId >= MOCK_ECONOMY_MAX_RESOURCES) return 0.0f;
+    return mock_economy_current[resourceId];
+}
+
+static float mock_economy_get_income_fn(int skirmishAIId, int resourceId) {
+    (void)skirmishAIId;
+    if (resourceId < 0 || resourceId >= MOCK_ECONOMY_MAX_RESOURCES) return 0.0f;
+    return mock_economy_income[resourceId];
+}
+
+static float mock_economy_get_usage_fn(int skirmishAIId, int resourceId) {
+    (void)skirmishAIId;
+    if (resourceId < 0 || resourceId >= MOCK_ECONOMY_MAX_RESOURCES) return 0.0f;
+    return mock_economy_usage[resourceId];
+}
+
+static float mock_economy_get_storage_fn(int skirmishAIId, int resourceId) {
+    (void)skirmishAIId;
+    if (resourceId < 0 || resourceId >= MOCK_ECONOMY_MAX_RESOURCES) return 0.0f;
+    return mock_economy_storage[resourceId];
 }
 
 // -- Mock map data callbacks --
@@ -236,6 +272,10 @@ struct SSkirmishAICallback *mock_engine_create(void) {
     cb.Unit_getPos = mock_unit_get_pos;
     cb.Unit_getHealth = mock_unit_get_health;
     cb.Unit_getMaxHealth = mock_unit_get_max_health;
+    cb.Economy_getCurrent = mock_economy_get_current;
+    cb.Economy_getIncome = mock_economy_get_income_fn;
+    cb.Economy_getUsage = mock_economy_get_usage_fn;
+    cb.Economy_getStorage = mock_economy_get_storage_fn;
     cb.Map_getHeightMap = mock_map_get_height_map;
     cb.Map_getCornersHeightMap = mock_map_get_corners_height_map;
     cb.Map_getSlopeMap = mock_map_get_slope_map;
@@ -254,6 +294,47 @@ void mock_engine_reset(void) {
     mock_last_command_id = 0;
     mock_recorded_count = 0;
     mock_los_return_count = -1;
+    for (int i = 0; i < MOCK_ECONOMY_MAX_RESOURCES; i++) {
+        mock_economy_current[i] = 0.0f;
+        mock_economy_income[i] = 0.0f;
+        mock_economy_usage[i] = 0.0f;
+        mock_economy_storage[i] = 0.0f;
+    }
+    mock_shutdown_count = 0;
+    mock_last_shutdown_reason = -1;
+}
+
+void mock_engine_set_economy_current(int resourceId, float value) {
+    if (resourceId >= 0 && resourceId < MOCK_ECONOMY_MAX_RESOURCES)
+        mock_economy_current[resourceId] = value;
+}
+
+void mock_engine_set_economy_income(int resourceId, float value) {
+    if (resourceId >= 0 && resourceId < MOCK_ECONOMY_MAX_RESOURCES)
+        mock_economy_income[resourceId] = value;
+}
+
+void mock_engine_set_economy_usage(int resourceId, float value) {
+    if (resourceId >= 0 && resourceId < MOCK_ECONOMY_MAX_RESOURCES)
+        mock_economy_usage[resourceId] = value;
+}
+
+void mock_engine_set_economy_storage(int resourceId, float value) {
+    if (resourceId >= 0 && resourceId < MOCK_ECONOMY_MAX_RESOURCES)
+        mock_economy_storage[resourceId] = value;
+}
+
+int mock_engine_get_shutdown_count(void) {
+    return mock_shutdown_count;
+}
+
+int mock_engine_get_last_shutdown_reason(void) {
+    return mock_last_shutdown_reason;
+}
+
+void mock_engine_record_shutdown(int reason) {
+    mock_shutdown_count++;
+    mock_last_shutdown_reason = reason;
 }
 
 int mock_engine_get_command_count(void) {

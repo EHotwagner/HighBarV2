@@ -5,6 +5,11 @@
 #include <string.h>
 #include <stdio.h>
 
+// Sentinel returned from the deserialize switch default branch when the
+// protobuf oneof case is not present in the proxy dispatch table (FR-003).
+// Distinct from -1 (null cmd / null handler).
+#define HB_DESERIALIZE_RC_UNSUPPORTED -2
+
 // Pool of static position buffers for Engine_handleCommand.
 // The engine may copy the command struct and dereference float* pointers
 // asynchronously, so stack-local arrays are unsafe.
@@ -117,10 +122,6 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         s.options = (short)c->options;
         s.timeOut = c->timeout;
         s.toPos_posF3 = vec3_to_pos(c->to_position);
-        fprintf(stderr, "[HB] MOVE uid=%d grp=%d opt=%d to=(%.1f,%.1f,%.1f) timeout=%d\n",
-                s.unitId, s.groupId, s.options,
-                s.toPos_posF3[0], s.toPos_posF3[1], s.toPos_posF3[2],
-                s.timeOut);
         return handle_command(skirmish_ai_id, -1, COMMAND_ID_UNTRACKED, COMMAND_MOVE_UNIT, &s);
     }
     case HIGHBAR__AICOMMAND__COMMAND_PATROL: {
@@ -705,6 +706,9 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         return handle_command(skirmish_ai_id, -1, COMMAND_ID_UNTRACKED, COMMAND_DRAW_UNIT, &s);
     }
     default:
-        return -1; // Unknown command
+        fprintf(stderr,
+            "[HB] unsupported command oneof case=%d (proxy switch table miss)\n",
+            (int)cmd->command_case);
+        return HB_DESERIALIZE_RC_UNSUPPORTED;
     }
 }

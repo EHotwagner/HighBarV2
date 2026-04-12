@@ -281,10 +281,13 @@ TEST(test_multiple_commands) {
 }
 
 TEST(test_unknown_command) {
+    // FR-003: when the command oneof case is not present in the proxy switch
+    // table, deserialize returns the HB_DESERIALIZE_RC_UNSUPPORTED sentinel (-2)
+    // so the bot can distinguish "proxy doesn't dispatch this" from "engine accepted".
     Highbar__AICommand cmd = HIGHBAR__AICOMMAND__INIT;
     cmd.command_case = HIGHBAR__AICOMMAND__COMMAND__NOT_SET;
     int rc = hb_deserialize_and_execute(&cmd, 0, cb->Engine_handleCommand);
-    assert(rc == -1); // Unknown command
+    assert(rc == -2);
     assert(mock_engine_get_command_count() == 0);
 }
 

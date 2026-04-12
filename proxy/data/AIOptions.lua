@@ -63,5 +63,14 @@ local options = {
         min    = '1024',
         max    = '65535',
     },
+    {
+        key    = 'verbose_commands',
+        name   = 'Verbose Per-Command Logging',
+        desc   = 'When enabled, the proxy logs every command dispatched to engine.infolog. ' ..
+                 'Default OFF to avoid bloating infolog files in normal sessions. ' ..
+                 'Override at runtime with HIGHBAR_VERBOSE_COMMANDS=1.',
+        type   = 'bool',
+        def    = 'false',
+    },
 }
 return options

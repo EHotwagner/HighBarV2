@@ -1,6 +1,6 @@
 # HighBarV2 Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-07
+Auto-generated from all feature plans. Last updated: 2026-04-12
 
 ## Active Technologies
 - C11 + protobuf-c, engine SSkirmishAICallback API (021-map-callbacks-proxy)
@@ -16,6 +16,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-07
 - Filesystem — output files written to session directory and a persistent reports directory (027-extract-save-map-data)
 - F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x, System.Diagnostics.Process, System.Net.Sockets (028-adapt-test-harness)
 - Filesystem (Unix domain sockets, session directories in /tmp, PID files) (028-adapt-test-harness)
+- C11 (proxy), F# / .NET 10.0 (client and live tests), Protobuf3 (proto schema) + protobuf-c (C proxy serialization), Google.Protobuf 3.28 (F# client), Recoil engine SSkirmishAI plugin interface (vendored headers in `proxy/include/AI/`), spring-headless 2025.06.19 (live tests) (029-fix-trainer-issues)
+- Filesystem only — Unix domain sockets for IPC, session directories under `/tmp` for live tests, `engine.infolog` files for trainer sessions (029-fix-trainer-issues)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -92,9 +94,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 029-fix-trainer-issues: Added C11 (proxy), F# / .NET 10.0 (client and live tests), Protobuf3 (proto schema) + protobuf-c (C proxy serialization), Google.Protobuf 3.28 (F# client), Recoil engine SSkirmishAI plugin interface (vendored headers in `proxy/include/AI/`), spring-headless 2025.06.19 (live tests)
 - 028-adapt-test-harness: Added F# / .NET 10.0 + HighBar.Client, Google.Protobuf 3.28, xUnit 2.9.x, System.Diagnostics.Process, System.Net.Sockets
 - 027-extract-save-map-data: Added F# / .NET 10.0 (test project), leveraging existing HighBar.Client + HighBar.Client, xUnit 2.9.x, Google.Protobuf 3.28, System.IO
-- 026-corners-heightmap-callback: Added C11 (proxy), F# / .NET 10.0 (client, tests), Protobuf (proto schema) + protobuf-c (C proxy), Google.Protobuf 3.28 (F# client), buf CLI (proto linting/codegen)
 
 
 <!-- MANUAL ADDITIONS START -->

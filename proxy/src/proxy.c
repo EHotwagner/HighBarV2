@@ -204,40 +204,35 @@ static int send_frame_and_process_response(ProxyState *state) {
             && ai_msg->frame_response) {
             // Execute command batch
             Highbar__FrameResponse *fr = ai_msg->frame_response;
-            if (fr->n_commands > 0) {
+            if (fr->n_commands > 0 && state->config.verbose_commands) {
                 char log_buf[128];
                 snprintf(log_buf, sizeof(log_buf), "Executing %zu commands at frame %u", fr->n_commands, state->frame_number);
                 proxy_log(HB_LOG_INFO, log_buf);
             }
             for (size_t i = 0; i < fr->n_commands; i++) {
                 Highbar__AICommand *c = fr->commands[i];
-                char cmd_dbg[256];
-                snprintf(cmd_dbg, sizeof(cmd_dbg), "Cmd %zu: case=%d", i, (int)c->command_case);
-                proxy_log(HB_LOG_INFO, cmd_dbg);
-                // Debug: log move command details
-                {
-                    char any_dbg[128];
-                    snprintf(any_dbg, sizeof(any_dbg), "CMD_DETAIL case=%d enum_move=%d",
-                        (int)c->command_case, (int)HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT);
-                    proxy_log(HB_LOG_INFO, any_dbg);
-                }
-                if (c->command_case == HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT && c->move_unit) {
-                    const Highbar__MoveUnitCommand *mv = c->move_unit;
-                    char mv_dbg[256];
-                    snprintf(mv_dbg, sizeof(mv_dbg),
-                        "MOVE uid=%d grp=%d opt=%u to=(%.1f,%.1f,%.1f) timeout=%d",
-                        mv->unit_id, mv->group_id, mv->options,
-                        mv->to_position ? mv->to_position->x : -1,
-                        mv->to_position ? mv->to_position->y : -1,
-                        mv->to_position ? mv->to_position->z : -1,
-                        mv->timeout);
-                    proxy_log(HB_LOG_INFO, mv_dbg);
+                if (state->config.verbose_commands) {
+                    char cmd_dbg[256];
+                    snprintf(cmd_dbg, sizeof(cmd_dbg), "Cmd %zu: case=%d", i, (int)c->command_case);
+                    proxy_log(HB_LOG_INFO, cmd_dbg);
+                    if (c->command_case == HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT && c->move_unit) {
+                        const Highbar__MoveUnitCommand *mv = c->move_unit;
+                        char mv_dbg[256];
+                        snprintf(mv_dbg, sizeof(mv_dbg),
+                            "MOVE uid=%d grp=%d opt=%u to=(%.1f,%.1f,%.1f) timeout=%d",
+                            mv->unit_id, mv->group_id, mv->options,
+                            mv->to_position ? mv->to_position->x : -1,
+                            mv->to_position ? mv->to_position->y : -1,
+                            mv->to_position ? mv->to_position->z : -1,
+                            mv->timeout);
+                        proxy_log(HB_LOG_INFO, mv_dbg);
+                    }
                 }
                 int cmd_rc = hb_deserialize_and_execute(
                     c,
                     state->skirmish_ai_id,
                     state->callback->Engine_handleCommand);
-                {
+                if (state->config.verbose_commands) {
                     char rc_buf[128];
                     snprintf(rc_buf, sizeof(rc_buf), "Cmd %zu: rc=%d", i, cmd_rc);
                     proxy_log(HB_LOG_INFO, rc_buf);
@@ -348,6 +343,63 @@ int handleEvent(int skirmishAIId, int topicId, const void *data) {
     if (!g_state || !g_state->conn.connected) return -1;
 
     if (topicId >= 0 && topicId < 50) topic_counts[topicId]++;
+
+    // EVENT_RELEASE — fired by the engine for every AI instance at game end
+    // (including surviving AIs on Spring.GameOver). Emit a terminal Shutdown
+    // message so the bot terminates within a frame of game-over instead of
+    // running to its own frame limit.
+    if (topicId == EVENT_RELEASE) {
+        const struct SReleaseEvent *ev = (const struct SReleaseEvent *)data;
+        int engine_reason = ev ? ev->reason : 0;
+
+        Highbar__ShutdownReason proto_reason;
+        switch (engine_reason) {
+            case 1: /* game ended */
+            case 2: /* team died */
+            case 3: /* AI killed */
+                proto_reason = HIGHBAR__SHUTDOWN_REASON__SHUTDOWN_REASON_GAME_OVER;
+                break;
+            case 4: /* AI crashed */
+            case 5: /* init failed */
+                proto_reason = HIGHBAR__SHUTDOWN_REASON__SHUTDOWN_REASON_ERROR;
+                break;
+            case 6: /* connection lost */
+                proto_reason = HIGHBAR__SHUTDOWN_REASON__SHUTDOWN_REASON_DISCONNECT;
+                break;
+            default:
+                proto_reason = HIGHBAR__SHUTDOWN_REASON__SHUTDOWN_REASON_UNKNOWN;
+                break;
+        }
+
+        {
+            char log_buf[128];
+            snprintf(log_buf, sizeof(log_buf),
+                "EVENT_RELEASE reason=%d -> emitting Shutdown(%d)",
+                engine_reason, (int)proto_reason);
+            proxy_log(HB_LOG_INFO, log_buf);
+        }
+
+        if (g_state->conn.connected) {
+            Highbar__Shutdown shutdown = HIGHBAR__SHUTDOWN__INIT;
+            shutdown.reason = proto_reason;
+
+            Highbar__ProxyMessage msg = HIGHBAR__PROXY_MESSAGE__INIT;
+            msg.message_case = HIGHBAR__PROXY_MESSAGE__MESSAGE_SHUTDOWN;
+            msg.shutdown = &shutdown;
+
+            size_t len = highbar__proxy_message__get_packed_size(&msg);
+            uint8_t *buf = malloc(len);
+            if (buf) {
+                highbar__proxy_message__pack(&msg, buf);
+                hb_conn_send(&g_state->conn, buf, (uint32_t)len);
+                free(buf);
+            }
+            hb_conn_close(&g_state->conn);
+            g_state->conn.connected = false;
+        }
+        return 0;
+    }
+
     if (topicId == EVENT_UPDATE) {
         const struct SUpdateEvent *upd = (const struct SUpdateEvent *)data;
         if (upd->frame > 0 && upd->frame % 50 == 0) {

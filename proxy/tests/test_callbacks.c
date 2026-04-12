@@ -323,6 +323,106 @@ TEST(test_get_corners_height_map_unavailable) {
     assert(resp->success == 0); // Error — callback not available
 }
 
+// -- Economy callback tests (029-fix-trainer-issues Issue 2) --
+
+TEST(test_economy_get_current_returns_value) {
+    mock_engine_reset();
+    mock_engine_set_economy_current(0, 123.5f);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 200;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_CURRENT;
+    Highbar__CallbackParam param = HIGHBAR__CALLBACK_PARAM__INIT;
+    param.value_case = HIGHBAR__CALLBACK_PARAM__VALUE_INT_VALUE;
+    param.int_value = 0;
+    Highbar__CallbackParam *params[] = { &param };
+    req.params = params;
+    req.n_params = 1;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_VALUE);
+    assert(fabsf(resp->result->float_value - 123.5f) < 0.01f);
+}
+
+TEST(test_economy_get_current_invalid_id_returns_nan) {
+    mock_engine_reset();
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 201;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_CURRENT;
+    Highbar__CallbackParam param = HIGHBAR__CALLBACK_PARAM__INIT;
+    param.value_case = HIGHBAR__CALLBACK_PARAM__VALUE_INT_VALUE;
+    param.int_value = 99;
+    Highbar__CallbackParam *params[] = { &param };
+    req.params = params;
+    req.n_params = 1;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp != NULL);
+    assert(resp->success == 1);
+    assert(resp->result->value_case == HIGHBAR__CALLBACK_RESULT__VALUE_FLOAT_VALUE);
+    assert(isnan(resp->result->float_value));
+}
+
+TEST(test_economy_get_income_returns_value) {
+    mock_engine_reset();
+    mock_engine_set_economy_income(1, 45.25f);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 202;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_INCOME;
+    Highbar__CallbackParam param = HIGHBAR__CALLBACK_PARAM__INIT;
+    param.value_case = HIGHBAR__CALLBACK_PARAM__VALUE_INT_VALUE;
+    param.int_value = 1;
+    Highbar__CallbackParam *params[] = { &param };
+    req.params = params;
+    req.n_params = 1;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp->success == 1);
+    assert(fabsf(resp->result->float_value - 45.25f) < 0.01f);
+}
+
+TEST(test_economy_get_usage_returns_value) {
+    mock_engine_reset();
+    mock_engine_set_economy_usage(0, 7.75f);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 203;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_USAGE;
+    Highbar__CallbackParam param = HIGHBAR__CALLBACK_PARAM__INIT;
+    param.value_case = HIGHBAR__CALLBACK_PARAM__VALUE_INT_VALUE;
+    param.int_value = 0;
+    Highbar__CallbackParam *params[] = { &param };
+    req.params = params;
+    req.n_params = 1;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp->success == 1);
+    assert(fabsf(resp->result->float_value - 7.75f) < 0.01f);
+}
+
+TEST(test_economy_get_storage_returns_value) {
+    mock_engine_reset();
+    mock_engine_set_economy_storage(1, 999.0f);
+    ProtobufCAllocator alloc = hb_arena_allocator(&arena);
+    Highbar__CallbackRequest req = HIGHBAR__CALLBACK_REQUEST__INIT;
+    req.request_id = 204;
+    req.callback_id = HIGHBAR__CALLBACK_ID__CALLBACK_ECONOMY_GET_STORAGE;
+    Highbar__CallbackParam param = HIGHBAR__CALLBACK_PARAM__INIT;
+    param.value_case = HIGHBAR__CALLBACK_PARAM__VALUE_INT_VALUE;
+    param.int_value = 1;
+    Highbar__CallbackParam *params[] = { &param };
+    req.params = params;
+    req.n_params = 1;
+
+    Highbar__CallbackResponse *resp = hb_callback_dispatch(&req, 0, cb, &alloc);
+    assert(resp->success == 1);
+    assert(fabsf(resp->result->float_value - 999.0f) < 0.01f);
+}
+
 TEST(test_zero_count_response) {
     mock_engine_set_map_size(4, 4);
     mock_engine_set_los_return_count(0);
@@ -365,7 +465,14 @@ int main(void) {
     RUN(test_get_corners_height_map_unavailable);
     RUN(test_zero_count_response);
 
-    printf("All %d callback tests passed!\n", 19);
+    // Economy callbacks (029 Issue 2)
+    RUN(test_economy_get_current_returns_value);
+    RUN(test_economy_get_current_invalid_id_returns_nan);
+    RUN(test_economy_get_income_returns_value);
+    RUN(test_economy_get_usage_returns_value);
+    RUN(test_economy_get_storage_returns_value);
+
+    printf("All %d callback tests passed!\n", 24);
     hb_arena_destroy(&arena);
     return 0;
 }

@@ -1,0 +1,38 @@
+=== HighBarV2 Test Runner ===
+Category: all
+Started: 2026-04-12 13:35:32
+
+━━━ C Proxy Tests (ctest) ━━━
+  ✓ PASSED (2 passed)
+
+━━━ F# Unit Tests ━━━
+  ⊘ SKIPPED: tests/unit/fsharp/ not found
+
+━━━ BarData Tests ━━━
+  ✓ PASSED (135 passed)
+
+━━━ Engine Prerequisites ━━━
+  ✓ Engine available: /home/developer/.local/state/Beyond All Reason/engine/recoil_2025.06.19/spring-headless
+
+━━━ F# Integration Tests ━━━
+  ✓ PASSED (35 passed)
+
+━━━ F# Persistent Tests ━━━
+  ✗ FAILED (8 passed, 58 failed)
+    [xUnit.net 00:01:30.52]     HighBar.PersistentTests.T11_MapDataExport.T11.3 Slope map is non-empty with values in [0,1] [FAIL]
+    [xUnit.net 00:01:30.52]     HighBar.PersistentTests.T11_MapDataExport.T11.4 Metal spots has at least one spot with positive income [FAIL]
+    [xUnit.net 00:01:30.52]     HighBar.PersistentTests.T11_MapDataExport.T11.5 Start position is within map bounds [FAIL]
+    [xUnit.net 00:01:30.52]     HighBar.PersistentTests.T11_MapDataExport.T11.6 LOS map is non-empty with non-negative values [FAIL]
+    [xUnit.net 00:01:30.53]     HighBar.PersistentTests.T11_MapDataExport.T11.7 Radar map is non-empty with non-negative values [FAIL]
+    [xUnit.net 00:01:30.53]     HighBar.PersistentTests.T11_MapDataExport.T11.8 Resource map (metal) is non-empty with non-negative values [FAIL]
+    [xUnit.net 00:01:30.53]     HighBar.PersistentTests.T11_MapDataExport.T11.9 Save all map data to disk [FAIL]
+    [xUnit.net 00:01:30.53]     HighBar.PersistentTests.T11_MapDataExport.T11.10 Generate extraction summary report [FAIL]
+    
+    Failed!  - Failed:    58, Passed:     8, Skipped:     0, Total:    66, Duration: 1 m 22 s - HighBar.PersistentTests.dll (net10.0)
+
+Report saved: /home/developer/projects/HighBarV2/reports/testreports/2026-04-12_13-37-25_all.md
+
+═══════════════════════════════════════
+  RESULT: FAILED
+  Passed: 180  Failed: 58  Skipped tiers: 1
+═══════════════════════════════════════

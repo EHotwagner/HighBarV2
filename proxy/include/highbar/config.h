@@ -30,6 +30,8 @@ typedef struct {
     uint32_t max_message_size;
     HB_Transport transport;
     uint16_t tcp_port;
+    // Default false. Per-command tracing in proxy.c is gated on this flag.
+    bool verbose_commands;
 } HB_Config;
 
 // Callback type for reading engine info values (Info_getValueByKey)
