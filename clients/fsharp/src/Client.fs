@@ -1,10 +1,14 @@
 namespace HighBar.Client
 
 open System
+open System.Collections.Generic
 open System.IO
 open System.Net.Sockets
 open Google.Protobuf
 open Highbar
+
+[<assembly: System.Runtime.CompilerServices.InternalsVisibleTo("HighBar.Tests")>]
+do ()
 
 /// Exception thrown when the engine proxy connection is lost.
 type EngineDisconnectedException(message: string, ?lastFrameNumber: uint32, ?innerException: exn) =
@@ -13,8 +17,21 @@ type EngineDisconnectedException(message: string, ?lastFrameNumber: uint32, ?inn
         match innerException with Some ex -> ex | None -> null)
     member _.LastFrameNumber = lastFrameNumber
 
+/// Exception thrown when the proxy sends a message that violates the
+/// documented callback/frame interleaving contract (e.g. a CallbackResponse
+/// whose request_id does not match the in-flight request).
+type HighBarProtocolException(message: string) =
+    inherit Exception(message)
+
 /// Typed frame received from the proxy, containing parsed events.
 type GameFrame = {
+    FrameNumber: uint32
+    Events: GameEvent list
+}
+
+/// A frame decoded while SendCallback was waiting for a CallbackResponse.
+/// Held in the client's replay buffer until the next Run/StepFrame drain.
+type internal PendingFrame = {
     FrameNumber: uint32
     Events: GameEvent list
 }
@@ -22,9 +39,13 @@ type GameFrame = {
 /// Client connection to the HighBar proxy.
 type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
     let mutable socket: Socket option = None
-    let mutable stream: NetworkStream option = None
+    let mutable stream: Stream option = None
     let protocolVersion = 1u
     let mutable nextRequestId = 1u
+    // FIFO of frames decoded while a SendCallback was waiting for its
+    // CallbackResponse. Drained by Run/StepFrame before touching the socket
+    // so no engine event is ever dropped on the callback path.
+    let replayBuffer = Queue<PendingFrame>()
     let timeoutMs =
         match readTimeoutMs with
         | Some t -> t
@@ -33,7 +54,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
             | null | "" -> 10000
             | v -> Int32.Parse(v)
 
-    let sendMessage (s: NetworkStream) (msg: IMessage) =
+    let sendMessage (s: Stream) (msg: IMessage) =
         let data = msg.ToByteArray()
         let len = BitConverter.GetBytes(uint32 data.Length)
         if not BitConverter.IsLittleEndian then Array.Reverse(len)
@@ -41,7 +62,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         s.Write(data, 0, data.Length)
         s.Flush()
 
-    let recvBytes (s: NetworkStream) : byte[] =
+    let recvBytes (s: Stream) : byte[] =
         let readFully (buf: byte[]) (offset: int) (count: int) =
             let mutable read = 0
             while read < count do
@@ -63,6 +84,17 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         readFully dataBuf 0 len
         dataBuf
 
+    /// Test-only constructor that swaps the Unix socket for a pre-opened Stream
+    /// (typically a duplex wrapper around a MemoryStream). Skips the Connect
+    /// handshake. Gated to the HighBar.Tests project via InternalsVisibleTo.
+    internal new (injectedStream: Stream) as this =
+        new HighBarClient("")
+        then
+            this.SetStreamForTesting(injectedStream)
+
+    member internal _.SetStreamForTesting(s: Stream) =
+        stream <- Some s
+
     /// Connect to the proxy Unix domain socket (proxy is the client connecting to us).
     member _.Connect() =
         let endpoint = UnixDomainSocketEndPoint(socketPath)
@@ -71,7 +103,7 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         socket <- Some sock
         let ns = new NetworkStream(sock, true)
         ns.ReadTimeout <- timeoutMs
-        stream <- Some ns
+        stream <- Some (ns :> Stream)
 
     /// Accept a connection from the proxy on a pre-created listening socket.
     member _.AcceptFrom(listener: Socket) =
@@ -79,14 +111,14 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         socket <- Some accepted
         let ns = new NetworkStream(accepted, true)
         ns.ReadTimeout <- timeoutMs
-        stream <- Some ns
+        stream <- Some (ns :> Stream)
 
     /// Wrap an already-connected socket (e.g. accepted by the harness).
     member _.WrapSocket(connectedSocket: Socket) =
         socket <- Some connectedSocket
         let ns = new NetworkStream(connectedSocket, false)
         ns.ReadTimeout <- timeoutMs
-        stream <- Some ns
+        stream <- Some (ns :> Stream)
 
     /// Perform handshake — wait for Handshake, send HandshakeResponse.
     member _.Handshake() =
@@ -123,17 +155,14 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
         | Some s ->
             let mutable running = true
             while running do
-                let proxyMsg = ProxyMessage.Parser.ParseFrom(recvBytes s)
-                match proxyMsg.MessageCase with
-                | ProxyMessage.MessageOneofCase.Frame ->
-                    let frame = proxyMsg.Frame
-                    let events =
-                        frame.Events
-                        |> Seq.map Events.fromProto
-                        |> Seq.toList
-                    let gameFrame = {
-                        FrameNumber = frame.FrameNumber
-                        Events = events
+                // Drain any frames that SendCallback stashed while waiting on
+                // a CallbackResponse. FIFO order preserved; the drain is a no-op
+                // on the happy path because replayBuffer is empty.
+                if replayBuffer.Count > 0 then
+                    let pending = replayBuffer.Dequeue()
+                    let gameFrame: GameFrame = {
+                        FrameNumber = pending.FrameNumber
+                        Events = pending.Events
                     }
                     let commands = onFrame gameFrame
                     let resp = AIMessage()
@@ -142,18 +171,38 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
                         fr.Commands.Add(cmd)
                     resp.FrameResponse <- fr
                     sendMessage s resp
+                else
+                    let proxyMsg = ProxyMessage.Parser.ParseFrom(recvBytes s)
+                    match proxyMsg.MessageCase with
+                    | ProxyMessage.MessageOneofCase.Frame ->
+                        let frame = proxyMsg.Frame
+                        let events =
+                            frame.Events
+                            |> Seq.map Events.fromProto
+                            |> Seq.toList
+                        let gameFrame: GameFrame = {
+                            FrameNumber = frame.FrameNumber
+                            Events = events
+                        }
+                        let commands = onFrame gameFrame
+                        let resp = AIMessage()
+                        let fr = FrameResponse()
+                        for cmd in commands do
+                            fr.Commands.Add(cmd)
+                        resp.FrameResponse <- fr
+                        sendMessage s resp
 
-                | ProxyMessage.MessageOneofCase.Shutdown ->
-                    running <- false
+                    | ProxyMessage.MessageOneofCase.Shutdown ->
+                        running <- false
 
-                | ProxyMessage.MessageOneofCase.SaveRequest ->
-                    let resp = AIMessage()
-                    let sr = SaveResponse()
-                    sr.StateData <- Google.Protobuf.ByteString.Empty
-                    resp.SaveResponse <- sr
-                    sendMessage s resp
+                    | ProxyMessage.MessageOneofCase.SaveRequest ->
+                        let resp = AIMessage()
+                        let sr = SaveResponse()
+                        sr.StateData <- Google.Protobuf.ByteString.Empty
+                        resp.SaveResponse <- sr
+                        sendMessage s resp
 
-                | _ -> ()
+                    | _ -> ()
 
     /// Process a single frame: receive one Frame message, call handler, send response.
     /// Returns Some(GameFrame) if a frame was processed, or None if a Shutdown was received.
@@ -165,17 +214,11 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
             let mutable result: GameFrame option = None
             let mutable keepReading = true
             while keepReading do
-                let proxyMsg = ProxyMessage.Parser.ParseFrom(recvBytes s)
-                match proxyMsg.MessageCase with
-                | ProxyMessage.MessageOneofCase.Frame ->
-                    let frame = proxyMsg.Frame
-                    let events =
-                        frame.Events
-                        |> Seq.map Events.fromProto
-                        |> Seq.toList
-                    let gameFrame = {
-                        FrameNumber = frame.FrameNumber
-                        Events = events
+                if replayBuffer.Count > 0 then
+                    let pending = replayBuffer.Dequeue()
+                    let gameFrame: GameFrame = {
+                        FrameNumber = pending.FrameNumber
+                        Events = pending.Events
                     }
                     let commands = onFrame gameFrame
                     let resp = AIMessage()
@@ -186,30 +229,55 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
                     sendMessage s resp
                     result <- Some gameFrame
                     keepReading <- false
+                else
+                    let proxyMsg = ProxyMessage.Parser.ParseFrom(recvBytes s)
+                    match proxyMsg.MessageCase with
+                    | ProxyMessage.MessageOneofCase.Frame ->
+                        let frame = proxyMsg.Frame
+                        let events =
+                            frame.Events
+                            |> Seq.map Events.fromProto
+                            |> Seq.toList
+                        let gameFrame: GameFrame = {
+                            FrameNumber = frame.FrameNumber
+                            Events = events
+                        }
+                        let commands = onFrame gameFrame
+                        let resp = AIMessage()
+                        let fr = FrameResponse()
+                        for cmd in commands do
+                            fr.Commands.Add(cmd)
+                        resp.FrameResponse <- fr
+                        sendMessage s resp
+                        result <- Some gameFrame
+                        keepReading <- false
 
-                | ProxyMessage.MessageOneofCase.Shutdown ->
-                    keepReading <- false
+                    | ProxyMessage.MessageOneofCase.Shutdown ->
+                        keepReading <- false
 
-                | ProxyMessage.MessageOneofCase.SaveRequest ->
-                    let resp = AIMessage()
-                    let sr = SaveResponse()
-                    sr.StateData <- Google.Protobuf.ByteString.Empty
-                    resp.SaveResponse <- sr
-                    sendMessage s resp
-                    // Continue reading for the next Frame
+                    | ProxyMessage.MessageOneofCase.SaveRequest ->
+                        let resp = AIMessage()
+                        let sr = SaveResponse()
+                        sr.StateData <- Google.Protobuf.ByteString.Empty
+                        resp.SaveResponse <- sr
+                        sendMessage s resp
+                        // Continue reading for the next Frame
 
-                | _ -> ()
+                    | _ -> ()
             result
 
     /// Send a callback request and receive the response.
-    /// Handles interleaved Frame messages by auto-responding with empty commands,
-    /// since the engine may push frames while we're waiting for the callback response.
+    /// Frames that the proxy interleaves between the request and its response
+    /// are decoded, acknowledged with an empty FrameResponse (so the proxy
+    /// does not stall), and buffered in replayBuffer for the next Run/StepFrame
+    /// call to replay to the bot's frame handler.
     member _.SendCallback(callbackId: uint32, callbackParams: CallbackParam list) : CallbackResponse =
         match stream with
         | None -> failwith "Not connected"
         | Some s ->
             let req = CallbackRequest()
-            req.RequestId <- nextRequestId
+            let expectedRequestId = nextRequestId
+            req.RequestId <- expectedRequestId
             nextRequestId <- nextRequestId + 1u
             req.CallbackId <- callbackId
             for p in callbackParams do
@@ -225,10 +293,26 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
                 let proxyMsg = ProxyMessage.Parser.ParseFrom(respBytes)
                 match proxyMsg.MessageCase with
                 | ProxyMessage.MessageOneofCase.CallbackResponse ->
-                    proxyMsg.CallbackResponse
+                    let cbResp = proxyMsg.CallbackResponse
+                    if cbResp.RequestId <> expectedRequestId then
+                        raise (HighBarProtocolException(
+                            $"CallbackResponse request_id mismatch: expected {expectedRequestId}, got {cbResp.RequestId}"))
+                    cbResp
                 | ProxyMessage.MessageOneofCase.Frame ->
-                    // Engine sent a frame while we're waiting for callback response.
-                    // Respond with empty commands and keep reading.
+                    // Engine pushed a frame while we're waiting for the callback
+                    // response. Decode the events, stash the frame in replayBuffer
+                    // for the next Run/StepFrame drain, ack with empty commands so
+                    // the proxy does not stall, then keep reading.
+                    let frame = proxyMsg.Frame
+                    let events =
+                        frame.Events
+                        |> Seq.map Events.fromProto
+                        |> Seq.toList
+                    let pending: PendingFrame = {
+                        FrameNumber = frame.FrameNumber
+                        Events = events
+                    }
+                    replayBuffer.Enqueue(pending)
                     let resp = AIMessage()
                     let fr = FrameResponse()
                     resp.FrameResponse <- fr

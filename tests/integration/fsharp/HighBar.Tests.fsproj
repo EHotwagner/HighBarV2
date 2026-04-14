@@ -27,6 +27,8 @@
     <Compile Include="EventTests.fs" />
     <Compile Include="CommandTests.fs" />
     <Compile Include="CallbackTests.fs" />
+    <Compile Include="CallbackEventLossTests.fs" />
+    <Compile Include="CallbackFrameInterleavingTests.fs" />
     <Compile Include="UnitDataTests.fs" />
     <Compile Include="NonMoveCommandEffectTests.fs" />
   </ItemGroup>

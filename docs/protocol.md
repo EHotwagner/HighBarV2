@@ -260,6 +260,28 @@ message CallbackResponse {
 | `CALLBACK_GAME_GET_MY_ALLY_TEAM` | — | int | Our ally team ID |
 | `CALLBACK_CHEATS_SET_EVENTS_ENABLED` | enabled | int | Enable cheat events |
 
+### Callback/Frame Interleaving
+
+The proxy may interleave one or more `Frame` messages between a client's
+`CallbackRequest` and the matching `CallbackResponse` on the same socket. This
+is a normative behaviour of the wire protocol, not an implementation detail.
+
+- `CallbackResponse.request_id` echoes the originating `CallbackRequest.request_id`
+  verbatim, and is the **only** correlation mechanism between a request and its
+  response. Conforming clients MUST verify the match and raise a protocol error
+  on mismatch.
+- Conforming clients MUST decode every `Frame` observed during a callback wait,
+  acknowledge it with an empty `FrameResponse` (so the proxy does not stall),
+  and **buffer** the frame's events in a per-instance FIFO for replay on the
+  next frame-consuming API call (`Run`, `StepFrame`, or equivalent).
+- Dropping the events from an interleaved `Frame` is **non-conforming** — it
+  silently loses engine events and breaks bot correctness guarantees.
+
+See [`../specs/031-fix-callback-event-drop/contracts/callback-frame-interleaving.md`](../specs/031-fix-callback-event-drop/contracts/callback-frame-interleaving.md)
+for the full normative contract, including the conforming-client procedure,
+error handling for `Shutdown` and `SaveRequest` during a callback wait, and
+the deterministic + live-engine tests that enforce it.
+
 ## Schema Files
 
 The proto source files are in `proto/highbar/` and are linted with `buf lint`. Generated code must not be checked into version control.
