@@ -8,6 +8,7 @@ module other_raptors_Swarmer_AllTerrain =
     type Raptor_6legged_l =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_6legged_l : Raptor_6legged_l =
         { name = "raptor_6legged_l"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 1875.0
@@ -145,6 +147,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_6legged_lDef : UnitDef =
         { name = "raptor_6legged_l"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 1875.0
@@ -257,6 +260,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_6legged_lToFlat (def: UnitDef) : Raptor_6legged_l =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -293,6 +297,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_6legged_lToUnitDef (flat: Raptor_6legged_l) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -341,6 +346,7 @@ module other_raptors_Swarmer_AllTerrain =
     type Raptor_allterrain_swarmer_basic_t2_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -377,6 +383,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t2_v1 : Raptor_allterrain_swarmer_basic_t2_v1 =
         { name = "raptor_allterrain_swarmer_basic_t2_v1"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = Some "All-Terrain Swarmer"
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 2250.0
@@ -478,6 +485,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t2_v1Def : UnitDef =
         { name = "raptor_allterrain_swarmer_basic_t2_v1"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = Some "All-Terrain Swarmer"
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 2250.0
@@ -590,6 +598,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t2_v1ToFlat (def: UnitDef) : Raptor_allterrain_swarmer_basic_t2_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -626,6 +635,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t2_v1ToUnitDef (flat: Raptor_allterrain_swarmer_basic_t2_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -674,6 +684,7 @@ module other_raptors_Swarmer_AllTerrain =
     type Raptor_allterrain_swarmer_basic_t3_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -710,6 +721,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t3_v1 : Raptor_allterrain_swarmer_basic_t3_v1 =
         { name = "raptor_allterrain_swarmer_basic_t3_v1"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = Some "Mature All-Terrain Swarmer"
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 2625.0
@@ -811,6 +823,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t3_v1Def : UnitDef =
         { name = "raptor_allterrain_swarmer_basic_t3_v1"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = Some "Mature All-Terrain Swarmer"
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 2625.0
@@ -923,6 +936,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t3_v1ToFlat (def: UnitDef) : Raptor_allterrain_swarmer_basic_t3_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -959,6 +973,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t3_v1ToUnitDef (flat: Raptor_allterrain_swarmer_basic_t3_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1007,6 +1022,7 @@ module other_raptors_Swarmer_AllTerrain =
     type Raptor_allterrain_swarmer_basic_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1043,6 +1059,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t4_v1 : Raptor_allterrain_swarmer_basic_t4_v1 =
         { name = "raptor_allterrain_swarmer_basic_t4_v1"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = Some "Apex All-Terrain Swarmer"
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 1875.0
@@ -1144,6 +1161,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t4_v1Def : UnitDef =
         { name = "raptor_allterrain_swarmer_basic_t4_v1"
           subfolder = "other/raptors/Swarmer/AllTerrain"
+          printableName = Some "Apex All-Terrain Swarmer"
           metalCost = ValueOrExpr.Concrete 99.0
           energyCost = ValueOrExpr.Concrete 5280.0
           buildTime = ValueOrExpr.Concrete 1875.0
@@ -1256,6 +1274,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t4_v1ToFlat (def: UnitDef) : Raptor_allterrain_swarmer_basic_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1292,6 +1311,7 @@ module other_raptors_Swarmer_AllTerrain =
     let raptor_allterrain_swarmer_basic_t4_v1ToUnitDef (flat: Raptor_allterrain_swarmer_basic_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

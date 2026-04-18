@@ -8,6 +8,7 @@ module Legion_Other_Commanders =
     type Legcomecon =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -53,6 +54,7 @@ module Legion_Other_Commanders =
     let legcomecon : Legcomecon =
         { name = "legcomecon"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Economy Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -225,7 +227,9 @@ module Legion_Other_Commanders =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -335,6 +339,7 @@ module Legion_Other_Commanders =
     let legcomeconDef : UnitDef =
         { name = "legcomecon"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Economy Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -511,7 +516,9 @@ module Legion_Other_Commanders =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -628,6 +635,7 @@ module Legion_Other_Commanders =
     let legcomeconToFlat (def: UnitDef) : Legcomecon =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -673,6 +681,7 @@ module Legion_Other_Commanders =
     let legcomeconToUnitDef (flat: Legcomecon) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -732,6 +741,7 @@ module Legion_Other_Commanders =
     type Legcomoff =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -777,6 +787,7 @@ module Legion_Other_Commanders =
     let legcomoff : Legcomoff =
         { name = "legcomoff"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Offensive Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -954,7 +965,9 @@ module Legion_Other_Commanders =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -1064,6 +1077,7 @@ module Legion_Other_Commanders =
     let legcomoffDef : UnitDef =
         { name = "legcomoff"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Offensive Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1245,7 +1259,9 @@ module Legion_Other_Commanders =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -1362,6 +1378,7 @@ module Legion_Other_Commanders =
     let legcomoffToFlat (def: UnitDef) : Legcomoff =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1407,6 +1424,7 @@ module Legion_Other_Commanders =
     let legcomoffToUnitDef (flat: Legcomoff) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1466,6 +1484,7 @@ module Legion_Other_Commanders =
     type Legcomt2com =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1511,6 +1530,7 @@ module Legion_Other_Commanders =
     let legcomt2com : Legcomt2com =
         { name = "legcomt2com"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Combat Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1688,7 +1708,9 @@ module Legion_Other_Commanders =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -1849,6 +1871,7 @@ module Legion_Other_Commanders =
     let legcomt2comDef : UnitDef =
         { name = "legcomt2com"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Combat Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -2030,7 +2053,9 @@ module Legion_Other_Commanders =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -2198,6 +2223,7 @@ module Legion_Other_Commanders =
     let legcomt2comToFlat (def: UnitDef) : Legcomt2com =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2243,6 +2269,7 @@ module Legion_Other_Commanders =
     let legcomt2comToUnitDef (flat: Legcomt2com) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2302,6 +2329,7 @@ module Legion_Other_Commanders =
     type Legcomt2def =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2347,6 +2375,7 @@ module Legion_Other_Commanders =
     let legcomt2def : Legcomt2def =
         { name = "legcomt2def"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Tactical Defense Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -2519,7 +2548,9 @@ module Legion_Other_Commanders =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -2662,6 +2693,7 @@ module Legion_Other_Commanders =
     let legcomt2defDef : UnitDef =
         { name = "legcomt2def"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Tactical Defense Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -2838,7 +2870,9 @@ module Legion_Other_Commanders =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -2988,6 +3022,7 @@ module Legion_Other_Commanders =
     let legcomt2defToFlat (def: UnitDef) : Legcomt2def =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3033,6 +3068,7 @@ module Legion_Other_Commanders =
     let legcomt2defToUnitDef (flat: Legcomt2def) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3092,6 +3128,7 @@ module Legion_Other_Commanders =
     type Legcomt2off =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3137,6 +3174,7 @@ module Legion_Other_Commanders =
     let legcomt2off : Legcomt2off =
         { name = "legcomt2off"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Tactical Offense Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -3314,7 +3352,9 @@ module Legion_Other_Commanders =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -3426,6 +3466,7 @@ module Legion_Other_Commanders =
     let legcomt2offDef : UnitDef =
         { name = "legcomt2off"
           subfolder = "Legion/Other/Commanders"
+          printableName = Some "Tactical Offense Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -3607,7 +3648,9 @@ module Legion_Other_Commanders =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -3726,6 +3769,7 @@ module Legion_Other_Commanders =
     let legcomt2offToFlat (def: UnitDef) : Legcomt2off =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3771,6 +3815,7 @@ module Legion_Other_Commanders =
     let legcomt2offToUnitDef (flat: Legcomt2off) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

@@ -8,6 +8,7 @@ module Scavengers_Buildings_Factories =
     type Armapt3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -48,6 +49,7 @@ module Scavengers_Buildings_Factories =
     let armapt3 : Armapt3 =
         { name = "armapt3"
           subfolder = "Scavengers/Buildings/Factories"
+          printableName = Some "Experimental Aircraft Plant"
           metalCost = ValueOrExpr.Concrete 8500.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 72400.0
@@ -144,6 +146,7 @@ module Scavengers_Buildings_Factories =
     let armapt3Def : UnitDef =
         { name = "armapt3"
           subfolder = "Scavengers/Buildings/Factories"
+          printableName = Some "Experimental Aircraft Plant"
           metalCost = ValueOrExpr.Concrete 8500.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 72400.0
@@ -259,6 +262,7 @@ module Scavengers_Buildings_Factories =
     let armapt3ToFlat (def: UnitDef) : Armapt3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -299,6 +303,7 @@ module Scavengers_Buildings_Factories =
     let armapt3ToUnitDef (flat: Armapt3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -362,6 +367,7 @@ module Scavengers_Buildings_Factories =
     type Corapt3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -401,6 +407,7 @@ module Scavengers_Buildings_Factories =
     let corapt3 : Corapt3 =
         { name = "corapt3"
           subfolder = "Scavengers/Buildings/Factories"
+          printableName = Some "Experimental Aircraft Plant"
           metalCost = ValueOrExpr.Concrete 8500.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 72400.0
@@ -497,6 +504,7 @@ module Scavengers_Buildings_Factories =
     let corapt3Def : UnitDef =
         { name = "corapt3"
           subfolder = "Scavengers/Buildings/Factories"
+          printableName = Some "Experimental Aircraft Plant"
           metalCost = ValueOrExpr.Concrete 8500.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 72400.0
@@ -613,6 +621,7 @@ module Scavengers_Buildings_Factories =
     let corapt3ToFlat (def: UnitDef) : Corapt3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -652,6 +661,7 @@ module Scavengers_Buildings_Factories =
     let corapt3ToUnitDef (flat: Corapt3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -715,6 +725,7 @@ module Scavengers_Buildings_Factories =
     type Legapt3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -754,6 +765,7 @@ module Scavengers_Buildings_Factories =
     let legapt3 : Legapt3 =
         { name = "legapt3"
           subfolder = "Scavengers/Buildings/Factories"
+          printableName = Some "Experimental Aircraft Gantry"
           metalCost = ValueOrExpr.Concrete 8500.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 72400.0
@@ -850,6 +862,7 @@ module Scavengers_Buildings_Factories =
     let legapt3Def : UnitDef =
         { name = "legapt3"
           subfolder = "Scavengers/Buildings/Factories"
+          printableName = Some "Experimental Aircraft Gantry"
           metalCost = ValueOrExpr.Concrete 8500.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 72400.0
@@ -966,6 +979,7 @@ module Scavengers_Buildings_Factories =
     let legapt3ToFlat (def: UnitDef) : Legapt3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1005,6 +1019,7 @@ module Scavengers_Buildings_Factories =
     let legapt3ToUnitDef (flat: Legapt3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

@@ -8,6 +8,7 @@ module ArmVehicles_T2 =
     type Armacv =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -51,6 +52,7 @@ module ArmVehicles_T2 =
     let armacv : Armacv =
         { name = "armacv"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Advanced Construction Vehicle"
           metalCost = ValueOrExpr.Concrete 550.0
           energyCost = ValueOrExpr.Concrete 6800.0
           buildTime = ValueOrExpr.Concrete 16000.0
@@ -147,6 +149,7 @@ module ArmVehicles_T2 =
     let armacvDef : UnitDef =
         { name = "armacv"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Advanced Construction Vehicle"
           metalCost = ValueOrExpr.Concrete 550.0
           energyCost = ValueOrExpr.Concrete 6800.0
           buildTime = ValueOrExpr.Concrete 16000.0
@@ -256,6 +259,7 @@ module ArmVehicles_T2 =
     let armacvToFlat (def: UnitDef) : Armacv =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -299,6 +303,7 @@ module ArmVehicles_T2 =
     let armacvToUnitDef (flat: Armacv) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -358,6 +363,7 @@ module ArmVehicles_T2 =
     type Armbull =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -396,6 +402,7 @@ module ArmVehicles_T2 =
     let armbull : Armbull =
         { name = "armbull"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Bull"
           metalCost = ValueOrExpr.Concrete 950.0
           energyCost = ValueOrExpr.Concrete 13000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -527,6 +534,7 @@ module ArmVehicles_T2 =
     let armbullDef : UnitDef =
         { name = "armbull"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Bull"
           metalCost = ValueOrExpr.Concrete 950.0
           energyCost = ValueOrExpr.Concrete 13000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -667,6 +675,7 @@ module ArmVehicles_T2 =
     let armbullToFlat (def: UnitDef) : Armbull =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -705,6 +714,7 @@ module ArmVehicles_T2 =
     let armbullToUnitDef (flat: Armbull) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -753,6 +763,7 @@ module ArmVehicles_T2 =
     type Armconsul =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -796,6 +807,7 @@ module ArmVehicles_T2 =
     let armconsul : Armconsul =
         { name = "armconsul"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Consul"
           metalCost = ValueOrExpr.Concrete 250.0
           energyCost = ValueOrExpr.Concrete 4300.0
           buildTime = ValueOrExpr.Concrete 8500.0
@@ -892,6 +904,7 @@ module ArmVehicles_T2 =
     let armconsulDef : UnitDef =
         { name = "armconsul"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Consul"
           metalCost = ValueOrExpr.Concrete 250.0
           energyCost = ValueOrExpr.Concrete 4300.0
           buildTime = ValueOrExpr.Concrete 8500.0
@@ -1001,6 +1014,7 @@ module ArmVehicles_T2 =
     let armconsulToFlat (def: UnitDef) : Armconsul =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1044,6 +1058,7 @@ module ArmVehicles_T2 =
     let armconsulToUnitDef (flat: Armconsul) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1103,6 +1118,7 @@ module ArmVehicles_T2 =
     type Armcroc =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1141,6 +1157,7 @@ module ArmVehicles_T2 =
     let armcroc : Armcroc =
         { name = "armcroc"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Turtle"
           metalCost = ValueOrExpr.Concrete 750.0
           energyCost = ValueOrExpr.Concrete 15000.0
           buildTime = ValueOrExpr.Concrete 21000.0
@@ -1225,7 +1242,9 @@ module ArmVehicles_T2 =
                   soundHit = Some "xplomed2"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR LIGHTAIRSCOUT"
                       "mount_fastautoretargeting", "true"
@@ -1328,6 +1347,7 @@ module ArmVehicles_T2 =
     let armcrocDef : UnitDef =
         { name = "armcroc"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Turtle"
           metalCost = ValueOrExpr.Concrete 750.0
           energyCost = ValueOrExpr.Concrete 15000.0
           buildTime = ValueOrExpr.Concrete 21000.0
@@ -1419,7 +1439,9 @@ module ArmVehicles_T2 =
                 soundHit = Some "xplomed2"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR LIGHTAIRSCOUT"
                     "mount_fastautoretargeting", "true"
@@ -1524,6 +1546,7 @@ module ArmVehicles_T2 =
     let armcrocToFlat (def: UnitDef) : Armcroc =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1562,6 +1585,7 @@ module ArmVehicles_T2 =
     let armcrocToUnitDef (flat: Armcroc) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1610,6 +1634,7 @@ module ArmVehicles_T2 =
     type Armgremlin =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1648,6 +1673,7 @@ module ArmVehicles_T2 =
     let armgremlin : Armgremlin =
         { name = "armgremlin"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Gremlin"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 3700.0
           buildTime = ValueOrExpr.Concrete 8500.0
@@ -1784,6 +1810,7 @@ module ArmVehicles_T2 =
     let armgremlinDef : UnitDef =
         { name = "armgremlin"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Gremlin"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 3700.0
           buildTime = ValueOrExpr.Concrete 8500.0
@@ -1929,6 +1956,7 @@ module ArmVehicles_T2 =
     let armgremlinToFlat (def: UnitDef) : Armgremlin =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1967,6 +1995,7 @@ module ArmVehicles_T2 =
     let armgremlinToUnitDef (flat: Armgremlin) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2015,6 +2044,7 @@ module ArmVehicles_T2 =
     type Armhacv =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2058,6 +2088,7 @@ module ArmVehicles_T2 =
     let armhacv : Armhacv =
         { name = "armhacv"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Consul"
           metalCost = ValueOrExpr.Concrete 1300.0
           energyCost = ValueOrExpr.Concrete 18800.0
           buildTime = ValueOrExpr.Concrete 42000.0
@@ -2155,6 +2186,7 @@ module ArmVehicles_T2 =
     let armhacvDef : UnitDef =
         { name = "armhacv"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Consul"
           metalCost = ValueOrExpr.Concrete 1300.0
           energyCost = ValueOrExpr.Concrete 18800.0
           buildTime = ValueOrExpr.Concrete 42000.0
@@ -2265,6 +2297,7 @@ module ArmVehicles_T2 =
     let armhacvToFlat (def: UnitDef) : Armhacv =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2308,6 +2341,7 @@ module ArmVehicles_T2 =
     let armhacvToUnitDef (flat: Armhacv) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2367,6 +2401,7 @@ module ArmVehicles_T2 =
     type Armjam =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2404,6 +2439,7 @@ module ArmVehicles_T2 =
     let armjam : Armjam =
         { name = "armjam"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Umbra"
           metalCost = ValueOrExpr.Concrete 105.0
           energyCost = ValueOrExpr.Concrete 1700.0
           buildTime = ValueOrExpr.Concrete 7000.0
@@ -2502,6 +2538,7 @@ module ArmVehicles_T2 =
     let armjamDef : UnitDef =
         { name = "armjam"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Umbra"
           metalCost = ValueOrExpr.Concrete 105.0
           energyCost = ValueOrExpr.Concrete 1700.0
           buildTime = ValueOrExpr.Concrete 7000.0
@@ -2610,6 +2647,7 @@ module ArmVehicles_T2 =
     let armjamToFlat (def: UnitDef) : Armjam =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2647,6 +2685,7 @@ module ArmVehicles_T2 =
     let armjamToUnitDef (flat: Armjam) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2695,6 +2734,7 @@ module ArmVehicles_T2 =
     type Armlatnk =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2733,6 +2773,7 @@ module ArmVehicles_T2 =
     let armlatnk : Armlatnk =
         { name = "armlatnk"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Jaguar"
           metalCost = ValueOrExpr.Concrete 330.0
           energyCost = ValueOrExpr.Concrete 6400.0
           buildTime = ValueOrExpr.Concrete 8000.0
@@ -2827,7 +2868,9 @@ module ArmVehicles_T2 =
                   soundHit = Some "xplosml2"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -2921,6 +2964,7 @@ module ArmVehicles_T2 =
     let armlatnkDef : UnitDef =
         { name = "armlatnk"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Jaguar"
           metalCost = ValueOrExpr.Concrete 330.0
           energyCost = ValueOrExpr.Concrete 6400.0
           buildTime = ValueOrExpr.Concrete 8000.0
@@ -3022,7 +3066,9 @@ module ArmVehicles_T2 =
                 soundHit = Some "xplosml2"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -3118,6 +3164,7 @@ module ArmVehicles_T2 =
     let armlatnkToFlat (def: UnitDef) : Armlatnk =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3156,6 +3203,7 @@ module ArmVehicles_T2 =
     let armlatnkToUnitDef (flat: Armlatnk) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3204,6 +3252,7 @@ module ArmVehicles_T2 =
     type Armmanni =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3242,6 +3291,7 @@ module ArmVehicles_T2 =
     let armmanni : Armmanni =
         { name = "armmanni"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Starlight"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 18500.0
           buildTime = ValueOrExpr.Concrete 33000.0
@@ -3386,6 +3436,7 @@ module ArmVehicles_T2 =
     let armmanniDef : UnitDef =
         { name = "armmanni"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Starlight"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 18500.0
           buildTime = ValueOrExpr.Concrete 33000.0
@@ -3539,6 +3590,7 @@ module ArmVehicles_T2 =
     let armmanniToFlat (def: UnitDef) : Armmanni =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3577,6 +3629,7 @@ module ArmVehicles_T2 =
     let armmanniToUnitDef (flat: Armmanni) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3625,6 +3678,7 @@ module ArmVehicles_T2 =
     type Armmart =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3663,6 +3717,7 @@ module ArmVehicles_T2 =
     let armmart : Armmart =
         { name = "armmart"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Mauser"
           metalCost = ValueOrExpr.Concrete 320.0
           energyCost = ValueOrExpr.Concrete 4900.0
           buildTime = ValueOrExpr.Concrete 8500.0
@@ -3799,6 +3854,7 @@ module ArmVehicles_T2 =
     let armmartDef : UnitDef =
         { name = "armmart"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Mauser"
           metalCost = ValueOrExpr.Concrete 320.0
           energyCost = ValueOrExpr.Concrete 4900.0
           buildTime = ValueOrExpr.Concrete 8500.0
@@ -3944,6 +4000,7 @@ module ArmVehicles_T2 =
     let armmartToFlat (def: UnitDef) : Armmart =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3982,6 +4039,7 @@ module ArmVehicles_T2 =
     let armmartToUnitDef (flat: Armmart) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4030,6 +4088,7 @@ module ArmVehicles_T2 =
     type Armmerl =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4068,6 +4127,7 @@ module ArmVehicles_T2 =
     let armmerl : Armmerl =
         { name = "armmerl"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Ambassador"
           metalCost = ValueOrExpr.Concrete 920.0
           energyCost = ValueOrExpr.Concrete 6500.0
           buildTime = ValueOrExpr.Concrete 21000.0
@@ -4214,6 +4274,7 @@ module ArmVehicles_T2 =
     let armmerlDef : UnitDef =
         { name = "armmerl"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Ambassador"
           metalCost = ValueOrExpr.Concrete 920.0
           energyCost = ValueOrExpr.Concrete 6500.0
           buildTime = ValueOrExpr.Concrete 21000.0
@@ -4369,6 +4430,7 @@ module ArmVehicles_T2 =
     let armmerlToFlat (def: UnitDef) : Armmerl =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4407,6 +4469,7 @@ module ArmVehicles_T2 =
     let armmerlToUnitDef (flat: Armmerl) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4455,6 +4518,7 @@ module ArmVehicles_T2 =
     type Armsacv =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4498,6 +4562,7 @@ module ArmVehicles_T2 =
     let armsacv : Armsacv =
         { name = "armsacv"
           subfolder = "ArmVehicles/T2"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 6800.0
           buildTime = ValueOrExpr.Concrete 16000.0
@@ -4594,6 +4659,7 @@ module ArmVehicles_T2 =
     let armsacvDef : UnitDef =
         { name = "armsacv"
           subfolder = "ArmVehicles/T2"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 6800.0
           buildTime = ValueOrExpr.Concrete 16000.0
@@ -4703,6 +4769,7 @@ module ArmVehicles_T2 =
     let armsacvToFlat (def: UnitDef) : Armsacv =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4746,6 +4813,7 @@ module ArmVehicles_T2 =
     let armsacvToUnitDef (flat: Armsacv) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4805,6 +4873,7 @@ module ArmVehicles_T2 =
     type Armseer =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4842,6 +4911,7 @@ module ArmVehicles_T2 =
     let armseer : Armseer =
         { name = "armseer"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Prophet"
           metalCost = ValueOrExpr.Concrete 125.0
           energyCost = ValueOrExpr.Concrete 2000.0
           buildTime = ValueOrExpr.Concrete 7500.0
@@ -4936,6 +5006,7 @@ module ArmVehicles_T2 =
     let armseerDef : UnitDef =
         { name = "armseer"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Prophet"
           metalCost = ValueOrExpr.Concrete 125.0
           energyCost = ValueOrExpr.Concrete 2000.0
           buildTime = ValueOrExpr.Concrete 7500.0
@@ -5040,6 +5111,7 @@ module ArmVehicles_T2 =
     let armseerToFlat (def: UnitDef) : Armseer =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5077,6 +5149,7 @@ module ArmVehicles_T2 =
     let armseerToUnitDef (flat: Armseer) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5125,6 +5198,7 @@ module ArmVehicles_T2 =
     type Armyork =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5163,6 +5237,7 @@ module ArmVehicles_T2 =
     let armyork : Armyork =
         { name = "armyork"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Shredder"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 9100.0
           buildTime = ValueOrExpr.Concrete 13000.0
@@ -5331,6 +5406,7 @@ module ArmVehicles_T2 =
     let armyorkDef : UnitDef =
         { name = "armyork"
           subfolder = "ArmVehicles/T2"
+          printableName = Some "Shredder"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 9100.0
           buildTime = ValueOrExpr.Concrete 13000.0
@@ -5508,6 +5584,7 @@ module ArmVehicles_T2 =
     let armyorkToFlat (def: UnitDef) : Armyork =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5546,6 +5623,7 @@ module ArmVehicles_T2 =
     let armyorkToUnitDef (flat: Armyork) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

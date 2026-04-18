@@ -8,6 +8,7 @@ module CorBots =
     type Corak =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module CorBots =
     let corak : Corak =
         { name = "corak"
           subfolder = "CorBots"
+          printableName = Some "Grunt"
           metalCost = ValueOrExpr.Concrete 42.0
           energyCost = ValueOrExpr.Concrete 820.0
           buildTime = ValueOrExpr.Concrete 1250.0
@@ -178,6 +180,7 @@ module CorBots =
     let corakDef : UnitDef =
         { name = "corak"
           subfolder = "CorBots"
+          printableName = Some "Grunt"
           metalCost = ValueOrExpr.Concrete 42.0
           energyCost = ValueOrExpr.Concrete 820.0
           buildTime = ValueOrExpr.Concrete 1250.0
@@ -319,6 +322,7 @@ module CorBots =
     let corakToFlat (def: UnitDef) : Corak =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -357,6 +361,7 @@ module CorBots =
     let corakToUnitDef (flat: Corak) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -405,6 +410,7 @@ module CorBots =
     type Corck =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -448,6 +454,7 @@ module CorBots =
     let corck : Corck =
         { name = "corck"
           subfolder = "CorBots"
+          printableName = Some "Construction Bot"
           metalCost = ValueOrExpr.Concrete 120.0
           energyCost = ValueOrExpr.Concrete 1750.0
           buildTime = ValueOrExpr.Concrete 3550.0
@@ -539,6 +546,7 @@ module CorBots =
     let corckDef : UnitDef =
         { name = "corck"
           subfolder = "CorBots"
+          printableName = Some "Construction Bot"
           metalCost = ValueOrExpr.Concrete 120.0
           energyCost = ValueOrExpr.Concrete 1750.0
           buildTime = ValueOrExpr.Concrete 3550.0
@@ -643,6 +651,7 @@ module CorBots =
     let corckToFlat (def: UnitDef) : Corck =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -686,6 +695,7 @@ module CorBots =
     let corckToUnitDef (flat: Corck) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -745,6 +755,7 @@ module CorBots =
     type Corcrash =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -782,6 +793,7 @@ module CorBots =
     let corcrash : Corcrash =
         { name = "corcrash"
           subfolder = "CorBots"
+          printableName = Some "Trasher"
           metalCost = ValueOrExpr.Concrete 125.0
           energyCost = ValueOrExpr.Concrete 1100.0
           buildTime = ValueOrExpr.Concrete 1900.0
@@ -957,6 +969,7 @@ module CorBots =
     let corcrashDef : UnitDef =
         { name = "corcrash"
           subfolder = "CorBots"
+          printableName = Some "Trasher"
           metalCost = ValueOrExpr.Concrete 125.0
           energyCost = ValueOrExpr.Concrete 1100.0
           buildTime = ValueOrExpr.Concrete 1900.0
@@ -1142,6 +1155,7 @@ module CorBots =
     let corcrashToFlat (def: UnitDef) : Corcrash =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1179,6 +1193,7 @@ module CorBots =
     let corcrashToUnitDef (flat: Corcrash) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1227,6 +1242,7 @@ module CorBots =
     type Cornecro =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1264,6 +1280,7 @@ module CorBots =
     let cornecro : Cornecro =
         { name = "cornecro"
           subfolder = "CorBots"
+          printableName = Some "Graverobber"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 1400.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -1354,6 +1371,7 @@ module CorBots =
     let cornecroDef : UnitDef =
         { name = "cornecro"
           subfolder = "CorBots"
+          printableName = Some "Graverobber"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 1400.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -1454,6 +1472,7 @@ module CorBots =
     let cornecroToFlat (def: UnitDef) : Cornecro =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1491,6 +1510,7 @@ module CorBots =
     let cornecroToUnitDef (flat: Cornecro) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1539,6 +1559,7 @@ module CorBots =
     type Corstorm =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1577,6 +1598,7 @@ module CorBots =
     let corstorm : Corstorm =
         { name = "corstorm"
           subfolder = "CorBots"
+          printableName = Some "Aggravator"
           metalCost = ValueOrExpr.Concrete 110.0
           energyCost = ValueOrExpr.Concrete 1150.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -1715,6 +1737,7 @@ module CorBots =
     let corstormDef : UnitDef =
         { name = "corstorm"
           subfolder = "CorBots"
+          printableName = Some "Aggravator"
           metalCost = ValueOrExpr.Concrete 110.0
           energyCost = ValueOrExpr.Concrete 1150.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -1862,6 +1885,7 @@ module CorBots =
     let corstormToFlat (def: UnitDef) : Corstorm =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1900,6 +1924,7 @@ module CorBots =
     let corstormToUnitDef (flat: Corstorm) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1948,6 +1973,7 @@ module CorBots =
     type Corthud =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1986,6 +2012,7 @@ module CorBots =
     let corthud : Corthud =
         { name = "corthud"
           subfolder = "CorBots"
+          printableName = Some "Thug"
           metalCost = ValueOrExpr.Concrete 140.0
           energyCost = ValueOrExpr.Concrete 1150.0
           buildTime = ValueOrExpr.Concrete 2100.0
@@ -2108,6 +2135,7 @@ module CorBots =
     let corthudDef : UnitDef =
         { name = "corthud"
           subfolder = "CorBots"
+          printableName = Some "Thug"
           metalCost = ValueOrExpr.Concrete 140.0
           energyCost = ValueOrExpr.Concrete 1150.0
           buildTime = ValueOrExpr.Concrete 2100.0
@@ -2239,6 +2267,7 @@ module CorBots =
     let corthudToFlat (def: UnitDef) : Corthud =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2277,6 +2306,7 @@ module CorBots =
     let corthudToUnitDef (flat: Corthud) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

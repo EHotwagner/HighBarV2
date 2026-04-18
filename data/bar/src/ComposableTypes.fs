@@ -44,6 +44,7 @@ type BuildingDef =
 type UnitDef =
     { name: string
       subfolder: string
+      printableName: string option
       metalCost: ValueOrExpr<float>
       energyCost: ValueOrExpr<float>
       buildTime: ValueOrExpr<float>

@@ -8,6 +8,7 @@ module Legion_Ships_T2 =
     type Leganavyaaship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module Legion_Ships_T2 =
     let leganavyaaship : Leganavyaaship =
         { name = "leganavyaaship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Notus"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 20100.0
@@ -297,6 +299,7 @@ module Legion_Ships_T2 =
     let leganavyaashipDef : UnitDef =
         { name = "leganavyaaship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Notus"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 20100.0
@@ -557,6 +560,7 @@ module Legion_Ships_T2 =
     let leganavyaashipToFlat (def: UnitDef) : Leganavyaaship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -595,6 +599,7 @@ module Legion_Ships_T2 =
     let leganavyaashipToUnitDef (flat: Leganavyaaship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -643,6 +648,7 @@ module Legion_Ships_T2 =
     type Leganavyantinukecarrier =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -683,6 +689,7 @@ module Legion_Ships_T2 =
     let leganavyantinukecarrier : Leganavyantinukecarrier =
         { name = "leganavyantinukecarrier"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Hecate"
           metalCost = ValueOrExpr.Concrete 1600.0
           energyCost = ValueOrExpr.Concrete 13000.0
           buildTime = ValueOrExpr.Concrete 26800.0
@@ -887,6 +894,7 @@ module Legion_Ships_T2 =
     let leganavyantinukecarrierDef : UnitDef =
         { name = "leganavyantinukecarrier"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Hecate"
           metalCost = ValueOrExpr.Concrete 1600.0
           energyCost = ValueOrExpr.Concrete 13000.0
           buildTime = ValueOrExpr.Concrete 26800.0
@@ -1103,6 +1111,7 @@ module Legion_Ships_T2 =
     let leganavyantinukecarrierToFlat (def: UnitDef) : Leganavyantinukecarrier =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1143,6 +1152,7 @@ module Legion_Ships_T2 =
     let leganavyantinukecarrierToUnitDef (flat: Leganavyantinukecarrier) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1197,6 +1207,7 @@ module Legion_Ships_T2 =
     type Leganavyantiswarm =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1235,6 +1246,7 @@ module Legion_Ships_T2 =
     let leganavyantiswarm : Leganavyantiswarm =
         { name = "leganavyantiswarm"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Leocampus"
           metalCost = ValueOrExpr.Concrete 500.0
           energyCost = ValueOrExpr.Concrete 8500.0
           buildTime = ValueOrExpr.Concrete 11270.0
@@ -1420,6 +1432,7 @@ module Legion_Ships_T2 =
     let leganavyantiswarmDef : UnitDef =
         { name = "leganavyantiswarm"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Leocampus"
           metalCost = ValueOrExpr.Concrete 500.0
           energyCost = ValueOrExpr.Concrete 8500.0
           buildTime = ValueOrExpr.Concrete 11270.0
@@ -1614,6 +1627,7 @@ module Legion_Ships_T2 =
     let leganavyantiswarmToFlat (def: UnitDef) : Leganavyantiswarm =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1652,6 +1666,7 @@ module Legion_Ships_T2 =
     let leganavyantiswarmToUnitDef (flat: Leganavyantiswarm) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1700,6 +1715,7 @@ module Legion_Ships_T2 =
     type Leganavyartyship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1738,6 +1754,7 @@ module Legion_Ships_T2 =
     let leganavyartyship : Leganavyartyship =
         { name = "leganavyartyship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Corinth"
           metalCost = ValueOrExpr.Concrete 13000.0
           energyCost = ValueOrExpr.Concrete 125000.0
           buildTime = ValueOrExpr.Concrete 204750.0
@@ -1998,6 +2015,7 @@ module Legion_Ships_T2 =
     let leganavyartyshipDef : UnitDef =
         { name = "leganavyartyship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Corinth"
           metalCost = ValueOrExpr.Concrete 13000.0
           energyCost = ValueOrExpr.Concrete 125000.0
           buildTime = ValueOrExpr.Concrete 204750.0
@@ -2267,6 +2285,7 @@ module Legion_Ships_T2 =
     let leganavyartyshipToFlat (def: UnitDef) : Leganavyartyship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2305,6 +2324,7 @@ module Legion_Ships_T2 =
     let leganavyartyshipToUnitDef (flat: Leganavyartyship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2353,6 +2373,7 @@ module Legion_Ships_T2 =
     type Leganavybattleship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2391,6 +2412,7 @@ module Legion_Ships_T2 =
     let leganavybattleship : Leganavybattleship =
         { name = "leganavybattleship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Scylla"
           metalCost = ValueOrExpr.Concrete 2900.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 49350.0
@@ -2445,9 +2467,9 @@ module Legion_Ships_T2 =
                   customParams = Map.empty
                   extras = Map.ofList [
                       "mount_badtargetcategory", "VTOL"
-                      "mount_onlytargetcategory", "SURFACE"
-                      "mount_fastautoretargeting", "true"
                       "mount_burstControlWhenOutOfArc", "2.0"
+                      "mount_fastautoretargeting", "true"
+                      "mount_onlytargetcategory", "SURFACE"
                       "burstrate", "0.066"
                       "burst", "3.0"
                       "avoidfeature", "false"
@@ -2457,18 +2479,18 @@ module Legion_Ships_T2 =
                       "soundhitwet", "splsmed"
                       "sprayangle", "750.0"
                   ] }
-                { name = "burst_plasma_t2"
+                { name = "burst_plasma_t2_land"
                   displayName = "Heavy long-range g2g plasma cannon"
                   weaponType = Some "Cannon"
                   damage = Map.ofList [
-                      "default", 270.0
+                      "default", 300.0
                       "vtol", 65.0
                   ]
-                  range = Some (ValueOrExpr.Concrete 750.0)
-                  reloadTime = Some (ValueOrExpr.Concrete 2.7)
-                  weaponVelocity = Some 440.0
-                  areaOfEffect = Some 200.0
-                  accuracy = None
+                  range = Some (ValueOrExpr.Concrete 700.0)
+                  reloadTime = Some (ValueOrExpr.Concrete 2.4)
+                  weaponVelocity = Some 470.0
+                  areaOfEffect = Some 140.0
+                  accuracy = Some 350.0
                   turret = Some true
                   tolerance = Some 5000.0
                   edgeEffectiveness = Some 0.15
@@ -2480,9 +2502,9 @@ module Legion_Ships_T2 =
                   rgbColor = None
                   customParams = Map.empty
                   extras = Map.ofList [
+                      "mount_burstControlWhenOutOfArc", "2.0"
                       "mount_fastautoretargeting", "true"
                       "mount_onlytargetcategory", "SURFACE"
-                      "mount_burstControlWhenOutOfArc", "2.0"
                       "burstrate", "0.066"
                       "burst", "3.0"
                       "avoidfeature", "false"
@@ -2490,7 +2512,6 @@ module Legion_Ships_T2 =
                       "cratermult", "0.0"
                       "gravityaffected", "true"
                       "soundhitwet", "splsmed"
-                      "sprayangle", "750.0"
                   ] }
                 { name = "legion_shotgun"
                   displayName = "Medium Shotgun"
@@ -2645,6 +2666,7 @@ module Legion_Ships_T2 =
     let leganavybattleshipDef : UnitDef =
         { name = "leganavybattleship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Scylla"
           metalCost = ValueOrExpr.Concrete 2900.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 49350.0
@@ -2706,9 +2728,9 @@ module Legion_Ships_T2 =
                 customParams = Map.empty
                 extras = Map.ofList [
                     "mount_badtargetcategory", "VTOL"
-                    "mount_onlytargetcategory", "SURFACE"
-                    "mount_fastautoretargeting", "true"
                     "mount_burstControlWhenOutOfArc", "2.0"
+                    "mount_fastautoretargeting", "true"
+                    "mount_onlytargetcategory", "SURFACE"
                     "burstrate", "0.066"
                     "burst", "3.0"
                     "avoidfeature", "false"
@@ -2718,18 +2740,18 @@ module Legion_Ships_T2 =
                     "soundhitwet", "splsmed"
                     "sprayangle", "750.0"
                 ] }
-              { name = "burst_plasma_t2"
+              { name = "burst_plasma_t2_land"
                 displayName = "Heavy long-range g2g plasma cannon"
                 weaponType = Some "Cannon"
                 damage = Map.ofList [
-                    "default", 270.0
+                    "default", 300.0
                     "vtol", 65.0
                 ]
-                range = Some (ValueOrExpr.Concrete 750.0)
-                reloadTime = Some (ValueOrExpr.Concrete 2.7)
-                weaponVelocity = Some 440.0
-                areaOfEffect = Some 200.0
-                accuracy = None
+                range = Some (ValueOrExpr.Concrete 700.0)
+                reloadTime = Some (ValueOrExpr.Concrete 2.4)
+                weaponVelocity = Some 470.0
+                areaOfEffect = Some 140.0
+                accuracy = Some 350.0
                 turret = Some true
                 tolerance = Some 5000.0
                 edgeEffectiveness = Some 0.15
@@ -2741,9 +2763,9 @@ module Legion_Ships_T2 =
                 rgbColor = None
                 customParams = Map.empty
                 extras = Map.ofList [
+                    "mount_burstControlWhenOutOfArc", "2.0"
                     "mount_fastautoretargeting", "true"
                     "mount_onlytargetcategory", "SURFACE"
-                    "mount_burstControlWhenOutOfArc", "2.0"
                     "burstrate", "0.066"
                     "burst", "3.0"
                     "avoidfeature", "false"
@@ -2751,7 +2773,6 @@ module Legion_Ships_T2 =
                     "cratermult", "0.0"
                     "gravityaffected", "true"
                     "soundhitwet", "splsmed"
-                    "sprayangle", "750.0"
                 ] }
               { name = "legion_shotgun"
                 displayName = "Medium Shotgun"
@@ -2908,6 +2929,7 @@ module Legion_Ships_T2 =
     let leganavybattleshipToFlat (def: UnitDef) : Leganavybattleship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2946,6 +2968,7 @@ module Legion_Ships_T2 =
     let leganavybattleshipToUnitDef (flat: Leganavybattleship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2994,6 +3017,7 @@ module Legion_Ships_T2 =
     type Leganavybattlesub =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3031,6 +3055,7 @@ module Legion_Ships_T2 =
     let leganavybattlesub : Leganavybattlesub =
         { name = "leganavybattlesub"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Architeuthis"
           metalCost = ValueOrExpr.Concrete 1100.0
           energyCost = ValueOrExpr.Concrete 16000.0
           buildTime = ValueOrExpr.Concrete 25000.0
@@ -3164,6 +3189,7 @@ module Legion_Ships_T2 =
     let leganavybattlesubDef : UnitDef =
         { name = "leganavybattlesub"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Architeuthis"
           metalCost = ValueOrExpr.Concrete 1100.0
           energyCost = ValueOrExpr.Concrete 16000.0
           buildTime = ValueOrExpr.Concrete 25000.0
@@ -3307,6 +3333,7 @@ module Legion_Ships_T2 =
     let leganavybattlesubToFlat (def: UnitDef) : Leganavybattlesub =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3344,6 +3371,7 @@ module Legion_Ships_T2 =
     let leganavybattlesubToUnitDef (flat: Leganavybattlesub) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3392,6 +3420,7 @@ module Legion_Ships_T2 =
     type Leganavycruiser =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3430,6 +3459,7 @@ module Legion_Ships_T2 =
     let leganavycruiser : Leganavycruiser =
         { name = "leganavycruiser"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Thalassa"
           metalCost = ValueOrExpr.Concrete 900.0
           energyCost = ValueOrExpr.Concrete 10800.0
           buildTime = ValueOrExpr.Concrete 20290.0
@@ -3606,6 +3636,7 @@ module Legion_Ships_T2 =
     let leganavycruiserDef : UnitDef =
         { name = "leganavycruiser"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Thalassa"
           metalCost = ValueOrExpr.Concrete 900.0
           energyCost = ValueOrExpr.Concrete 10800.0
           buildTime = ValueOrExpr.Concrete 20290.0
@@ -3791,6 +3822,7 @@ module Legion_Ships_T2 =
     let leganavycruiserToFlat (def: UnitDef) : Leganavycruiser =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3829,6 +3861,7 @@ module Legion_Ships_T2 =
     let leganavycruiserToUnitDef (flat: Leganavycruiser) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3877,6 +3910,7 @@ module Legion_Ships_T2 =
     type Leganavyflagship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3916,6 +3950,7 @@ module Legion_Ships_T2 =
     let leganavyflagship : Leganavyflagship =
         { name = "leganavyflagship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Neptune"
           metalCost = ValueOrExpr.Concrete 16000.0
           energyCost = ValueOrExpr.Concrete 240000.0
           buildTime = ValueOrExpr.Concrete 269000.0
@@ -4345,6 +4380,7 @@ module Legion_Ships_T2 =
     let leganavyflagshipDef : UnitDef =
         { name = "leganavyflagship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Neptune"
           metalCost = ValueOrExpr.Concrete 16000.0
           energyCost = ValueOrExpr.Concrete 240000.0
           buildTime = ValueOrExpr.Concrete 269000.0
@@ -4787,6 +4823,7 @@ module Legion_Ships_T2 =
     let leganavyflagshipToFlat (def: UnitDef) : Leganavyflagship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4826,6 +4863,7 @@ module Legion_Ships_T2 =
     let leganavyflagshipToUnitDef (flat: Leganavyflagship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4880,6 +4918,7 @@ module Legion_Ships_T2 =
     type Leganavyheavysub =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4917,6 +4956,7 @@ module Legion_Ships_T2 =
     let leganavyheavysub : Leganavyheavysub =
         { name = "leganavyheavysub"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Sphyrna"
           metalCost = ValueOrExpr.Concrete 1900.0
           energyCost = ValueOrExpr.Concrete 29000.0
           buildTime = ValueOrExpr.Concrete 34370.0
@@ -5053,6 +5093,7 @@ module Legion_Ships_T2 =
     let leganavyheavysubDef : UnitDef =
         { name = "leganavyheavysub"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Sphyrna"
           metalCost = ValueOrExpr.Concrete 1900.0
           energyCost = ValueOrExpr.Concrete 29000.0
           buildTime = ValueOrExpr.Concrete 34370.0
@@ -5199,6 +5240,7 @@ module Legion_Ships_T2 =
     let leganavyheavysubToFlat (def: UnitDef) : Leganavyheavysub =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5236,6 +5278,7 @@ module Legion_Ships_T2 =
     let leganavyheavysubToUnitDef (flat: Leganavyheavysub) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5284,6 +5327,7 @@ module Legion_Ships_T2 =
     type Leganavymissileship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5322,6 +5366,7 @@ module Legion_Ships_T2 =
     let leganavymissileship : Leganavymissileship =
         { name = "leganavymissileship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Ultor"
           metalCost = ValueOrExpr.Concrete 2000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -5523,6 +5568,7 @@ module Legion_Ships_T2 =
     let leganavymissileshipDef : UnitDef =
         { name = "leganavymissileship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Ultor"
           metalCost = ValueOrExpr.Concrete 2000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -5733,6 +5779,7 @@ module Legion_Ships_T2 =
     let leganavymissileshipToFlat (def: UnitDef) : Leganavymissileship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5771,6 +5818,7 @@ module Legion_Ships_T2 =
     let leganavymissileshipToUnitDef (flat: Leganavymissileship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5819,6 +5867,7 @@ module Legion_Ships_T2 =
     type Leganavyradjamship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5856,6 +5905,7 @@ module Legion_Ships_T2 =
     let leganavyradjamship : Leganavyradjamship =
         { name = "leganavyradjamship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Dolus"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 6000.0
           buildTime = ValueOrExpr.Concrete 19800.0
@@ -5947,6 +5997,7 @@ module Legion_Ships_T2 =
     let leganavyradjamshipDef : UnitDef =
         { name = "leganavyradjamship"
           subfolder = "Legion/Ships/T2"
+          printableName = Some "Dolus"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 6000.0
           buildTime = ValueOrExpr.Concrete 19800.0
@@ -6048,6 +6099,7 @@ module Legion_Ships_T2 =
     let leganavyradjamshipToFlat (def: UnitDef) : Leganavyradjamship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6085,6 +6137,7 @@ module Legion_Ships_T2 =
     let leganavyradjamshipToUnitDef (flat: Leganavyradjamship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

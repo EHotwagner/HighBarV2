@@ -8,6 +8,7 @@ module Scavengers_Other =
     type Scavempspawner =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -35,6 +36,7 @@ module Scavengers_Other =
     let scavempspawner : Scavempspawner =
         { name = "scavempspawner"
           subfolder = "Scavengers/Other"
+          printableName = Some "New Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -119,6 +121,7 @@ module Scavengers_Other =
     let scavempspawnerDef : UnitDef =
         { name = "scavempspawner"
           subfolder = "Scavengers/Other"
+          printableName = Some "New Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -210,6 +213,7 @@ module Scavengers_Other =
     let scavempspawnerToFlat (def: UnitDef) : Scavempspawner =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -237,6 +241,7 @@ module Scavengers_Other =
     let scavempspawnerToUnitDef (flat: Scavempspawner) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -272,6 +277,7 @@ module Scavengers_Other =
     type Scavengerdroppod =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -299,6 +305,7 @@ module Scavengers_Other =
     let scavengerdroppod : Scavengerdroppod =
         { name = "scavengerdroppod"
           subfolder = "Scavengers/Other"
+          printableName = Some "Scavenger Droppod"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -389,6 +396,7 @@ module Scavengers_Other =
     let scavengerdroppodDef : UnitDef =
         { name = "scavengerdroppod"
           subfolder = "Scavengers/Other"
+          printableName = Some "Scavenger Droppod"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -486,6 +494,7 @@ module Scavengers_Other =
     let scavengerdroppodToFlat (def: UnitDef) : Scavengerdroppod =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -513,6 +522,7 @@ module Scavengers_Other =
     let scavengerdroppodToUnitDef (flat: Scavengerdroppod) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -548,6 +558,7 @@ module Scavengers_Other =
     type Scavengerdroppodfriendly =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -575,6 +586,7 @@ module Scavengers_Other =
     let scavengerdroppodfriendly : Scavengerdroppodfriendly =
         { name = "scavengerdroppodfriendly"
           subfolder = "Scavengers/Other"
+          printableName = Some "Friendly Droppod"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -659,6 +671,7 @@ module Scavengers_Other =
     let scavengerdroppodfriendlyDef : UnitDef =
         { name = "scavengerdroppodfriendly"
           subfolder = "Scavengers/Other"
+          printableName = Some "Friendly Droppod"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -750,6 +763,7 @@ module Scavengers_Other =
     let scavengerdroppodfriendlyToFlat (def: UnitDef) : Scavengerdroppodfriendly =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -777,6 +791,7 @@ module Scavengers_Other =
     let scavengerdroppodfriendlyToUnitDef (flat: Scavengerdroppodfriendly) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -812,6 +827,7 @@ module Scavengers_Other =
     type Scavtacnukespawner =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -839,6 +855,7 @@ module Scavengers_Other =
     let scavtacnukespawner : Scavtacnukespawner =
         { name = "scavtacnukespawner"
           subfolder = "Scavengers/Other"
+          printableName = Some "Tactical Nuke Drop"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -922,6 +939,7 @@ module Scavengers_Other =
     let scavtacnukespawnerDef : UnitDef =
         { name = "scavtacnukespawner"
           subfolder = "Scavengers/Other"
+          printableName = Some "Tactical Nuke Drop"
           metalCost = ValueOrExpr.Concrete 10.0
           energyCost = ValueOrExpr.Concrete 10.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -1012,6 +1030,7 @@ module Scavengers_Other =
     let scavtacnukespawnerToFlat (def: UnitDef) : Scavtacnukespawner =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1039,6 +1058,7 @@ module Scavengers_Other =
     let scavtacnukespawnerToUnitDef (flat: Scavtacnukespawner) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

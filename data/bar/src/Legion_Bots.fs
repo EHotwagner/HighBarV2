@@ -8,6 +8,7 @@ module Legion_Bots =
     type Legaabot =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -45,6 +46,7 @@ module Legion_Bots =
     let legaabot : Legaabot =
         { name = "legaabot"
           subfolder = "Legion/Bots"
+          printableName = Some "Toxotai"
           metalCost = ValueOrExpr.Concrete 120.0
           energyCost = ValueOrExpr.Concrete 950.0
           buildTime = ValueOrExpr.Concrete 1800.0
@@ -189,6 +191,7 @@ module Legion_Bots =
     let legaabotDef : UnitDef =
         { name = "legaabot"
           subfolder = "Legion/Bots"
+          printableName = Some "Toxotai"
           metalCost = ValueOrExpr.Concrete 120.0
           energyCost = ValueOrExpr.Concrete 950.0
           buildTime = ValueOrExpr.Concrete 1800.0
@@ -343,6 +346,7 @@ module Legion_Bots =
     let legaabotToFlat (def: UnitDef) : Legaabot =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -380,6 +384,7 @@ module Legion_Bots =
     let legaabotToUnitDef (flat: Legaabot) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -428,6 +433,7 @@ module Legion_Bots =
     type Legbal =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -466,6 +472,7 @@ module Legion_Bots =
     let legbal : Legbal =
         { name = "legbal"
           subfolder = "Legion/Bots"
+          printableName = Some "Ballista"
           metalCost = ValueOrExpr.Concrete 160.0
           energyCost = ValueOrExpr.Concrete 1920.0
           buildTime = ValueOrExpr.Concrete 2400.0
@@ -603,6 +610,7 @@ module Legion_Bots =
     let legbalDef : UnitDef =
         { name = "legbal"
           subfolder = "Legion/Bots"
+          printableName = Some "Ballista"
           metalCost = ValueOrExpr.Concrete 160.0
           energyCost = ValueOrExpr.Concrete 1920.0
           buildTime = ValueOrExpr.Concrete 2400.0
@@ -749,6 +757,7 @@ module Legion_Bots =
     let legbalToFlat (def: UnitDef) : Legbal =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -787,6 +796,7 @@ module Legion_Bots =
     let legbalToUnitDef (flat: Legbal) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -835,6 +845,7 @@ module Legion_Bots =
     type Legcen =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -873,6 +884,7 @@ module Legion_Bots =
     let legcen : Legcen =
         { name = "legcen"
           subfolder = "Legion/Bots"
+          printableName = Some "Phobos"
           metalCost = ValueOrExpr.Concrete 140.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -1001,6 +1013,7 @@ module Legion_Bots =
     let legcenDef : UnitDef =
         { name = "legcen"
           subfolder = "Legion/Bots"
+          printableName = Some "Phobos"
           metalCost = ValueOrExpr.Concrete 140.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -1138,6 +1151,7 @@ module Legion_Bots =
     let legcenToFlat (def: UnitDef) : Legcen =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1176,6 +1190,7 @@ module Legion_Bots =
     let legcenToUnitDef (flat: Legcen) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1224,6 +1239,7 @@ module Legion_Bots =
     type Leggob =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1262,6 +1278,7 @@ module Legion_Bots =
     let leggob : Leggob =
         { name = "leggob"
           subfolder = "Legion/Bots"
+          printableName = Some "Goblin"
           metalCost = ValueOrExpr.Concrete 25.0
           energyCost = ValueOrExpr.Concrete 500.0
           buildTime = ValueOrExpr.Concrete 900.0
@@ -1399,6 +1416,7 @@ module Legion_Bots =
     let leggobDef : UnitDef =
         { name = "leggob"
           subfolder = "Legion/Bots"
+          printableName = Some "Goblin"
           metalCost = ValueOrExpr.Concrete 25.0
           energyCost = ValueOrExpr.Concrete 500.0
           buildTime = ValueOrExpr.Concrete 900.0
@@ -1545,6 +1563,7 @@ module Legion_Bots =
     let leggobToFlat (def: UnitDef) : Leggob =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1583,6 +1602,7 @@ module Legion_Bots =
     let leggobToUnitDef (flat: Leggob) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1631,6 +1651,7 @@ module Legion_Bots =
     type Legkark =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1669,6 +1690,7 @@ module Legion_Bots =
     let legkark : Legkark =
         { name = "legkark"
           subfolder = "Legion/Bots"
+          printableName = Some "Karkinos"
           metalCost = ValueOrExpr.Concrete 330.0
           energyCost = ValueOrExpr.Concrete 2600.0
           buildTime = ValueOrExpr.Concrete 4400.0
@@ -1849,6 +1871,7 @@ module Legion_Bots =
     let legkarkDef : UnitDef =
         { name = "legkark"
           subfolder = "Legion/Bots"
+          printableName = Some "Karkinos"
           metalCost = ValueOrExpr.Concrete 330.0
           energyCost = ValueOrExpr.Concrete 2600.0
           buildTime = ValueOrExpr.Concrete 4400.0
@@ -2038,6 +2061,7 @@ module Legion_Bots =
     let legkarkToFlat (def: UnitDef) : Legkark =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2076,6 +2100,7 @@ module Legion_Bots =
     let legkarkToUnitDef (flat: Legkark) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2124,6 +2149,7 @@ module Legion_Bots =
     type Leglob =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2162,6 +2188,7 @@ module Legion_Bots =
     let leglob : Leglob =
         { name = "leglob"
           subfolder = "Legion/Bots"
+          printableName = Some "Satyr"
           metalCost = ValueOrExpr.Concrete 60.0
           energyCost = ValueOrExpr.Concrete 400.0
           buildTime = ValueOrExpr.Concrete 1100.0
@@ -2321,6 +2348,7 @@ module Legion_Bots =
     let leglobDef : UnitDef =
         { name = "leglob"
           subfolder = "Legion/Bots"
+          printableName = Some "Satyr"
           metalCost = ValueOrExpr.Concrete 60.0
           energyCost = ValueOrExpr.Concrete 400.0
           buildTime = ValueOrExpr.Concrete 1100.0
@@ -2489,6 +2517,7 @@ module Legion_Bots =
     let leglobToFlat (def: UnitDef) : Leglob =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2527,6 +2556,7 @@ module Legion_Bots =
     let leglobToUnitDef (flat: Leglob) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2575,6 +2605,7 @@ module Legion_Bots =
     type Legrezbot =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2612,6 +2643,7 @@ module Legion_Bots =
     let legrezbot : Legrezbot =
         { name = "legrezbot"
           subfolder = "Legion/Bots"
+          printableName = Some "Zagreus"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 1400.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -2702,6 +2734,7 @@ module Legion_Bots =
     let legrezbotDef : UnitDef =
         { name = "legrezbot"
           subfolder = "Legion/Bots"
+          printableName = Some "Zagreus"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 1400.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -2802,6 +2835,7 @@ module Legion_Bots =
     let legrezbotToFlat (def: UnitDef) : Legrezbot =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2839,6 +2873,7 @@ module Legion_Bots =
     let legrezbotToUnitDef (flat: Legrezbot) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

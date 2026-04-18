@@ -8,6 +8,7 @@ module other =
     type Armrespawn =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -33,6 +34,7 @@ module other =
     let armrespawn : Armrespawn =
         { name = "armrespawn"
           subfolder = "other"
+          printableName = Some "Base Builder"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -88,6 +90,7 @@ module other =
     let armrespawnDef : UnitDef =
         { name = "armrespawn"
           subfolder = "other"
+          printableName = Some "Base Builder"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -149,6 +152,7 @@ module other =
     let armrespawnToFlat (def: UnitDef) : Armrespawn =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -174,6 +178,7 @@ module other =
     let armrespawnToUnitDef (flat: Armrespawn) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -205,6 +210,7 @@ module other =
     type Armsat =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -239,6 +245,7 @@ module other =
     let armsat : Armsat =
         { name = "armsat"
           subfolder = "other"
+          printableName = Some "Satellite"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 12800.0
@@ -310,6 +317,7 @@ module other =
     let armsatDef : UnitDef =
         { name = "armsat"
           subfolder = "other"
+          printableName = Some "Satellite"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 12800.0
@@ -394,6 +402,7 @@ module other =
     let armsatToFlat (def: UnitDef) : Armsat =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -428,6 +437,7 @@ module other =
     let armsatToUnitDef (flat: Armsat) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -476,6 +486,7 @@ module other =
     type Chip =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -510,6 +521,7 @@ module other =
     let chip : Chip =
         { name = "chip"
           subfolder = "other"
+          printableName = Some "Chip"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -563,6 +575,7 @@ module other =
     let chipDef : UnitDef =
         { name = "chip"
           subfolder = "other"
+          printableName = Some "Chip"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -632,6 +645,7 @@ module other =
     let chipToFlat (def: UnitDef) : Chip =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -666,6 +680,7 @@ module other =
     let chipToUnitDef (flat: Chip) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -718,6 +733,7 @@ module other =
     type Correspawn =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -743,6 +759,7 @@ module other =
     let correspawn : Correspawn =
         { name = "correspawn"
           subfolder = "other"
+          printableName = Some "Base Builder"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -798,6 +815,7 @@ module other =
     let correspawnDef : UnitDef =
         { name = "correspawn"
           subfolder = "other"
+          printableName = Some "Base Builder"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -859,6 +877,7 @@ module other =
     let correspawnToFlat (def: UnitDef) : Correspawn =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -884,6 +903,7 @@ module other =
     let correspawnToUnitDef (flat: Correspawn) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -915,6 +935,7 @@ module other =
     type Corsat =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -949,6 +970,7 @@ module other =
     let corsat : Corsat =
         { name = "corsat"
           subfolder = "other"
+          printableName = Some "Satellite"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 12800.0
@@ -1020,6 +1042,7 @@ module other =
     let corsatDef : UnitDef =
         { name = "corsat"
           subfolder = "other"
+          printableName = Some "Satellite"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 12800.0
@@ -1104,6 +1127,7 @@ module other =
     let corsatToFlat (def: UnitDef) : Corsat =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1138,6 +1162,7 @@ module other =
     let corsatToUnitDef (flat: Corsat) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1186,6 +1211,7 @@ module other =
     type Dbg_sphere =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1220,6 +1246,7 @@ module other =
     let dbg_sphere : Dbg_sphere =
         { name = "dbg_sphere"
           subfolder = "other"
+          printableName = Some "dbg_sphere"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3400.0
           buildTime = ValueOrExpr.Concrete 5090.0
@@ -1267,6 +1294,7 @@ module other =
     let dbg_sphereDef : UnitDef =
         { name = "dbg_sphere"
           subfolder = "other"
+          printableName = Some "dbg_sphere"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3400.0
           buildTime = ValueOrExpr.Concrete 5090.0
@@ -1327,6 +1355,7 @@ module other =
     let dbg_sphereToFlat (def: UnitDef) : Dbg_sphere =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1361,6 +1390,7 @@ module other =
     let dbg_sphereToUnitDef (flat: Dbg_sphere) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1409,6 +1439,7 @@ module other =
     type Dbg_sphere_fullmetal =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1443,6 +1474,7 @@ module other =
     let dbg_sphere_fullmetal : Dbg_sphere_fullmetal =
         { name = "dbg_sphere_fullmetal"
           subfolder = "other"
+          printableName = Some "dbg_sphere"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3400.0
           buildTime = ValueOrExpr.Concrete 5090.0
@@ -1490,6 +1522,7 @@ module other =
     let dbg_sphere_fullmetalDef : UnitDef =
         { name = "dbg_sphere_fullmetal"
           subfolder = "other"
+          printableName = Some "dbg_sphere"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3400.0
           buildTime = ValueOrExpr.Concrete 5090.0
@@ -1550,6 +1583,7 @@ module other =
     let dbg_sphere_fullmetalToFlat (def: UnitDef) : Dbg_sphere_fullmetal =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1584,6 +1618,7 @@ module other =
     let dbg_sphere_fullmetalToUnitDef (flat: Dbg_sphere_fullmetal) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1632,6 +1667,7 @@ module other =
     type Dice =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1666,6 +1702,7 @@ module other =
     let dice : Dice =
         { name = "dice"
           subfolder = "other"
+          printableName = Some "Dice"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -1717,6 +1754,7 @@ module other =
     let diceDef : UnitDef =
         { name = "dice"
           subfolder = "other"
+          printableName = Some "Dice"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -1784,6 +1822,7 @@ module other =
     let diceToFlat (def: UnitDef) : Dice =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1818,6 +1857,7 @@ module other =
     let diceToUnitDef (flat: Dice) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1870,6 +1910,7 @@ module other =
     type Freefusion =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1900,6 +1941,7 @@ module other =
     let freefusion : Freefusion =
         { name = "freefusion"
           subfolder = "other"
+          printableName = Some "Free Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 50.0
           buildTime = ValueOrExpr.Concrete 800.0
@@ -1968,6 +2010,7 @@ module other =
     let freefusionDef : UnitDef =
         { name = "freefusion"
           subfolder = "other"
+          printableName = Some "Free Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 50.0
           buildTime = ValueOrExpr.Concrete 800.0
@@ -2045,6 +2088,7 @@ module other =
     let freefusionToFlat (def: UnitDef) : Freefusion =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2075,6 +2119,7 @@ module other =
     let freefusionToUnitDef (flat: Freefusion) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2116,6 +2161,7 @@ module other =
     type Legnanotcbase =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2141,6 +2187,7 @@ module other =
     let legnanotcbase : Legnanotcbase =
         { name = "legnanotcbase"
           subfolder = "other"
+          printableName = Some "Base Builder"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -2196,6 +2243,7 @@ module other =
     let legnanotcbaseDef : UnitDef =
         { name = "legnanotcbase"
           subfolder = "other"
+          printableName = Some "Base Builder"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -2257,6 +2305,7 @@ module other =
     let legnanotcbaseToFlat (def: UnitDef) : Legnanotcbase =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2282,6 +2331,7 @@ module other =
     let legnanotcbaseToUnitDef (flat: Legnanotcbase) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2313,6 +2363,7 @@ module other =
     type Meteor =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2341,6 +2392,7 @@ module other =
     let meteor : Meteor =
         { name = "meteor"
           subfolder = "other"
+          printableName = Some "Meteor"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 1.0
@@ -2426,6 +2478,7 @@ module other =
     let meteorDef : UnitDef =
         { name = "meteor"
           subfolder = "other"
+          printableName = Some "Meteor"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 1.0
@@ -2517,6 +2570,7 @@ module other =
     let meteorToFlat (def: UnitDef) : Meteor =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2545,6 +2599,7 @@ module other =
     let meteorToUnitDef (flat: Meteor) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2580,6 +2635,7 @@ module other =
     type Mission_command_tower =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2609,6 +2665,7 @@ module other =
     let mission_command_tower : Mission_command_tower =
         { name = "mission_command_tower"
           subfolder = "other"
+          printableName = Some "Command Tower"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 100000.0
@@ -2663,6 +2720,7 @@ module other =
     let mission_command_towerDef : UnitDef =
         { name = "mission_command_tower"
           subfolder = "other"
+          printableName = Some "Command Tower"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 100000.0
@@ -2727,6 +2785,7 @@ module other =
     let mission_command_towerToFlat (def: UnitDef) : Mission_command_tower =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2756,6 +2815,7 @@ module other =
     let mission_command_towerToUnitDef (flat: Mission_command_tower) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2797,6 +2857,7 @@ module other =
     type Nuketest =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2825,6 +2886,7 @@ module other =
     let nuketest : Nuketest =
         { name = "nuketest"
           subfolder = "other"
+          printableName = Some "New Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -2908,6 +2970,7 @@ module other =
     let nuketestDef : UnitDef =
         { name = "nuketest"
           subfolder = "other"
+          printableName = Some "New Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -3002,6 +3065,7 @@ module other =
     let nuketestToFlat (def: UnitDef) : Nuketest =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3030,6 +3094,7 @@ module other =
     let nuketestToUnitDef (flat: Nuketest) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3071,6 +3136,7 @@ module other =
     type Nuketestcor =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3099,6 +3165,7 @@ module other =
     let nuketestcor : Nuketestcor =
         { name = "nuketestcor"
           subfolder = "other"
+          printableName = Some "New Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -3182,6 +3249,7 @@ module other =
     let nuketestcorDef : UnitDef =
         { name = "nuketestcor"
           subfolder = "other"
+          printableName = Some "New Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -3276,6 +3344,7 @@ module other =
     let nuketestcorToFlat (def: UnitDef) : Nuketestcor =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3304,6 +3373,7 @@ module other =
     let nuketestcorToUnitDef (flat: Nuketestcor) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3345,6 +3415,7 @@ module other =
     type Nuketestorg =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3373,6 +3444,7 @@ module other =
     let nuketestorg : Nuketestorg =
         { name = "nuketestorg"
           subfolder = "other"
+          printableName = Some "Original Arm Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -3459,6 +3531,7 @@ module other =
     let nuketestorgDef : UnitDef =
         { name = "nuketestorg"
           subfolder = "other"
+          printableName = Some "Original Arm Nuke Spawner"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -3556,6 +3629,7 @@ module other =
     let nuketestorgToFlat (def: UnitDef) : Nuketestorg =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3584,6 +3658,7 @@ module other =
     let nuketestorgToUnitDef (flat: Nuketestorg) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3625,6 +3700,7 @@ module other =
     type Pbr_cube =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3659,6 +3735,7 @@ module other =
     let pbr_cube : Pbr_cube =
         { name = "pbr_cube"
           subfolder = "other"
+          printableName = Some "PBR Test Cube Thing"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3400.0
           buildTime = ValueOrExpr.Concrete 5090.0
@@ -3706,6 +3783,7 @@ module other =
     let pbr_cubeDef : UnitDef =
         { name = "pbr_cube"
           subfolder = "other"
+          printableName = Some "PBR Test Cube Thing"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3400.0
           buildTime = ValueOrExpr.Concrete 5090.0
@@ -3766,6 +3844,7 @@ module other =
     let pbr_cubeToFlat (def: UnitDef) : Pbr_cube =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3800,6 +3879,7 @@ module other =
     let pbr_cubeToUnitDef (flat: Pbr_cube) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3848,6 +3928,7 @@ module other =
     type Resourcecheat =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3880,6 +3961,7 @@ module other =
     let resourcecheat : Resourcecheat =
         { name = "resourcecheat"
           subfolder = "other"
+          printableName = Some "INFINITE RESOURCES"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 312500.0
@@ -3968,6 +4050,7 @@ module other =
     let resourcecheatDef : UnitDef =
         { name = "resourcecheat"
           subfolder = "other"
+          printableName = Some "INFINITE RESOURCES"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 312500.0
@@ -4063,6 +4146,7 @@ module other =
     let resourcecheatToFlat (def: UnitDef) : Resourcecheat =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4095,6 +4179,7 @@ module other =
     let resourcecheatToUnitDef (flat: Resourcecheat) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4136,6 +4221,7 @@ module other =
     type Volcano_projectile_unit =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4169,6 +4255,7 @@ module other =
     let volcano_projectile_unit : Volcano_projectile_unit =
         { name = "volcano_projectile_unit"
           subfolder = "other"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 100.0
           energyCost = ValueOrExpr.Concrete 100.0
           buildTime = ValueOrExpr.Concrete 1.0
@@ -4258,6 +4345,7 @@ module other =
     let volcano_projectile_unitDef : UnitDef =
         { name = "volcano_projectile_unit"
           subfolder = "other"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 100.0
           energyCost = ValueOrExpr.Concrete 100.0
           buildTime = ValueOrExpr.Concrete 1.0
@@ -4364,6 +4452,7 @@ module other =
     let volcano_projectile_unitToFlat (def: UnitDef) : Volcano_projectile_unit =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4397,6 +4486,7 @@ module other =
     let volcano_projectile_unitToUnitDef (flat: Volcano_projectile_unit) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4449,6 +4539,7 @@ module other =
     type Xmasball1_1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4483,6 +4574,7 @@ module other =
     let xmasball1_1 : Xmasball1_1 =
         { name = "xmasball1_1"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -4535,6 +4627,7 @@ module other =
     let xmasball1_1Def : UnitDef =
         { name = "xmasball1_1"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -4603,6 +4696,7 @@ module other =
     let xmasball1_1ToFlat (def: UnitDef) : Xmasball1_1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4637,6 +4731,7 @@ module other =
     let xmasball1_1ToUnitDef (flat: Xmasball1_1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4689,6 +4784,7 @@ module other =
     type Xmasball1_2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4723,6 +4819,7 @@ module other =
     let xmasball1_2 : Xmasball1_2 =
         { name = "xmasball1_2"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -4775,6 +4872,7 @@ module other =
     let xmasball1_2Def : UnitDef =
         { name = "xmasball1_2"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -4843,6 +4941,7 @@ module other =
     let xmasball1_2ToFlat (def: UnitDef) : Xmasball1_2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4877,6 +4976,7 @@ module other =
     let xmasball1_2ToUnitDef (flat: Xmasball1_2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4929,6 +5029,7 @@ module other =
     type Xmasball1_3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4963,6 +5064,7 @@ module other =
     let xmasball1_3 : Xmasball1_3 =
         { name = "xmasball1_3"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5015,6 +5117,7 @@ module other =
     let xmasball1_3Def : UnitDef =
         { name = "xmasball1_3"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5083,6 +5186,7 @@ module other =
     let xmasball1_3ToFlat (def: UnitDef) : Xmasball1_3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5117,6 +5221,7 @@ module other =
     let xmasball1_3ToUnitDef (flat: Xmasball1_3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5169,6 +5274,7 @@ module other =
     type Xmasball1_4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5203,6 +5309,7 @@ module other =
     let xmasball1_4 : Xmasball1_4 =
         { name = "xmasball1_4"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5255,6 +5362,7 @@ module other =
     let xmasball1_4Def : UnitDef =
         { name = "xmasball1_4"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5323,6 +5431,7 @@ module other =
     let xmasball1_4ToFlat (def: UnitDef) : Xmasball1_4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5357,6 +5466,7 @@ module other =
     let xmasball1_4ToUnitDef (flat: Xmasball1_4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5409,6 +5519,7 @@ module other =
     type Xmasball1_5 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5443,6 +5554,7 @@ module other =
     let xmasball1_5 : Xmasball1_5 =
         { name = "xmasball1_5"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5495,6 +5607,7 @@ module other =
     let xmasball1_5Def : UnitDef =
         { name = "xmasball1_5"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5563,6 +5676,7 @@ module other =
     let xmasball1_5ToFlat (def: UnitDef) : Xmasball1_5 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5597,6 +5711,7 @@ module other =
     let xmasball1_5ToUnitDef (flat: Xmasball1_5) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5649,6 +5764,7 @@ module other =
     type Xmasball1_6 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5683,6 +5799,7 @@ module other =
     let xmasball1_6 : Xmasball1_6 =
         { name = "xmasball1_6"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5735,6 +5852,7 @@ module other =
     let xmasball1_6Def : UnitDef =
         { name = "xmasball1_6"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5803,6 +5921,7 @@ module other =
     let xmasball1_6ToFlat (def: UnitDef) : Xmasball1_6 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5837,6 +5956,7 @@ module other =
     let xmasball1_6ToUnitDef (flat: Xmasball1_6) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5889,6 +6009,7 @@ module other =
     type Xmasball2_1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5923,6 +6044,7 @@ module other =
     let xmasball2_1 : Xmasball2_1 =
         { name = "xmasball2_1"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -5975,6 +6097,7 @@ module other =
     let xmasball2_1Def : UnitDef =
         { name = "xmasball2_1"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6043,6 +6166,7 @@ module other =
     let xmasball2_1ToFlat (def: UnitDef) : Xmasball2_1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6077,6 +6201,7 @@ module other =
     let xmasball2_1ToUnitDef (flat: Xmasball2_1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6129,6 +6254,7 @@ module other =
     type Xmasball2_2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6163,6 +6289,7 @@ module other =
     let xmasball2_2 : Xmasball2_2 =
         { name = "xmasball2_2"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6215,6 +6342,7 @@ module other =
     let xmasball2_2Def : UnitDef =
         { name = "xmasball2_2"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6283,6 +6411,7 @@ module other =
     let xmasball2_2ToFlat (def: UnitDef) : Xmasball2_2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6317,6 +6446,7 @@ module other =
     let xmasball2_2ToUnitDef (flat: Xmasball2_2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6369,6 +6499,7 @@ module other =
     type Xmasball2_3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6403,6 +6534,7 @@ module other =
     let xmasball2_3 : Xmasball2_3 =
         { name = "xmasball2_3"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6455,6 +6587,7 @@ module other =
     let xmasball2_3Def : UnitDef =
         { name = "xmasball2_3"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6523,6 +6656,7 @@ module other =
     let xmasball2_3ToFlat (def: UnitDef) : Xmasball2_3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6557,6 +6691,7 @@ module other =
     let xmasball2_3ToUnitDef (flat: Xmasball2_3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6609,6 +6744,7 @@ module other =
     type Xmasball2_4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6643,6 +6779,7 @@ module other =
     let xmasball2_4 : Xmasball2_4 =
         { name = "xmasball2_4"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6695,6 +6832,7 @@ module other =
     let xmasball2_4Def : UnitDef =
         { name = "xmasball2_4"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6763,6 +6901,7 @@ module other =
     let xmasball2_4ToFlat (def: UnitDef) : Xmasball2_4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6797,6 +6936,7 @@ module other =
     let xmasball2_4ToUnitDef (flat: Xmasball2_4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6849,6 +6989,7 @@ module other =
     type Xmasball2_5 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6883,6 +7024,7 @@ module other =
     let xmasball2_5 : Xmasball2_5 =
         { name = "xmasball2_5"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -6935,6 +7077,7 @@ module other =
     let xmasball2_5Def : UnitDef =
         { name = "xmasball2_5"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -7003,6 +7146,7 @@ module other =
     let xmasball2_5ToFlat (def: UnitDef) : Xmasball2_5 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7037,6 +7181,7 @@ module other =
     let xmasball2_5ToUnitDef (flat: Xmasball2_5) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7089,6 +7234,7 @@ module other =
     type Xmasball2_6 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7123,6 +7269,7 @@ module other =
     let xmasball2_6 : Xmasball2_6 =
         { name = "xmasball2_6"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -7175,6 +7322,7 @@ module other =
     let xmasball2_6Def : UnitDef =
         { name = "xmasball2_6"
           subfolder = "other"
+          printableName = Some "Xmas ball"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 255.0
@@ -7243,6 +7391,7 @@ module other =
     let xmasball2_6ToFlat (def: UnitDef) : Xmasball2_6 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7277,6 +7426,7 @@ module other =
     let xmasball2_6ToUnitDef (flat: Xmasball2_6) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

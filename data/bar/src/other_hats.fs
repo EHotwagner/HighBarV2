@@ -8,6 +8,7 @@ module other_hats =
     type Cor_hat_fightnight =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -32,6 +33,7 @@ module other_hats =
     let cor_hat_fightnight : Cor_hat_fightnight =
         { name = "cor_hat_fightnight"
           subfolder = "other/hats"
+          printableName = Some "#1 Grunt"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -77,6 +79,7 @@ module other_hats =
     let cor_hat_fightnightDef : UnitDef =
         { name = "cor_hat_fightnight"
           subfolder = "other/hats"
+          printableName = Some "#1 Grunt"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -129,6 +132,7 @@ module other_hats =
     let cor_hat_fightnightToFlat (def: UnitDef) : Cor_hat_fightnight =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -153,6 +157,7 @@ module other_hats =
     let cor_hat_fightnightToUnitDef (flat: Cor_hat_fightnight) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -184,6 +189,7 @@ module other_hats =
     type Cor_hat_hornet =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -208,6 +214,7 @@ module other_hats =
     let cor_hat_hornet : Cor_hat_hornet =
         { name = "cor_hat_hornet"
           subfolder = "other/hats"
+          printableName = Some "Hornet's Tricorn"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -253,6 +260,7 @@ module other_hats =
     let cor_hat_hornetDef : UnitDef =
         { name = "cor_hat_hornet"
           subfolder = "other/hats"
+          printableName = Some "Hornet's Tricorn"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -305,6 +313,7 @@ module other_hats =
     let cor_hat_hornetToFlat (def: UnitDef) : Cor_hat_hornet =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -329,6 +338,7 @@ module other_hats =
     let cor_hat_hornetToUnitDef (flat: Cor_hat_hornet) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -360,6 +370,7 @@ module other_hats =
     type Cor_hat_hw =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -384,6 +395,7 @@ module other_hats =
     let cor_hat_hw : Cor_hat_hw =
         { name = "cor_hat_hw"
           subfolder = "other/hats"
+          printableName = Some "Spooky Pumpkin"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -429,6 +441,7 @@ module other_hats =
     let cor_hat_hwDef : UnitDef =
         { name = "cor_hat_hw"
           subfolder = "other/hats"
+          printableName = Some "Spooky Pumpkin"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -481,6 +494,7 @@ module other_hats =
     let cor_hat_hwToFlat (def: UnitDef) : Cor_hat_hw =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -505,6 +519,7 @@ module other_hats =
     let cor_hat_hwToUnitDef (flat: Cor_hat_hw) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -536,6 +551,7 @@ module other_hats =
     type Cor_hat_legfn =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -560,6 +576,7 @@ module other_hats =
     let cor_hat_legfn : Cor_hat_legfn =
         { name = "cor_hat_legfn"
           subfolder = "other/hats"
+          printableName = Some "#1 Goblin"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -605,6 +622,7 @@ module other_hats =
     let cor_hat_legfnDef : UnitDef =
         { name = "cor_hat_legfn"
           subfolder = "other/hats"
+          printableName = Some "#1 Goblin"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -657,6 +675,7 @@ module other_hats =
     let cor_hat_legfnToFlat (def: UnitDef) : Cor_hat_legfn =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -681,6 +700,7 @@ module other_hats =
     let cor_hat_legfnToUnitDef (flat: Cor_hat_legfn) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -712,6 +732,7 @@ module other_hats =
     type Cor_hat_ptaq =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -736,6 +757,7 @@ module other_hats =
     let cor_hat_ptaq : Cor_hat_ptaq =
         { name = "cor_hat_ptaq"
           subfolder = "other/hats"
+          printableName = Some "PtaQ's Hat"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -781,6 +803,7 @@ module other_hats =
     let cor_hat_ptaqDef : UnitDef =
         { name = "cor_hat_ptaq"
           subfolder = "other/hats"
+          printableName = Some "PtaQ's Hat"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -833,6 +856,7 @@ module other_hats =
     let cor_hat_ptaqToFlat (def: UnitDef) : Cor_hat_ptaq =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -857,6 +881,7 @@ module other_hats =
     let cor_hat_ptaqToUnitDef (flat: Cor_hat_ptaq) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -888,6 +913,7 @@ module other_hats =
     type Cor_hat_viking =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -912,6 +938,7 @@ module other_hats =
     let cor_hat_viking : Cor_hat_viking =
         { name = "cor_hat_viking"
           subfolder = "other/hats"
+          printableName = Some "Viking Helmet"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -957,6 +984,7 @@ module other_hats =
     let cor_hat_vikingDef : UnitDef =
         { name = "cor_hat_viking"
           subfolder = "other/hats"
+          printableName = Some "Viking Helmet"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 10000.0
@@ -1009,6 +1037,7 @@ module other_hats =
     let cor_hat_vikingToFlat (def: UnitDef) : Cor_hat_viking =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1033,6 +1062,7 @@ module other_hats =
     let cor_hat_vikingToUnitDef (flat: Cor_hat_viking) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

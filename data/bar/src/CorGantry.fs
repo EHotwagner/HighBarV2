@@ -8,6 +8,7 @@ module CorGantry =
     type Corcat =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module CorGantry =
     let corcat : Corcat =
         { name = "corcat"
           subfolder = "CorGantry"
+          printableName = Some "Catapult"
           metalCost = ValueOrExpr.Concrete 4900.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 160000.0
@@ -192,6 +194,7 @@ module CorGantry =
     let corcatDef : UnitDef =
         { name = "corcat"
           subfolder = "CorGantry"
+          printableName = Some "Catapult"
           metalCost = ValueOrExpr.Concrete 4900.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 160000.0
@@ -347,6 +350,7 @@ module CorGantry =
     let corcatToFlat (def: UnitDef) : Corcat =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -385,6 +389,7 @@ module CorGantry =
     let corcatToUnitDef (flat: Corcat) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -433,6 +438,7 @@ module CorGantry =
     type Cordemon =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -471,6 +477,7 @@ module CorGantry =
     let cordemon : Cordemon =
         { name = "cordemon"
           subfolder = "CorGantry"
+          printableName = Some "Demon"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 160000.0
@@ -575,7 +582,9 @@ module CorGantry =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -670,6 +679,7 @@ module CorGantry =
     let cordemonDef : UnitDef =
         { name = "cordemon"
           subfolder = "CorGantry"
+          printableName = Some "Demon"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 160000.0
@@ -781,7 +791,9 @@ module CorGantry =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -878,6 +890,7 @@ module CorGantry =
     let cordemonToFlat (def: UnitDef) : Cordemon =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -916,6 +929,7 @@ module CorGantry =
     let cordemonToUnitDef (flat: Cordemon) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -964,6 +978,7 @@ module CorGantry =
     type Corjugg =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1002,6 +1017,7 @@ module CorGantry =
     let corjugg : Corjugg =
         { name = "corjugg"
           subfolder = "CorGantry"
+          printableName = Some "Behemoth"
           metalCost = ValueOrExpr.Concrete 20000.0
           energyCost = ValueOrExpr.Concrete 513000.0
           buildTime = ValueOrExpr.Concrete 780000.0
@@ -1294,6 +1310,7 @@ module CorGantry =
     let corjuggDef : UnitDef =
         { name = "corjugg"
           subfolder = "CorGantry"
+          printableName = Some "Behemoth"
           metalCost = ValueOrExpr.Concrete 20000.0
           energyCost = ValueOrExpr.Concrete 513000.0
           buildTime = ValueOrExpr.Concrete 780000.0
@@ -1595,6 +1612,7 @@ module CorGantry =
     let corjuggToFlat (def: UnitDef) : Corjugg =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1633,6 +1651,7 @@ module CorGantry =
     let corjuggToUnitDef (flat: Corjugg) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1681,6 +1700,7 @@ module CorGantry =
     type Corkarg =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1719,6 +1739,7 @@ module CorGantry =
     let corkarg : Corkarg =
         { name = "corkarg"
           subfolder = "CorGantry"
+          printableName = Some "Karganeth"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 57000.0
           buildTime = ValueOrExpr.Concrete 94000.0
@@ -1726,9 +1747,9 @@ module CorGantry =
           sightDistance = ValueOrExpr.Concrete 455.0
           footprintX = 4.0
           footprintZ = 4.0
-          objectName = Some "Units/CORKARG.s3o"
+          objectName = Some "Units/corkarg.s3o"
           buildPic = Some "CORKARG.DDS"
-          script = Some "Units/CORKARG.COB"
+          script = Some "Units/corkarg.cob"
           corpse = Some "DEAD"
           explodeAs = Some "explosiont3med"
           selfDestructAs = Some "explosiont3"
@@ -1823,7 +1844,9 @@ module CorGantry =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -1917,6 +1940,7 @@ module CorGantry =
     let corkargDef : UnitDef =
         { name = "corkarg"
           subfolder = "CorGantry"
+          printableName = Some "Karganeth"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 57000.0
           buildTime = ValueOrExpr.Concrete 94000.0
@@ -1924,9 +1948,9 @@ module CorGantry =
           sightDistance = ValueOrExpr.Concrete 455.0
           footprintX = 4.0
           footprintZ = 4.0
-          objectName = Some "Units/CORKARG.s3o"
+          objectName = Some "Units/corkarg.s3o"
           buildPic = Some "CORKARG.DDS"
-          script = Some "Units/CORKARG.COB"
+          script = Some "Units/corkarg.cob"
           corpse = Some "DEAD"
           explodeAs = Some "explosiont3med"
           selfDestructAs = Some "explosiont3"
@@ -2028,7 +2052,9 @@ module CorGantry =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -2124,6 +2150,7 @@ module CorGantry =
     let corkargToFlat (def: UnitDef) : Corkarg =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2162,6 +2189,7 @@ module CorGantry =
     let corkargToUnitDef (flat: Corkarg) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2210,6 +2238,7 @@ module CorGantry =
     type Corkorg =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2250,6 +2279,7 @@ module CorGantry =
     let corkorg : Corkorg =
         { name = "corkorg"
           subfolder = "CorGantry"
+          printableName = Some "Juggernaut"
           metalCost = ValueOrExpr.Concrete 29000.0
           energyCost = ValueOrExpr.Concrete 615000.0
           buildTime = ValueOrExpr.Concrete 730000.0
@@ -2642,6 +2672,7 @@ module CorGantry =
     let corkorgDef : UnitDef =
         { name = "corkorg"
           subfolder = "CorGantry"
+          printableName = Some "Juggernaut"
           metalCost = ValueOrExpr.Concrete 29000.0
           energyCost = ValueOrExpr.Concrete 615000.0
           buildTime = ValueOrExpr.Concrete 730000.0
@@ -3046,6 +3077,7 @@ module CorGantry =
     let corkorgToFlat (def: UnitDef) : Corkorg =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3086,6 +3118,7 @@ module CorGantry =
     let corkorgToUnitDef (flat: Corkorg) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3140,6 +3173,7 @@ module CorGantry =
     type Corshiva =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3178,6 +3212,7 @@ module CorGantry =
     let corshiva : Corshiva =
         { name = "corshiva"
           subfolder = "CorGantry"
+          printableName = Some "Shiva"
           metalCost = ValueOrExpr.Concrete 1550.0
           energyCost = ValueOrExpr.Concrete 23000.0
           buildTime = ValueOrExpr.Concrete 40000.0
@@ -3352,6 +3387,7 @@ module CorGantry =
     let corshivaDef : UnitDef =
         { name = "corshiva"
           subfolder = "CorGantry"
+          printableName = Some "Shiva"
           metalCost = ValueOrExpr.Concrete 1550.0
           energyCost = ValueOrExpr.Concrete 23000.0
           buildTime = ValueOrExpr.Concrete 40000.0
@@ -3535,6 +3571,7 @@ module CorGantry =
     let corshivaToFlat (def: UnitDef) : Corshiva =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3573,6 +3610,7 @@ module CorGantry =
     let corshivaToUnitDef (flat: Corshiva) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3621,6 +3659,7 @@ module CorGantry =
     type Corsok =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3660,6 +3699,7 @@ module CorGantry =
     let corsok : Corsok =
         { name = "corsok"
           subfolder = "CorGantry"
+          printableName = Some "Cataphract"
           metalCost = ValueOrExpr.Concrete 950.0
           energyCost = ValueOrExpr.Concrete 19000.0
           buildTime = ValueOrExpr.Concrete 34000.0
@@ -3755,7 +3795,9 @@ module CorGantry =
                   soundHit = Some "xplodep2"
                   explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTSUB"
                       "mount_maindir", "0 -1 0"
@@ -3842,6 +3884,7 @@ module CorGantry =
     let corsokDef : UnitDef =
         { name = "corsok"
           subfolder = "CorGantry"
+          printableName = Some "Cataphract"
           metalCost = ValueOrExpr.Concrete 950.0
           energyCost = ValueOrExpr.Concrete 19000.0
           buildTime = ValueOrExpr.Concrete 34000.0
@@ -3943,7 +3986,9 @@ module CorGantry =
                 soundHit = Some "xplodep2"
                 explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTSUB"
                     "mount_maindir", "0 -1 0"
@@ -4032,6 +4077,7 @@ module CorGantry =
     let corsokToFlat (def: UnitDef) : Corsok =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4071,6 +4117,7 @@ module CorGantry =
     let corsokToUnitDef (flat: Corsok) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

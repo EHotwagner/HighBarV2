@@ -8,6 +8,7 @@ module Legion_T3 =
     type Leegmech =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module Legion_T3 =
     let leegmech : Leegmech =
         { name = "leegmech"
           subfolder = "Legion/T3"
+          printableName = Some "Praetorian"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 200000.0
           buildTime = ValueOrExpr.Concrete 260000.0
@@ -284,7 +286,9 @@ module Legion_T3 =
                   soundHit = Some "bimpact3"
                   explosiongenerator = Some "custom:plasmahit-sparkonly"
                   rgbColor = Some "1 0.4 0.95"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -369,6 +373,7 @@ module Legion_T3 =
     let leegmechDef : UnitDef =
         { name = "leegmech"
           subfolder = "Legion/T3"
+          printableName = Some "Praetorian"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 200000.0
           buildTime = ValueOrExpr.Concrete 260000.0
@@ -614,7 +619,9 @@ module Legion_T3 =
                 soundHit = Some "bimpact3"
                 explosiongenerator = Some "custom:plasmahit-sparkonly"
                 rgbColor = Some "1 0.4 0.95"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -701,6 +708,7 @@ module Legion_T3 =
     let leegmechToFlat (def: UnitDef) : Leegmech =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -739,6 +747,7 @@ module Legion_T3 =
     let leegmechToUnitDef (flat: Leegmech) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -787,6 +796,7 @@ module Legion_T3 =
     type Legbunk =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -825,6 +835,7 @@ module Legion_T3 =
     let legbunk : Legbunk =
         { name = "legbunk"
           subfolder = "Legion/T3"
+          printableName = Some "Pilum"
           metalCost = ValueOrExpr.Concrete 1850.0
           energyCost = ValueOrExpr.Concrete 42000.0
           buildTime = ValueOrExpr.Concrete 46430.0
@@ -912,7 +923,9 @@ module Legion_T3 =
                   soundHit = Some "xplomed2"
                   explosiongenerator = Some "custom:barrelshot-large"
                   rgbColor = Some "1 0.8 0.17"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "GROUNDSCOUT"
                       "mount_onlytargetcategory", "SURFACE"
@@ -1045,6 +1058,7 @@ module Legion_T3 =
     let legbunkDef : UnitDef =
         { name = "legbunk"
           subfolder = "Legion/T3"
+          printableName = Some "Pilum"
           metalCost = ValueOrExpr.Concrete 1850.0
           energyCost = ValueOrExpr.Concrete 42000.0
           buildTime = ValueOrExpr.Concrete 46430.0
@@ -1139,7 +1153,9 @@ module Legion_T3 =
                 soundHit = Some "xplomed2"
                 explosiongenerator = Some "custom:barrelshot-large"
                 rgbColor = Some "1 0.8 0.17"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "GROUNDSCOUT"
                     "mount_onlytargetcategory", "SURFACE"
@@ -1274,6 +1290,7 @@ module Legion_T3 =
     let legbunkToFlat (def: UnitDef) : Legbunk =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1312,6 +1329,7 @@ module Legion_T3 =
     let legbunkToUnitDef (flat: Legbunk) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1360,6 +1378,7 @@ module Legion_T3 =
     type Legeallterrainmech =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1398,6 +1417,7 @@ module Legion_T3 =
     let legeallterrainmech : Legeallterrainmech =
         { name = "legeallterrainmech"
           subfolder = "Legion/T3"
+          printableName = Some "Myrmidon"
           metalCost = ValueOrExpr.Concrete 3950.0
           energyCost = ValueOrExpr.Concrete 78000.0
           buildTime = ValueOrExpr.Concrete 120250.0
@@ -1559,7 +1579,9 @@ module Legion_T3 =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "SURFACE LIGHTAIRSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -1706,6 +1728,7 @@ module Legion_T3 =
     let legeallterrainmechDef : UnitDef =
         { name = "legeallterrainmech"
           subfolder = "Legion/T3"
+          printableName = Some "Myrmidon"
           metalCost = ValueOrExpr.Concrete 3950.0
           energyCost = ValueOrExpr.Concrete 78000.0
           buildTime = ValueOrExpr.Concrete 120250.0
@@ -1874,7 +1897,9 @@ module Legion_T3 =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "SURFACE LIGHTAIRSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -2023,6 +2048,7 @@ module Legion_T3 =
     let legeallterrainmechToFlat (def: UnitDef) : Legeallterrainmech =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2061,6 +2087,7 @@ module Legion_T3 =
     let legeallterrainmechToUnitDef (flat: Legeallterrainmech) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2109,6 +2136,7 @@ module Legion_T3 =
     type Legeheatraymech =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2148,6 +2176,7 @@ module Legion_T3 =
     let legeheatraymech : Legeheatraymech =
         { name = "legeheatraymech"
           subfolder = "Legion/T3"
+          printableName = Some "Sol Invictus"
           metalCost = ValueOrExpr.Concrete 23500.0
           energyCost = ValueOrExpr.Concrete 615000.0
           buildTime = ValueOrExpr.Concrete 585250.0
@@ -2425,7 +2454,9 @@ module Legion_T3 =
                   soundHit = Some "flakhit2"
                   explosiongenerator = Some "custom:flak"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR LIGHTAIRSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -2547,6 +2578,7 @@ module Legion_T3 =
     let legeheatraymechDef : UnitDef =
         { name = "legeheatraymech"
           subfolder = "Legion/T3"
+          printableName = Some "Sol Invictus"
           metalCost = ValueOrExpr.Concrete 23500.0
           energyCost = ValueOrExpr.Concrete 615000.0
           buildTime = ValueOrExpr.Concrete 585250.0
@@ -2830,7 +2862,9 @@ module Legion_T3 =
                 soundHit = Some "flakhit2"
                 explosiongenerator = Some "custom:flak"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR LIGHTAIRSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -2959,6 +2993,7 @@ module Legion_T3 =
     let legeheatraymechToFlat (def: UnitDef) : Legeheatraymech =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2998,6 +3033,7 @@ module Legion_T3 =
     let legeheatraymechToUnitDef (flat: Legeheatraymech) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3052,6 +3088,7 @@ module Legion_T3 =
     type Legeheatraymech_old =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3091,6 +3128,7 @@ module Legion_T3 =
     let legeheatraymech_old : Legeheatraymech_old =
         { name = "legeheatraymech_old"
           subfolder = "Legion/T3"
+          printableName = Some "Archaic Sol Invictus"
           metalCost = ValueOrExpr.Concrete 27000.0
           energyCost = ValueOrExpr.Concrete 705000.0
           buildTime = ValueOrExpr.Concrete 666250.0
@@ -3386,7 +3424,9 @@ module Legion_T3 =
                   soundHit = Some "flakhit2"
                   explosiongenerator = Some "custom:flak"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR LIGHTAIRSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -3507,6 +3547,7 @@ module Legion_T3 =
     let legeheatraymech_oldDef : UnitDef =
         { name = "legeheatraymech_old"
           subfolder = "Legion/T3"
+          printableName = Some "Archaic Sol Invictus"
           metalCost = ValueOrExpr.Concrete 27000.0
           energyCost = ValueOrExpr.Concrete 705000.0
           buildTime = ValueOrExpr.Concrete 666250.0
@@ -3808,7 +3849,9 @@ module Legion_T3 =
                 soundHit = Some "flakhit2"
                 explosiongenerator = Some "custom:flak"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR LIGHTAIRSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -3936,6 +3979,7 @@ module Legion_T3 =
     let legeheatraymech_oldToFlat (def: UnitDef) : Legeheatraymech_old =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3975,6 +4019,7 @@ module Legion_T3 =
     let legeheatraymech_oldToUnitDef (flat: Legeheatraymech_old) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4029,6 +4074,7 @@ module Legion_T3 =
     type Legehovertank =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4067,6 +4113,7 @@ module Legion_T3 =
     let legehovertank : Legehovertank =
         { name = "legehovertank"
           subfolder = "Legion/T3"
+          printableName = Some "Charybdis"
           metalCost = ValueOrExpr.Concrete 1350.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 41600.0
@@ -4164,7 +4211,9 @@ module Legion_T3 =
                   soundHit = Some "xplodep2"
                   explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTSUB"
                       "mount_maindir", "0 -1 0"
@@ -4378,6 +4427,7 @@ module Legion_T3 =
     let legehovertankDef : UnitDef =
         { name = "legehovertank"
           subfolder = "Legion/T3"
+          printableName = Some "Charybdis"
           metalCost = ValueOrExpr.Concrete 1350.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 41600.0
@@ -4482,7 +4532,9 @@ module Legion_T3 =
                 soundHit = Some "xplodep2"
                 explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTSUB"
                     "mount_maindir", "0 -1 0"
@@ -4698,6 +4750,7 @@ module Legion_T3 =
     let legehovertankToFlat (def: UnitDef) : Legehovertank =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4736,6 +4789,7 @@ module Legion_T3 =
     let legehovertankToUnitDef (flat: Legehovertank) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4784,6 +4838,7 @@ module Legion_T3 =
     type Legelrpcmech =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4822,6 +4877,7 @@ module Legion_T3 =
     let legelrpcmech : Legelrpcmech =
         { name = "legelrpcmech"
           subfolder = "Legion/T3"
+          printableName = Some "Astraeus"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 150000.0
           buildTime = ValueOrExpr.Concrete 178000.0
@@ -4961,6 +5017,7 @@ module Legion_T3 =
     let legelrpcmechDef : UnitDef =
         { name = "legelrpcmech"
           subfolder = "Legion/T3"
+          printableName = Some "Astraeus"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 150000.0
           buildTime = ValueOrExpr.Concrete 178000.0
@@ -5109,6 +5166,7 @@ module Legion_T3 =
     let legelrpcmechToFlat (def: UnitDef) : Legelrpcmech =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5147,6 +5205,7 @@ module Legion_T3 =
     let legelrpcmechToUnitDef (flat: Legelrpcmech) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5195,6 +5254,7 @@ module Legion_T3 =
     type Legerailtank =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5233,6 +5293,7 @@ module Legion_T3 =
     let legerailtank : Legerailtank =
         { name = "legerailtank"
           subfolder = "Legion/T3"
+          printableName = Some "Daedalus"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 125000.0
@@ -5472,6 +5533,7 @@ module Legion_T3 =
     let legerailtankDef : UnitDef =
         { name = "legerailtank"
           subfolder = "Legion/T3"
+          printableName = Some "Daedalus"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 125000.0
@@ -5720,6 +5782,7 @@ module Legion_T3 =
     let legerailtankToFlat (def: UnitDef) : Legerailtank =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5758,6 +5821,7 @@ module Legion_T3 =
     let legerailtankToUnitDef (flat: Legerailtank) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5806,6 +5870,7 @@ module Legion_T3 =
     type Legeshotgunmech =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5844,6 +5909,7 @@ module Legion_T3 =
     let legeshotgunmech : Legeshotgunmech =
         { name = "legeshotgunmech"
           subfolder = "Legion/T3"
+          printableName = Some "Praetorian"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 120000.0
           buildTime = ValueOrExpr.Concrete 159000.0
@@ -6070,7 +6136,9 @@ module Legion_T3 =
                   soundHit = Some "flakhit"
                   explosiongenerator = Some "custom:flakshard"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "LIGHTAIRSCOUT"
                       "mount_burstcontrolwhenoutofarc", "2.0"
@@ -6156,6 +6224,7 @@ module Legion_T3 =
     let legeshotgunmechDef : UnitDef =
         { name = "legeshotgunmech"
           subfolder = "Legion/T3"
+          printableName = Some "Praetorian"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 120000.0
           buildTime = ValueOrExpr.Concrete 159000.0
@@ -6389,7 +6458,9 @@ module Legion_T3 =
                 soundHit = Some "flakhit"
                 explosiongenerator = Some "custom:flakshard"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "LIGHTAIRSCOUT"
                     "mount_burstcontrolwhenoutofarc", "2.0"
@@ -6477,6 +6548,7 @@ module Legion_T3 =
     let legeshotgunmechToFlat (def: UnitDef) : Legeshotgunmech =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6515,6 +6587,7 @@ module Legion_T3 =
     let legeshotgunmechToUnitDef (flat: Legeshotgunmech) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6563,6 +6636,7 @@ module Legion_T3 =
     type Legjav =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6601,6 +6675,7 @@ module Legion_T3 =
     let legjav : Legjav =
         { name = "legjav"
           subfolder = "Legion/T3"
+          printableName = Some "Javelin"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 39850.0
@@ -6699,7 +6774,9 @@ module Legion_T3 =
                   soundHit = Some "bimpact3"
                   explosiongenerator = Some "custom:plasmahit-sparkonly"
                   rgbColor = Some "1 0.33 0.7"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -6789,6 +6866,7 @@ module Legion_T3 =
     let legjavDef : UnitDef =
         { name = "legjav"
           subfolder = "Legion/T3"
+          printableName = Some "Javelin"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 39850.0
@@ -6894,7 +6972,9 @@ module Legion_T3 =
                 soundHit = Some "bimpact3"
                 explosiongenerator = Some "custom:plasmahit-sparkonly"
                 rgbColor = Some "1 0.33 0.7"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -6986,6 +7066,7 @@ module Legion_T3 =
     let legjavToFlat (def: UnitDef) : Legjav =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7024,6 +7105,7 @@ module Legion_T3 =
     let legjavToUnitDef (flat: Legjav) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7072,6 +7154,7 @@ module Legion_T3 =
     type Legkeres =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7110,6 +7193,7 @@ module Legion_T3 =
     let legkeres : Legkeres =
         { name = "legkeres"
           subfolder = "Legion/T3"
+          printableName = Some "Keres"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 60000.0
@@ -7346,6 +7430,7 @@ module Legion_T3 =
     let legkeresDef : UnitDef =
         { name = "legkeres"
           subfolder = "Legion/T3"
+          printableName = Some "Keres"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 60000.0
@@ -7591,6 +7676,7 @@ module Legion_T3 =
     let legkeresToFlat (def: UnitDef) : Legkeres =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7629,6 +7715,7 @@ module Legion_T3 =
     let legkeresToUnitDef (flat: Legkeres) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

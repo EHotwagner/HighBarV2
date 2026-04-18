@@ -8,6 +8,7 @@ module other_raptors_Assault_Advanced =
     type Raptor_land_assault_basic_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v1 : Raptor_land_assault_basic_t4_v1 =
         { name = "raptor_land_assault_basic_t4_v1"
           subfolder = "other/raptors/Assault/Advanced"
+          printableName = Some "Apex Brawler"
           metalCost = ValueOrExpr.Concrete 302.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 30000.0
@@ -132,7 +134,9 @@ module other_raptors_Assault_Advanced =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -200,6 +204,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v1Def : UnitDef =
         { name = "raptor_land_assault_basic_t4_v1"
           subfolder = "other/raptors/Assault/Advanced"
+          printableName = Some "Apex Brawler"
           metalCost = ValueOrExpr.Concrete 302.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 30000.0
@@ -295,7 +300,9 @@ module other_raptors_Assault_Advanced =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -367,6 +374,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v1ToFlat (def: UnitDef) : Raptor_land_assault_basic_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -403,6 +411,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v1ToUnitDef (flat: Raptor_land_assault_basic_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -451,6 +460,7 @@ module other_raptors_Assault_Advanced =
     type Raptor_land_assault_basic_t4_v2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -487,6 +497,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v2 : Raptor_land_assault_basic_t4_v2 =
         { name = "raptor_land_assault_basic_t4_v2"
           subfolder = "other/raptors/Assault/Advanced"
+          printableName = Some "Apex Brawler"
           metalCost = ValueOrExpr.Concrete 302.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 30000.0
@@ -575,7 +586,9 @@ module other_raptors_Assault_Advanced =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -644,6 +657,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v2Def : UnitDef =
         { name = "raptor_land_assault_basic_t4_v2"
           subfolder = "other/raptors/Assault/Advanced"
+          printableName = Some "Apex Brawler"
           metalCost = ValueOrExpr.Concrete 302.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 30000.0
@@ -739,7 +753,9 @@ module other_raptors_Assault_Advanced =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -812,6 +828,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v2ToFlat (def: UnitDef) : Raptor_land_assault_basic_t4_v2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -848,6 +865,7 @@ module other_raptors_Assault_Advanced =
     let raptor_land_assault_basic_t4_v2ToUnitDef (flat: Raptor_land_assault_basic_t4_v2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

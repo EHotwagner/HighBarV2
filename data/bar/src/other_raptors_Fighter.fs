@@ -8,6 +8,7 @@ module other_raptors_Fighter =
     type Raptor_air_fighter_basic_t1_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -42,6 +43,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t1_v1 : Raptor_air_fighter_basic_t1_v1 =
         { name = "raptor_air_fighter_basic_t1_v1"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Juvenile Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -173,6 +175,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t1_v1Def : UnitDef =
         { name = "raptor_air_fighter_basic_t1_v1"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Juvenile Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -317,6 +320,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t1_v1ToFlat (def: UnitDef) : Raptor_air_fighter_basic_t1_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -351,6 +355,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t1_v1ToUnitDef (flat: Raptor_air_fighter_basic_t1_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -399,6 +404,7 @@ module other_raptors_Fighter =
     type Raptor_air_fighter_basic_t2_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -433,6 +439,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v1 : Raptor_air_fighter_basic_t2_v1 =
         { name = "raptor_air_fighter_basic_t2_v1"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -564,6 +571,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v1Def : UnitDef =
         { name = "raptor_air_fighter_basic_t2_v1"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -708,6 +716,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v1ToFlat (def: UnitDef) : Raptor_air_fighter_basic_t2_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -742,6 +751,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v1ToUnitDef (flat: Raptor_air_fighter_basic_t2_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -790,6 +800,7 @@ module other_raptors_Fighter =
     type Raptor_air_fighter_basic_t2_v2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -824,6 +835,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v2 : Raptor_air_fighter_basic_t2_v2 =
         { name = "raptor_air_fighter_basic_t2_v2"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 2025.0
@@ -955,6 +967,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v2Def : UnitDef =
         { name = "raptor_air_fighter_basic_t2_v2"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 2025.0
@@ -1099,6 +1112,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v2ToFlat (def: UnitDef) : Raptor_air_fighter_basic_t2_v2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1133,6 +1147,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v2ToUnitDef (flat: Raptor_air_fighter_basic_t2_v2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1181,6 +1196,7 @@ module other_raptors_Fighter =
     type Raptor_air_fighter_basic_t2_v3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1215,6 +1231,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v3 : Raptor_air_fighter_basic_t2_v3 =
         { name = "raptor_air_fighter_basic_t2_v3"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1875.0
@@ -1346,6 +1363,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v3Def : UnitDef =
         { name = "raptor_air_fighter_basic_t2_v3"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1875.0
@@ -1490,6 +1508,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v3ToFlat (def: UnitDef) : Raptor_air_fighter_basic_t2_v3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1524,6 +1543,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v3ToUnitDef (flat: Raptor_air_fighter_basic_t2_v3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1572,6 +1592,7 @@ module other_raptors_Fighter =
     type Raptor_air_fighter_basic_t2_v4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1606,6 +1627,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v4 : Raptor_air_fighter_basic_t2_v4 =
         { name = "raptor_air_fighter_basic_t2_v4"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1650.0
@@ -1737,6 +1759,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v4Def : UnitDef =
         { name = "raptor_air_fighter_basic_t2_v4"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1650.0
@@ -1881,6 +1904,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v4ToFlat (def: UnitDef) : Raptor_air_fighter_basic_t2_v4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1915,6 +1939,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t2_v4ToUnitDef (flat: Raptor_air_fighter_basic_t2_v4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1963,6 +1988,7 @@ module other_raptors_Fighter =
     type Raptor_air_fighter_basic_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1997,6 +2023,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t4_v1 : Raptor_air_fighter_basic_t4_v1 =
         { name = "raptor_air_fighter_basic_t4_v1"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Apex Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -2129,6 +2156,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t4_v1Def : UnitDef =
         { name = "raptor_air_fighter_basic_t4_v1"
           subfolder = "other/raptors/Fighter"
+          printableName = Some "Apex Airfighter"
           metalCost = ValueOrExpr.Concrete 72.0
           energyCost = ValueOrExpr.Concrete 2200.0
           buildTime = ValueOrExpr.Concrete 1950.0
@@ -2274,6 +2302,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t4_v1ToFlat (def: UnitDef) : Raptor_air_fighter_basic_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2308,6 +2337,7 @@ module other_raptors_Fighter =
     let raptor_air_fighter_basic_t4_v1ToUnitDef (flat: Raptor_air_fighter_basic_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

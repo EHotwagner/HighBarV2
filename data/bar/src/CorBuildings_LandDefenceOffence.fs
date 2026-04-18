@@ -8,6 +8,7 @@ module CorBuildings_LandDefenceOffence =
     type Corbhmth =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -40,6 +41,7 @@ module CorBuildings_LandDefenceOffence =
     let corbhmth : Corbhmth =
         { name = "corbhmth"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Cerberus"
           metalCost = ValueOrExpr.Concrete 3100.0
           energyCost = ValueOrExpr.Concrete 35000.0
           buildTime = ValueOrExpr.Concrete 59600.0
@@ -242,6 +244,7 @@ module CorBuildings_LandDefenceOffence =
     let corbhmthDef : UnitDef =
         { name = "corbhmth"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Cerberus"
           metalCost = ValueOrExpr.Concrete 3100.0
           energyCost = ValueOrExpr.Concrete 35000.0
           buildTime = ValueOrExpr.Concrete 59600.0
@@ -451,6 +454,7 @@ module CorBuildings_LandDefenceOffence =
     let corbhmthToFlat (def: UnitDef) : Corbhmth =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -483,6 +487,7 @@ module CorBuildings_LandDefenceOffence =
     let corbhmthToUnitDef (flat: Corbhmth) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -524,6 +529,7 @@ module CorBuildings_LandDefenceOffence =
     type Corbuzz =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -553,6 +559,7 @@ module CorBuildings_LandDefenceOffence =
     let corbuzz : Corbuzz =
         { name = "corbuzz"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Calamity"
           metalCost = ValueOrExpr.Concrete 68000.0
           energyCost = ValueOrExpr.Concrete 800000.0
           buildTime = ValueOrExpr.Concrete 1400000.0
@@ -679,6 +686,7 @@ module CorBuildings_LandDefenceOffence =
     let corbuzzDef : UnitDef =
         { name = "corbuzz"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Calamity"
           metalCost = ValueOrExpr.Concrete 68000.0
           energyCost = ValueOrExpr.Concrete 800000.0
           buildTime = ValueOrExpr.Concrete 1400000.0
@@ -810,6 +818,7 @@ module CorBuildings_LandDefenceOffence =
     let corbuzzToFlat (def: UnitDef) : Corbuzz =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -839,6 +848,7 @@ module CorBuildings_LandDefenceOffence =
     let corbuzzToUnitDef (flat: Corbuzz) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -874,6 +884,7 @@ module CorBuildings_LandDefenceOffence =
     type Cordoom =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -905,6 +916,7 @@ module CorBuildings_LandDefenceOffence =
     let cordoom : Cordoom =
         { name = "cordoom"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Bulwark"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 37000.0
           buildTime = ValueOrExpr.Concrete 55200.0
@@ -1031,7 +1043,9 @@ module CorBuildings_LandDefenceOffence =
                   soundHit = None
                   explosiongenerator = Some "custom:laserhit-small-red"
                   rgbColor = Some "1 0 0"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_fastautoretargeting", "true"
                       "mount_onlytargetcategory", "NOTSUB"
@@ -1123,6 +1137,7 @@ module CorBuildings_LandDefenceOffence =
     let cordoomDef : UnitDef =
         { name = "cordoom"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Bulwark"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 37000.0
           buildTime = ValueOrExpr.Concrete 55200.0
@@ -1247,7 +1262,9 @@ module CorBuildings_LandDefenceOffence =
                 soundHit = None
                 explosiongenerator = Some "custom:laserhit-small-red"
                 rgbColor = Some "1 0 0"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_fastautoretargeting", "true"
                     "mount_onlytargetcategory", "NOTSUB"
@@ -1349,6 +1366,7 @@ module CorBuildings_LandDefenceOffence =
     let cordoomToFlat (def: UnitDef) : Cordoom =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1380,6 +1398,7 @@ module CorBuildings_LandDefenceOffence =
     let cordoomToUnitDef (flat: Cordoom) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1421,6 +1440,7 @@ module CorBuildings_LandDefenceOffence =
     type Corerad =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1450,6 +1470,7 @@ module CorBuildings_LandDefenceOffence =
     let corerad : Corerad =
         { name = "corerad"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Eradicator"
           metalCost = ValueOrExpr.Concrete 800.0
           energyCost = ValueOrExpr.Concrete 7900.0
           buildTime = ValueOrExpr.Concrete 12000.0
@@ -1591,6 +1612,7 @@ module CorBuildings_LandDefenceOffence =
     let coreradDef : UnitDef =
         { name = "corerad"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Eradicator"
           metalCost = ValueOrExpr.Concrete 800.0
           energyCost = ValueOrExpr.Concrete 7900.0
           buildTime = ValueOrExpr.Concrete 12000.0
@@ -1737,6 +1759,7 @@ module CorBuildings_LandDefenceOffence =
     let coreradToFlat (def: UnitDef) : Corerad =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1766,6 +1789,7 @@ module CorBuildings_LandDefenceOffence =
     let coreradToUnitDef (flat: Corerad) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1801,6 +1825,7 @@ module CorBuildings_LandDefenceOffence =
     type Corexp =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1833,6 +1858,7 @@ module CorBuildings_LandDefenceOffence =
     let corexp : Corexp =
         { name = "corexp"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Exploiter"
           metalCost = ValueOrExpr.Concrete 240.0
           energyCost = ValueOrExpr.Concrete 1900.0
           buildTime = ValueOrExpr.Concrete 2900.0
@@ -1969,6 +1995,7 @@ module CorBuildings_LandDefenceOffence =
     let corexpDef : UnitDef =
         { name = "corexp"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Exploiter"
           metalCost = ValueOrExpr.Concrete 240.0
           energyCost = ValueOrExpr.Concrete 1900.0
           buildTime = ValueOrExpr.Concrete 2900.0
@@ -2112,6 +2139,7 @@ module CorBuildings_LandDefenceOffence =
     let corexpToFlat (def: UnitDef) : Corexp =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2144,6 +2172,7 @@ module CorBuildings_LandDefenceOffence =
     let corexpToUnitDef (flat: Corexp) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2185,6 +2214,7 @@ module CorBuildings_LandDefenceOffence =
     type Corflak =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2214,6 +2244,7 @@ module CorBuildings_LandDefenceOffence =
     let corflak : Corflak =
         { name = "corflak"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Birdshot"
           metalCost = ValueOrExpr.Concrete 850.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 20100.0
@@ -2344,6 +2375,7 @@ module CorBuildings_LandDefenceOffence =
     let corflakDef : UnitDef =
         { name = "corflak"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Birdshot"
           metalCost = ValueOrExpr.Concrete 850.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 20100.0
@@ -2479,6 +2511,7 @@ module CorBuildings_LandDefenceOffence =
     let corflakToFlat (def: UnitDef) : Corflak =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2508,6 +2541,7 @@ module CorBuildings_LandDefenceOffence =
     let corflakToUnitDef (flat: Corflak) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2543,6 +2577,7 @@ module CorBuildings_LandDefenceOffence =
     type Corfmd =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2572,6 +2607,7 @@ module CorBuildings_LandDefenceOffence =
     let corfmd : Corfmd =
         { name = "corfmd"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Prevailer"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 60000.0
@@ -2718,6 +2754,7 @@ module CorBuildings_LandDefenceOffence =
     let corfmdDef : UnitDef =
         { name = "corfmd"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Prevailer"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 60000.0
@@ -2869,6 +2906,7 @@ module CorBuildings_LandDefenceOffence =
     let corfmdToFlat (def: UnitDef) : Corfmd =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2898,6 +2936,7 @@ module CorBuildings_LandDefenceOffence =
     let corfmdToUnitDef (flat: Corfmd) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2933,6 +2972,7 @@ module CorBuildings_LandDefenceOffence =
     type Corhllt =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2962,6 +3002,7 @@ module CorBuildings_LandDefenceOffence =
     let corhllt : Corhllt =
         { name = "corhllt"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Twin Guard"
           metalCost = ValueOrExpr.Concrete 195.0
           energyCost = ValueOrExpr.Concrete 1750.0
           buildTime = ValueOrExpr.Concrete 4900.0
@@ -3134,6 +3175,7 @@ module CorBuildings_LandDefenceOffence =
     let corhlltDef : UnitDef =
         { name = "corhllt"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Twin Guard"
           metalCost = ValueOrExpr.Concrete 195.0
           energyCost = ValueOrExpr.Concrete 1750.0
           buildTime = ValueOrExpr.Concrete 4900.0
@@ -3311,6 +3353,7 @@ module CorBuildings_LandDefenceOffence =
     let corhlltToFlat (def: UnitDef) : Corhllt =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3340,6 +3383,7 @@ module CorBuildings_LandDefenceOffence =
     let corhlltToUnitDef (flat: Corhllt) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3375,6 +3419,7 @@ module CorBuildings_LandDefenceOffence =
     type Corhlt =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3405,6 +3450,7 @@ module CorBuildings_LandDefenceOffence =
     let corhlt : Corhlt =
         { name = "corhlt"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Warden"
           metalCost = ValueOrExpr.Concrete 480.0
           energyCost = ValueOrExpr.Concrete 4700.0
           buildTime = ValueOrExpr.Concrete 11400.0
@@ -3534,6 +3580,7 @@ module CorBuildings_LandDefenceOffence =
     let corhltDef : UnitDef =
         { name = "corhlt"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Warden"
           metalCost = ValueOrExpr.Concrete 480.0
           energyCost = ValueOrExpr.Concrete 4700.0
           buildTime = ValueOrExpr.Concrete 11400.0
@@ -3672,6 +3719,7 @@ module CorBuildings_LandDefenceOffence =
     let corhltToFlat (def: UnitDef) : Corhlt =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3702,6 +3750,7 @@ module CorBuildings_LandDefenceOffence =
     let corhltToUnitDef (flat: Corhlt) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3743,6 +3792,7 @@ module CorBuildings_LandDefenceOffence =
     type Corint =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3772,6 +3822,7 @@ module CorBuildings_LandDefenceOffence =
     let corint : Corint =
         { name = "corint"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Basilisk"
           metalCost = ValueOrExpr.Concrete 4600.0
           energyCost = ValueOrExpr.Concrete 67000.0
           buildTime = ValueOrExpr.Concrete 93300.0
@@ -3901,6 +3952,7 @@ module CorBuildings_LandDefenceOffence =
     let corintDef : UnitDef =
         { name = "corint"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Basilisk"
           metalCost = ValueOrExpr.Concrete 4600.0
           energyCost = ValueOrExpr.Concrete 67000.0
           buildTime = ValueOrExpr.Concrete 93300.0
@@ -4035,6 +4087,7 @@ module CorBuildings_LandDefenceOffence =
     let corintToFlat (def: UnitDef) : Corint =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4064,6 +4117,7 @@ module CorBuildings_LandDefenceOffence =
     let corintToUnitDef (flat: Corint) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4099,6 +4153,7 @@ module CorBuildings_LandDefenceOffence =
     type Corjuno =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4127,6 +4182,7 @@ module CorBuildings_LandDefenceOffence =
     let corjuno : Corjuno =
         { name = "corjuno"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Juno"
           metalCost = ValueOrExpr.Concrete 660.0
           energyCost = ValueOrExpr.Concrete 16000.0
           buildTime = ValueOrExpr.Concrete 27700.0
@@ -4267,6 +4323,7 @@ module CorBuildings_LandDefenceOffence =
     let corjunoDef : UnitDef =
         { name = "corjuno"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Juno"
           metalCost = ValueOrExpr.Concrete 660.0
           energyCost = ValueOrExpr.Concrete 16000.0
           buildTime = ValueOrExpr.Concrete 27700.0
@@ -4413,6 +4470,7 @@ module CorBuildings_LandDefenceOffence =
     let corjunoToFlat (def: UnitDef) : Corjuno =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4441,6 +4499,7 @@ module CorBuildings_LandDefenceOffence =
     let corjunoToUnitDef (flat: Corjuno) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4476,6 +4535,7 @@ module CorBuildings_LandDefenceOffence =
     type Corllt =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4505,6 +4565,7 @@ module CorBuildings_LandDefenceOffence =
     let corllt : Corllt =
         { name = "corllt"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Guard"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 700.0
           buildTime = ValueOrExpr.Concrete 2500.0
@@ -4634,6 +4695,7 @@ module CorBuildings_LandDefenceOffence =
     let corlltDef : UnitDef =
         { name = "corllt"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Guard"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 700.0
           buildTime = ValueOrExpr.Concrete 2500.0
@@ -4768,6 +4830,7 @@ module CorBuildings_LandDefenceOffence =
     let corlltToFlat (def: UnitDef) : Corllt =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4797,6 +4860,7 @@ module CorBuildings_LandDefenceOffence =
     let corlltToUnitDef (flat: Corllt) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4832,6 +4896,7 @@ module CorBuildings_LandDefenceOffence =
     type Cormadsam =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4861,6 +4926,7 @@ module CorBuildings_LandDefenceOffence =
     let cormadsam : Cormadsam =
         { name = "cormadsam"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "SAM"
           metalCost = ValueOrExpr.Concrete 315.0
           energyCost = ValueOrExpr.Concrete 6100.0
           buildTime = ValueOrExpr.Concrete 5240.0
@@ -4998,6 +5064,7 @@ module CorBuildings_LandDefenceOffence =
     let cormadsamDef : UnitDef =
         { name = "cormadsam"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "SAM"
           metalCost = ValueOrExpr.Concrete 315.0
           energyCost = ValueOrExpr.Concrete 6100.0
           buildTime = ValueOrExpr.Concrete 5240.0
@@ -5140,6 +5207,7 @@ module CorBuildings_LandDefenceOffence =
     let cormadsamToFlat (def: UnitDef) : Cormadsam =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5169,6 +5237,7 @@ module CorBuildings_LandDefenceOffence =
     let cormadsamToUnitDef (flat: Cormadsam) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5204,6 +5273,7 @@ module CorBuildings_LandDefenceOffence =
     type Cormaw =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5233,6 +5303,7 @@ module CorBuildings_LandDefenceOffence =
     let cormaw : Cormaw =
         { name = "cormaw"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Dragon's Maw"
           metalCost = ValueOrExpr.Concrete 290.0
           energyCost = ValueOrExpr.Concrete 1550.0
           buildTime = ValueOrExpr.Concrete 4420.0
@@ -5379,6 +5450,7 @@ module CorBuildings_LandDefenceOffence =
     let cormawDef : UnitDef =
         { name = "cormaw"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Dragon's Maw"
           metalCost = ValueOrExpr.Concrete 290.0
           energyCost = ValueOrExpr.Concrete 1550.0
           buildTime = ValueOrExpr.Concrete 4420.0
@@ -5530,6 +5602,7 @@ module CorBuildings_LandDefenceOffence =
     let cormawToFlat (def: UnitDef) : Cormaw =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5559,6 +5632,7 @@ module CorBuildings_LandDefenceOffence =
     let cormawToUnitDef (flat: Cormaw) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5594,6 +5668,7 @@ module CorBuildings_LandDefenceOffence =
     type Cormexp =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5626,6 +5701,7 @@ module CorBuildings_LandDefenceOffence =
     let cormexp : Cormexp =
         { name = "cormexp"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Advanced Exploiter"
           metalCost = ValueOrExpr.Concrete 2400.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 32500.0
@@ -5804,6 +5880,7 @@ module CorBuildings_LandDefenceOffence =
     let cormexpDef : UnitDef =
         { name = "cormexp"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Advanced Exploiter"
           metalCost = ValueOrExpr.Concrete 2400.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 32500.0
@@ -5989,6 +6066,7 @@ module CorBuildings_LandDefenceOffence =
     let cormexpToFlat (def: UnitDef) : Cormexp =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6021,6 +6099,7 @@ module CorBuildings_LandDefenceOffence =
     let cormexpToUnitDef (flat: Cormexp) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6062,6 +6141,7 @@ module CorBuildings_LandDefenceOffence =
     type Corpun =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6092,6 +6172,7 @@ module CorBuildings_LandDefenceOffence =
     let corpun : Corpun =
         { name = "corpun"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Agitator"
           metalCost = ValueOrExpr.Concrete 1300.0
           energyCost = ValueOrExpr.Concrete 13500.0
           buildTime = ValueOrExpr.Concrete 17400.0
@@ -6283,6 +6364,7 @@ module CorBuildings_LandDefenceOffence =
     let corpunDef : UnitDef =
         { name = "corpun"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Agitator"
           metalCost = ValueOrExpr.Concrete 1300.0
           energyCost = ValueOrExpr.Concrete 13500.0
           buildTime = ValueOrExpr.Concrete 17400.0
@@ -6478,6 +6560,7 @@ module CorBuildings_LandDefenceOffence =
     let corpunToFlat (def: UnitDef) : Corpun =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6508,6 +6591,7 @@ module CorBuildings_LandDefenceOffence =
     let corpunToUnitDef (flat: Corpun) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6543,6 +6627,7 @@ module CorBuildings_LandDefenceOffence =
     type Corrl =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6572,6 +6657,7 @@ module CorBuildings_LandDefenceOffence =
     let corrl : Corrl =
         { name = "corrl"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Thistle"
           metalCost = ValueOrExpr.Concrete 80.0
           energyCost = ValueOrExpr.Concrete 850.0
           buildTime = ValueOrExpr.Concrete 1750.0
@@ -6711,6 +6797,7 @@ module CorBuildings_LandDefenceOffence =
     let corrlDef : UnitDef =
         { name = "corrl"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Thistle"
           metalCost = ValueOrExpr.Concrete 80.0
           energyCost = ValueOrExpr.Concrete 850.0
           buildTime = ValueOrExpr.Concrete 1750.0
@@ -6855,6 +6942,7 @@ module CorBuildings_LandDefenceOffence =
     let corrlToFlat (def: UnitDef) : Corrl =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6884,6 +6972,7 @@ module CorBuildings_LandDefenceOffence =
     let corrlToUnitDef (flat: Corrl) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6919,6 +7008,7 @@ module CorBuildings_LandDefenceOffence =
     type Corscreamer =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6949,6 +7039,7 @@ module CorBuildings_LandDefenceOffence =
     let corscreamer : Corscreamer =
         { name = "corscreamer"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Screamer"
           metalCost = ValueOrExpr.Concrete 1650.0
           energyCost = ValueOrExpr.Concrete 32000.0
           buildTime = ValueOrExpr.Concrete 28000.0
@@ -7012,9 +7103,9 @@ module CorBuildings_LandDefenceOffence =
                       "model", "corscreamermissile.s3o"
                       "proximitypriority", "-1.0"
                       "smokecolor", "0.9"
-                      "smokeperiod", "3.0"
-                      "smokesize", "11.0"
-                      "smoketime", "24.0"
+                      "smokeperiod", "2.0"
+                      "smokesize", "9.0"
+                      "smoketime", "20.0"
                       "smoketrail", "true"
                       "smoketrailcastshadow", "false"
                       "soundhitvolume", "8.0"
@@ -7095,6 +7186,7 @@ module CorBuildings_LandDefenceOffence =
     let corscreamerDef : UnitDef =
         { name = "corscreamer"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Screamer"
           metalCost = ValueOrExpr.Concrete 1650.0
           energyCost = ValueOrExpr.Concrete 32000.0
           buildTime = ValueOrExpr.Concrete 28000.0
@@ -7157,9 +7249,9 @@ module CorBuildings_LandDefenceOffence =
                     "model", "corscreamermissile.s3o"
                     "proximitypriority", "-1.0"
                     "smokecolor", "0.9"
-                    "smokeperiod", "3.0"
-                    "smokesize", "11.0"
-                    "smoketime", "24.0"
+                    "smokeperiod", "2.0"
+                    "smokesize", "9.0"
+                    "smoketime", "20.0"
                     "smoketrail", "true"
                     "smoketrailcastshadow", "false"
                     "soundhitvolume", "8.0"
@@ -7245,6 +7337,7 @@ module CorBuildings_LandDefenceOffence =
     let corscreamerToFlat (def: UnitDef) : Corscreamer =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7275,6 +7368,7 @@ module CorBuildings_LandDefenceOffence =
     let corscreamerToUnitDef (flat: Corscreamer) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7310,6 +7404,7 @@ module CorBuildings_LandDefenceOffence =
     type Corsilo =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7338,6 +7433,7 @@ module CorBuildings_LandDefenceOffence =
     let corsilo : Corsilo =
         { name = "corsilo"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Apocalypse"
           metalCost = ValueOrExpr.Concrete 7700.0
           energyCost = ValueOrExpr.Concrete 82000.0
           buildTime = ValueOrExpr.Concrete 181000.0
@@ -7402,7 +7498,7 @@ module CorBuildings_LandDefenceOffence =
                       "model", "crblmssl.s3o"
                       "smokecolor", "0.85"
                       "smokeperiod", "10.0"
-                      "smokesize", "28.0"
+                      "smokesize", "35.0"
                       "smoketime", "130.0"
                       "smoketrail", "true"
                       "smoketrailcastshadow", "true"
@@ -7518,6 +7614,7 @@ module CorBuildings_LandDefenceOffence =
     let corsiloDef : UnitDef =
         { name = "corsilo"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Apocalypse"
           metalCost = ValueOrExpr.Concrete 7700.0
           energyCost = ValueOrExpr.Concrete 82000.0
           buildTime = ValueOrExpr.Concrete 181000.0
@@ -7583,7 +7680,7 @@ module CorBuildings_LandDefenceOffence =
                     "model", "crblmssl.s3o"
                     "smokecolor", "0.85"
                     "smokeperiod", "10.0"
-                    "smokesize", "28.0"
+                    "smokesize", "35.0"
                     "smoketime", "130.0"
                     "smoketrail", "true"
                     "smoketrailcastshadow", "true"
@@ -7704,6 +7801,7 @@ module CorBuildings_LandDefenceOffence =
     let corsiloToFlat (def: UnitDef) : Corsilo =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7732,6 +7830,7 @@ module CorBuildings_LandDefenceOffence =
     let corsiloToUnitDef (flat: Corsilo) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7767,6 +7866,7 @@ module CorBuildings_LandDefenceOffence =
     type Cortoast =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7797,6 +7897,7 @@ module CorBuildings_LandDefenceOffence =
     let cortoast : Cortoast =
         { name = "cortoast"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Persecutor"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 25700.0
@@ -7996,6 +8097,7 @@ module CorBuildings_LandDefenceOffence =
     let cortoastDef : UnitDef =
         { name = "cortoast"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Persecutor"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 25700.0
@@ -8199,6 +8301,7 @@ module CorBuildings_LandDefenceOffence =
     let cortoastToFlat (def: UnitDef) : Cortoast =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -8229,6 +8332,7 @@ module CorBuildings_LandDefenceOffence =
     let cortoastToUnitDef (flat: Cortoast) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -8264,6 +8368,7 @@ module CorBuildings_LandDefenceOffence =
     type Cortron =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -8292,6 +8397,7 @@ module CorBuildings_LandDefenceOffence =
     let cortron : Cortron =
         { name = "cortron"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Catalyst"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 59000.0
@@ -8357,8 +8463,8 @@ module CorBuildings_LandDefenceOffence =
                       "model", "cortronmissile.s3o"
                       "smokecolor", "0.7"
                       "smokeperiod", "9.0"
-                      "smokesize", "14.0"
-                      "smoketime", "60.0"
+                      "smokesize", "20.0"
+                      "smoketime", "63.0"
                       "smoketrail", "true"
                       "smoketrailcastshadow", "false"
                       "stockpile", "true"
@@ -8435,6 +8541,7 @@ module CorBuildings_LandDefenceOffence =
     let cortronDef : UnitDef =
         { name = "cortron"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Catalyst"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 59000.0
@@ -8501,8 +8608,8 @@ module CorBuildings_LandDefenceOffence =
                     "model", "cortronmissile.s3o"
                     "smokecolor", "0.7"
                     "smokeperiod", "9.0"
-                    "smokesize", "14.0"
-                    "smoketime", "60.0"
+                    "smokesize", "20.0"
+                    "smoketime", "63.0"
                     "smoketrail", "true"
                     "smoketrailcastshadow", "false"
                     "stockpile", "true"
@@ -8584,6 +8691,7 @@ module CorBuildings_LandDefenceOffence =
     let cortronToFlat (def: UnitDef) : Cortron =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -8612,6 +8720,7 @@ module CorBuildings_LandDefenceOffence =
     let cortronToUnitDef (flat: Cortron) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -8647,6 +8756,7 @@ module CorBuildings_LandDefenceOffence =
     type Corvipe =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -8676,6 +8786,7 @@ module CorBuildings_LandDefenceOffence =
     let corvipe : Corvipe =
         { name = "corvipe"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Scorpion"
           metalCost = ValueOrExpr.Concrete 730.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 15000.0
@@ -8817,6 +8928,7 @@ module CorBuildings_LandDefenceOffence =
     let corvipeDef : UnitDef =
         { name = "corvipe"
           subfolder = "CorBuildings/LandDefenceOffence"
+          printableName = Some "Scorpion"
           metalCost = ValueOrExpr.Concrete 730.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 15000.0
@@ -8963,6 +9075,7 @@ module CorBuildings_LandDefenceOffence =
     let corvipeToFlat (def: UnitDef) : Corvipe =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -8992,6 +9105,7 @@ module CorBuildings_LandDefenceOffence =
     let corvipeToUnitDef (flat: Corvipe) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

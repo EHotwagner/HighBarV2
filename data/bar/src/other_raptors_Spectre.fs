@@ -8,6 +8,7 @@ module other_raptors_Spectre =
     type Raptor_land_assault_spectre_t2_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t2_v1 : Raptor_land_assault_spectre_t2_v1 =
         { name = "raptor_land_assault_spectre_t2_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Spectre Brawler"
           metalCost = ValueOrExpr.Concrete 152.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 9000.0
@@ -132,7 +134,9 @@ module other_raptors_Spectre =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -205,6 +209,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t2_v1Def : UnitDef =
         { name = "raptor_land_assault_spectre_t2_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Spectre Brawler"
           metalCost = ValueOrExpr.Concrete 152.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 9000.0
@@ -300,7 +305,9 @@ module other_raptors_Spectre =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -377,6 +384,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t2_v1ToFlat (def: UnitDef) : Raptor_land_assault_spectre_t2_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -413,6 +421,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t2_v1ToUnitDef (flat: Raptor_land_assault_spectre_t2_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -461,6 +470,7 @@ module other_raptors_Spectre =
     type Raptor_land_assault_spectre_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -497,6 +507,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t4_v1 : Raptor_land_assault_spectre_t4_v1 =
         { name = "raptor_land_assault_spectre_t4_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Apex Spectre Brawler"
           metalCost = ValueOrExpr.Concrete 302.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 30000.0
@@ -585,7 +596,9 @@ module other_raptors_Spectre =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -659,6 +672,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t4_v1Def : UnitDef =
         { name = "raptor_land_assault_spectre_t4_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Apex Spectre Brawler"
           metalCost = ValueOrExpr.Concrete 302.0
           energyCost = ValueOrExpr.Concrete 3520.0
           buildTime = ValueOrExpr.Concrete 30000.0
@@ -754,7 +768,9 @@ module other_raptors_Spectre =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -832,6 +848,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t4_v1ToFlat (def: UnitDef) : Raptor_land_assault_spectre_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -868,6 +885,7 @@ module other_raptors_Spectre =
     let raptor_land_assault_spectre_t4_v1ToUnitDef (flat: Raptor_land_assault_spectre_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -916,6 +934,7 @@ module other_raptors_Spectre =
     type Raptor_land_spiker_spectre_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -952,6 +971,7 @@ module other_raptors_Spectre =
     let raptor_land_spiker_spectre_t4_v1 : Raptor_land_spiker_spectre_t4_v1 =
         { name = "raptor_land_spiker_spectre_t4_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Apex Spectre Spiker"
           metalCost = ValueOrExpr.Concrete 174.0
           energyCost = ValueOrExpr.Concrete 174.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -1066,6 +1086,7 @@ module other_raptors_Spectre =
     let raptor_land_spiker_spectre_t4_v1Def : UnitDef =
         { name = "raptor_land_spiker_spectre_t4_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Apex Spectre Spiker"
           metalCost = ValueOrExpr.Concrete 174.0
           energyCost = ValueOrExpr.Concrete 174.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -1191,6 +1212,7 @@ module other_raptors_Spectre =
     let raptor_land_spiker_spectre_t4_v1ToFlat (def: UnitDef) : Raptor_land_spiker_spectre_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1227,6 +1249,7 @@ module other_raptors_Spectre =
     let raptor_land_spiker_spectre_t4_v1ToUnitDef (flat: Raptor_land_spiker_spectre_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1275,6 +1298,7 @@ module other_raptors_Spectre =
     type Raptor_land_swarmer_spectre_t3_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1311,6 +1335,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t3_v1 : Raptor_land_swarmer_spectre_t3_v1 =
         { name = "raptor_land_swarmer_spectre_t3_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Spectre Swarmer"
           metalCost = ValueOrExpr.Concrete 79.0
           energyCost = ValueOrExpr.Concrete 79.0
           buildTime = ValueOrExpr.Concrete 1500.0
@@ -1418,6 +1443,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t3_v1Def : UnitDef =
         { name = "raptor_land_swarmer_spectre_t3_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Spectre Swarmer"
           metalCost = ValueOrExpr.Concrete 79.0
           energyCost = ValueOrExpr.Concrete 79.0
           buildTime = ValueOrExpr.Concrete 1500.0
@@ -1536,6 +1562,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t3_v1ToFlat (def: UnitDef) : Raptor_land_swarmer_spectre_t3_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1572,6 +1599,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t3_v1ToUnitDef (flat: Raptor_land_swarmer_spectre_t3_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1620,6 +1648,7 @@ module other_raptors_Spectre =
     type Raptor_land_swarmer_spectre_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1656,6 +1685,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t4_v1 : Raptor_land_swarmer_spectre_t4_v1 =
         { name = "raptor_land_swarmer_spectre_t4_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Apex Spectre Swarmer"
           metalCost = ValueOrExpr.Concrete 100.0
           energyCost = ValueOrExpr.Concrete 1000.0
           buildTime = ValueOrExpr.Concrete 7500.0
@@ -1763,6 +1793,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t4_v1Def : UnitDef =
         { name = "raptor_land_swarmer_spectre_t4_v1"
           subfolder = "other/raptors/Spectre"
+          printableName = Some "Apex Spectre Swarmer"
           metalCost = ValueOrExpr.Concrete 100.0
           energyCost = ValueOrExpr.Concrete 1000.0
           buildTime = ValueOrExpr.Concrete 7500.0
@@ -1881,6 +1912,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t4_v1ToFlat (def: UnitDef) : Raptor_land_swarmer_spectre_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1917,6 +1949,7 @@ module other_raptors_Spectre =
     let raptor_land_swarmer_spectre_t4_v1ToUnitDef (flat: Raptor_land_swarmer_spectre_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

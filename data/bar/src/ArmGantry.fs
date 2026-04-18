@@ -8,6 +8,7 @@ module ArmGantry =
     type Armbanth =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -48,6 +49,7 @@ module ArmGantry =
     let armbanth : Armbanth =
         { name = "armbanth"
           subfolder = "ArmGantry"
+          printableName = Some "Titan"
           metalCost = ValueOrExpr.Concrete 13500.0
           energyCost = ValueOrExpr.Concrete 286000.0
           buildTime = ValueOrExpr.Concrete 360000.0
@@ -309,6 +311,7 @@ module ArmGantry =
     let armbanthDef : UnitDef =
         { name = "armbanth"
           subfolder = "ArmGantry"
+          printableName = Some "Titan"
           metalCost = ValueOrExpr.Concrete 13500.0
           energyCost = ValueOrExpr.Concrete 286000.0
           buildTime = ValueOrExpr.Concrete 360000.0
@@ -582,6 +585,7 @@ module ArmGantry =
     let armbanthToFlat (def: UnitDef) : Armbanth =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -622,6 +626,7 @@ module ArmGantry =
     let armbanthToUnitDef (flat: Armbanth) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -676,6 +681,7 @@ module ArmGantry =
     type Armlun =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -714,6 +720,7 @@ module ArmGantry =
     let armlun : Armlun =
         { name = "armlun"
           subfolder = "ArmGantry"
+          printableName = Some "Lunkhead"
           metalCost = ValueOrExpr.Concrete 1150.0
           energyCost = ValueOrExpr.Concrete 23000.0
           buildTime = ValueOrExpr.Concrete 40000.0
@@ -892,6 +899,7 @@ module ArmGantry =
     let armlunDef : UnitDef =
         { name = "armlun"
           subfolder = "ArmGantry"
+          printableName = Some "Lunkhead"
           metalCost = ValueOrExpr.Concrete 1150.0
           energyCost = ValueOrExpr.Concrete 23000.0
           buildTime = ValueOrExpr.Concrete 40000.0
@@ -1079,6 +1087,7 @@ module ArmGantry =
     let armlunToFlat (def: UnitDef) : Armlun =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1117,6 +1126,7 @@ module ArmGantry =
     let armlunToUnitDef (flat: Armlun) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1165,6 +1175,7 @@ module ArmGantry =
     type Armmar =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1203,6 +1214,7 @@ module ArmGantry =
     let armmar : Armmar =
         { name = "armmar"
           subfolder = "ArmGantry"
+          printableName = Some "Marauder"
           metalCost = ValueOrExpr.Concrete 970.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 33000.0
@@ -1288,7 +1300,9 @@ module ArmGantry =
                   soundHit = Some "xplosml2"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -1382,6 +1396,7 @@ module ArmGantry =
     let armmarDef : UnitDef =
         { name = "armmar"
           subfolder = "ArmGantry"
+          printableName = Some "Marauder"
           metalCost = ValueOrExpr.Concrete 970.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 33000.0
@@ -1474,7 +1489,9 @@ module ArmGantry =
                 soundHit = Some "xplosml2"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -1570,6 +1587,7 @@ module ArmGantry =
     let armmarToFlat (def: UnitDef) : Armmar =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1608,6 +1626,7 @@ module ArmGantry =
     let armmarToUnitDef (flat: Armmar) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1656,6 +1675,7 @@ module ArmGantry =
     type Armprowl =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1694,6 +1714,7 @@ module ArmGantry =
     let armprowl : Armprowl =
         { name = "armprowl"
           subfolder = "ArmGantry"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 970.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 33000.0
@@ -1779,7 +1800,9 @@ module ArmGantry =
                   soundHit = Some "xplosml2"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -1873,6 +1896,7 @@ module ArmGantry =
     let armprowlDef : UnitDef =
         { name = "armprowl"
           subfolder = "ArmGantry"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 970.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 33000.0
@@ -1965,7 +1989,9 @@ module ArmGantry =
                 soundHit = Some "xplosml2"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -2061,6 +2087,7 @@ module ArmGantry =
     let armprowlToFlat (def: UnitDef) : Armprowl =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2099,6 +2126,7 @@ module ArmGantry =
     let armprowlToUnitDef (flat: Armprowl) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2147,6 +2175,7 @@ module ArmGantry =
     type Armraz =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2185,6 +2214,7 @@ module ArmGantry =
     let armraz : Armraz =
         { name = "armraz"
           subfolder = "ArmGantry"
+          printableName = Some "Razorback"
           metalCost = ValueOrExpr.Concrete 3800.0
           energyCost = ValueOrExpr.Concrete 68000.0
           buildTime = ValueOrExpr.Concrete 120000.0
@@ -2250,7 +2280,7 @@ module ArmGantry =
                       "beamtime", "0.07"
                       "burst", "6.0"
                       "burstrate", "0.06667"
-                      "corethickness", "0.35"
+                      "corethickness", "0.45"
                       "craterareaofeffect", "0.0"
                       "craterboost", "0.0"
                       "cratermult", "0.0"
@@ -2330,6 +2360,7 @@ module ArmGantry =
     let armrazDef : UnitDef =
         { name = "armraz"
           subfolder = "ArmGantry"
+          printableName = Some "Razorback"
           metalCost = ValueOrExpr.Concrete 3800.0
           energyCost = ValueOrExpr.Concrete 68000.0
           buildTime = ValueOrExpr.Concrete 120000.0
@@ -2402,7 +2433,7 @@ module ArmGantry =
                     "beamtime", "0.07"
                     "burst", "6.0"
                     "burstrate", "0.06667"
-                    "corethickness", "0.35"
+                    "corethickness", "0.45"
                     "craterareaofeffect", "0.0"
                     "craterboost", "0.0"
                     "cratermult", "0.0"
@@ -2484,6 +2515,7 @@ module ArmGantry =
     let armrazToFlat (def: UnitDef) : Armraz =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2522,6 +2554,7 @@ module ArmGantry =
     let armrazToUnitDef (flat: Armraz) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2570,6 +2603,7 @@ module ArmGantry =
     type Armthor =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2608,6 +2642,7 @@ module ArmGantry =
     let armthor : Armthor =
         { name = "armthor"
           subfolder = "ArmGantry"
+          printableName = Some "Thor"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 240000.0
           buildTime = ValueOrExpr.Concrete 320000.0
@@ -2899,6 +2934,7 @@ module ArmGantry =
     let armthorDef : UnitDef =
         { name = "armthor"
           subfolder = "ArmGantry"
+          printableName = Some "Thor"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 240000.0
           buildTime = ValueOrExpr.Concrete 320000.0
@@ -3199,6 +3235,7 @@ module ArmGantry =
     let armthorToFlat (def: UnitDef) : Armthor =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3237,6 +3274,7 @@ module ArmGantry =
     let armthorToUnitDef (flat: Armthor) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3285,6 +3323,7 @@ module ArmGantry =
     type Armvang =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3323,6 +3362,7 @@ module ArmGantry =
     let armvang : Armvang =
         { name = "armvang"
           subfolder = "ArmGantry"
+          printableName = Some "Vanguard"
           metalCost = ValueOrExpr.Concrete 3300.0
           energyCost = ValueOrExpr.Concrete 71000.0
           buildTime = ValueOrExpr.Concrete 120000.0
@@ -3534,6 +3574,7 @@ module ArmGantry =
     let armvangDef : UnitDef =
         { name = "armvang"
           subfolder = "ArmGantry"
+          printableName = Some "Vanguard"
           metalCost = ValueOrExpr.Concrete 3300.0
           energyCost = ValueOrExpr.Concrete 71000.0
           buildTime = ValueOrExpr.Concrete 120000.0
@@ -3754,6 +3795,7 @@ module ArmGantry =
     let armvangToFlat (def: UnitDef) : Armvang =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3792,6 +3834,7 @@ module ArmGantry =
     let armvangToUnitDef (flat: Armvang) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

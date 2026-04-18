@@ -8,6 +8,7 @@ module Root =
     type Armassistdrone_land =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -48,6 +49,7 @@ module Root =
     let armassistdrone_land : Armassistdrone_land =
         { name = "armassistdrone_land"
           subfolder = "Root"
+          printableName = Some "Assist Vehicle"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 500.0
@@ -109,6 +111,7 @@ module Root =
     let armassistdrone_landDef : UnitDef =
         { name = "armassistdrone_land"
           subfolder = "Root"
+          printableName = Some "Assist Vehicle"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 500.0
@@ -181,6 +184,7 @@ module Root =
     let armassistdrone_landToFlat (def: UnitDef) : Armassistdrone_land =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -221,6 +225,7 @@ module Root =
     let armassistdrone_landToUnitDef (flat: Armassistdrone_land) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -274,6 +279,7 @@ module Root =
     type Armcom =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -319,6 +325,7 @@ module Root =
     let armcom : Armcom =
         { name = "armcom"
           subfolder = "Root"
+          printableName = Some "Armada Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -564,6 +571,7 @@ module Root =
     let armcomDef : UnitDef =
         { name = "armcom"
           subfolder = "Root"
+          printableName = Some "Armada Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -820,6 +828,7 @@ module Root =
     let armcomToFlat (def: UnitDef) : Armcom =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -865,6 +874,7 @@ module Root =
     let armcomToUnitDef (flat: Armcom) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -924,6 +934,7 @@ module Root =
     type Armcomcon =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -969,6 +980,7 @@ module Root =
     let armcomcon : Armcomcon =
         { name = "armcomcon"
           subfolder = "Root"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1212,6 +1224,7 @@ module Root =
     let armcomconDef : UnitDef =
         { name = "armcomcon"
           subfolder = "Root"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1466,6 +1479,7 @@ module Root =
     let armcomconToFlat (def: UnitDef) : Armcomcon =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1511,6 +1525,7 @@ module Root =
     let armcomconToUnitDef (flat: Armcomcon) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1570,6 +1585,7 @@ module Root =
     type Armcomnew =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1615,6 +1631,7 @@ module Root =
     let armcomnew : Armcomnew =
         { name = "armcomnew"
           subfolder = "Root"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1860,6 +1877,7 @@ module Root =
     let armcomnewDef : UnitDef =
         { name = "armcomnew"
           subfolder = "Root"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -2116,6 +2134,7 @@ module Root =
     let armcomnewToFlat (def: UnitDef) : Armcomnew =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2161,6 +2180,7 @@ module Root =
     let armcomnewToUnitDef (flat: Armcomnew) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2220,6 +2240,7 @@ module Root =
     type Corassistdrone_land =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2260,6 +2281,7 @@ module Root =
     let corassistdrone_land : Corassistdrone_land =
         { name = "corassistdrone_land"
           subfolder = "Root"
+          printableName = Some "Assist Vehicle"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 500.0
@@ -2322,6 +2344,7 @@ module Root =
     let corassistdrone_landDef : UnitDef =
         { name = "corassistdrone_land"
           subfolder = "Root"
+          printableName = Some "Assist Vehicle"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 500.0
@@ -2395,6 +2418,7 @@ module Root =
     let corassistdrone_landToFlat (def: UnitDef) : Corassistdrone_land =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2435,6 +2459,7 @@ module Root =
     let corassistdrone_landToUnitDef (flat: Corassistdrone_land) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2488,6 +2513,7 @@ module Root =
     type Corcom =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2533,6 +2559,7 @@ module Root =
     let corcom : Corcom =
         { name = "corcom"
           subfolder = "Root"
+          printableName = Some "Cortex Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -2778,6 +2805,7 @@ module Root =
     let corcomDef : UnitDef =
         { name = "corcom"
           subfolder = "Root"
+          printableName = Some "Cortex Commander"
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -3034,6 +3062,7 @@ module Root =
     let corcomToFlat (def: UnitDef) : Corcom =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3079,6 +3108,7 @@ module Root =
     let corcomToUnitDef (flat: Corcom) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3138,6 +3168,7 @@ module Root =
     type Corcomcon =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3183,6 +3214,7 @@ module Root =
     let corcomcon : Corcomcon =
         { name = "corcomcon"
           subfolder = "Root"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -3425,6 +3457,7 @@ module Root =
     let corcomconDef : UnitDef =
         { name = "corcomcon"
           subfolder = "Root"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 2700.0
           energyCost = ValueOrExpr.Concrete 26000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -3678,6 +3711,7 @@ module Root =
     let corcomconToFlat (def: UnitDef) : Corcomcon =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3723,6 +3757,7 @@ module Root =
     let corcomconToUnitDef (flat: Corcomcon) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

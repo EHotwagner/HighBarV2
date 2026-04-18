@@ -8,6 +8,7 @@ module Legion_SeaEconomy =
     type Legfeconv =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -36,6 +37,7 @@ module Legion_SeaEconomy =
     let legfeconv : Legfeconv =
         { name = "legfeconv"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Naval Energy Converter"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1250.0
           buildTime = ValueOrExpr.Concrete 2680.0
@@ -85,6 +87,7 @@ module Legion_SeaEconomy =
     let legfeconvDef : UnitDef =
         { name = "legfeconv"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Naval Energy Converter"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1250.0
           buildTime = ValueOrExpr.Concrete 2680.0
@@ -140,6 +143,7 @@ module Legion_SeaEconomy =
     let legfeconvToFlat (def: UnitDef) : Legfeconv =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -168,6 +172,7 @@ module Legion_SeaEconomy =
     let legfeconvToUnitDef (flat: Legfeconv) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -203,6 +208,7 @@ module Legion_SeaEconomy =
     type Legtide =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -233,6 +239,7 @@ module Legion_SeaEconomy =
     let legtide : Legtide =
         { name = "legtide"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Tidal Generator"
           metalCost = ValueOrExpr.Concrete 85.0
           energyCost = ValueOrExpr.Concrete 250.0
           buildTime = ValueOrExpr.Concrete 2100.0
@@ -315,6 +322,7 @@ module Legion_SeaEconomy =
     let legtideDef : UnitDef =
         { name = "legtide"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Tidal Generator"
           metalCost = ValueOrExpr.Concrete 85.0
           energyCost = ValueOrExpr.Concrete 250.0
           buildTime = ValueOrExpr.Concrete 2100.0
@@ -406,6 +414,7 @@ module Legion_SeaEconomy =
     let legtideToFlat (def: UnitDef) : Legtide =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -436,6 +445,7 @@ module Legion_SeaEconomy =
     let legtideToUnitDef (flat: Legtide) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -477,6 +487,7 @@ module Legion_SeaEconomy =
     type Leguwestore =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -506,6 +517,7 @@ module Legion_SeaEconomy =
     let leguwestore : Leguwestore =
         { name = "leguwestore"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Naval Energy Storage"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 1800.0
           buildTime = ValueOrExpr.Concrete 4260.0
@@ -590,6 +602,7 @@ module Legion_SeaEconomy =
     let leguwestoreDef : UnitDef =
         { name = "leguwestore"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Naval Energy Storage"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 1800.0
           buildTime = ValueOrExpr.Concrete 4260.0
@@ -684,6 +697,7 @@ module Legion_SeaEconomy =
     let leguwestoreToFlat (def: UnitDef) : Leguwestore =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -713,6 +727,7 @@ module Legion_SeaEconomy =
     let leguwestoreToUnitDef (flat: Leguwestore) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -754,6 +769,7 @@ module Legion_SeaEconomy =
     type Leguwgeo =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -785,6 +801,7 @@ module Legion_SeaEconomy =
     let leguwgeo : Leguwgeo =
         { name = "leguwgeo"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Offshore Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 12900.0
@@ -878,6 +895,7 @@ module Legion_SeaEconomy =
     let leguwgeoDef : UnitDef =
         { name = "leguwgeo"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Offshore Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 12900.0
@@ -979,6 +997,7 @@ module Legion_SeaEconomy =
     let leguwgeoToFlat (def: UnitDef) : Leguwgeo =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1010,6 +1029,7 @@ module Legion_SeaEconomy =
     let leguwgeoToUnitDef (flat: Leguwgeo) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1051,6 +1071,7 @@ module Legion_SeaEconomy =
     type Leguwmstore =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1080,6 +1101,7 @@ module Legion_SeaEconomy =
     let leguwmstore : Leguwmstore =
         { name = "leguwmstore"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Naval Metal Storage"
           metalCost = ValueOrExpr.Concrete 340.0
           energyCost = ValueOrExpr.Concrete 590.0
           buildTime = ValueOrExpr.Concrete 2920.0
@@ -1164,6 +1186,7 @@ module Legion_SeaEconomy =
     let leguwmstoreDef : UnitDef =
         { name = "leguwmstore"
           subfolder = "Legion/SeaEconomy"
+          printableName = Some "Naval Metal Storage"
           metalCost = ValueOrExpr.Concrete 340.0
           energyCost = ValueOrExpr.Concrete 590.0
           buildTime = ValueOrExpr.Concrete 2920.0
@@ -1258,6 +1281,7 @@ module Legion_SeaEconomy =
     let leguwmstoreToFlat (def: UnitDef) : Leguwmstore =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1287,6 +1311,7 @@ module Legion_SeaEconomy =
     let leguwmstoreToUnitDef (flat: Leguwmstore) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

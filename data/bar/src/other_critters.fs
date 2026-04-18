@@ -8,6 +8,7 @@ module other_critters =
     type Critter_ant =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_critters =
     let critter_ant : Critter_ant =
         { name = "critter_ant"
           subfolder = "other/critters"
+          printableName = Some "Ant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -111,6 +113,7 @@ module other_critters =
     let critter_antDef : UnitDef =
         { name = "critter_ant"
           subfolder = "other/critters"
+          printableName = Some "Ant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -189,6 +192,7 @@ module other_critters =
     let critter_antToFlat (def: UnitDef) : Critter_ant =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -225,6 +229,7 @@ module other_critters =
     let critter_antToUnitDef (flat: Critter_ant) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -273,6 +278,7 @@ module other_critters =
     type Critter_crab =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -304,6 +310,7 @@ module other_critters =
     let critter_crab : Critter_crab =
         { name = "critter_crab"
           subfolder = "other/critters"
+          printableName = Some "Crab"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -365,6 +372,7 @@ module other_critters =
     let critter_crabDef : UnitDef =
         { name = "critter_crab"
           subfolder = "other/critters"
+          printableName = Some "Crab"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -442,6 +450,7 @@ module other_critters =
     let critter_crabToFlat (def: UnitDef) : Critter_crab =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -473,6 +482,7 @@ module other_critters =
     let critter_crabToUnitDef (flat: Critter_crab) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -521,6 +531,7 @@ module other_critters =
     type Critter_duck =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -555,6 +566,7 @@ module other_critters =
     let critter_duck : Critter_duck =
         { name = "critter_duck"
           subfolder = "other/critters"
+          printableName = Some "Duck"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -619,6 +631,7 @@ module other_critters =
     let critter_duckDef : UnitDef =
         { name = "critter_duck"
           subfolder = "other/critters"
+          printableName = Some "Duck"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -696,6 +709,7 @@ module other_critters =
     let critter_duckToFlat (def: UnitDef) : Critter_duck =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -730,6 +744,7 @@ module other_critters =
     let critter_duckToUnitDef (flat: Critter_duck) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -778,6 +793,7 @@ module other_critters =
     type Critter_goldfish =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -812,6 +828,7 @@ module other_critters =
     let critter_goldfish : Critter_goldfish =
         { name = "critter_goldfish"
           subfolder = "other/critters"
+          printableName = Some "Goldfish"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 600.0
@@ -869,6 +886,7 @@ module other_critters =
     let critter_goldfishDef : UnitDef =
         { name = "critter_goldfish"
           subfolder = "other/critters"
+          printableName = Some "Goldfish"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 600.0
@@ -939,6 +957,7 @@ module other_critters =
     let critter_goldfishToFlat (def: UnitDef) : Critter_goldfish =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -973,6 +992,7 @@ module other_critters =
     let critter_goldfishToUnitDef (flat: Critter_goldfish) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1021,6 +1041,7 @@ module other_critters =
     type Critter_gull =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1052,6 +1073,7 @@ module other_critters =
     let critter_gull : Critter_gull =
         { name = "critter_gull"
           subfolder = "other/critters"
+          printableName = Some "Seagull"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -1109,6 +1131,7 @@ module other_critters =
     let critter_gullDef : UnitDef =
         { name = "critter_gull"
           subfolder = "other/critters"
+          printableName = Some "Seagull"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 10.0
@@ -1182,6 +1205,7 @@ module other_critters =
     let critter_gullToFlat (def: UnitDef) : Critter_gull =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1213,6 +1237,7 @@ module other_critters =
     let critter_gullToUnitDef (flat: Critter_gull) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1261,6 +1286,7 @@ module other_critters =
     type Critter_penguin =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1295,6 +1321,7 @@ module other_critters =
     let critter_penguin : Critter_penguin =
         { name = "critter_penguin"
           subfolder = "other/critters"
+          printableName = Some "Penguin"
           metalCost = ValueOrExpr.Concrete 15.0
           energyCost = ValueOrExpr.Concrete 200.0
           buildTime = ValueOrExpr.Concrete 250.0
@@ -1358,6 +1385,7 @@ module other_critters =
     let critter_penguinDef : UnitDef =
         { name = "critter_penguin"
           subfolder = "other/critters"
+          printableName = Some "Penguin"
           metalCost = ValueOrExpr.Concrete 15.0
           energyCost = ValueOrExpr.Concrete 200.0
           buildTime = ValueOrExpr.Concrete 250.0
@@ -1434,6 +1462,7 @@ module other_critters =
     let critter_penguinToFlat (def: UnitDef) : Critter_penguin =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1468,6 +1497,7 @@ module other_critters =
     let critter_penguinToUnitDef (flat: Critter_penguin) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1516,6 +1546,7 @@ module other_critters =
     type Critter_penguinbro =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1551,6 +1582,7 @@ module other_critters =
     let critter_penguinbro : Critter_penguinbro =
         { name = "critter_penguinbro"
           subfolder = "other/critters"
+          printableName = Some "Penguin Bro"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 15000.0
           buildTime = ValueOrExpr.Concrete 5000.0
@@ -1697,6 +1729,7 @@ module other_critters =
     let critter_penguinbroDef : UnitDef =
         { name = "critter_penguinbro"
           subfolder = "other/critters"
+          printableName = Some "Penguin Bro"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 15000.0
           buildTime = ValueOrExpr.Concrete 5000.0
@@ -1855,6 +1888,7 @@ module other_critters =
     let critter_penguinbroToFlat (def: UnitDef) : Critter_penguinbro =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1890,6 +1924,7 @@ module other_critters =
     let critter_penguinbroToUnitDef (flat: Critter_penguinbro) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1938,6 +1973,7 @@ module other_critters =
     type Critter_penguinking =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1973,6 +2009,7 @@ module other_critters =
     let critter_penguinking : Critter_penguinking =
         { name = "critter_penguinking"
           subfolder = "other/critters"
+          printableName = Some "Penguin King"
           metalCost = ValueOrExpr.Concrete 20000.0
           energyCost = ValueOrExpr.Concrete 400000.0
           buildTime = ValueOrExpr.Concrete 35000.0
@@ -2119,6 +2156,7 @@ module other_critters =
     let critter_penguinkingDef : UnitDef =
         { name = "critter_penguinking"
           subfolder = "other/critters"
+          printableName = Some "Penguin King"
           metalCost = ValueOrExpr.Concrete 20000.0
           energyCost = ValueOrExpr.Concrete 400000.0
           buildTime = ValueOrExpr.Concrete 35000.0
@@ -2277,6 +2315,7 @@ module other_critters =
     let critter_penguinkingToFlat (def: UnitDef) : Critter_penguinking =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2312,6 +2351,7 @@ module other_critters =
     let critter_penguinkingToUnitDef (flat: Critter_penguinking) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

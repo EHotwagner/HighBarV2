@@ -8,6 +8,7 @@ module CorBuildings_SeaFactories =
     type Coramsub =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -45,6 +46,7 @@ module CorBuildings_SeaFactories =
     let coramsub : Coramsub =
         { name = "coramsub"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Amphibious Complex"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 5600.0
           buildTime = ValueOrExpr.Concrete 11400.0
@@ -119,6 +121,7 @@ module CorBuildings_SeaFactories =
     let coramsubDef : UnitDef =
         { name = "coramsub"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Amphibious Complex"
           metalCost = ValueOrExpr.Concrete 1200.0
           energyCost = ValueOrExpr.Concrete 5600.0
           buildTime = ValueOrExpr.Concrete 11400.0
@@ -215,6 +218,7 @@ module CorBuildings_SeaFactories =
     let coramsubToFlat (def: UnitDef) : Coramsub =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -252,6 +256,7 @@ module CorBuildings_SeaFactories =
     let coramsubToUnitDef (flat: Coramsub) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -315,6 +320,7 @@ module CorBuildings_SeaFactories =
     type Corasy =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -353,6 +359,7 @@ module CorBuildings_SeaFactories =
     let corasy : Corasy =
         { name = "corasy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Advanced Shipyard"
           metalCost = ValueOrExpr.Concrete 2800.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -423,6 +430,7 @@ module CorBuildings_SeaFactories =
     let corasyDef : UnitDef =
         { name = "corasy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Advanced Shipyard"
           metalCost = ValueOrExpr.Concrete 2800.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -514,6 +522,7 @@ module CorBuildings_SeaFactories =
     let corasyToFlat (def: UnitDef) : Corasy =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -552,6 +561,7 @@ module CorBuildings_SeaFactories =
     let corasyToUnitDef (flat: Corasy) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -615,6 +625,7 @@ module CorBuildings_SeaFactories =
     type Corfhp =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -653,6 +664,7 @@ module CorBuildings_SeaFactories =
     let corfhp : Corfhp =
         { name = "corfhp"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Naval Hovercraft Platform"
           metalCost = ValueOrExpr.Concrete 670.0
           energyCost = ValueOrExpr.Concrete 2000.0
           buildTime = ValueOrExpr.Concrete 8700.0
@@ -723,6 +735,7 @@ module CorBuildings_SeaFactories =
     let corfhpDef : UnitDef =
         { name = "corfhp"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Naval Hovercraft Platform"
           metalCost = ValueOrExpr.Concrete 670.0
           energyCost = ValueOrExpr.Concrete 2000.0
           buildTime = ValueOrExpr.Concrete 8700.0
@@ -814,6 +827,7 @@ module CorBuildings_SeaFactories =
     let corfhpToFlat (def: UnitDef) : Corfhp =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -852,6 +866,7 @@ module CorBuildings_SeaFactories =
     let corfhpToUnitDef (flat: Corfhp) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -915,6 +930,7 @@ module CorBuildings_SeaFactories =
     type Corgantuw =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -953,6 +969,7 @@ module CorBuildings_SeaFactories =
     let corgantuw : Corgantuw =
         { name = "corgantuw"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Experimental Gantry"
           metalCost = ValueOrExpr.Concrete 8350.0
           energyCost = ValueOrExpr.Concrete 62500.0
           buildTime = ValueOrExpr.Concrete 68000.0
@@ -1043,6 +1060,7 @@ module CorBuildings_SeaFactories =
     let corgantuwDef : UnitDef =
         { name = "corgantuw"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Experimental Gantry"
           metalCost = ValueOrExpr.Concrete 8350.0
           energyCost = ValueOrExpr.Concrete 62500.0
           buildTime = ValueOrExpr.Concrete 68000.0
@@ -1154,6 +1172,7 @@ module CorBuildings_SeaFactories =
     let corgantuwToFlat (def: UnitDef) : Corgantuw =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1192,6 +1211,7 @@ module CorBuildings_SeaFactories =
     let corgantuwToUnitDef (flat: Corgantuw) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1255,6 +1275,7 @@ module CorBuildings_SeaFactories =
     type Corhasy =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1294,6 +1315,7 @@ module CorBuildings_SeaFactories =
     let corhasy : Corhasy =
         { name = "corhasy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Experimental Shipyard"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 92000.0
@@ -1365,6 +1387,7 @@ module CorBuildings_SeaFactories =
     let corhasyDef : UnitDef =
         { name = "corhasy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Experimental Shipyard"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 92000.0
@@ -1456,6 +1479,7 @@ module CorBuildings_SeaFactories =
     let corhasyToFlat (def: UnitDef) : Corhasy =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1495,6 +1519,7 @@ module CorBuildings_SeaFactories =
     let corhasyToUnitDef (flat: Corhasy) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1558,6 +1583,7 @@ module CorBuildings_SeaFactories =
     type Corplat =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1597,6 +1623,7 @@ module CorBuildings_SeaFactories =
     let corplat : Corplat =
         { name = "corplat"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Seaplane Platform"
           metalCost = ValueOrExpr.Concrete 1400.0
           energyCost = ValueOrExpr.Concrete 5500.0
           buildTime = ValueOrExpr.Concrete 11800.0
@@ -1671,6 +1698,7 @@ module CorBuildings_SeaFactories =
     let corplatDef : UnitDef =
         { name = "corplat"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Seaplane Platform"
           metalCost = ValueOrExpr.Concrete 1400.0
           energyCost = ValueOrExpr.Concrete 5500.0
           buildTime = ValueOrExpr.Concrete 11800.0
@@ -1765,6 +1793,7 @@ module CorBuildings_SeaFactories =
     let corplatToFlat (def: UnitDef) : Corplat =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1804,6 +1833,7 @@ module CorBuildings_SeaFactories =
     let corplatToUnitDef (flat: Corplat) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1867,6 +1897,7 @@ module CorBuildings_SeaFactories =
     type Corsasy =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1905,6 +1936,7 @@ module CorBuildings_SeaFactories =
     let corsasy : Corsasy =
         { name = "corsasy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 3500.0
           energyCost = ValueOrExpr.Concrete 35000.0
           buildTime = ValueOrExpr.Concrete 51000.0
@@ -1975,6 +2007,7 @@ module CorBuildings_SeaFactories =
     let corsasyDef : UnitDef =
         { name = "corsasy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 3500.0
           energyCost = ValueOrExpr.Concrete 35000.0
           buildTime = ValueOrExpr.Concrete 51000.0
@@ -2066,6 +2099,7 @@ module CorBuildings_SeaFactories =
     let corsasyToFlat (def: UnitDef) : Corsasy =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2104,6 +2138,7 @@ module CorBuildings_SeaFactories =
     let corsasyToUnitDef (flat: Corsasy) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2167,6 +2202,7 @@ module CorBuildings_SeaFactories =
     type Corsy =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2205,6 +2241,7 @@ module CorBuildings_SeaFactories =
     let corsy : Corsy =
         { name = "corsy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Shipyard"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 950.0
           buildTime = ValueOrExpr.Concrete 5100.0
@@ -2274,6 +2311,7 @@ module CorBuildings_SeaFactories =
     let corsyDef : UnitDef =
         { name = "corsy"
           subfolder = "CorBuildings/SeaFactories"
+          printableName = Some "Shipyard"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 950.0
           buildTime = ValueOrExpr.Concrete 5100.0
@@ -2364,6 +2402,7 @@ module CorBuildings_SeaFactories =
     let corsyToFlat (def: UnitDef) : Corsy =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2402,6 +2441,7 @@ module CorBuildings_SeaFactories =
     let corsyToUnitDef (flat: Corsy) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

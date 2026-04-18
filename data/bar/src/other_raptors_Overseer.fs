@@ -8,6 +8,7 @@ module other_raptors_Overseer =
     type Raptorh5 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Overseer =
     let raptorh5 : Raptorh5 =
         { name = "raptorh5"
           subfolder = "other/raptors/Overseer"
+          printableName = Some "Overseer"
           metalCost = ValueOrExpr.Concrete 251.0
           energyCost = ValueOrExpr.Concrete 5201.0
           buildTime = ValueOrExpr.Concrete 18000.0
@@ -186,6 +188,7 @@ module other_raptors_Overseer =
     let raptorh5Def : UnitDef =
         { name = "raptorh5"
           subfolder = "other/raptors/Overseer"
+          printableName = Some "Overseer"
           metalCost = ValueOrExpr.Concrete 251.0
           energyCost = ValueOrExpr.Concrete 5201.0
           buildTime = ValueOrExpr.Concrete 18000.0
@@ -339,6 +342,7 @@ module other_raptors_Overseer =
     let raptorh5ToFlat (def: UnitDef) : Raptorh5 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -375,6 +379,7 @@ module other_raptors_Overseer =
     let raptorh5ToUnitDef (flat: Raptorh5) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

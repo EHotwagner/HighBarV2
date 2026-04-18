@@ -8,6 +8,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl10 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -53,6 +54,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl10 : Legcomlvl10 =
         { name = "legcomlvl10"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 10"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 110000.0
           buildTime = ValueOrExpr.Concrete 264000.0
@@ -412,6 +414,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl10Def : UnitDef =
         { name = "legcomlvl10"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 10"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 110000.0
           buildTime = ValueOrExpr.Concrete 264000.0
@@ -782,6 +785,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl10ToFlat (def: UnitDef) : Legcomlvl10 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -827,6 +831,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl10ToUnitDef (flat: Legcomlvl10) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -886,6 +891,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -931,6 +937,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl2 : Legcomlvl2 =
         { name = "legcomlvl2"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 2"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 112500.0
@@ -1120,7 +1127,9 @@ module Legion_Legion_EvoCom =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -1249,6 +1258,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl2Def : UnitDef =
         { name = "legcomlvl2"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 2"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 112500.0
@@ -1442,7 +1452,9 @@ module Legion_Legion_EvoCom =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -1578,6 +1590,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl2ToFlat (def: UnitDef) : Legcomlvl2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1623,6 +1636,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl2ToUnitDef (flat: Legcomlvl2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1682,6 +1696,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1727,6 +1742,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl3 : Legcomlvl3 =
         { name = "legcomlvl3"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 3"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 150000.0
@@ -1916,7 +1932,9 @@ module Legion_Legion_EvoCom =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL"
@@ -2104,6 +2122,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl3Def : UnitDef =
         { name = "legcomlvl3"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 3"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 150000.0
@@ -2297,7 +2316,9 @@ module Legion_Legion_EvoCom =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL"
@@ -2492,6 +2513,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl3ToFlat (def: UnitDef) : Legcomlvl3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2537,6 +2559,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl3ToUnitDef (flat: Legcomlvl3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2596,6 +2619,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2641,6 +2665,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl4 : Legcomlvl4 =
         { name = "legcomlvl4"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 4"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 50000.0
           buildTime = ValueOrExpr.Concrete 187500.0
@@ -3006,6 +3031,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl4Def : UnitDef =
         { name = "legcomlvl4"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 4"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 50000.0
           buildTime = ValueOrExpr.Concrete 187500.0
@@ -3382,6 +3408,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl4ToFlat (def: UnitDef) : Legcomlvl4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3427,6 +3454,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl4ToUnitDef (flat: Legcomlvl4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3486,6 +3514,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl5 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3531,6 +3560,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl5 : Legcomlvl5 =
         { name = "legcomlvl5"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 5"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 187500.0
@@ -3681,7 +3711,9 @@ module Legion_Legion_EvoCom =
                   soundHit = Some "xplomas2"
                   explosiongenerator = Some "custom:expldgun"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "NOTSUB"
                       "avoidfeature", "false"
@@ -3905,6 +3937,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl5Def : UnitDef =
         { name = "legcomlvl5"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 5"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 187500.0
@@ -4059,7 +4092,9 @@ module Legion_Legion_EvoCom =
                 soundHit = Some "xplomas2"
                 explosiongenerator = Some "custom:expldgun"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "NOTSUB"
                     "avoidfeature", "false"
@@ -4290,6 +4325,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl5ToFlat (def: UnitDef) : Legcomlvl5 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4335,6 +4371,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl5ToUnitDef (flat: Legcomlvl5) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4394,6 +4431,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl6 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4439,6 +4477,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl6 : Legcomlvl6 =
         { name = "legcomlvl6"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 6"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 70000.0
           buildTime = ValueOrExpr.Concrete 187500.0
@@ -4800,6 +4839,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl6Def : UnitDef =
         { name = "legcomlvl6"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 6"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 70000.0
           buildTime = ValueOrExpr.Concrete 187500.0
@@ -5172,6 +5212,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl6ToFlat (def: UnitDef) : Legcomlvl6 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5217,6 +5258,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl6ToUnitDef (flat: Legcomlvl6) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5276,6 +5318,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl7 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5321,6 +5364,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl7 : Legcomlvl7 =
         { name = "legcomlvl7"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 7"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 192000.0
@@ -5682,6 +5726,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl7Def : UnitDef =
         { name = "legcomlvl7"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 7"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 192000.0
@@ -6054,6 +6099,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl7ToFlat (def: UnitDef) : Legcomlvl7 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6099,6 +6145,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl7ToUnitDef (flat: Legcomlvl7) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6158,6 +6205,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl8 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6203,6 +6251,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl8 : Legcomlvl8 =
         { name = "legcomlvl8"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 8"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 216000.0
@@ -6565,6 +6614,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl8Def : UnitDef =
         { name = "legcomlvl8"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 8"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 216000.0
@@ -6938,6 +6988,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl8ToFlat (def: UnitDef) : Legcomlvl8 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6983,6 +7034,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl8ToUnitDef (flat: Legcomlvl8) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7042,6 +7094,7 @@ module Legion_Legion_EvoCom =
     type Legcomlvl9 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7087,6 +7140,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl9 : Legcomlvl9 =
         { name = "legcomlvl9"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 9"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -7452,6 +7506,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl9Def : UnitDef =
         { name = "legcomlvl9"
           subfolder = "Legion/Legion EvoCom"
+          printableName = Some "Legion Commander Level 9"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -7828,6 +7883,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl9ToFlat (def: UnitDef) : Legcomlvl9 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7873,6 +7929,7 @@ module Legion_Legion_EvoCom =
     let legcomlvl9ToUnitDef (flat: Legcomlvl9) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

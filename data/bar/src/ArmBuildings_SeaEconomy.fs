@@ -8,6 +8,7 @@ module ArmBuildings_SeaEconomy =
     type Armfmkr =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -36,6 +37,7 @@ module ArmBuildings_SeaEconomy =
     let armfmkr : Armfmkr =
         { name = "armfmkr"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Energy Converter"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1150.0
           buildTime = ValueOrExpr.Concrete 2600.0
@@ -85,6 +87,7 @@ module ArmBuildings_SeaEconomy =
     let armfmkrDef : UnitDef =
         { name = "armfmkr"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Energy Converter"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1150.0
           buildTime = ValueOrExpr.Concrete 2600.0
@@ -140,6 +143,7 @@ module ArmBuildings_SeaEconomy =
     let armfmkrToFlat (def: UnitDef) : Armfmkr =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -168,6 +172,7 @@ module ArmBuildings_SeaEconomy =
     let armfmkrToUnitDef (flat: Armfmkr) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -203,6 +208,7 @@ module ArmBuildings_SeaEconomy =
     type Armtide =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -233,6 +239,7 @@ module ArmBuildings_SeaEconomy =
     let armtide : Armtide =
         { name = "armtide"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Tidal Generator"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 200.0
           buildTime = ValueOrExpr.Concrete 2190.0
@@ -315,6 +322,7 @@ module ArmBuildings_SeaEconomy =
     let armtideDef : UnitDef =
         { name = "armtide"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Tidal Generator"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 200.0
           buildTime = ValueOrExpr.Concrete 2190.0
@@ -406,6 +414,7 @@ module ArmBuildings_SeaEconomy =
     let armtideToFlat (def: UnitDef) : Armtide =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -436,6 +445,7 @@ module ArmBuildings_SeaEconomy =
     let armtideToUnitDef (flat: Armtide) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -477,6 +487,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwadves =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -506,6 +517,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadves : Armuwadves =
         { name = "armuwadves"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Hardened Energy Storage"
           metalCost = ValueOrExpr.Concrete 830.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 20300.0
@@ -591,6 +603,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvesDef : UnitDef =
         { name = "armuwadves"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Hardened Energy Storage"
           metalCost = ValueOrExpr.Concrete 830.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 20300.0
@@ -686,6 +699,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvesToFlat (def: UnitDef) : Armuwadves =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -715,6 +729,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvesToUnitDef (flat: Armuwadves) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -756,6 +771,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwadvms =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -785,6 +801,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvms : Armuwadvms =
         { name = "armuwadvms"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Hardened Metal Storage"
           metalCost = ValueOrExpr.Concrete 750.0
           energyCost = ValueOrExpr.Concrete 11500.0
           buildTime = ValueOrExpr.Concrete 20400.0
@@ -870,6 +887,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvmsDef : UnitDef =
         { name = "armuwadvms"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Hardened Metal Storage"
           metalCost = ValueOrExpr.Concrete 750.0
           energyCost = ValueOrExpr.Concrete 11500.0
           buildTime = ValueOrExpr.Concrete 20400.0
@@ -965,6 +983,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvmsToFlat (def: UnitDef) : Armuwadvms =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -994,6 +1013,7 @@ module ArmBuildings_SeaEconomy =
     let armuwadvmsToUnitDef (flat: Armuwadvms) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1035,6 +1055,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwageo =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1065,6 +1086,7 @@ module ArmBuildings_SeaEconomy =
     let armuwageo : Armuwageo =
         { name = "armuwageo"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Advanced Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 50000.0
@@ -1127,6 +1149,7 @@ module ArmBuildings_SeaEconomy =
     let armuwageoDef : UnitDef =
         { name = "armuwageo"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Advanced Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 50000.0
@@ -1198,6 +1221,7 @@ module ArmBuildings_SeaEconomy =
     let armuwageoToFlat (def: UnitDef) : Armuwageo =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1228,6 +1252,7 @@ module ArmBuildings_SeaEconomy =
     let armuwageoToUnitDef (flat: Armuwageo) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1269,6 +1294,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwes =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1298,6 +1324,7 @@ module ArmBuildings_SeaEconomy =
     let armuwes : Armuwes =
         { name = "armuwes"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Energy Storage"
           metalCost = ValueOrExpr.Concrete 170.0
           energyCost = ValueOrExpr.Concrete 1700.0
           buildTime = ValueOrExpr.Concrete 4110.0
@@ -1382,6 +1409,7 @@ module ArmBuildings_SeaEconomy =
     let armuwesDef : UnitDef =
         { name = "armuwes"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Energy Storage"
           metalCost = ValueOrExpr.Concrete 170.0
           energyCost = ValueOrExpr.Concrete 1700.0
           buildTime = ValueOrExpr.Concrete 4110.0
@@ -1476,6 +1504,7 @@ module ArmBuildings_SeaEconomy =
     let armuwesToFlat (def: UnitDef) : Armuwes =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1505,6 +1534,7 @@ module ArmBuildings_SeaEconomy =
     let armuwesToUnitDef (flat: Armuwes) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1546,6 +1576,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwfus =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1577,6 +1608,7 @@ module ArmBuildings_SeaEconomy =
     let armuwfus : Armuwfus =
         { name = "armuwfus"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 5200.0
           energyCost = ValueOrExpr.Concrete 33500.0
           buildTime = ValueOrExpr.Concrete 99900.0
@@ -1666,6 +1698,7 @@ module ArmBuildings_SeaEconomy =
     let armuwfusDef : UnitDef =
         { name = "armuwfus"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 5200.0
           energyCost = ValueOrExpr.Concrete 33500.0
           buildTime = ValueOrExpr.Concrete 99900.0
@@ -1763,6 +1796,7 @@ module ArmBuildings_SeaEconomy =
     let armuwfusToFlat (def: UnitDef) : Armuwfus =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1794,6 +1828,7 @@ module ArmBuildings_SeaEconomy =
     let armuwfusToUnitDef (flat: Armuwfus) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1835,6 +1870,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwgeo =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1866,6 +1902,7 @@ module ArmBuildings_SeaEconomy =
     let armuwgeo : Armuwgeo =
         { name = "armuwgeo"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Offshore Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 13100.0
@@ -1959,6 +1996,7 @@ module ArmBuildings_SeaEconomy =
     let armuwgeoDef : UnitDef =
         { name = "armuwgeo"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Offshore Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 13100.0
@@ -2060,6 +2098,7 @@ module ArmBuildings_SeaEconomy =
     let armuwgeoToFlat (def: UnitDef) : Armuwgeo =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2091,6 +2130,7 @@ module ArmBuildings_SeaEconomy =
     let armuwgeoToUnitDef (flat: Armuwgeo) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2132,6 +2172,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwmme =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2163,6 +2204,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmme : Armuwmme =
         { name = "armuwmme"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Advanced Metal Extractor"
           metalCost = ValueOrExpr.Concrete 620.0
           energyCost = ValueOrExpr.Concrete 7700.0
           buildTime = ValueOrExpr.Concrete 14900.0
@@ -2254,6 +2296,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmeDef : UnitDef =
         { name = "armuwmme"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Advanced Metal Extractor"
           metalCost = ValueOrExpr.Concrete 620.0
           energyCost = ValueOrExpr.Concrete 7700.0
           buildTime = ValueOrExpr.Concrete 14900.0
@@ -2353,6 +2396,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmeToFlat (def: UnitDef) : Armuwmme =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2384,6 +2428,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmeToUnitDef (flat: Armuwmme) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2425,6 +2470,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwmmm =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2454,6 +2500,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmm : Armuwmmm =
         { name = "armuwmmm"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Advanced Energy Converter"
           metalCost = ValueOrExpr.Concrete 380.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 35000.0
@@ -2536,6 +2583,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmmDef : UnitDef =
         { name = "armuwmmm"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Advanced Energy Converter"
           metalCost = ValueOrExpr.Concrete 380.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 35000.0
@@ -2623,6 +2671,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmmToFlat (def: UnitDef) : Armuwmmm =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2652,6 +2701,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmmmToUnitDef (flat: Armuwmmm) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2687,6 +2737,7 @@ module ArmBuildings_SeaEconomy =
     type Armuwms =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2716,6 +2767,7 @@ module ArmBuildings_SeaEconomy =
     let armuwms : Armuwms =
         { name = "armuwms"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Metal Storage"
           metalCost = ValueOrExpr.Concrete 330.0
           energyCost = ValueOrExpr.Concrete 570.0
           buildTime = ValueOrExpr.Concrete 2920.0
@@ -2800,6 +2852,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmsDef : UnitDef =
         { name = "armuwms"
           subfolder = "ArmBuildings/SeaEconomy"
+          printableName = Some "Naval Metal Storage"
           metalCost = ValueOrExpr.Concrete 330.0
           energyCost = ValueOrExpr.Concrete 570.0
           buildTime = ValueOrExpr.Concrete 2920.0
@@ -2894,6 +2947,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmsToFlat (def: UnitDef) : Armuwms =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2923,6 +2977,7 @@ module ArmBuildings_SeaEconomy =
     let armuwmsToUnitDef (flat: Armuwms) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

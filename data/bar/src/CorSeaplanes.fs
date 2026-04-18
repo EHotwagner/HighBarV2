@@ -8,6 +8,7 @@ module CorSeaplanes =
     type Corcsa =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -49,6 +50,7 @@ module CorSeaplanes =
     let corcsa : Corcsa =
         { name = "corcsa"
           subfolder = "CorSeaplanes"
+          printableName = Some "Construction Seaplane"
           metalCost = ValueOrExpr.Concrete 140.0
           energyCost = ValueOrExpr.Concrete 8200.0
           buildTime = ValueOrExpr.Concrete 14500.0
@@ -110,6 +112,7 @@ module CorSeaplanes =
     let corcsaDef : UnitDef =
         { name = "corcsa"
           subfolder = "CorSeaplanes"
+          printableName = Some "Construction Seaplane"
           metalCost = ValueOrExpr.Concrete 140.0
           energyCost = ValueOrExpr.Concrete 8200.0
           buildTime = ValueOrExpr.Concrete 14500.0
@@ -186,6 +189,7 @@ module CorSeaplanes =
     let corcsaToFlat (def: UnitDef) : Corcsa =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -227,6 +231,7 @@ module CorSeaplanes =
     let corcsaToUnitDef (flat: Corcsa) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -286,6 +291,7 @@ module CorSeaplanes =
     type Corcut =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -322,6 +328,7 @@ module CorSeaplanes =
     let corcut : Corcut =
         { name = "corcut"
           subfolder = "CorSeaplanes"
+          printableName = Some "Cutlass"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 5400.0
           buildTime = ValueOrExpr.Concrete 11500.0
@@ -418,6 +425,7 @@ module CorSeaplanes =
     let corcutDef : UnitDef =
         { name = "corcut"
           subfolder = "CorSeaplanes"
+          printableName = Some "Cutlass"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 5400.0
           buildTime = ValueOrExpr.Concrete 11500.0
@@ -525,6 +533,7 @@ module CorSeaplanes =
     let corcutToFlat (def: UnitDef) : Corcut =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -561,6 +570,7 @@ module CorSeaplanes =
     let corcutToUnitDef (flat: Corcut) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -609,6 +619,7 @@ module CorSeaplanes =
     type Corhaca =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -650,6 +661,7 @@ module CorSeaplanes =
     let corhaca : Corhaca =
         { name = "corhaca"
           subfolder = "CorSeaplanes"
+          printableName = Some "Experimental Construction Aircraft"
           metalCost = ValueOrExpr.Concrete 1040.0
           energyCost = ValueOrExpr.Concrete 28800.0
           buildTime = ValueOrExpr.Concrete 58000.0
@@ -712,6 +724,7 @@ module CorSeaplanes =
     let corhacaDef : UnitDef =
         { name = "corhaca"
           subfolder = "CorSeaplanes"
+          printableName = Some "Experimental Construction Aircraft"
           metalCost = ValueOrExpr.Concrete 1040.0
           energyCost = ValueOrExpr.Concrete 28800.0
           buildTime = ValueOrExpr.Concrete 58000.0
@@ -789,6 +802,7 @@ module CorSeaplanes =
     let corhacaToFlat (def: UnitDef) : Corhaca =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -830,6 +844,7 @@ module CorSeaplanes =
     let corhacaToUnitDef (flat: Corhaca) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -889,6 +904,7 @@ module CorSeaplanes =
     type Corhunt =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -923,6 +939,7 @@ module CorSeaplanes =
     let corhunt : Corhunt =
         { name = "corhunt"
           subfolder = "CorSeaplanes"
+          printableName = Some "Watcher"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 6900.0
           buildTime = ValueOrExpr.Concrete 11500.0
@@ -964,6 +981,7 @@ module CorSeaplanes =
           customParams = Map.ofList [
                 "model_author", "Beherith"
                 "normaltex", "unittextures/cor_normal.dds"
+                "selectable_as_combat_unit", "true"
                 "subfolder", "CorSeaplanes"
                 "unitgroup", "util"
             ]
@@ -988,6 +1006,7 @@ module CorSeaplanes =
     let corhuntDef : UnitDef =
         { name = "corhunt"
           subfolder = "CorSeaplanes"
+          printableName = Some "Watcher"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 6900.0
           buildTime = ValueOrExpr.Concrete 11500.0
@@ -1042,6 +1061,7 @@ module CorSeaplanes =
           customParams = Map.ofList [
               "model_author", "Beherith"
               "normaltex", "unittextures/cor_normal.dds"
+              "selectable_as_combat_unit", "true"
               "subfolder", "CorSeaplanes"
               "unitgroup", "util"
           ]
@@ -1066,6 +1086,7 @@ module CorSeaplanes =
     let corhuntToFlat (def: UnitDef) : Corhunt =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1100,6 +1121,7 @@ module CorSeaplanes =
     let corhuntToUnitDef (flat: Corhunt) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1148,6 +1170,7 @@ module CorSeaplanes =
     type Corsb =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1183,6 +1206,7 @@ module CorSeaplanes =
     let corsb : Corsb =
         { name = "corsb"
           subfolder = "CorSeaplanes"
+          printableName = Some "Dam Buster"
           metalCost = ValueOrExpr.Concrete 200.0
           energyCost = ValueOrExpr.Concrete 8200.0
           buildTime = ValueOrExpr.Concrete 9000.0
@@ -1296,6 +1320,7 @@ module CorSeaplanes =
     let corsbDef : UnitDef =
         { name = "corsb"
           subfolder = "CorSeaplanes"
+          printableName = Some "Dam Buster"
           metalCost = ValueOrExpr.Concrete 200.0
           energyCost = ValueOrExpr.Concrete 8200.0
           buildTime = ValueOrExpr.Concrete 9000.0
@@ -1421,6 +1446,7 @@ module CorSeaplanes =
     let corsbToFlat (def: UnitDef) : Corsb =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1456,6 +1482,7 @@ module CorSeaplanes =
     let corsbToUnitDef (flat: Corsb) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1504,6 +1531,7 @@ module CorSeaplanes =
     type Corseap =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1539,6 +1567,7 @@ module CorSeaplanes =
     let corseap : Corseap =
         { name = "corseap"
           subfolder = "CorSeaplanes"
+          printableName = Some "Monsoon"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 5500.0
           buildTime = ValueOrExpr.Concrete 13000.0
@@ -1647,6 +1676,7 @@ module CorSeaplanes =
     let corseapDef : UnitDef =
         { name = "corseap"
           subfolder = "CorSeaplanes"
+          printableName = Some "Monsoon"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 5500.0
           buildTime = ValueOrExpr.Concrete 13000.0
@@ -1767,6 +1797,7 @@ module CorSeaplanes =
     let corseapToFlat (def: UnitDef) : Corseap =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1802,6 +1833,7 @@ module CorSeaplanes =
     let corseapToUnitDef (flat: Corseap) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1850,6 +1882,7 @@ module CorSeaplanes =
     type Corsfig =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1885,6 +1918,7 @@ module CorSeaplanes =
     let corsfig : Corsfig =
         { name = "corsfig"
           subfolder = "CorSeaplanes"
+          printableName = Some "Bat"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 4600.0
           buildTime = ValueOrExpr.Concrete 6500.0
@@ -1952,12 +1986,12 @@ module CorSeaplanes =
                       "firestarter", "0.0"
                       "flighttime", "1.3"
                       "metalpershot", "0.0"
-                      "model", "cormissile.s3o"
-                      "smokecolor", "0.55"
+                      "model", "cormissilefighter.s3o"
+                      "smokecolor", "0.5"
                       "smokeperiod", "4.0"
-                      "smokesize", "1.8"
+                      "smokesize", "1.4"
                       "smoketime", "8.0"
-                      "smoketrail", "false"
+                      "smoketrail", "true"
                       "smoketrailcastshadow", "false"
                       "soundhitwet", "splshbig"
                       "startvelocity", "480.0"
@@ -2009,6 +2043,7 @@ module CorSeaplanes =
     let corsfigDef : UnitDef =
         { name = "corsfig"
           subfolder = "CorSeaplanes"
+          printableName = Some "Bat"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 4600.0
           buildTime = ValueOrExpr.Concrete 6500.0
@@ -2085,12 +2120,12 @@ module CorSeaplanes =
                     "firestarter", "0.0"
                     "flighttime", "1.3"
                     "metalpershot", "0.0"
-                    "model", "cormissile.s3o"
-                    "smokecolor", "0.55"
+                    "model", "cormissilefighter.s3o"
+                    "smokecolor", "0.5"
                     "smokeperiod", "4.0"
-                    "smokesize", "1.8"
+                    "smokesize", "1.4"
                     "smoketime", "8.0"
-                    "smoketrail", "false"
+                    "smoketrail", "true"
                     "smoketrailcastshadow", "false"
                     "soundhitwet", "splshbig"
                     "startvelocity", "480.0"
@@ -2145,6 +2180,7 @@ module CorSeaplanes =
     let corsfigToFlat (def: UnitDef) : Corsfig =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2180,6 +2216,7 @@ module CorSeaplanes =
     let corsfigToUnitDef (flat: Corsfig) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2228,6 +2265,7 @@ module CorSeaplanes =
     type Corsfig2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2263,6 +2301,7 @@ module CorSeaplanes =
     let corsfig2 : Corsfig2 =
         { name = "corsfig2"
           subfolder = "CorSeaplanes"
+          printableName = Some "Bat"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 4600.0
           buildTime = ValueOrExpr.Concrete 6500.0
@@ -2330,12 +2369,12 @@ module CorSeaplanes =
                       "firestarter", "0.0"
                       "flighttime", "1.3"
                       "metalpershot", "0.0"
-                      "model", "cormissile.s3o"
-                      "smokecolor", "0.55"
+                      "model", "cormissilefighter.s3o"
+                      "smokecolor", "0.5"
                       "smokeperiod", "4.0"
-                      "smokesize", "1.8"
+                      "smokesize", "1.4"
                       "smoketime", "8.0"
-                      "smoketrail", "false"
+                      "smoketrail", "true"
                       "smoketrailcastshadow", "false"
                       "soundhitwet", "splshbig"
                       "startvelocity", "480.0"
@@ -2442,6 +2481,7 @@ module CorSeaplanes =
     let corsfig2Def : UnitDef =
         { name = "corsfig2"
           subfolder = "CorSeaplanes"
+          printableName = Some "Bat"
           metalCost = ValueOrExpr.Concrete 90.0
           energyCost = ValueOrExpr.Concrete 4600.0
           buildTime = ValueOrExpr.Concrete 6500.0
@@ -2518,12 +2558,12 @@ module CorSeaplanes =
                     "firestarter", "0.0"
                     "flighttime", "1.3"
                     "metalpershot", "0.0"
-                    "model", "cormissile.s3o"
-                    "smokecolor", "0.55"
+                    "model", "cormissilefighter.s3o"
+                    "smokecolor", "0.5"
                     "smokeperiod", "4.0"
-                    "smokesize", "1.8"
+                    "smokesize", "1.4"
                     "smoketime", "8.0"
-                    "smoketrail", "false"
+                    "smoketrail", "true"
                     "smoketrailcastshadow", "false"
                     "soundhitwet", "splshbig"
                     "startvelocity", "480.0"
@@ -2633,6 +2673,7 @@ module CorSeaplanes =
     let corsfig2ToFlat (def: UnitDef) : Corsfig2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2668,6 +2709,7 @@ module CorSeaplanes =
     let corsfig2ToUnitDef (flat: Corsfig2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2716,6 +2758,7 @@ module CorSeaplanes =
     type Leghaca =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2757,6 +2800,7 @@ module CorSeaplanes =
     let leghaca : Leghaca =
         { name = "leghaca"
           subfolder = "CorSeaplanes"
+          printableName = Some "Experimental Construction Aircraft"
           metalCost = ValueOrExpr.Concrete 960.0
           energyCost = ValueOrExpr.Concrete 32800.0
           buildTime = ValueOrExpr.Concrete 58000.0
@@ -2819,6 +2863,7 @@ module CorSeaplanes =
     let leghacaDef : UnitDef =
         { name = "leghaca"
           subfolder = "CorSeaplanes"
+          printableName = Some "Experimental Construction Aircraft"
           metalCost = ValueOrExpr.Concrete 960.0
           energyCost = ValueOrExpr.Concrete 32800.0
           buildTime = ValueOrExpr.Concrete 58000.0
@@ -2896,6 +2941,7 @@ module CorSeaplanes =
     let leghacaToFlat (def: UnitDef) : Leghaca =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2937,6 +2983,7 @@ module CorSeaplanes =
     let leghacaToUnitDef (flat: Leghaca) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

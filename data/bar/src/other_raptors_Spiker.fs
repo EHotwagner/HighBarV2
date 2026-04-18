@@ -8,6 +8,7 @@ module other_raptors_Spiker =
     type Raptor_land_spiker_basic_t2_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t2_v1 : Raptor_land_spiker_basic_t2_v1 =
         { name = "raptor_land_spiker_basic_t2_v1"
           subfolder = "other/raptors/Spiker"
+          printableName = Some "Spiker"
           metalCost = ValueOrExpr.Concrete 174.0
           energyCost = ValueOrExpr.Concrete 174.0
           buildTime = ValueOrExpr.Concrete 3750.0
@@ -152,6 +154,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t2_v1Def : UnitDef =
         { name = "raptor_land_spiker_basic_t2_v1"
           subfolder = "other/raptors/Spiker"
+          printableName = Some "Spiker"
           metalCost = ValueOrExpr.Concrete 174.0
           energyCost = ValueOrExpr.Concrete 174.0
           buildTime = ValueOrExpr.Concrete 3750.0
@@ -271,6 +274,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t2_v1ToFlat (def: UnitDef) : Raptor_land_spiker_basic_t2_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -307,6 +311,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t2_v1ToUnitDef (flat: Raptor_land_spiker_basic_t2_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -355,6 +360,7 @@ module other_raptors_Spiker =
     type Raptor_land_spiker_basic_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -391,6 +397,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t4_v1 : Raptor_land_spiker_basic_t4_v1 =
         { name = "raptor_land_spiker_basic_t4_v1"
           subfolder = "other/raptors/Spiker"
+          printableName = Some "Apex Spiker"
           metalCost = ValueOrExpr.Concrete 174.0
           energyCost = ValueOrExpr.Concrete 174.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -504,6 +511,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t4_v1Def : UnitDef =
         { name = "raptor_land_spiker_basic_t4_v1"
           subfolder = "other/raptors/Spiker"
+          printableName = Some "Apex Spiker"
           metalCost = ValueOrExpr.Concrete 174.0
           energyCost = ValueOrExpr.Concrete 174.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -628,6 +636,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t4_v1ToFlat (def: UnitDef) : Raptor_land_spiker_basic_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -664,6 +673,7 @@ module other_raptors_Spiker =
     let raptor_land_spiker_basic_t4_v1ToUnitDef (flat: Raptor_land_spiker_basic_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

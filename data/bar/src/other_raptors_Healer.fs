@@ -8,6 +8,7 @@ module other_raptors_Healer =
     type Raptor_land_swarmer_heal_t1_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t1_v1 : Raptor_land_swarmer_heal_t1_v1 =
         { name = "raptor_land_swarmer_heal_t1_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Juvenile Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -116,6 +118,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t1_v1Def : UnitDef =
         { name = "raptor_land_swarmer_heal_t1_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Juvenile Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -204,6 +207,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t1_v1ToFlat (def: UnitDef) : Raptor_land_swarmer_heal_t1_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -240,6 +244,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t1_v1ToUnitDef (flat: Raptor_land_swarmer_heal_t1_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -294,6 +299,7 @@ module other_raptors_Healer =
     type Raptor_land_swarmer_heal_t2_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -330,6 +336,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t2_v1 : Raptor_land_swarmer_heal_t2_v1 =
         { name = "raptor_land_swarmer_heal_t2_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -402,6 +409,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t2_v1Def : UnitDef =
         { name = "raptor_land_swarmer_heal_t2_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -490,6 +498,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t2_v1ToFlat (def: UnitDef) : Raptor_land_swarmer_heal_t2_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -526,6 +535,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t2_v1ToUnitDef (flat: Raptor_land_swarmer_heal_t2_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -580,6 +590,7 @@ module other_raptors_Healer =
     type Raptor_land_swarmer_heal_t3_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -616,6 +627,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t3_v1 : Raptor_land_swarmer_heal_t3_v1 =
         { name = "raptor_land_swarmer_heal_t3_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Mature Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -688,6 +700,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t3_v1Def : UnitDef =
         { name = "raptor_land_swarmer_heal_t3_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Mature Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -776,6 +789,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t3_v1ToFlat (def: UnitDef) : Raptor_land_swarmer_heal_t3_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -812,6 +826,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t3_v1ToUnitDef (flat: Raptor_land_swarmer_heal_t3_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -866,6 +881,7 @@ module other_raptors_Healer =
     type Raptor_land_swarmer_heal_t4_v1 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -902,6 +918,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t4_v1 : Raptor_land_swarmer_heal_t4_v1 =
         { name = "raptor_land_swarmer_heal_t4_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Apex Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -974,6 +991,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t4_v1Def : UnitDef =
         { name = "raptor_land_swarmer_heal_t4_v1"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Apex Healer"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -1062,6 +1080,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t4_v1ToFlat (def: UnitDef) : Raptor_land_swarmer_heal_t4_v1 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1098,6 +1117,7 @@ module other_raptors_Healer =
     let raptor_land_swarmer_heal_t4_v1ToUnitDef (flat: Raptor_land_swarmer_heal_t4_v1) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1152,6 +1172,7 @@ module other_raptors_Healer =
     type Raptorh1b =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1188,6 +1209,7 @@ module other_raptors_Healer =
     let raptorh1b : Raptorh1b =
         { name = "raptorh1b"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Cleaner"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 1125.0
@@ -1260,6 +1282,7 @@ module other_raptors_Healer =
     let raptorh1bDef : UnitDef =
         { name = "raptorh1b"
           subfolder = "other/raptors/Healer"
+          printableName = Some "Cleaner"
           metalCost = ValueOrExpr.Concrete 40.0
           energyCost = ValueOrExpr.Concrete 600.0
           buildTime = ValueOrExpr.Concrete 1125.0
@@ -1348,6 +1371,7 @@ module other_raptors_Healer =
     let raptorh1bToFlat (def: UnitDef) : Raptorh1b =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1384,6 +1408,7 @@ module other_raptors_Healer =
     let raptorh1bToUnitDef (flat: Raptorh1b) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

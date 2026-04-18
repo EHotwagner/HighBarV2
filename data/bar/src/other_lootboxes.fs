@@ -8,6 +8,7 @@ module other_lootboxes =
     type Lootboxbronze =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_lootboxes =
     let lootboxbronze : Lootboxbronze =
         { name = "lootboxbronze"
           subfolder = "other/lootboxes"
+          printableName = Some "Bronze Resource Generator"
           metalCost = ValueOrExpr.Concrete 375.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -106,6 +108,7 @@ module other_lootboxes =
     let lootboxbronzeDef : UnitDef =
         { name = "lootboxbronze"
           subfolder = "other/lootboxes"
+          printableName = Some "Bronze Resource Generator"
           metalCost = ValueOrExpr.Concrete 375.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -184,6 +187,7 @@ module other_lootboxes =
     let lootboxbronzeToFlat (def: UnitDef) : Lootboxbronze =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -220,6 +224,7 @@ module other_lootboxes =
     let lootboxbronzeToUnitDef (flat: Lootboxbronze) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -274,6 +279,7 @@ module other_lootboxes =
     type Lootboxgold =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -310,6 +316,7 @@ module other_lootboxes =
     let lootboxgold : Lootboxgold =
         { name = "lootboxgold"
           subfolder = "other/lootboxes"
+          printableName = Some "Gold Resource Generator"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -371,6 +378,7 @@ module other_lootboxes =
     let lootboxgoldDef : UnitDef =
         { name = "lootboxgold"
           subfolder = "other/lootboxes"
+          printableName = Some "Gold Resource Generator"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -448,6 +456,7 @@ module other_lootboxes =
     let lootboxgoldToFlat (def: UnitDef) : Lootboxgold =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -484,6 +493,7 @@ module other_lootboxes =
     let lootboxgoldToUnitDef (flat: Lootboxgold) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -538,6 +548,7 @@ module other_lootboxes =
     type Lootboxplatinum =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -574,6 +585,7 @@ module other_lootboxes =
     let lootboxplatinum : Lootboxplatinum =
         { name = "lootboxplatinum"
           subfolder = "other/lootboxes"
+          printableName = Some "Platinum Resource Generator"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -635,6 +647,7 @@ module other_lootboxes =
     let lootboxplatinumDef : UnitDef =
         { name = "lootboxplatinum"
           subfolder = "other/lootboxes"
+          printableName = Some "Platinum Resource Generator"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -712,6 +725,7 @@ module other_lootboxes =
     let lootboxplatinumToFlat (def: UnitDef) : Lootboxplatinum =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -748,6 +762,7 @@ module other_lootboxes =
     let lootboxplatinumToUnitDef (flat: Lootboxplatinum) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -802,6 +817,7 @@ module other_lootboxes =
     type Lootboxsilver =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -838,6 +854,7 @@ module other_lootboxes =
     let lootboxsilver : Lootboxsilver =
         { name = "lootboxsilver"
           subfolder = "other/lootboxes"
+          printableName = Some "Silver Resource Generator"
           metalCost = ValueOrExpr.Concrete 750.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -899,6 +916,7 @@ module other_lootboxes =
     let lootboxsilverDef : UnitDef =
         { name = "lootboxsilver"
           subfolder = "other/lootboxes"
+          printableName = Some "Silver Resource Generator"
           metalCost = ValueOrExpr.Concrete 750.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -976,6 +994,7 @@ module other_lootboxes =
     let lootboxsilverToFlat (def: UnitDef) : Lootboxsilver =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1012,6 +1031,7 @@ module other_lootboxes =
     let lootboxsilverToUnitDef (flat: Lootboxsilver) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1066,6 +1086,7 @@ module other_lootboxes =
     type Lootdroppod_gold =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1094,6 +1115,7 @@ module other_lootboxes =
     let lootdroppod_gold : Lootdroppod_gold =
         { name = "lootdroppod_gold"
           subfolder = "other/lootboxes"
+          printableName = Some "Lootbox Droppod"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -1178,6 +1200,7 @@ module other_lootboxes =
     let lootdroppod_goldDef : UnitDef =
         { name = "lootdroppod_gold"
           subfolder = "other/lootboxes"
+          printableName = Some "Lootbox Droppod"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -1273,6 +1296,7 @@ module other_lootboxes =
     let lootdroppod_goldToFlat (def: UnitDef) : Lootdroppod_gold =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1301,6 +1325,7 @@ module other_lootboxes =
     let lootdroppod_goldToUnitDef (flat: Lootdroppod_gold) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1342,6 +1367,7 @@ module other_lootboxes =
     type Lootdroppod_printer =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1370,6 +1396,7 @@ module other_lootboxes =
     let lootdroppod_printer : Lootdroppod_printer =
         { name = "lootdroppod_printer"
           subfolder = "other/lootboxes"
+          printableName = Some "Lootbox Droppod"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -1454,6 +1481,7 @@ module other_lootboxes =
     let lootdroppod_printerDef : UnitDef =
         { name = "lootdroppod_printer"
           subfolder = "other/lootboxes"
+          printableName = Some "Lootbox Droppod"
           metalCost = ValueOrExpr.Concrete 400.0
           energyCost = ValueOrExpr.Concrete 25000.0
           buildTime = ValueOrExpr.Concrete 10500.0
@@ -1549,6 +1577,7 @@ module other_lootboxes =
     let lootdroppod_printerToFlat (def: UnitDef) : Lootdroppod_printer =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1577,6 +1606,7 @@ module other_lootboxes =
     let lootdroppod_printerToUnitDef (flat: Lootdroppod_printer) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

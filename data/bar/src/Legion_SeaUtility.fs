@@ -8,6 +8,7 @@ module Legion_SeaUtility =
     type Legfrad =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -37,6 +38,7 @@ module Legion_SeaUtility =
     let legfrad : Legfrad =
         { name = "legfrad"
           subfolder = "Legion/SeaUtility"
+          printableName = Some "Naval Radar / Sonar Tower"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 1000.0
           buildTime = ValueOrExpr.Concrete 1800.0
@@ -107,6 +109,7 @@ module Legion_SeaUtility =
     let legfradDef : UnitDef =
         { name = "legfrad"
           subfolder = "Legion/SeaUtility"
+          printableName = Some "Naval Radar / Sonar Tower"
           metalCost = ValueOrExpr.Concrete 130.0
           energyCost = ValueOrExpr.Concrete 1000.0
           buildTime = ValueOrExpr.Concrete 1800.0
@@ -182,6 +185,7 @@ module Legion_SeaUtility =
     let legfradToFlat (def: UnitDef) : Legfrad =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -211,6 +215,7 @@ module Legion_SeaUtility =
     let legfradToUnitDef (flat: Legfrad) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

@@ -8,6 +8,7 @@ module CorBuildings_LandEconomy =
     type Coradvsol =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -39,6 +40,7 @@ module CorBuildings_LandEconomy =
     let coradvsol : Coradvsol =
         { name = "coradvsol"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Solar Collector"
           metalCost = ValueOrExpr.Concrete 370.0
           energyCost = ValueOrExpr.Concrete 4000.0
           buildTime = ValueOrExpr.Concrete 8150.0
@@ -127,6 +129,7 @@ module CorBuildings_LandEconomy =
     let coradvsolDef : UnitDef =
         { name = "coradvsol"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Solar Collector"
           metalCost = ValueOrExpr.Concrete 370.0
           energyCost = ValueOrExpr.Concrete 4000.0
           buildTime = ValueOrExpr.Concrete 8150.0
@@ -223,6 +226,7 @@ module CorBuildings_LandEconomy =
     let coradvsolToFlat (def: UnitDef) : Coradvsol =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -254,6 +258,7 @@ module CorBuildings_LandEconomy =
     let coradvsolToUnitDef (flat: Coradvsol) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -295,6 +300,7 @@ module CorBuildings_LandEconomy =
     type Corafus =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -325,6 +331,7 @@ module CorBuildings_LandEconomy =
     let corafus : Corafus =
         { name = "corafus"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 9700.0
           energyCost = ValueOrExpr.Concrete 48000.0
           buildTime = ValueOrExpr.Concrete 329200.0
@@ -413,6 +420,7 @@ module CorBuildings_LandEconomy =
     let corafusDef : UnitDef =
         { name = "corafus"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 9700.0
           energyCost = ValueOrExpr.Concrete 48000.0
           buildTime = ValueOrExpr.Concrete 329200.0
@@ -510,6 +518,7 @@ module CorBuildings_LandEconomy =
     let corafusToFlat (def: UnitDef) : Corafus =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -540,6 +549,7 @@ module CorBuildings_LandEconomy =
     let corafusToUnitDef (flat: Corafus) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -581,6 +591,7 @@ module CorBuildings_LandEconomy =
     type Corageo =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -611,6 +622,7 @@ module CorBuildings_LandEconomy =
     let corageo : Corageo =
         { name = "corageo"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 27000.0
           buildTime = ValueOrExpr.Concrete 48000.0
@@ -668,6 +680,7 @@ module CorBuildings_LandEconomy =
     let corageoDef : UnitDef =
         { name = "corageo"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 27000.0
           buildTime = ValueOrExpr.Concrete 48000.0
@@ -734,6 +747,7 @@ module CorBuildings_LandEconomy =
     let corageoToFlat (def: UnitDef) : Corageo =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -764,6 +778,7 @@ module CorBuildings_LandEconomy =
     let corageoToUnitDef (flat: Corageo) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -805,6 +820,7 @@ module CorBuildings_LandEconomy =
     type Corestor =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -835,6 +851,7 @@ module CorBuildings_LandEconomy =
     let corestor : Corestor =
         { name = "corestor"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Energy Storage"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 1800.0
           buildTime = ValueOrExpr.Concrete 4260.0
@@ -920,6 +937,7 @@ module CorBuildings_LandEconomy =
     let corestorDef : UnitDef =
         { name = "corestor"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Energy Storage"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 1800.0
           buildTime = ValueOrExpr.Concrete 4260.0
@@ -1014,6 +1032,7 @@ module CorBuildings_LandEconomy =
     let corestorToFlat (def: UnitDef) : Corestor =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1044,6 +1063,7 @@ module CorBuildings_LandEconomy =
     let corestorToUnitDef (flat: Corestor) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1085,6 +1105,7 @@ module CorBuildings_LandEconomy =
     type Corfus =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1116,6 +1137,7 @@ module CorBuildings_LandEconomy =
     let corfus : Corfus =
         { name = "corfus"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 3600.0
           energyCost = ValueOrExpr.Concrete 22000.0
           buildTime = ValueOrExpr.Concrete 59000.0
@@ -1205,6 +1227,7 @@ module CorBuildings_LandEconomy =
     let corfusDef : UnitDef =
         { name = "corfus"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Fusion Reactor"
           metalCost = ValueOrExpr.Concrete 3600.0
           energyCost = ValueOrExpr.Concrete 22000.0
           buildTime = ValueOrExpr.Concrete 59000.0
@@ -1302,6 +1325,7 @@ module CorBuildings_LandEconomy =
     let corfusToFlat (def: UnitDef) : Corfus =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1333,6 +1357,7 @@ module CorBuildings_LandEconomy =
     let corfusToUnitDef (flat: Corfus) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1374,6 +1399,7 @@ module CorBuildings_LandEconomy =
     type Corgeo =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1405,6 +1431,7 @@ module CorBuildings_LandEconomy =
     let corgeo : Corgeo =
         { name = "corgeo"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 540.0
           energyCost = ValueOrExpr.Concrete 13000.0
           buildTime = ValueOrExpr.Concrete 12900.0
@@ -1493,6 +1520,7 @@ module CorBuildings_LandEconomy =
     let corgeoDef : UnitDef =
         { name = "corgeo"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Geothermal Powerplant"
           metalCost = ValueOrExpr.Concrete 540.0
           energyCost = ValueOrExpr.Concrete 13000.0
           buildTime = ValueOrExpr.Concrete 12900.0
@@ -1589,6 +1617,7 @@ module CorBuildings_LandEconomy =
     let corgeoToFlat (def: UnitDef) : Corgeo =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1620,6 +1649,7 @@ module CorBuildings_LandEconomy =
     let corgeoToUnitDef (flat: Corgeo) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1661,6 +1691,7 @@ module CorBuildings_LandEconomy =
     type Cormakr =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1689,6 +1720,7 @@ module CorBuildings_LandEconomy =
     let cormakr : Cormakr =
         { name = "cormakr"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Energy Converter"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1250.0
           buildTime = ValueOrExpr.Concrete 2680.0
@@ -1743,6 +1775,7 @@ module CorBuildings_LandEconomy =
     let cormakrDef : UnitDef =
         { name = "cormakr"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Energy Converter"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1250.0
           buildTime = ValueOrExpr.Concrete 2680.0
@@ -1803,6 +1836,7 @@ module CorBuildings_LandEconomy =
     let cormakrToFlat (def: UnitDef) : Cormakr =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1831,6 +1865,7 @@ module CorBuildings_LandEconomy =
     let cormakrToUnitDef (flat: Cormakr) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1866,6 +1901,7 @@ module CorBuildings_LandEconomy =
     type Cormex =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1897,6 +1933,7 @@ module CorBuildings_LandEconomy =
     let cormex : Cormex =
         { name = "cormex"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Metal Extractor"
           metalCost = ValueOrExpr.Concrete 50.0
           energyCost = ValueOrExpr.Concrete 500.0
           buildTime = ValueOrExpr.Concrete 1870.0
@@ -1988,6 +2025,7 @@ module CorBuildings_LandEconomy =
     let cormexDef : UnitDef =
         { name = "cormex"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Metal Extractor"
           metalCost = ValueOrExpr.Concrete 50.0
           energyCost = ValueOrExpr.Concrete 500.0
           buildTime = ValueOrExpr.Concrete 1870.0
@@ -2087,6 +2125,7 @@ module CorBuildings_LandEconomy =
     let cormexToFlat (def: UnitDef) : Cormex =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2118,6 +2157,7 @@ module CorBuildings_LandEconomy =
     let cormexToUnitDef (flat: Cormex) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2159,6 +2199,7 @@ module CorBuildings_LandEconomy =
     type Cormmkr =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2188,6 +2229,7 @@ module CorBuildings_LandEconomy =
     let cormmkr : Cormmkr =
         { name = "cormmkr"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Energy Converter"
           metalCost = ValueOrExpr.Concrete 370.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 31300.0
@@ -2276,6 +2318,7 @@ module CorBuildings_LandEconomy =
     let cormmkrDef : UnitDef =
         { name = "cormmkr"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Energy Converter"
           metalCost = ValueOrExpr.Concrete 370.0
           energyCost = ValueOrExpr.Concrete 21000.0
           buildTime = ValueOrExpr.Concrete 31300.0
@@ -2369,6 +2412,7 @@ module CorBuildings_LandEconomy =
     let cormmkrToFlat (def: UnitDef) : Cormmkr =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2398,6 +2442,7 @@ module CorBuildings_LandEconomy =
     let cormmkrToUnitDef (flat: Cormmkr) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2433,6 +2478,7 @@ module CorBuildings_LandEconomy =
     type Cormoho =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2464,6 +2510,7 @@ module CorBuildings_LandEconomy =
     let cormoho : Cormoho =
         { name = "cormoho"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Metal Extractor"
           metalCost = ValueOrExpr.Concrete 640.0
           energyCost = ValueOrExpr.Concrete 8100.0
           buildTime = ValueOrExpr.Concrete 14100.0
@@ -2555,6 +2602,7 @@ module CorBuildings_LandEconomy =
     let cormohoDef : UnitDef =
         { name = "cormoho"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Advanced Metal Extractor"
           metalCost = ValueOrExpr.Concrete 640.0
           energyCost = ValueOrExpr.Concrete 8100.0
           buildTime = ValueOrExpr.Concrete 14100.0
@@ -2654,6 +2702,7 @@ module CorBuildings_LandEconomy =
     let cormohoToFlat (def: UnitDef) : Cormoho =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2685,6 +2734,7 @@ module CorBuildings_LandEconomy =
     let cormohoToUnitDef (flat: Cormoho) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2726,6 +2776,7 @@ module CorBuildings_LandEconomy =
     type Cormstor =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2755,6 +2806,7 @@ module CorBuildings_LandEconomy =
     let cormstor : Cormstor =
         { name = "cormstor"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Metal Storage"
           metalCost = ValueOrExpr.Concrete 340.0
           energyCost = ValueOrExpr.Concrete 590.0
           buildTime = ValueOrExpr.Concrete 2920.0
@@ -2837,6 +2889,7 @@ module CorBuildings_LandEconomy =
     let cormstorDef : UnitDef =
         { name = "cormstor"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Metal Storage"
           metalCost = ValueOrExpr.Concrete 340.0
           energyCost = ValueOrExpr.Concrete 590.0
           buildTime = ValueOrExpr.Concrete 2920.0
@@ -2929,6 +2982,7 @@ module CorBuildings_LandEconomy =
     let cormstorToFlat (def: UnitDef) : Cormstor =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2958,6 +3012,7 @@ module CorBuildings_LandEconomy =
     let cormstorToUnitDef (flat: Cormstor) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2999,6 +3054,7 @@ module CorBuildings_LandEconomy =
     type Corsolar =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3029,6 +3085,7 @@ module CorBuildings_LandEconomy =
     let corsolar : Corsolar =
         { name = "corsolar"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Solar Collector"
           metalCost = ValueOrExpr.Concrete 150.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -3118,6 +3175,7 @@ module CorBuildings_LandEconomy =
     let corsolarDef : UnitDef =
         { name = "corsolar"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Solar Collector"
           metalCost = ValueOrExpr.Concrete 150.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 2800.0
@@ -3216,6 +3274,7 @@ module CorBuildings_LandEconomy =
     let corsolarToFlat (def: UnitDef) : Corsolar =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3246,6 +3305,7 @@ module CorBuildings_LandEconomy =
     let corsolarToUnitDef (flat: Corsolar) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3287,6 +3347,7 @@ module CorBuildings_LandEconomy =
     type Corwin =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3317,6 +3378,7 @@ module CorBuildings_LandEconomy =
     let corwin : Corwin =
         { name = "corwin"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Wind Turbine"
           metalCost = ValueOrExpr.Concrete 43.0
           energyCost = ValueOrExpr.Concrete 175.0
           buildTime = ValueOrExpr.Concrete 1680.0
@@ -3402,6 +3464,7 @@ module CorBuildings_LandEconomy =
     let corwinDef : UnitDef =
         { name = "corwin"
           subfolder = "CorBuildings/LandEconomy"
+          printableName = Some "Wind Turbine"
           metalCost = ValueOrExpr.Concrete 43.0
           energyCost = ValueOrExpr.Concrete 175.0
           buildTime = ValueOrExpr.Concrete 1680.0
@@ -3496,6 +3559,7 @@ module CorBuildings_LandEconomy =
     let corwinToFlat (def: UnitDef) : Corwin =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3526,6 +3590,7 @@ module CorBuildings_LandEconomy =
     let corwinToUnitDef (flat: Corwin) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

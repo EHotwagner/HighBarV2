@@ -8,6 +8,7 @@ module Scavengers_Air =
     type Armfepocht4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -45,6 +46,7 @@ module Scavengers_Air =
     let armfepocht4 : Armfepocht4 =
         { name = "armfepocht4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Flying Epoch"
           metalCost = ValueOrExpr.Concrete 25000.0
           energyCost = ValueOrExpr.Concrete 250000.0
           buildTime = ValueOrExpr.Concrete 250000.0
@@ -424,6 +426,7 @@ module Scavengers_Air =
     let armfepocht4Def : UnitDef =
         { name = "armfepocht4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Flying Epoch"
           metalCost = ValueOrExpr.Concrete 25000.0
           energyCost = ValueOrExpr.Concrete 250000.0
           buildTime = ValueOrExpr.Concrete 250000.0
@@ -813,6 +816,7 @@ module Scavengers_Air =
     let armfepocht4ToFlat (def: UnitDef) : Armfepocht4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -850,6 +854,7 @@ module Scavengers_Air =
     let armfepocht4ToUnitDef (flat: Armfepocht4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -898,6 +903,7 @@ module Scavengers_Air =
     type Armfify =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -933,6 +939,7 @@ module Scavengers_Air =
     let armfify : Armfify =
         { name = "armfify"
           subfolder = "Scavengers/Air"
+          printableName = Some "Firefly"
           metalCost = ValueOrExpr.Concrete 58.0
           energyCost = ValueOrExpr.Concrete 2900.0
           buildTime = ValueOrExpr.Concrete 3800.0
@@ -996,6 +1003,7 @@ module Scavengers_Air =
     let armfifyDef : UnitDef =
         { name = "armfify"
           subfolder = "Scavengers/Air"
+          printableName = Some "Firefly"
           metalCost = ValueOrExpr.Concrete 58.0
           energyCost = ValueOrExpr.Concrete 2900.0
           buildTime = ValueOrExpr.Concrete 3800.0
@@ -1071,6 +1079,7 @@ module Scavengers_Air =
     let armfifyToFlat (def: UnitDef) : Armfify =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1106,6 +1115,7 @@ module Scavengers_Air =
     let armfifyToUnitDef (flat: Armfify) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1154,6 +1164,7 @@ module Scavengers_Air =
     type Armlichet4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1189,6 +1200,7 @@ module Scavengers_Air =
     let armlichet4 : Armlichet4 =
         { name = "armlichet4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Liche"
           metalCost = ValueOrExpr.Concrete 18000.0
           energyCost = ValueOrExpr.Concrete 240000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -1314,6 +1326,7 @@ module Scavengers_Air =
     let armlichet4Def : UnitDef =
         { name = "armlichet4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Liche"
           metalCost = ValueOrExpr.Concrete 18000.0
           energyCost = ValueOrExpr.Concrete 240000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -1451,6 +1464,7 @@ module Scavengers_Air =
     let armlichet4ToFlat (def: UnitDef) : Armlichet4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1486,6 +1500,7 @@ module Scavengers_Air =
     let armlichet4ToUnitDef (flat: Armlichet4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1534,6 +1549,7 @@ module Scavengers_Air =
     type Armminebomber =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1569,6 +1585,7 @@ module Scavengers_Air =
     let armminebomber : Armminebomber =
         { name = "armminebomber"
           subfolder = "Scavengers/Air"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 145.0
           energyCost = ValueOrExpr.Concrete 4200.0
           buildTime = ValueOrExpr.Concrete 4800.0
@@ -1673,6 +1690,7 @@ module Scavengers_Air =
     let armminebomberDef : UnitDef =
         { name = "armminebomber"
           subfolder = "Scavengers/Air"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 145.0
           energyCost = ValueOrExpr.Concrete 4200.0
           buildTime = ValueOrExpr.Concrete 4800.0
@@ -1789,6 +1807,7 @@ module Scavengers_Air =
     let armminebomberToFlat (def: UnitDef) : Armminebomber =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1824,6 +1843,7 @@ module Scavengers_Air =
     let armminebomberToUnitDef (flat: Armminebomber) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1872,6 +1892,7 @@ module Scavengers_Air =
     type Armthundt4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1907,6 +1928,7 @@ module Scavengers_Air =
     let armthundt4 : Armthundt4 =
         { name = "armthundt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Stormbringer"
           metalCost = ValueOrExpr.Concrete 15000.0
           energyCost = ValueOrExpr.Concrete 150000.0
           buildTime = ValueOrExpr.Concrete 150000.0
@@ -2013,6 +2035,7 @@ module Scavengers_Air =
     let armthundt4Def : UnitDef =
         { name = "armthundt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Stormbringer"
           metalCost = ValueOrExpr.Concrete 15000.0
           energyCost = ValueOrExpr.Concrete 150000.0
           buildTime = ValueOrExpr.Concrete 150000.0
@@ -2131,6 +2154,7 @@ module Scavengers_Air =
     let armthundt4ToFlat (def: UnitDef) : Armthundt4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2166,6 +2190,7 @@ module Scavengers_Air =
     let armthundt4ToUnitDef (flat: Armthundt4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2214,6 +2239,7 @@ module Scavengers_Air =
     type Corcrw =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2250,6 +2276,7 @@ module Scavengers_Air =
     let corcrw : Corcrw =
         { name = "corcrw"
           subfolder = "Scavengers/Air"
+          printableName = Some "Archaic Dragon"
           metalCost = ValueOrExpr.Concrete 5100.0
           energyCost = ValueOrExpr.Concrete 72000.0
           buildTime = ValueOrExpr.Concrete 84200.0
@@ -2429,6 +2456,7 @@ module Scavengers_Air =
     let corcrwDef : UnitDef =
         { name = "corcrw"
           subfolder = "Scavengers/Air"
+          printableName = Some "Archaic Dragon"
           metalCost = ValueOrExpr.Concrete 5100.0
           energyCost = ValueOrExpr.Concrete 72000.0
           buildTime = ValueOrExpr.Concrete 84200.0
@@ -2619,6 +2647,7 @@ module Scavengers_Air =
     let corcrwToFlat (def: UnitDef) : Corcrw =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2655,6 +2684,7 @@ module Scavengers_Air =
     let corcrwToUnitDef (flat: Corcrw) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2703,6 +2733,7 @@ module Scavengers_Air =
     type Corcrwt4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2739,6 +2770,7 @@ module Scavengers_Air =
     let corcrwt4 : Corcrwt4 =
         { name = "corcrwt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Dragon"
           metalCost = ValueOrExpr.Concrete 15000.0
           energyCost = ValueOrExpr.Concrete 150000.0
           buildTime = ValueOrExpr.Concrete 150000.0
@@ -3090,6 +3122,7 @@ module Scavengers_Air =
     let corcrwt4Def : UnitDef =
         { name = "corcrwt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Dragon"
           metalCost = ValueOrExpr.Concrete 15000.0
           energyCost = ValueOrExpr.Concrete 150000.0
           buildTime = ValueOrExpr.Concrete 150000.0
@@ -3452,6 +3485,7 @@ module Scavengers_Air =
     let corcrwt4ToFlat (def: UnitDef) : Corcrwt4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3488,6 +3522,7 @@ module Scavengers_Air =
     let corcrwt4ToUnitDef (flat: Corcrwt4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3536,6 +3571,7 @@ module Scavengers_Air =
     type Cordronecarryair =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3575,6 +3611,7 @@ module Scavengers_Air =
     let cordronecarryair : Cordronecarryair =
         { name = "cordronecarryair"
           subfolder = "Scavengers/Air"
+          printableName = Some "Disperser Omni"
           metalCost = ValueOrExpr.Concrete 1700.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -3719,6 +3756,7 @@ module Scavengers_Air =
     let cordronecarryairDef : UnitDef =
         { name = "cordronecarryair"
           subfolder = "Scavengers/Air"
+          printableName = Some "Disperser Omni"
           metalCost = ValueOrExpr.Concrete 1700.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -3876,6 +3914,7 @@ module Scavengers_Air =
     let cordronecarryairToFlat (def: UnitDef) : Cordronecarryair =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3915,6 +3954,7 @@ module Scavengers_Air =
     let cordronecarryairToUnitDef (flat: Cordronecarryair) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3969,6 +4009,7 @@ module Scavengers_Air =
     type Cords =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4004,6 +4045,7 @@ module Scavengers_Air =
     let cords : Cords =
         { name = "cords"
           subfolder = "Scavengers/Air"
+          printableName = Some "Disgruntler"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 14600.0
           buildTime = ValueOrExpr.Concrete 5000.0
@@ -4112,6 +4154,7 @@ module Scavengers_Air =
     let cordsDef : UnitDef =
         { name = "cords"
           subfolder = "Scavengers/Air"
+          printableName = Some "Disgruntler"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 14600.0
           buildTime = ValueOrExpr.Concrete 5000.0
@@ -4232,6 +4275,7 @@ module Scavengers_Air =
     let cordsToFlat (def: UnitDef) : Cords =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4267,6 +4311,7 @@ module Scavengers_Air =
     let cordsToUnitDef (flat: Cords) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4315,6 +4360,7 @@ module Scavengers_Air =
     type Corfblackhyt4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4352,6 +4398,7 @@ module Scavengers_Air =
     let corfblackhyt4 : Corfblackhyt4 =
         { name = "corfblackhyt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Flying Black Hydra"
           metalCost = ValueOrExpr.Concrete 25000.0
           energyCost = ValueOrExpr.Concrete 250000.0
           buildTime = ValueOrExpr.Concrete 250000.0
@@ -4703,6 +4750,7 @@ module Scavengers_Air =
     let corfblackhyt4Def : UnitDef =
         { name = "corfblackhyt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Flying Black Hydra"
           metalCost = ValueOrExpr.Concrete 25000.0
           energyCost = ValueOrExpr.Concrete 250000.0
           buildTime = ValueOrExpr.Concrete 250000.0
@@ -5064,6 +5112,7 @@ module Scavengers_Air =
     let corfblackhyt4ToFlat (def: UnitDef) : Corfblackhyt4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5101,6 +5150,7 @@ module Scavengers_Air =
     let corfblackhyt4ToUnitDef (flat: Corfblackhyt4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5149,6 +5199,7 @@ module Scavengers_Air =
     type Legfortt4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5185,6 +5236,7 @@ module Scavengers_Air =
     let legfortt4 : Legfortt4 =
         { name = "legfortt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Tyrannus"
           metalCost = ValueOrExpr.Concrete 56000.0
           energyCost = ValueOrExpr.Concrete 790000.0
           buildTime = ValueOrExpr.Concrete 900000.0
@@ -5506,6 +5558,7 @@ module Scavengers_Air =
     let legfortt4Def : UnitDef =
         { name = "legfortt4"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Tyrannus"
           metalCost = ValueOrExpr.Concrete 56000.0
           energyCost = ValueOrExpr.Concrete 790000.0
           buildTime = ValueOrExpr.Concrete 900000.0
@@ -5838,6 +5891,7 @@ module Scavengers_Air =
     let legfortt4ToFlat (def: UnitDef) : Legfortt4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5874,6 +5928,7 @@ module Scavengers_Air =
     let legfortt4ToUnitDef (flat: Legfortt4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5922,6 +5977,7 @@ module Scavengers_Air =
     type Legmost3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5958,6 +6014,7 @@ module Scavengers_Air =
     let legmost3 : Legmost3 =
         { name = "legmost3"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Mosquito"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 42000.0
           buildTime = ValueOrExpr.Concrete 42000.0
@@ -6070,6 +6127,7 @@ module Scavengers_Air =
     let legmost3Def : UnitDef =
         { name = "legmost3"
           subfolder = "Scavengers/Air"
+          printableName = Some "Epic Mosquito"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 42000.0
           buildTime = ValueOrExpr.Concrete 42000.0
@@ -6193,6 +6251,7 @@ module Scavengers_Air =
     let legmost3ToFlat (def: UnitDef) : Legmost3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6229,6 +6288,7 @@ module Scavengers_Air =
     let legmost3ToUnitDef (flat: Legmost3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

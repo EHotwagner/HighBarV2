@@ -8,6 +8,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legaheattank =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaheattank : Legaheattank =
         { name = "legaheattank"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Prometheus"
           metalCost = ValueOrExpr.Concrete 1250.0
           energyCost = ValueOrExpr.Concrete 19000.0
           buildTime = ValueOrExpr.Concrete 25600.0
@@ -191,6 +193,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaheattankDef : UnitDef =
         { name = "legaheattank"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Prometheus"
           metalCost = ValueOrExpr.Concrete 1250.0
           energyCost = ValueOrExpr.Concrete 19000.0
           buildTime = ValueOrExpr.Concrete 25600.0
@@ -345,6 +348,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaheattankToFlat (def: UnitDef) : Legaheattank =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -383,6 +387,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaheattankToUnitDef (flat: Legaheattank) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -431,6 +436,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legamcluster =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -469,6 +475,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legamcluster : Legamcluster =
         { name = "legamcluster"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Cleaver"
           metalCost = ValueOrExpr.Concrete 460.0
           energyCost = ValueOrExpr.Concrete 5500.0
           buildTime = ValueOrExpr.Concrete 10450.0
@@ -606,6 +613,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legamclusterDef : UnitDef =
         { name = "legamcluster"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Cleaver"
           metalCost = ValueOrExpr.Concrete 460.0
           energyCost = ValueOrExpr.Concrete 5500.0
           buildTime = ValueOrExpr.Concrete 10450.0
@@ -752,6 +760,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legamclusterToFlat (def: UnitDef) : Legamcluster =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -790,6 +799,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legamclusterToUnitDef (flat: Legamcluster) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -838,6 +848,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legaskirmtank =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -876,6 +887,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaskirmtank : Legaskirmtank =
         { name = "legaskirmtank"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Gladiator"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 6800.0
           buildTime = ValueOrExpr.Concrete 10490.0
@@ -1016,6 +1028,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaskirmtankDef : UnitDef =
         { name = "legaskirmtank"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Gladiator"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 6800.0
           buildTime = ValueOrExpr.Concrete 10490.0
@@ -1165,6 +1178,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaskirmtankToFlat (def: UnitDef) : Legaskirmtank =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1203,6 +1217,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legaskirmtankToUnitDef (flat: Legaskirmtank) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1251,6 +1266,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legavantinuke =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1289,6 +1305,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavantinuke : Legavantinuke =
         { name = "legavantinuke"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Hera"
           metalCost = ValueOrExpr.Concrete 1100.0
           energyCost = ValueOrExpr.Concrete 36000.0
           buildTime = ValueOrExpr.Concrete 51300.0
@@ -1444,6 +1461,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavantinukeDef : UnitDef =
         { name = "legavantinuke"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Hera"
           metalCost = ValueOrExpr.Concrete 1100.0
           energyCost = ValueOrExpr.Concrete 36000.0
           buildTime = ValueOrExpr.Concrete 51300.0
@@ -1608,6 +1626,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavantinukeToFlat (def: UnitDef) : Legavantinuke =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1646,6 +1665,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavantinukeToUnitDef (flat: Legavantinuke) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1694,6 +1714,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legavjam =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1731,6 +1752,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavjam : Legavjam =
         { name = "legavjam"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Cicero"
           metalCost = ValueOrExpr.Concrete 105.0
           energyCost = ValueOrExpr.Concrete 1900.0
           buildTime = ValueOrExpr.Concrete 6930.0
@@ -1829,6 +1851,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavjamDef : UnitDef =
         { name = "legavjam"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Cicero"
           metalCost = ValueOrExpr.Concrete 105.0
           energyCost = ValueOrExpr.Concrete 1900.0
           buildTime = ValueOrExpr.Concrete 6930.0
@@ -1937,6 +1960,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavjamToFlat (def: UnitDef) : Legavjam =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1974,6 +1998,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavjamToUnitDef (flat: Legavjam) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2022,6 +2047,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legavrad =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2059,6 +2085,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavrad : Legavrad =
         { name = "legavrad"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Pheme"
           metalCost = ValueOrExpr.Concrete 125.0
           energyCost = ValueOrExpr.Concrete 2000.0
           buildTime = ValueOrExpr.Concrete 7290.0
@@ -2153,6 +2180,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavradDef : UnitDef =
         { name = "legavrad"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Pheme"
           metalCost = ValueOrExpr.Concrete 125.0
           energyCost = ValueOrExpr.Concrete 2000.0
           buildTime = ValueOrExpr.Concrete 7290.0
@@ -2257,6 +2285,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavradToFlat (def: UnitDef) : Legavrad =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2294,6 +2323,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavradToUnitDef (flat: Legavrad) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2342,6 +2372,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legavroc =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2380,6 +2411,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavroc : Legavroc =
         { name = "legavroc"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Boreas"
           metalCost = ValueOrExpr.Concrete 920.0
           energyCost = ValueOrExpr.Concrete 6500.0
           buildTime = ValueOrExpr.Concrete 20130.0
@@ -2526,6 +2558,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavrocDef : UnitDef =
         { name = "legavroc"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Boreas"
           metalCost = ValueOrExpr.Concrete 920.0
           energyCost = ValueOrExpr.Concrete 6500.0
           buildTime = ValueOrExpr.Concrete 20130.0
@@ -2681,6 +2714,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavrocToFlat (def: UnitDef) : Legavroc =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2719,6 +2753,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legavrocToUnitDef (flat: Legavroc) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2767,6 +2802,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legfloat =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2806,6 +2842,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legfloat : Legfloat =
         { name = "legfloat"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Triton"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 12000.0
@@ -2989,6 +3026,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legfloatDef : UnitDef =
         { name = "legfloat"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Triton"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 12000.0
@@ -3180,6 +3218,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legfloatToFlat (def: UnitDef) : Legfloat =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3219,6 +3258,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legfloatToUnitDef (flat: Legfloat) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3267,6 +3307,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Leginf =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3305,6 +3346,7 @@ module Legion_Vehicles_T2_Vehicles =
     let leginf : Leginf =
         { name = "leginf"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Inferno"
           metalCost = ValueOrExpr.Concrete 1700.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 42900.0
@@ -3452,6 +3494,7 @@ module Legion_Vehicles_T2_Vehicles =
     let leginfDef : UnitDef =
         { name = "leginf"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Inferno"
           metalCost = ValueOrExpr.Concrete 1700.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 42900.0
@@ -3608,6 +3651,7 @@ module Legion_Vehicles_T2_Vehicles =
     let leginfToFlat (def: UnitDef) : Leginf =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3646,6 +3690,7 @@ module Legion_Vehicles_T2_Vehicles =
     let leginfToUnitDef (flat: Leginf) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3694,6 +3739,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legmed =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3732,6 +3778,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmed : Legmed =
         { name = "legmed"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Medusa"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 22500.0
           buildTime = ValueOrExpr.Concrete 30370.0
@@ -3926,6 +3973,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmedDef : UnitDef =
         { name = "legmed"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Medusa"
           metalCost = ValueOrExpr.Concrete 1500.0
           energyCost = ValueOrExpr.Concrete 22500.0
           buildTime = ValueOrExpr.Concrete 30370.0
@@ -4129,6 +4177,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmedToFlat (def: UnitDef) : Legmed =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4167,6 +4216,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmedToUnitDef (flat: Legmed) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4215,6 +4265,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legmrv =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4253,6 +4304,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmrv : Legmrv =
         { name = "legmrv"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Quickshot"
           metalCost = ValueOrExpr.Concrete 250.0
           energyCost = ValueOrExpr.Concrete 4100.0
           buildTime = ValueOrExpr.Concrete 5900.0
@@ -4387,6 +4439,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmrvDef : UnitDef =
         { name = "legmrv"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Quickshot"
           metalCost = ValueOrExpr.Concrete 250.0
           energyCost = ValueOrExpr.Concrete 4100.0
           buildTime = ValueOrExpr.Concrete 5900.0
@@ -4530,6 +4583,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmrvToFlat (def: UnitDef) : Legmrv =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4568,6 +4622,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legmrvToUnitDef (flat: Legmrv) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4616,6 +4671,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legvcarry =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4654,6 +4710,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvcarry : Legvcarry =
         { name = "legvcarry"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Mantis"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 9000.0
           buildTime = ValueOrExpr.Concrete 11550.0
@@ -4798,6 +4855,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvcarryDef : UnitDef =
         { name = "legvcarry"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Mantis"
           metalCost = ValueOrExpr.Concrete 450.0
           energyCost = ValueOrExpr.Concrete 9000.0
           buildTime = ValueOrExpr.Concrete 11550.0
@@ -4951,6 +5009,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvcarryToFlat (def: UnitDef) : Legvcarry =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4989,6 +5048,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvcarryToUnitDef (flat: Legvcarry) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5037,6 +5097,7 @@ module Legion_Vehicles_T2_Vehicles =
     type Legvflak =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5075,6 +5136,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvflak : Legvflak =
         { name = "legvflak"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Charon"
           metalCost = ValueOrExpr.Concrete 470.0
           energyCost = ValueOrExpr.Concrete 10500.0
           buildTime = ValueOrExpr.Concrete 15130.0
@@ -5214,6 +5276,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvflakDef : UnitDef =
         { name = "legvflak"
           subfolder = "Legion/Vehicles/T2 Vehicles"
+          printableName = Some "Charon"
           metalCost = ValueOrExpr.Concrete 470.0
           energyCost = ValueOrExpr.Concrete 10500.0
           buildTime = ValueOrExpr.Concrete 15130.0
@@ -5362,6 +5425,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvflakToFlat (def: UnitDef) : Legvflak =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5400,6 +5464,7 @@ module Legion_Vehicles_T2_Vehicles =
     let legvflakToUnitDef (flat: Legvflak) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

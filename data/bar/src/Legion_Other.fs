@@ -8,6 +8,7 @@ module Legion_Other =
     type Legvision =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -37,6 +38,7 @@ module Legion_Other =
     let legvision : Legvision =
         { name = "legvision"
           subfolder = "Legion/Other"
+          printableName = Some "Vision"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -108,6 +110,7 @@ module Legion_Other =
     let legvisionDef : UnitDef =
         { name = "legvision"
           subfolder = "Legion/Other"
+          printableName = Some "Vision"
           metalCost = ValueOrExpr.Concrete 1.0
           energyCost = ValueOrExpr.Concrete 1.0
           buildTime = ValueOrExpr.Concrete 750.0
@@ -184,6 +187,7 @@ module Legion_Other =
     let legvisionToFlat (def: UnitDef) : Legvision =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -213,6 +217,7 @@ module Legion_Other =
     let legvisionToUnitDef (flat: Legvision) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

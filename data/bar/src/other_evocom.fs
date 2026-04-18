@@ -8,6 +8,7 @@ module other_evocom =
     type Armcomlvl10 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -53,6 +54,7 @@ module other_evocom =
     let armcomlvl10 : Armcomlvl10 =
         { name = "armcomlvl10"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 10"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 110000.0
           buildTime = ValueOrExpr.Concrete 195600.0
@@ -338,7 +340,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -459,6 +463,7 @@ module other_evocom =
     let armcomlvl10Def : UnitDef =
         { name = "armcomlvl10"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 10"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 110000.0
           buildTime = ValueOrExpr.Concrete 195600.0
@@ -748,7 +753,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -876,6 +883,7 @@ module other_evocom =
     let armcomlvl10ToFlat (def: UnitDef) : Armcomlvl10 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -921,6 +929,7 @@ module other_evocom =
     let armcomlvl10ToUnitDef (flat: Armcomlvl10) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -980,6 +989,7 @@ module other_evocom =
     type Armcomlvl2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1025,6 +1035,7 @@ module other_evocom =
     let armcomlvl2 : Armcomlvl2 =
         { name = "armcomlvl2"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 2"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1295,6 +1306,7 @@ module other_evocom =
     let armcomlvl2Def : UnitDef =
         { name = "armcomlvl2"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 2"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 75000.0
@@ -1576,6 +1588,7 @@ module other_evocom =
     let armcomlvl2ToFlat (def: UnitDef) : Armcomlvl2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1621,6 +1634,7 @@ module other_evocom =
     let armcomlvl2ToUnitDef (flat: Armcomlvl2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1680,6 +1694,7 @@ module other_evocom =
     type Armcomlvl3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1725,6 +1740,7 @@ module other_evocom =
     let armcomlvl3 : Armcomlvl3 =
         { name = "armcomlvl3"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 3"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 85000.0
@@ -1795,7 +1811,7 @@ module other_evocom =
                       "cratermult", "0.0"
                       "firestarter", "100.0"
                       "flighttime", "7.4"
-                      "model", "corkbmissl1.s3o"
+                      "model", "corkbmissl0.s3o"
                       "smoketrail", "true"
                       "smokePeriod", "8.0"
                       "smoketime", "30.0"
@@ -2011,7 +2027,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -2139,6 +2157,7 @@ module other_evocom =
     let armcomlvl3Def : UnitDef =
         { name = "armcomlvl3"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 3"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 85000.0
@@ -2213,7 +2232,7 @@ module other_evocom =
                     "cratermult", "0.0"
                     "firestarter", "100.0"
                     "flighttime", "7.4"
-                    "model", "corkbmissl1.s3o"
+                    "model", "corkbmissl0.s3o"
                     "smoketrail", "true"
                     "smokePeriod", "8.0"
                     "smoketime", "30.0"
@@ -2429,7 +2448,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -2564,6 +2585,7 @@ module other_evocom =
     let armcomlvl3ToFlat (def: UnitDef) : Armcomlvl3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2609,6 +2631,7 @@ module other_evocom =
     let armcomlvl3ToUnitDef (flat: Armcomlvl3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2668,6 +2691,7 @@ module other_evocom =
     type Armcomlvl4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2713,6 +2737,7 @@ module other_evocom =
     let armcomlvl4 : Armcomlvl4 =
         { name = "armcomlvl4"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 4"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 50000.0
           buildTime = ValueOrExpr.Concrete 94800.0
@@ -2999,7 +3024,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -3127,6 +3154,7 @@ module other_evocom =
     let armcomlvl4Def : UnitDef =
         { name = "armcomlvl4"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 4"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 50000.0
           buildTime = ValueOrExpr.Concrete 94800.0
@@ -3417,7 +3445,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -3552,6 +3582,7 @@ module other_evocom =
     let armcomlvl4ToFlat (def: UnitDef) : Armcomlvl4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3597,6 +3628,7 @@ module other_evocom =
     let armcomlvl4ToUnitDef (flat: Armcomlvl4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3656,6 +3688,7 @@ module other_evocom =
     type Armcomlvl5 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3701,6 +3734,7 @@ module other_evocom =
     let armcomlvl5 : Armcomlvl5 =
         { name = "armcomlvl5"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 5"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 111600.0
@@ -3986,7 +4020,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -4114,6 +4150,7 @@ module other_evocom =
     let armcomlvl5Def : UnitDef =
         { name = "armcomlvl5"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 5"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 111600.0
@@ -4403,7 +4440,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -4538,6 +4577,7 @@ module other_evocom =
     let armcomlvl5ToFlat (def: UnitDef) : Armcomlvl5 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4583,6 +4623,7 @@ module other_evocom =
     let armcomlvl5ToUnitDef (flat: Armcomlvl5) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4642,6 +4683,7 @@ module other_evocom =
     type Armcomlvl6 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4687,6 +4729,7 @@ module other_evocom =
     let armcomlvl6 : Armcomlvl6 =
         { name = "armcomlvl6"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 6"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 70000.0
           buildTime = ValueOrExpr.Concrete 128400.0
@@ -4972,7 +5015,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -5100,6 +5145,7 @@ module other_evocom =
     let armcomlvl6Def : UnitDef =
         { name = "armcomlvl6"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 6"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 70000.0
           buildTime = ValueOrExpr.Concrete 128400.0
@@ -5389,7 +5435,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -5524,6 +5572,7 @@ module other_evocom =
     let armcomlvl6ToFlat (def: UnitDef) : Armcomlvl6 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5569,6 +5618,7 @@ module other_evocom =
     let armcomlvl6ToUnitDef (flat: Armcomlvl6) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5628,6 +5678,7 @@ module other_evocom =
     type Armcomlvl7 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5673,6 +5724,7 @@ module other_evocom =
     let armcomlvl7 : Armcomlvl7 =
         { name = "armcomlvl7"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 7"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 145200.0
@@ -5959,7 +6011,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -6087,6 +6141,7 @@ module other_evocom =
     let armcomlvl7Def : UnitDef =
         { name = "armcomlvl7"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 7"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 145200.0
@@ -6377,7 +6432,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -6512,6 +6569,7 @@ module other_evocom =
     let armcomlvl7ToFlat (def: UnitDef) : Armcomlvl7 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6557,6 +6615,7 @@ module other_evocom =
     let armcomlvl7ToUnitDef (flat: Armcomlvl7) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6616,6 +6675,7 @@ module other_evocom =
     type Armcomlvl8 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6661,6 +6721,7 @@ module other_evocom =
     let armcomlvl8 : Armcomlvl8 =
         { name = "armcomlvl8"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 8"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 162000.0
@@ -6946,7 +7007,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -7074,6 +7137,7 @@ module other_evocom =
     let armcomlvl8Def : UnitDef =
         { name = "armcomlvl8"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 8"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 162000.0
@@ -7363,7 +7427,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -7498,6 +7564,7 @@ module other_evocom =
     let armcomlvl8ToFlat (def: UnitDef) : Armcomlvl8 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7543,6 +7610,7 @@ module other_evocom =
     let armcomlvl8ToUnitDef (flat: Armcomlvl8) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7602,6 +7670,7 @@ module other_evocom =
     type Armcomlvl9 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7647,6 +7716,7 @@ module other_evocom =
     let armcomlvl9 : Armcomlvl9 =
         { name = "armcomlvl9"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 9"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 178000.0
@@ -7932,7 +8002,9 @@ module other_evocom =
                   soundHit = None
                   explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                   rgbColor = Some "1 1 1"
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "COMMANDER"
                       "avoidfeature", "false"
@@ -8060,6 +8132,7 @@ module other_evocom =
     let armcomlvl9Def : UnitDef =
         { name = "armcomlvl9"
           subfolder = "other/evocom"
+          printableName = Some "Armada Commander Level 9"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 178000.0
@@ -8349,7 +8422,9 @@ module other_evocom =
                 soundHit = None
                 explosiongenerator = Some "custom:genericshellexplosion-huge-lightning"
                 rgbColor = Some "1 1 1"
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "COMMANDER"
                     "avoidfeature", "false"
@@ -8484,6 +8559,7 @@ module other_evocom =
     let armcomlvl9ToFlat (def: UnitDef) : Armcomlvl9 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -8529,6 +8605,7 @@ module other_evocom =
     let armcomlvl9ToUnitDef (flat: Armcomlvl9) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -8588,6 +8665,7 @@ module other_evocom =
     type Corcomlvl10 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -8633,6 +8711,7 @@ module other_evocom =
     let corcomlvl10 : Corcomlvl10 =
         { name = "corcomlvl10"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 10"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 110000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -9013,6 +9092,7 @@ module other_evocom =
     let corcomlvl10Def : UnitDef =
         { name = "corcomlvl10"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 10"
           metalCost = ValueOrExpr.Concrete 11000.0
           energyCost = ValueOrExpr.Concrete 110000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -9404,6 +9484,7 @@ module other_evocom =
     let corcomlvl10ToFlat (def: UnitDef) : Corcomlvl10 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -9449,6 +9530,7 @@ module other_evocom =
     let corcomlvl10ToUnitDef (flat: Corcomlvl10) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -9508,6 +9590,7 @@ module other_evocom =
     type Corcomlvl2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -9553,6 +9636,7 @@ module other_evocom =
     let corcomlvl2 : Corcomlvl2 =
         { name = "corcomlvl2"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 2"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 112500.0
@@ -9851,6 +9935,7 @@ module other_evocom =
     let corcomlvl2Def : UnitDef =
         { name = "corcomlvl2"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 2"
           metalCost = ValueOrExpr.Concrete 3000.0
           energyCost = ValueOrExpr.Concrete 30000.0
           buildTime = ValueOrExpr.Concrete 112500.0
@@ -10160,6 +10245,7 @@ module other_evocom =
     let corcomlvl2ToFlat (def: UnitDef) : Corcomlvl2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -10205,6 +10291,7 @@ module other_evocom =
     let corcomlvl2ToUnitDef (flat: Corcomlvl2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -10264,6 +10351,7 @@ module other_evocom =
     type Corcomlvl3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -10309,6 +10397,7 @@ module other_evocom =
     let corcomlvl3 : Corcomlvl3 =
         { name = "corcomlvl3"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 3"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 120000.0
@@ -10650,6 +10739,7 @@ module other_evocom =
     let corcomlvl3Def : UnitDef =
         { name = "corcomlvl3"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 3"
           metalCost = ValueOrExpr.Concrete 4000.0
           energyCost = ValueOrExpr.Concrete 40000.0
           buildTime = ValueOrExpr.Concrete 120000.0
@@ -11002,6 +11092,7 @@ module other_evocom =
     let corcomlvl3ToFlat (def: UnitDef) : Corcomlvl3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -11047,6 +11138,7 @@ module other_evocom =
     let corcomlvl3ToUnitDef (flat: Corcomlvl3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -11106,6 +11198,7 @@ module other_evocom =
     type Corcomlvl4 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -11151,6 +11244,7 @@ module other_evocom =
     let corcomlvl4 : Corcomlvl4 =
         { name = "corcomlvl4"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 4"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 50000.0
           buildTime = ValueOrExpr.Concrete 140000.0
@@ -11524,6 +11618,7 @@ module other_evocom =
     let corcomlvl4Def : UnitDef =
         { name = "corcomlvl4"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 4"
           metalCost = ValueOrExpr.Concrete 5000.0
           energyCost = ValueOrExpr.Concrete 50000.0
           buildTime = ValueOrExpr.Concrete 140000.0
@@ -11908,6 +12003,7 @@ module other_evocom =
     let corcomlvl4ToFlat (def: UnitDef) : Corcomlvl4 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -11953,6 +12049,7 @@ module other_evocom =
     let corcomlvl4ToUnitDef (flat: Corcomlvl4) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -12012,6 +12109,7 @@ module other_evocom =
     type Corcomlvl5 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -12057,6 +12155,7 @@ module other_evocom =
     let corcomlvl5 : Corcomlvl5 =
         { name = "corcomlvl5"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 5"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 154800.0
@@ -12434,6 +12533,7 @@ module other_evocom =
     let corcomlvl5Def : UnitDef =
         { name = "corcomlvl5"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 5"
           metalCost = ValueOrExpr.Concrete 6000.0
           energyCost = ValueOrExpr.Concrete 60000.0
           buildTime = ValueOrExpr.Concrete 154800.0
@@ -12822,6 +12922,7 @@ module other_evocom =
     let corcomlvl5ToFlat (def: UnitDef) : Corcomlvl5 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -12867,6 +12968,7 @@ module other_evocom =
     let corcomlvl5ToUnitDef (flat: Corcomlvl5) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -12926,6 +13028,7 @@ module other_evocom =
     type Corcomlvl6 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -12971,6 +13074,7 @@ module other_evocom =
     let corcomlvl6 : Corcomlvl6 =
         { name = "corcomlvl6"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 6"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 70000.0
           buildTime = ValueOrExpr.Concrete 182000.0
@@ -13352,6 +13456,7 @@ module other_evocom =
     let corcomlvl6Def : UnitDef =
         { name = "corcomlvl6"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 6"
           metalCost = ValueOrExpr.Concrete 7000.0
           energyCost = ValueOrExpr.Concrete 70000.0
           buildTime = ValueOrExpr.Concrete 182000.0
@@ -13744,6 +13849,7 @@ module other_evocom =
     let corcomlvl6ToFlat (def: UnitDef) : Corcomlvl6 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -13789,6 +13895,7 @@ module other_evocom =
     let corcomlvl6ToUnitDef (flat: Corcomlvl6) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -13848,6 +13955,7 @@ module other_evocom =
     type Corcomlvl7 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -13893,6 +14001,7 @@ module other_evocom =
     let corcomlvl7 : Corcomlvl7 =
         { name = "corcomlvl7"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 7"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 210000.0
@@ -14275,6 +14384,7 @@ module other_evocom =
     let corcomlvl7Def : UnitDef =
         { name = "corcomlvl7"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 7"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 210000.0
@@ -14668,6 +14778,7 @@ module other_evocom =
     let corcomlvl7ToFlat (def: UnitDef) : Corcomlvl7 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -14713,6 +14824,7 @@ module other_evocom =
     let corcomlvl7ToUnitDef (flat: Corcomlvl7) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -14772,6 +14884,7 @@ module other_evocom =
     type Corcomlvl8 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -14817,6 +14930,7 @@ module other_evocom =
     let corcomlvl8 : Corcomlvl8 =
         { name = "corcomlvl8"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 8"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 230000.0
@@ -15204,6 +15318,7 @@ module other_evocom =
     let corcomlvl8Def : UnitDef =
         { name = "corcomlvl8"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 8"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 90000.0
           buildTime = ValueOrExpr.Concrete 230000.0
@@ -15602,6 +15717,7 @@ module other_evocom =
     let corcomlvl8ToFlat (def: UnitDef) : Corcomlvl8 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -15647,6 +15763,7 @@ module other_evocom =
     let corcomlvl8ToUnitDef (flat: Corcomlvl8) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -15706,6 +15823,7 @@ module other_evocom =
     type Corcomlvl9 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -15751,6 +15869,7 @@ module other_evocom =
     let corcomlvl9 : Corcomlvl9 =
         { name = "corcomlvl9"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 9"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -16137,6 +16256,7 @@ module other_evocom =
     let corcomlvl9Def : UnitDef =
         { name = "corcomlvl9"
           subfolder = "other/evocom"
+          printableName = Some "Cortex Commander Level 9"
           metalCost = ValueOrExpr.Concrete 10000.0
           energyCost = ValueOrExpr.Concrete 100000.0
           buildTime = ValueOrExpr.Concrete 240000.0
@@ -16534,6 +16654,7 @@ module other_evocom =
     let corcomlvl9ToFlat (def: UnitDef) : Corcomlvl9 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -16579,6 +16700,7 @@ module other_evocom =
     let corcomlvl9ToUnitDef (flat: Corcomlvl9) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

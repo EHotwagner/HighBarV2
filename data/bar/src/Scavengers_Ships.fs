@@ -8,6 +8,7 @@ module Scavengers_Ships =
     type Armdecadet3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module Scavengers_Ships =
     let armdecadet3 : Armdecadet3 =
         { name = "armdecadet3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Dolphin"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 160000.0
           buildTime = ValueOrExpr.Concrete 90000.0
@@ -211,6 +213,7 @@ module Scavengers_Ships =
     let armdecadet3Def : UnitDef =
         { name = "armdecadet3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Dolphin"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 160000.0
           buildTime = ValueOrExpr.Concrete 90000.0
@@ -385,6 +388,7 @@ module Scavengers_Ships =
     let armdecadet3ToFlat (def: UnitDef) : Armdecadet3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -423,6 +427,7 @@ module Scavengers_Ships =
     let armdecadet3ToUnitDef (flat: Armdecadet3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -471,6 +476,7 @@ module Scavengers_Ships =
     type Armpshipt3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -509,6 +515,7 @@ module Scavengers_Ships =
     let armpshipt3 : Armpshipt3 =
         { name = "armpshipt3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Ellysaw"
           metalCost = ValueOrExpr.Concrete 6500.0
           energyCost = ValueOrExpr.Concrete 200000.0
           buildTime = ValueOrExpr.Concrete 70000.0
@@ -692,6 +699,7 @@ module Scavengers_Ships =
     let armpshipt3Def : UnitDef =
         { name = "armpshipt3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Ellysaw"
           metalCost = ValueOrExpr.Concrete 6500.0
           energyCost = ValueOrExpr.Concrete 200000.0
           buildTime = ValueOrExpr.Concrete 70000.0
@@ -884,6 +892,7 @@ module Scavengers_Ships =
     let armpshipt3ToFlat (def: UnitDef) : Armpshipt3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -922,6 +931,7 @@ module Scavengers_Ships =
     let armpshipt3ToUnitDef (flat: Armpshipt3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -970,6 +980,7 @@ module Scavengers_Ships =
     type Armptt2 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1008,6 +1019,7 @@ module Scavengers_Ships =
     let armptt2 : Armptt2 =
         { name = "armptt2"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Skater"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 15000.0
           buildTime = ValueOrExpr.Concrete 25000.0
@@ -1239,6 +1251,7 @@ module Scavengers_Ships =
     let armptt2Def : UnitDef =
         { name = "armptt2"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Skater"
           metalCost = ValueOrExpr.Concrete 2500.0
           energyCost = ValueOrExpr.Concrete 15000.0
           buildTime = ValueOrExpr.Concrete 25000.0
@@ -1479,6 +1492,7 @@ module Scavengers_Ships =
     let armptt2ToFlat (def: UnitDef) : Armptt2 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1517,6 +1531,7 @@ module Scavengers_Ships =
     let armptt2ToUnitDef (flat: Armptt2) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1565,6 +1580,7 @@ module Scavengers_Ships =
     type Armserpt3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1602,6 +1618,7 @@ module Scavengers_Ships =
     let armserpt3 : Armserpt3 =
         { name = "armserpt3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Serpent"
           metalCost = ValueOrExpr.Concrete 15000.0
           energyCost = ValueOrExpr.Concrete 225000.0
           buildTime = ValueOrExpr.Concrete 250000.0
@@ -1907,6 +1924,7 @@ module Scavengers_Ships =
     let armserpt3Def : UnitDef =
         { name = "armserpt3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Epic Serpent"
           metalCost = ValueOrExpr.Concrete 15000.0
           energyCost = ValueOrExpr.Concrete 225000.0
           buildTime = ValueOrExpr.Concrete 250000.0
@@ -2222,6 +2240,7 @@ module Scavengers_Ships =
     let armserpt3ToFlat (def: UnitDef) : Armserpt3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2259,6 +2278,7 @@ module Scavengers_Ships =
     let armserpt3ToUnitDef (flat: Armserpt3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2307,6 +2327,7 @@ module Scavengers_Ships =
     type Coresuppt3 =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2345,6 +2366,7 @@ module Scavengers_Ships =
     let coresuppt3 : Coresuppt3 =
         { name = "coresuppt3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Adjudicator"
           metalCost = ValueOrExpr.Concrete 30000.0
           energyCost = ValueOrExpr.Concrete 600000.0
           buildTime = ValueOrExpr.Concrete 400000.0
@@ -2522,6 +2544,7 @@ module Scavengers_Ships =
     let coresuppt3Def : UnitDef =
         { name = "coresuppt3"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Adjudicator"
           metalCost = ValueOrExpr.Concrete 30000.0
           energyCost = ValueOrExpr.Concrete 600000.0
           buildTime = ValueOrExpr.Concrete 400000.0
@@ -2708,6 +2731,7 @@ module Scavengers_Ships =
     let coresuppt3ToFlat (def: UnitDef) : Coresuppt3 =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2746,6 +2770,7 @@ module Scavengers_Ships =
     let coresuppt3ToUnitDef (flat: Coresuppt3) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2794,6 +2819,7 @@ module Scavengers_Ships =
     type Corslrpc =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2832,6 +2858,7 @@ module Scavengers_Ships =
     let corslrpc : Corslrpc =
         { name = "corslrpc"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Leviathan"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 100000.0
@@ -2963,6 +2990,7 @@ module Scavengers_Ships =
     let corslrpcDef : UnitDef =
         { name = "corslrpc"
           subfolder = "Scavengers/Ships"
+          printableName = Some "Leviathan"
           metalCost = ValueOrExpr.Concrete 8000.0
           energyCost = ValueOrExpr.Concrete 80000.0
           buildTime = ValueOrExpr.Concrete 100000.0
@@ -3103,6 +3131,7 @@ module Scavengers_Ships =
     let corslrpcToFlat (def: UnitDef) : Corslrpc =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3141,6 +3170,7 @@ module Scavengers_Ships =
     let corslrpcToUnitDef (flat: Corslrpc) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

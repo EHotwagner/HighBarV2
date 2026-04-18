@@ -8,6 +8,7 @@ module ArmHovercraft =
     type Armah =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -46,6 +47,7 @@ module ArmHovercraft =
     let armah : Armah =
         { name = "armah"
           subfolder = "ArmHovercraft"
+          printableName = Some "Sweeper"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 4500.0
           buildTime = ValueOrExpr.Concrete 3560.0
@@ -225,6 +227,7 @@ module ArmHovercraft =
     let armahDef : UnitDef =
         { name = "armah"
           subfolder = "ArmHovercraft"
+          printableName = Some "Sweeper"
           metalCost = ValueOrExpr.Concrete 230.0
           energyCost = ValueOrExpr.Concrete 4500.0
           buildTime = ValueOrExpr.Concrete 3560.0
@@ -413,6 +416,7 @@ module ArmHovercraft =
     let armahToFlat (def: UnitDef) : Armah =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -451,6 +455,7 @@ module ArmHovercraft =
     let armahToUnitDef (flat: Armah) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -499,6 +504,7 @@ module ArmHovercraft =
     type Armanac =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -537,6 +543,7 @@ module ArmHovercraft =
     let armanac : Armanac =
         { name = "armanac"
           subfolder = "ArmHovercraft"
+          printableName = Some "Crocodile"
           metalCost = ValueOrExpr.Concrete 270.0
           energyCost = ValueOrExpr.Concrete 2400.0
           buildTime = ValueOrExpr.Concrete 3000.0
@@ -657,6 +664,7 @@ module ArmHovercraft =
     let armanacDef : UnitDef =
         { name = "armanac"
           subfolder = "ArmHovercraft"
+          printableName = Some "Crocodile"
           metalCost = ValueOrExpr.Concrete 270.0
           energyCost = ValueOrExpr.Concrete 2400.0
           buildTime = ValueOrExpr.Concrete 3000.0
@@ -786,6 +794,7 @@ module ArmHovercraft =
     let armanacToFlat (def: UnitDef) : Armanac =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -824,6 +833,7 @@ module ArmHovercraft =
     let armanacToUnitDef (flat: Armanac) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -872,6 +882,7 @@ module ArmHovercraft =
     type Armch =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -915,6 +926,7 @@ module ArmHovercraft =
     let armch : Armch =
         { name = "armch"
           subfolder = "ArmHovercraft"
+          printableName = Some "Construction Hovercraft"
           metalCost = ValueOrExpr.Concrete 200.0
           energyCost = ValueOrExpr.Concrete 2700.0
           buildTime = ValueOrExpr.Concrete 4470.0
@@ -1006,6 +1018,7 @@ module ArmHovercraft =
     let armchDef : UnitDef =
         { name = "armch"
           subfolder = "ArmHovercraft"
+          printableName = Some "Construction Hovercraft"
           metalCost = ValueOrExpr.Concrete 200.0
           energyCost = ValueOrExpr.Concrete 2700.0
           buildTime = ValueOrExpr.Concrete 4470.0
@@ -1110,6 +1123,7 @@ module ArmHovercraft =
     let armchToFlat (def: UnitDef) : Armch =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1153,6 +1167,7 @@ module ArmHovercraft =
     let armchToUnitDef (flat: Armch) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1212,6 +1227,7 @@ module ArmHovercraft =
     type Armmh =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1250,6 +1266,7 @@ module ArmHovercraft =
     let armmh : Armmh =
         { name = "armmh"
           subfolder = "ArmHovercraft"
+          printableName = Some "Possum"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3000.0
           buildTime = ValueOrExpr.Concrete 3300.0
@@ -1316,7 +1333,7 @@ module ArmHovercraft =
                       "firestarter", "100.0"
                       "flighttime", "10.0"
                       "metalpershot", "0.0"
-                      "model", "corkbmissl1.s3o"
+                      "model", "corkbmissl-1.s3o"
                       "smokecolor", "0.7"
                       "smokeperiod", "9.0"
                       "smokesize", "10.0"
@@ -1389,6 +1406,7 @@ module ArmHovercraft =
     let armmhDef : UnitDef =
         { name = "armmh"
           subfolder = "ArmHovercraft"
+          printableName = Some "Possum"
           metalCost = ValueOrExpr.Concrete 175.0
           energyCost = ValueOrExpr.Concrete 3000.0
           buildTime = ValueOrExpr.Concrete 3300.0
@@ -1462,7 +1480,7 @@ module ArmHovercraft =
                     "firestarter", "100.0"
                     "flighttime", "10.0"
                     "metalpershot", "0.0"
-                    "model", "corkbmissl1.s3o"
+                    "model", "corkbmissl-1.s3o"
                     "smokecolor", "0.7"
                     "smokeperiod", "9.0"
                     "smokesize", "10.0"
@@ -1537,6 +1555,7 @@ module ArmHovercraft =
     let armmhToFlat (def: UnitDef) : Armmh =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1575,6 +1594,7 @@ module ArmHovercraft =
     let armmhToUnitDef (flat: Armmh) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1623,6 +1643,7 @@ module ArmHovercraft =
     type Armsh =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1661,6 +1682,7 @@ module ArmHovercraft =
     let armsh : Armsh =
         { name = "armsh"
           subfolder = "ArmHovercraft"
+          printableName = Some "Seeker"
           metalCost = ValueOrExpr.Concrete 85.0
           energyCost = ValueOrExpr.Concrete 1250.0
           buildTime = ValueOrExpr.Concrete 1700.0
@@ -1790,6 +1812,7 @@ module ArmHovercraft =
     let armshDef : UnitDef =
         { name = "armsh"
           subfolder = "ArmHovercraft"
+          printableName = Some "Seeker"
           metalCost = ValueOrExpr.Concrete 85.0
           energyCost = ValueOrExpr.Concrete 1250.0
           buildTime = ValueOrExpr.Concrete 1700.0
@@ -1928,6 +1951,7 @@ module ArmHovercraft =
     let armshToFlat (def: UnitDef) : Armsh =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1966,6 +1990,7 @@ module ArmHovercraft =
     let armshToUnitDef (flat: Armsh) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

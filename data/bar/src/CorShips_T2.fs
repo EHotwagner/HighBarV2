@@ -8,6 +8,7 @@ module CorShips_T2 =
     type Coracsub =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -50,6 +51,7 @@ module CorShips_T2 =
     let coracsub : Coracsub =
         { name = "coracsub"
           subfolder = "CorShips/T2"
+          printableName = Some "Advanced Construction Sub"
           metalCost = ValueOrExpr.Concrete 700.0
           energyCost = ValueOrExpr.Concrete 9000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -141,6 +143,7 @@ module CorShips_T2 =
     let coracsubDef : UnitDef =
         { name = "coracsub"
           subfolder = "CorShips/T2"
+          printableName = Some "Advanced Construction Sub"
           metalCost = ValueOrExpr.Concrete 700.0
           energyCost = ValueOrExpr.Concrete 9000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -246,6 +249,7 @@ module CorShips_T2 =
     let coracsubToFlat (def: UnitDef) : Coracsub =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -288,6 +292,7 @@ module CorShips_T2 =
     let coracsubToUnitDef (flat: Coracsub) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -347,6 +352,7 @@ module CorShips_T2 =
     type Corantiship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -387,6 +393,7 @@ module CorShips_T2 =
     let corantiship : Corantiship =
         { name = "corantiship"
           subfolder = "CorShips/T2"
+          printableName = Some "Oasis"
           metalCost = ValueOrExpr.Concrete 1400.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 27000.0
@@ -548,6 +555,7 @@ module CorShips_T2 =
     let corantishipDef : UnitDef =
         { name = "corantiship"
           subfolder = "CorShips/T2"
+          printableName = Some "Oasis"
           metalCost = ValueOrExpr.Concrete 1400.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 27000.0
@@ -721,6 +729,7 @@ module CorShips_T2 =
     let corantishipToFlat (def: UnitDef) : Corantiship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -761,6 +770,7 @@ module CorShips_T2 =
     let corantishipToUnitDef (flat: Corantiship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -815,6 +825,7 @@ module CorShips_T2 =
     type Corarch =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -853,6 +864,7 @@ module CorShips_T2 =
     let corarch : Corarch =
         { name = "corarch"
           subfolder = "CorShips/T2"
+          printableName = Some "Arrow Storm"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 21000.0
@@ -1076,6 +1088,7 @@ module CorShips_T2 =
     let corarchDef : UnitDef =
         { name = "corarch"
           subfolder = "CorShips/T2"
+          printableName = Some "Arrow Storm"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 21000.0
@@ -1308,6 +1321,7 @@ module CorShips_T2 =
     let corarchToFlat (def: UnitDef) : Corarch =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1346,6 +1360,7 @@ module CorShips_T2 =
     let corarchToUnitDef (flat: Corarch) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1394,6 +1409,7 @@ module CorShips_T2 =
     type Corbats =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1432,6 +1448,7 @@ module CorShips_T2 =
     let corbats : Corbats =
         { name = "corbats"
           subfolder = "CorShips/T2"
+          printableName = Some "Despot"
           metalCost = ValueOrExpr.Concrete 3400.0
           energyCost = ValueOrExpr.Concrete 23000.0
           buildTime = ValueOrExpr.Concrete 51000.0
@@ -1661,6 +1678,7 @@ module CorShips_T2 =
     let corbatsDef : UnitDef =
         { name = "corbats"
           subfolder = "CorShips/T2"
+          printableName = Some "Despot"
           metalCost = ValueOrExpr.Concrete 3400.0
           energyCost = ValueOrExpr.Concrete 23000.0
           buildTime = ValueOrExpr.Concrete 51000.0
@@ -1899,6 +1917,7 @@ module CorShips_T2 =
     let corbatsToFlat (def: UnitDef) : Corbats =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1937,6 +1956,7 @@ module CorShips_T2 =
     let corbatsToUnitDef (flat: Corbats) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1985,6 +2005,7 @@ module CorShips_T2 =
     type Corblackhy =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2023,6 +2044,7 @@ module CorShips_T2 =
     let corblackhy : Corblackhy =
         { name = "corblackhy"
           subfolder = "CorShips/T2"
+          printableName = Some "Black Hydra"
           metalCost = ValueOrExpr.Concrete 21000.0
           energyCost = ValueOrExpr.Concrete 190000.0
           buildTime = ValueOrExpr.Concrete 310000.0
@@ -2151,7 +2173,9 @@ module CorShips_T2 =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_maindir", "-1.5 0 2"
@@ -2291,7 +2315,9 @@ module CorShips_T2 =
                   soundHit = Some "packohit"
                   explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_maindir", "1.5 0 2"
@@ -2393,6 +2419,7 @@ module CorShips_T2 =
     let corblackhyDef : UnitDef =
         { name = "corblackhy"
           subfolder = "CorShips/T2"
+          printableName = Some "Black Hydra"
           metalCost = ValueOrExpr.Concrete 21000.0
           energyCost = ValueOrExpr.Concrete 190000.0
           buildTime = ValueOrExpr.Concrete 310000.0
@@ -2528,7 +2555,9 @@ module CorShips_T2 =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_maindir", "-1.5 0 2"
@@ -2668,7 +2697,9 @@ module CorShips_T2 =
                 soundHit = Some "packohit"
                 explosiongenerator = Some "custom:genericshellexplosion-tiny-aa"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_maindir", "1.5 0 2"
@@ -2772,6 +2803,7 @@ module CorShips_T2 =
     let corblackhyToFlat (def: UnitDef) : Corblackhy =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2810,6 +2842,7 @@ module CorShips_T2 =
     let corblackhyToUnitDef (flat: Corblackhy) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2858,6 +2891,7 @@ module CorShips_T2 =
     type Corcarry =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2898,6 +2932,7 @@ module CorShips_T2 =
     let corcarry : Corcarry =
         { name = "corcarry"
           subfolder = "CorShips/T2"
+          printableName = Some "Oasis"
           metalCost = ValueOrExpr.Concrete 1400.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 28000.0
@@ -3059,6 +3094,7 @@ module CorShips_T2 =
     let corcarryDef : UnitDef =
         { name = "corcarry"
           subfolder = "CorShips/T2"
+          printableName = Some "Oasis"
           metalCost = ValueOrExpr.Concrete 1400.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 28000.0
@@ -3232,6 +3268,7 @@ module CorShips_T2 =
     let corcarryToFlat (def: UnitDef) : Corcarry =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3272,6 +3309,7 @@ module CorShips_T2 =
     let corcarryToUnitDef (flat: Corcarry) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3326,6 +3364,7 @@ module CorShips_T2 =
     type Corcrus =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3364,6 +3403,7 @@ module CorShips_T2 =
     let corcrus : Corcrus =
         { name = "corcrus"
           subfolder = "CorShips/T2"
+          printableName = Some "Buccaneer"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -3490,7 +3530,9 @@ module CorShips_T2 =
                   soundHit = Some "xplodep2"
                   explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "CANBEUW UNDERWATER"
                       "avoidfeature", "false"
@@ -3568,6 +3610,7 @@ module CorShips_T2 =
     let corcrusDef : UnitDef =
         { name = "corcrus"
           subfolder = "CorShips/T2"
+          printableName = Some "Buccaneer"
           metalCost = ValueOrExpr.Concrete 1000.0
           energyCost = ValueOrExpr.Concrete 12000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -3701,7 +3744,9 @@ module CorShips_T2 =
                 soundHit = Some "xplodep2"
                 explosiongenerator = Some "custom:genericshellexplosion-medium-uw"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "CANBEUW UNDERWATER"
                     "avoidfeature", "false"
@@ -3781,6 +3826,7 @@ module CorShips_T2 =
     let corcrusToFlat (def: UnitDef) : Corcrus =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3819,6 +3865,7 @@ module CorShips_T2 =
     let corcrusToUnitDef (flat: Corcrus) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3867,6 +3914,7 @@ module CorShips_T2 =
     type Cordesolator =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3906,6 +3954,7 @@ module CorShips_T2 =
     let cordesolator : Cordesolator =
         { name = "cordesolator"
           subfolder = "CorShips/T2"
+          printableName = Some "Desolator"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 95000.0
           buildTime = ValueOrExpr.Concrete 190000.0
@@ -4144,6 +4193,7 @@ module CorShips_T2 =
     let cordesolatorDef : UnitDef =
         { name = "cordesolator"
           subfolder = "CorShips/T2"
+          printableName = Some "Desolator"
           metalCost = ValueOrExpr.Concrete 9000.0
           energyCost = ValueOrExpr.Concrete 95000.0
           buildTime = ValueOrExpr.Concrete 190000.0
@@ -4390,6 +4440,7 @@ module CorShips_T2 =
     let cordesolatorToFlat (def: UnitDef) : Cordesolator =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4429,6 +4480,7 @@ module CorShips_T2 =
     let cordesolatorToUnitDef (flat: Cordesolator) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -4477,6 +4529,7 @@ module CorShips_T2 =
     type Cordronecarry =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -4517,6 +4570,7 @@ module CorShips_T2 =
     let cordronecarry : Cordronecarry =
         { name = "cordronecarry"
           subfolder = "CorShips/T2"
+          printableName = Some "Disperser"
           metalCost = ValueOrExpr.Concrete 1700.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -4611,7 +4665,9 @@ module CorShips_T2 =
                   soundHit = Some "xplomed2"
                   explosiongenerator = Some "custom:genericshellexplosion-medium-air"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -4713,6 +4769,7 @@ module CorShips_T2 =
     let cordronecarryDef : UnitDef =
         { name = "cordronecarry"
           subfolder = "CorShips/T2"
+          printableName = Some "Disperser"
           metalCost = ValueOrExpr.Concrete 1700.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -4812,7 +4869,9 @@ module CorShips_T2 =
                 soundHit = Some "xplomed2"
                 explosiongenerator = Some "custom:genericshellexplosion-medium-air"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -4921,6 +4980,7 @@ module CorShips_T2 =
     let cordronecarryToFlat (def: UnitDef) : Cordronecarry =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4961,6 +5021,7 @@ module CorShips_T2 =
     let cordronecarryToUnitDef (flat: Cordronecarry) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5015,6 +5076,7 @@ module CorShips_T2 =
     type Corfship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5053,6 +5115,7 @@ module CorShips_T2 =
     let corfship : Corfship =
         { name = "corfship"
           subfolder = "CorShips/T2"
+          printableName = Some "Brimstone"
           metalCost = ValueOrExpr.Concrete 630.0
           energyCost = ValueOrExpr.Concrete 9400.0
           buildTime = ValueOrExpr.Concrete 13000.0
@@ -5151,7 +5214,9 @@ module CorShips_T2 =
                   soundHit = Some "xplomed2"
                   explosiongenerator = Some "custom:genericshellexplosion-medium-air"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -5243,6 +5308,7 @@ module CorShips_T2 =
     let corfshipDef : UnitDef =
         { name = "corfship"
           subfolder = "CorShips/T2"
+          printableName = Some "Brimstone"
           metalCost = ValueOrExpr.Concrete 630.0
           energyCost = ValueOrExpr.Concrete 9400.0
           buildTime = ValueOrExpr.Concrete 13000.0
@@ -5348,7 +5414,9 @@ module CorShips_T2 =
                 soundHit = Some "xplomed2"
                 explosiongenerator = Some "custom:genericshellexplosion-medium-air"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -5442,6 +5510,7 @@ module CorShips_T2 =
     let corfshipToFlat (def: UnitDef) : Corfship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5480,6 +5549,7 @@ module CorShips_T2 =
     let corfshipToUnitDef (flat: Corfship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5528,6 +5598,7 @@ module CorShips_T2 =
     type Corhacs =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5569,6 +5640,7 @@ module CorShips_T2 =
     let corhacs : Corhacs =
         { name = "corhacs"
           subfolder = "CorShips/T2"
+          printableName = Some "Pathfinder"
           metalCost = ValueOrExpr.Concrete 1180.0
           energyCost = ValueOrExpr.Concrete 23600.0
           buildTime = ValueOrExpr.Concrete 60000.0
@@ -5661,6 +5733,7 @@ module CorShips_T2 =
     let corhacsDef : UnitDef =
         { name = "corhacs"
           subfolder = "CorShips/T2"
+          printableName = Some "Pathfinder"
           metalCost = ValueOrExpr.Concrete 1180.0
           energyCost = ValueOrExpr.Concrete 23600.0
           buildTime = ValueOrExpr.Concrete 60000.0
@@ -5763,6 +5836,7 @@ module CorShips_T2 =
     let corhacsToFlat (def: UnitDef) : Corhacs =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -5804,6 +5878,7 @@ module CorShips_T2 =
     let corhacsToUnitDef (flat: Corhacs) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -5857,6 +5932,7 @@ module CorShips_T2 =
     type Cormls =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -5898,6 +5974,7 @@ module CorShips_T2 =
     let cormls : Cormls =
         { name = "cormls"
           subfolder = "CorShips/T2"
+          printableName = Some "Pathfinder"
           metalCost = ValueOrExpr.Concrete 200.0
           energyCost = ValueOrExpr.Concrete 3300.0
           buildTime = ValueOrExpr.Concrete 6500.0
@@ -5989,6 +6066,7 @@ module CorShips_T2 =
     let cormlsDef : UnitDef =
         { name = "cormls"
           subfolder = "CorShips/T2"
+          printableName = Some "Pathfinder"
           metalCost = ValueOrExpr.Concrete 200.0
           energyCost = ValueOrExpr.Concrete 3300.0
           buildTime = ValueOrExpr.Concrete 6500.0
@@ -6090,6 +6168,7 @@ module CorShips_T2 =
     let cormlsToFlat (def: UnitDef) : Cormls =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6131,6 +6210,7 @@ module CorShips_T2 =
     let cormlsToUnitDef (flat: Cormls) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6184,6 +6264,7 @@ module CorShips_T2 =
     type Cormship =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6222,6 +6303,7 @@ module CorShips_T2 =
     let cormship : Cormship =
         { name = "cormship"
           subfolder = "CorShips/T2"
+          printableName = Some "Messenger"
           metalCost = ValueOrExpr.Concrete 2000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -6330,7 +6412,9 @@ module CorShips_T2 =
                   soundHit = Some "xplomed2"
                   explosiongenerator = Some "custom:genericshellexplosion-medium-air"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfeature", "false"
@@ -6421,6 +6505,7 @@ module CorShips_T2 =
     let cormshipDef : UnitDef =
         { name = "cormship"
           subfolder = "CorShips/T2"
+          printableName = Some "Messenger"
           metalCost = ValueOrExpr.Concrete 2000.0
           energyCost = ValueOrExpr.Concrete 10000.0
           buildTime = ValueOrExpr.Concrete 24000.0
@@ -6536,7 +6621,9 @@ module CorShips_T2 =
                 soundHit = Some "xplomed2"
                 explosiongenerator = Some "custom:genericshellexplosion-medium-air"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfeature", "false"
@@ -6629,6 +6716,7 @@ module CorShips_T2 =
     let cormshipToFlat (def: UnitDef) : Cormship =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -6667,6 +6755,7 @@ module CorShips_T2 =
     let cormshipToUnitDef (flat: Cormship) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -6715,6 +6804,7 @@ module CorShips_T2 =
     type Coronager =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -6752,6 +6842,7 @@ module CorShips_T2 =
     let coronager : Coronager =
         { name = "coronager"
           subfolder = "CorShips/T2"
+          printableName = Some "Onager"
           metalCost = ValueOrExpr.Concrete 950.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 26000.0
@@ -6897,6 +6988,7 @@ module CorShips_T2 =
     let coronagerDef : UnitDef =
         { name = "coronager"
           subfolder = "CorShips/T2"
+          printableName = Some "Onager"
           metalCost = ValueOrExpr.Concrete 950.0
           energyCost = ValueOrExpr.Concrete 17000.0
           buildTime = ValueOrExpr.Concrete 26000.0
@@ -7052,6 +7144,7 @@ module CorShips_T2 =
     let coronagerToFlat (def: UnitDef) : Coronager =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7089,6 +7182,7 @@ module CorShips_T2 =
     let coronagerToUnitDef (flat: Coronager) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7137,6 +7231,7 @@ module CorShips_T2 =
     type Corprince =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -7175,6 +7270,7 @@ module CorShips_T2 =
     let corprince : Corprince =
         { name = "corprince"
           subfolder = "CorShips/T2"
+          printableName = Some "Black Prince"
           metalCost = ValueOrExpr.Concrete 13500.0
           energyCost = ValueOrExpr.Concrete 115000.0
           buildTime = ValueOrExpr.Concrete 200000.0
@@ -7400,7 +7496,9 @@ module CorShips_T2 =
                   soundHit = Some "flakhit"
                   explosiongenerator = Some "custom:flak"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL T4AIR"
@@ -7439,7 +7537,9 @@ module CorShips_T2 =
                   soundHit = Some "flakhit"
                   explosiongenerator = Some "custom:flak"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                       "mount_onlytargetcategory", "VTOL T4AIR"
@@ -7522,6 +7622,7 @@ module CorShips_T2 =
     let corprinceDef : UnitDef =
         { name = "corprince"
           subfolder = "CorShips/T2"
+          printableName = Some "Black Prince"
           metalCost = ValueOrExpr.Concrete 13500.0
           energyCost = ValueOrExpr.Concrete 115000.0
           buildTime = ValueOrExpr.Concrete 200000.0
@@ -7754,7 +7855,9 @@ module CorShips_T2 =
                 soundHit = Some "flakhit"
                 explosiongenerator = Some "custom:flak"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL T4AIR"
@@ -7793,7 +7896,9 @@ module CorShips_T2 =
                 soundHit = Some "flakhit"
                 explosiongenerator = Some "custom:flak"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_badtargetcategory", "NOTAIR GROUNDSCOUT"
                     "mount_onlytargetcategory", "VTOL T4AIR"
@@ -7878,6 +7983,7 @@ module CorShips_T2 =
     let corprinceToFlat (def: UnitDef) : Corprince =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -7916,6 +8022,7 @@ module CorShips_T2 =
     let corprinceToUnitDef (flat: Corprince) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -7964,6 +8071,7 @@ module CorShips_T2 =
     type Corsacvsub =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -8006,6 +8114,7 @@ module CorShips_T2 =
     let corsacvsub : Corsacvsub =
         { name = "corsacvsub"
           subfolder = "CorShips/T2"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 500.0
           energyCost = ValueOrExpr.Concrete 9000.0
           buildTime = ValueOrExpr.Concrete 22000.0
@@ -8097,6 +8206,7 @@ module CorShips_T2 =
     let corsacvsubDef : UnitDef =
         { name = "corsacvsub"
           subfolder = "CorShips/T2"
+          printableName = None
           metalCost = ValueOrExpr.Concrete 500.0
           energyCost = ValueOrExpr.Concrete 9000.0
           buildTime = ValueOrExpr.Concrete 22000.0
@@ -8202,6 +8312,7 @@ module CorShips_T2 =
     let corsacvsubToFlat (def: UnitDef) : Corsacvsub =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -8244,6 +8355,7 @@ module CorShips_T2 =
     let corsacvsubToUnitDef (flat: Corsacvsub) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -8303,6 +8415,7 @@ module CorShips_T2 =
     type Corsentinel =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -8341,6 +8454,7 @@ module CorShips_T2 =
     let corsentinel : Corsentinel =
         { name = "corsentinel"
           subfolder = "CorShips/T2"
+          printableName = Some "Sentinel"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -8531,6 +8645,7 @@ module CorShips_T2 =
     let corsentinelDef : UnitDef =
         { name = "corsentinel"
           subfolder = "CorShips/T2"
+          printableName = Some "Sentinel"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 20000.0
@@ -8730,6 +8845,7 @@ module CorShips_T2 =
     let corsentinelToFlat (def: UnitDef) : Corsentinel =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -8768,6 +8884,7 @@ module CorShips_T2 =
     let corsentinelToUnitDef (flat: Corsentinel) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -8816,6 +8933,7 @@ module CorShips_T2 =
     type Corshark =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -8853,6 +8971,7 @@ module CorShips_T2 =
     let corshark : Corshark =
         { name = "corshark"
           subfolder = "CorShips/T2"
+          printableName = Some "Predator"
           metalCost = ValueOrExpr.Concrete 730.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -8985,6 +9104,7 @@ module CorShips_T2 =
     let corsharkDef : UnitDef =
         { name = "corshark"
           subfolder = "CorShips/T2"
+          printableName = Some "Predator"
           metalCost = ValueOrExpr.Concrete 730.0
           energyCost = ValueOrExpr.Concrete 14000.0
           buildTime = ValueOrExpr.Concrete 23000.0
@@ -9127,6 +9247,7 @@ module CorShips_T2 =
     let corsharkToFlat (def: UnitDef) : Corshark =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -9164,6 +9285,7 @@ module CorShips_T2 =
     let corsharkToUnitDef (flat: Corshark) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -9212,6 +9334,7 @@ module CorShips_T2 =
     type Corsjam =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -9249,6 +9372,7 @@ module CorShips_T2 =
     let corsjam : Corsjam =
         { name = "corsjam"
           subfolder = "CorShips/T2"
+          printableName = Some "Phantasm"
           metalCost = ValueOrExpr.Concrete 280.0
           energyCost = ValueOrExpr.Concrete 4200.0
           buildTime = ValueOrExpr.Concrete 17000.0
@@ -9339,6 +9463,7 @@ module CorShips_T2 =
     let corsjamDef : UnitDef =
         { name = "corsjam"
           subfolder = "CorShips/T2"
+          printableName = Some "Phantasm"
           metalCost = ValueOrExpr.Concrete 280.0
           energyCost = ValueOrExpr.Concrete 4200.0
           buildTime = ValueOrExpr.Concrete 17000.0
@@ -9439,6 +9564,7 @@ module CorShips_T2 =
     let corsjamToFlat (def: UnitDef) : Corsjam =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -9476,6 +9602,7 @@ module CorShips_T2 =
     let corsjamToUnitDef (flat: Corsjam) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -9524,6 +9651,7 @@ module CorShips_T2 =
     type Corssub =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -9561,6 +9689,7 @@ module CorShips_T2 =
     let corssub : Corssub =
         { name = "corssub"
           subfolder = "CorShips/T2"
+          printableName = Some "Kraken"
           metalCost = ValueOrExpr.Concrete 1900.0
           energyCost = ValueOrExpr.Concrete 29000.0
           buildTime = ValueOrExpr.Concrete 35000.0
@@ -9697,6 +9826,7 @@ module CorShips_T2 =
     let corssubDef : UnitDef =
         { name = "corssub"
           subfolder = "CorShips/T2"
+          printableName = Some "Kraken"
           metalCost = ValueOrExpr.Concrete 1900.0
           energyCost = ValueOrExpr.Concrete 29000.0
           buildTime = ValueOrExpr.Concrete 35000.0
@@ -9843,6 +9973,7 @@ module CorShips_T2 =
     let corssubToFlat (def: UnitDef) : Corssub =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -9880,6 +10011,7 @@ module CorShips_T2 =
     let corssubToUnitDef (flat: Corssub) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -9928,6 +10060,7 @@ module CorShips_T2 =
     type Cortdrone =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -9963,6 +10096,7 @@ module CorShips_T2 =
     let cortdrone : Cortdrone =
         { name = "cortdrone"
           subfolder = "CorShips/T2"
+          printableName = Some "Depth Charge Drone"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -10076,6 +10210,7 @@ module CorShips_T2 =
     let cortdroneDef : UnitDef =
         { name = "cortdrone"
           subfolder = "CorShips/T2"
+          printableName = Some "Depth Charge Drone"
           metalCost = ValueOrExpr.Concrete 0.0
           energyCost = ValueOrExpr.Concrete 0.0
           buildTime = ValueOrExpr.Concrete 1000.0
@@ -10201,6 +10336,7 @@ module CorShips_T2 =
     let cortdroneToFlat (def: UnitDef) : Cortdrone =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -10236,6 +10372,7 @@ module CorShips_T2 =
     let cortdroneToUnitDef (flat: Cortdrone) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

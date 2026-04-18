@@ -8,6 +8,7 @@ module other_raptors_Miniqueen =
     type Raptor_matriarch_acid =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -44,6 +45,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_acid : Raptor_matriarch_acid =
         { name = "raptor_matriarch_acid"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Acid Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -338,6 +340,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_acidDef : UnitDef =
         { name = "raptor_matriarch_acid"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Acid Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -643,6 +646,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_acidToFlat (def: UnitDef) : Raptor_matriarch_acid =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -679,6 +683,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_acidToUnitDef (flat: Raptor_matriarch_acid) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -727,6 +732,7 @@ module other_raptors_Miniqueen =
     type Raptor_matriarch_basic =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -763,6 +769,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_basic : Raptor_matriarch_basic =
         { name = "raptor_matriarch_basic"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -849,7 +856,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -902,7 +911,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -955,7 +966,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -1066,6 +1079,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_basicDef : UnitDef =
         { name = "raptor_matriarch_basic"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -1159,7 +1173,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -1212,7 +1228,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -1265,7 +1283,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -1380,6 +1400,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_basicToFlat (def: UnitDef) : Raptor_matriarch_basic =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1416,6 +1437,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_basicToUnitDef (flat: Raptor_matriarch_basic) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -1464,6 +1486,7 @@ module other_raptors_Miniqueen =
     type Raptor_matriarch_electric =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -1500,6 +1523,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_electric : Raptor_matriarch_electric =
         { name = "raptor_matriarch_electric"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Paralyzer Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -1805,6 +1829,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_electricDef : UnitDef =
         { name = "raptor_matriarch_electric"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Paralyzer Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -2121,6 +2146,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_electricToFlat (def: UnitDef) : Raptor_matriarch_electric =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2157,6 +2183,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_electricToUnitDef (flat: Raptor_matriarch_electric) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2205,6 +2232,7 @@ module other_raptors_Miniqueen =
     type Raptor_matriarch_fire =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2241,6 +2269,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_fire : Raptor_matriarch_fire =
         { name = "raptor_matriarch_fire"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Pyro Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -2545,6 +2574,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_fireDef : UnitDef =
         { name = "raptor_matriarch_fire"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Pyro Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -2860,6 +2890,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_fireToFlat (def: UnitDef) : Raptor_matriarch_fire =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -2896,6 +2927,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_fireToUnitDef (flat: Raptor_matriarch_fire) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -2944,6 +2976,7 @@ module other_raptors_Miniqueen =
     type Raptor_matriarch_healer =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -2983,6 +3016,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_healer : Raptor_matriarch_healer =
         { name = "raptor_matriarch_healer"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Healer Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -3072,7 +3106,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -3125,7 +3161,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -3178,7 +3216,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -3283,6 +3323,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_healerDef : UnitDef =
         { name = "raptor_matriarch_healer"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Healer Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -3380,7 +3421,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -3433,7 +3476,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -3486,7 +3531,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -3595,6 +3642,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_healerToFlat (def: UnitDef) : Raptor_matriarch_healer =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -3634,6 +3682,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_healerToUnitDef (flat: Raptor_matriarch_healer) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -3687,6 +3736,7 @@ module other_raptors_Miniqueen =
     type Raptor_matriarch_spectre =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -3723,6 +3773,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_spectre : Raptor_matriarch_spectre =
         { name = "raptor_matriarch_spectre"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Spectre Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -3809,7 +3860,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -3862,7 +3915,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -3915,7 +3970,9 @@ module other_raptors_Miniqueen =
                   soundHit = Some "spore_explo"
                   explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                   rgbColor = None
-                  customParams = Map.empty
+                  customParams = Map.ofList [
+                      "weapons_role", "secondary"
+                  ]
                   extras = Map.ofList [
                       "mount_onlytargetcategory", "VTOL"
                       "avoidfriendly", "false"
@@ -4032,6 +4089,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_spectreDef : UnitDef =
         { name = "raptor_matriarch_spectre"
           subfolder = "other/raptors/Miniqueen"
+          printableName = Some "Spectre Matriarch"
           metalCost = ValueOrExpr.Concrete 50000.0
           energyCost = ValueOrExpr.Concrete 2000000.0
           buildTime = ValueOrExpr.Concrete 1500000.0
@@ -4125,7 +4183,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -4178,7 +4238,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -4231,7 +4293,9 @@ module other_raptors_Miniqueen =
                 soundHit = Some "spore_explo"
                 explosiongenerator = Some "custom:genericshellexplosion-huge-bomb"
                 rgbColor = None
-                customParams = Map.empty
+                customParams = Map.ofList [
+                    "weapons_role", "secondary"
+                ]
                 extras = Map.ofList [
                     "mount_onlytargetcategory", "VTOL"
                     "avoidfriendly", "false"
@@ -4352,6 +4416,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_spectreToFlat (def: UnitDef) : Raptor_matriarch_spectre =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -4388,6 +4453,7 @@ module other_raptors_Miniqueen =
     let raptor_matriarch_spectreToUnitDef (flat: Raptor_matriarch_spectre) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

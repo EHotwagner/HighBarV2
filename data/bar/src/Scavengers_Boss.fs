@@ -8,6 +8,7 @@ module Scavengers_Boss =
     type Armcomboss =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -51,6 +52,7 @@ module Scavengers_Boss =
     let armcomboss : Armcomboss =
         { name = "armcomboss"
           subfolder = "Scavengers/Boss"
+          printableName = Some "Epic Commander - Final Boss"
           metalCost = ValueOrExpr.Concrete 10000000.0
           energyCost = ValueOrExpr.Concrete 10000000.0
           buildTime = ValueOrExpr.Concrete 750000000000.0
@@ -284,6 +286,7 @@ module Scavengers_Boss =
     let armcombossDef : UnitDef =
         { name = "armcomboss"
           subfolder = "Scavengers/Boss"
+          printableName = Some "Epic Commander - Final Boss"
           metalCost = ValueOrExpr.Concrete 10000000.0
           energyCost = ValueOrExpr.Concrete 10000000.0
           buildTime = ValueOrExpr.Concrete 750000000000.0
@@ -530,6 +533,7 @@ module Scavengers_Boss =
     let armcombossToFlat (def: UnitDef) : Armcomboss =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -573,6 +577,7 @@ module Scavengers_Boss =
     let armcombossToUnitDef (flat: Armcomboss) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -632,6 +637,7 @@ module Scavengers_Boss =
     type Corcomboss =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -675,6 +681,7 @@ module Scavengers_Boss =
     let corcomboss : Corcomboss =
         { name = "corcomboss"
           subfolder = "Scavengers/Boss"
+          printableName = Some "Epic Commander - Final Boss"
           metalCost = ValueOrExpr.Concrete 300000.0
           energyCost = ValueOrExpr.Concrete 3000000.0
           buildTime = ValueOrExpr.Concrete 300000.0
@@ -910,6 +917,7 @@ module Scavengers_Boss =
     let corcombossDef : UnitDef =
         { name = "corcomboss"
           subfolder = "Scavengers/Boss"
+          printableName = Some "Epic Commander - Final Boss"
           metalCost = ValueOrExpr.Concrete 300000.0
           energyCost = ValueOrExpr.Concrete 3000000.0
           buildTime = ValueOrExpr.Concrete 300000.0
@@ -1158,6 +1166,7 @@ module Scavengers_Boss =
     let corcombossToFlat (def: UnitDef) : Corcomboss =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -1201,6 +1210,7 @@ module Scavengers_Boss =
     let corcombossToUnitDef (flat: Corcomboss) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

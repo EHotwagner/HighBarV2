@@ -8,6 +8,7 @@ module Legion_SeaUtility_T2 =
     type Leganavalpinpointer =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -37,6 +38,7 @@ module Legion_SeaUtility_T2 =
     let leganavalpinpointer : Leganavalpinpointer =
         { name = "leganavalpinpointer"
           subfolder = "Legion/SeaUtility/T2"
+          printableName = Some "Naval Pinpointer"
           metalCost = ValueOrExpr.Concrete 800.0
           energyCost = ValueOrExpr.Concrete 7500.0
           buildTime = ValueOrExpr.Concrete 10300.0
@@ -51,7 +53,7 @@ module Legion_SeaUtility_T2 =
           explodeAs = Some "largeBuildingexplosiongeneric"
           selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
           collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "69 95 58"
+          collisionVolumeScales = Some "48 80 48"
           collisionVolumeType = Some "CylY"
           seismicSignature = Some 0.0
           category = None
@@ -120,6 +122,7 @@ module Legion_SeaUtility_T2 =
     let leganavalpinpointerDef : UnitDef =
         { name = "leganavalpinpointer"
           subfolder = "Legion/SeaUtility/T2"
+          printableName = Some "Naval Pinpointer"
           metalCost = ValueOrExpr.Concrete 800.0
           energyCost = ValueOrExpr.Concrete 7500.0
           buildTime = ValueOrExpr.Concrete 10300.0
@@ -134,7 +137,7 @@ module Legion_SeaUtility_T2 =
           explodeAs = Some "largeBuildingexplosiongeneric"
           selfDestructAs = Some "largeBuildingExplosionGenericSelfd"
           collisionVolumeOffsets = Some "0 0 0"
-          collisionVolumeScales = Some "69 95 58"
+          collisionVolumeScales = Some "48 80 48"
           collisionVolumeType = Some "CylY"
           seismicSignature = Some 0.0
           category = None
@@ -208,6 +211,7 @@ module Legion_SeaUtility_T2 =
     let leganavalpinpointerToFlat (def: UnitDef) : Leganavalpinpointer =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -237,6 +241,7 @@ module Legion_SeaUtility_T2 =
     let leganavalpinpointerToUnitDef (flat: Leganavalpinpointer) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime
@@ -272,6 +277,7 @@ module Legion_SeaUtility_T2 =
     type Leganavalsonarstation =
         { name: string
           subfolder: string
+          printableName: string option
           metalCost: ValueOrExpr<float>
           energyCost: ValueOrExpr<float>
           buildTime: ValueOrExpr<float>
@@ -301,6 +307,7 @@ module Legion_SeaUtility_T2 =
     let leganavalsonarstation : Leganavalsonarstation =
         { name = "leganavalsonarstation"
           subfolder = "Legion/SeaUtility/T2"
+          printableName = Some "Auscultor"
           metalCost = ValueOrExpr.Concrete 160.0
           energyCost = ValueOrExpr.Concrete 2400.0
           buildTime = ValueOrExpr.Concrete 6100.0
@@ -374,6 +381,7 @@ module Legion_SeaUtility_T2 =
     let leganavalsonarstationDef : UnitDef =
         { name = "leganavalsonarstation"
           subfolder = "Legion/SeaUtility/T2"
+          printableName = Some "Auscultor"
           metalCost = ValueOrExpr.Concrete 160.0
           energyCost = ValueOrExpr.Concrete 2400.0
           buildTime = ValueOrExpr.Concrete 6100.0
@@ -452,6 +460,7 @@ module Legion_SeaUtility_T2 =
     let leganavalsonarstationToFlat (def: UnitDef) : Leganavalsonarstation =
         { name = def.name
           subfolder = def.subfolder
+          printableName = def.printableName
           metalCost = def.metalCost
           energyCost = def.energyCost
           buildTime = def.buildTime
@@ -481,6 +490,7 @@ module Legion_SeaUtility_T2 =
     let leganavalsonarstationToUnitDef (flat: Leganavalsonarstation) : UnitDef =
         { name = flat.name
           subfolder = flat.subfolder
+          printableName = flat.printableName
           metalCost = flat.metalCost
           energyCost = flat.energyCost
           buildTime = flat.buildTime

@@ -59,7 +59,7 @@ if not skipClone then
     printfn "Cloning BAR repo (shallow, sparse)..."
     run "git" (sprintf "clone --depth 1 --filter=blob:none --sparse \"%s\" \"%s\"" repoUrl repoDir) root |> ignore
     printfn "Setting up sparse checkout..."
-    run "git" "sparse-checkout set units modules gamedata" repoDir |> ignore
+    run "git" "sparse-checkout set units modules gamedata language/en" repoDir |> ignore
     run "git" "checkout" repoDir |> ignore
     printfn "Clone complete."
 else
@@ -67,6 +67,32 @@ else
 
 if not (Directory.Exists(repoDir)) then
     failwith "bar-repo directory not found. Run without --skip-clone first."
+
+// Load English unit display names from language/en/units.json. Keys are
+// internal unit names (e.g. "armcom"), values are human-readable names
+// (e.g. "Armada Commander"). Missing entries → printableName = None.
+let unitDisplayNames : Map<string, string> =
+    let path = Path.Combine(repoDir, "language", "en", "units.json")
+    if not (File.Exists path) then
+        printfn "WARN: %s not present — printableName will be None for all units" path
+        Map.empty
+    else
+        let raw = File.ReadAllText path
+        use doc = System.Text.Json.JsonDocument.Parse(raw)
+        let root = doc.RootElement
+        let mutable m = Map.empty
+        let tryGetProp (el: System.Text.Json.JsonElement) (name: string) =
+            match el.TryGetProperty name with
+            | true, v -> Some v
+            | _ -> None
+        match tryGetProp root "units" |> Option.bind (fun u -> tryGetProp u "names") with
+        | Some names when names.ValueKind = System.Text.Json.JsonValueKind.Object ->
+            for p in names.EnumerateObject() do
+                if p.Value.ValueKind = System.Text.Json.JsonValueKind.String then
+                    m <- Map.add (p.Name.ToLowerInvariant()) (p.Value.GetString()) m
+        | _ -> ()
+        printfn "Loaded %d unit display names from units.json" (Map.count m)
+        m
 
 // ---------------------------------------------------------------------------
 // 2. Lua table parser using XParsec
@@ -584,6 +610,7 @@ module CodeGen =
         // Universal fields
         fields.Add("name", "string")
         fields.Add("subfolder", "string")
+        fields.Add("printableName", "string option")
         fields.Add("metalCost", "ValueOrExpr<float>")
         fields.Add("energyCost", "ValueOrExpr<float>")
         fields.Add("buildTime", "ValueOrExpr<float>")
@@ -703,6 +730,7 @@ module CodeGen =
             match name with
             | "name" -> sb.AppendLine(sprintf "name = \"%s\"" (escapeString unitName)) |> ignore
             | "subfolder" -> sb.AppendLine(sprintf "subfolder = \"%s\"" (escapeString subfolder)) |> ignore
+            | "printableName" -> sb.AppendLine(sprintf "printableName = %s" (emitOptionStr (Map.tryFind (unitName.ToLowerInvariant()) unitDisplayNames))) |> ignore
             | "metalCost" -> sb.AppendLine(sprintf "metalCost = %s" (emitVoE "metalcost")) |> ignore
             | "energyCost" -> sb.AppendLine(sprintf "energyCost = %s" (emitVoE "energycost")) |> ignore
             | "buildTime" -> sb.AppendLine(sprintf "buildTime = %s" (emitVoE "buildtime")) |> ignore
@@ -946,6 +974,7 @@ module CodeGen =
 
         [ sprintf "%s{ name = \"%s\"" pad (escapeString unitName)
           sprintf "%s  subfolder = \"%s\"" pad (escapeString subfolder)
+          sprintf "%s  printableName = %s" pad (emitOptionStr (Map.tryFind (unitName.ToLowerInvariant()) unitDisplayNames))
           sprintf "%s  metalCost = %s" pad (emitVoE "metalcost")
           sprintf "%s  energyCost = %s" pad (emitVoE "energycost")
           sprintf "%s  buildTime = %s" pad (emitVoE "buildtime")
@@ -994,6 +1023,7 @@ module CodeGen =
             match name with
             | "name" -> sb.AppendLine("name = def.name") |> ignore
             | "subfolder" -> sb.AppendLine("subfolder = def.subfolder") |> ignore
+            | "printableName" -> sb.AppendLine("printableName = def.printableName") |> ignore
             | "metalCost" -> sb.AppendLine("metalCost = def.metalCost") |> ignore
             | "energyCost" -> sb.AppendLine("energyCost = def.energyCost") |> ignore
             | "buildTime" -> sb.AppendLine("buildTime = def.buildTime") |> ignore
@@ -1072,6 +1102,7 @@ module CodeGen =
         // Universal fields
         sb.AppendLine("name = flat.name") |> ignore
         sb.Append(sprintf "%s      " pad) |> ignore; sb.AppendLine("subfolder = flat.subfolder") |> ignore
+        sb.Append(sprintf "%s      " pad) |> ignore; sb.AppendLine("printableName = flat.printableName") |> ignore
         sb.Append(sprintf "%s      " pad) |> ignore; sb.AppendLine("metalCost = flat.metalCost") |> ignore
         sb.Append(sprintf "%s      " pad) |> ignore; sb.AppendLine("energyCost = flat.energyCost") |> ignore
         sb.Append(sprintf "%s      " pad) |> ignore; sb.AppendLine("buildTime = flat.buildTime") |> ignore
