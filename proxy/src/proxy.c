@@ -211,32 +211,34 @@ static int send_frame_and_process_response(ProxyState *state) {
             }
             for (size_t i = 0; i < fr->n_commands; i++) {
                 Highbar__AICommand *c = fr->commands[i];
-                if (state->config.verbose_commands) {
-                    char cmd_dbg[256];
-                    snprintf(cmd_dbg, sizeof(cmd_dbg), "Cmd %zu: case=%d", i, (int)c->command_case);
-                    proxy_log(HB_LOG_INFO, cmd_dbg);
-                    if (c->command_case == HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT && c->move_unit) {
-                        const Highbar__MoveUnitCommand *mv = c->move_unit;
-                        char mv_dbg[256];
-                        snprintf(mv_dbg, sizeof(mv_dbg),
-                            "MOVE uid=%d grp=%d opt=%u to=(%.1f,%.1f,%.1f) timeout=%d",
-                            mv->unit_id, mv->group_id, mv->options,
-                            mv->to_position ? mv->to_position->x : -1,
-                            mv->to_position ? mv->to_position->y : -1,
-                            mv->to_position ? mv->to_position->z : -1,
-                            mv->timeout);
-                        proxy_log(HB_LOG_INFO, mv_dbg);
-                    }
+                // Optional payload-detail logging, gated.
+                if (state->config.verbose_commands
+                    && c->command_case == HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT
+                    && c->move_unit) {
+                    const Highbar__MoveUnitCommand *mv = c->move_unit;
+                    char mv_dbg[256];
+                    snprintf(mv_dbg, sizeof(mv_dbg),
+                        "MOVE uid=%d grp=%d opt=%u to=(%.1f,%.1f,%.1f) timeout=%d",
+                        mv->unit_id, mv->group_id, mv->options,
+                        mv->to_position ? mv->to_position->x : -1,
+                        mv->to_position ? mv->to_position->y : -1,
+                        mv->to_position ? mv->to_position->z : -1,
+                        mv->timeout);
+                    proxy_log(HB_LOG_INFO, mv_dbg);
                 }
                 int cmd_rc = hb_deserialize_and_execute(
                     c,
                     state->skirmish_ai_id,
                     state->callback->Engine_handleCommand);
-                if (state->config.verbose_commands) {
-                    char rc_buf[128];
-                    snprintf(rc_buf, sizeof(rc_buf), "Cmd %zu: rc=%d", i, cmd_rc);
-                    proxy_log(HB_LOG_INFO, rc_buf);
-                }
+                // Always-on dispatch log per contracts/dispatch-log.md.
+                char disp_buf[160];
+                snprintf(disp_buf, sizeof(disp_buf),
+                    "[HB] dispatch frame=%u case=%s unit=%d engine_rc=%d",
+                    state->frame_number,
+                    hb_aicommand_case_name((int)c->command_case),
+                    hb_aicommand_unit_id(c),
+                    cmd_rc);
+                proxy_log(cmd_rc == 0 ? HB_LOG_INFO : HB_LOG_WARN, disp_buf);
             }
             highbar__aimessage__free_unpacked(ai_msg, NULL);
             return 0;

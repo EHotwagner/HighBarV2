@@ -706,9 +706,137 @@ int hb_deserialize_and_execute(const Highbar__AICommand *cmd,
         return handle_command(skirmish_ai_id, -1, COMMAND_ID_UNTRACKED, COMMAND_DRAW_UNIT, &s);
     }
     default:
-        fprintf(stderr,
-            "[HB] unsupported command oneof case=%d (proxy switch table miss)\n",
-            (int)cmd->command_case);
+        // Intentionally silent here — proxy.c logs the `[HB] dispatch`
+        // line with case=UNKNOWN(<n>) at WARN level for every dispatch,
+        // regardless of verbose_commands. See contracts/dispatch-log.md.
         return HB_DESERIALIZE_RC_UNSUPPORTED;
+    }
+}
+
+const char *hb_aicommand_case_name(int command_case) {
+    static __thread char unknown_buf[32];
+    switch (command_case) {
+    case HIGHBAR__AICOMMAND__COMMAND_BUILD_UNIT:                 return "BUILD_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_STOP:                       return "STOP";
+    case HIGHBAR__AICOMMAND__COMMAND_WAIT:                       return "WAIT";
+    case HIGHBAR__AICOMMAND__COMMAND_TIMED_WAIT:                 return "TIMED_WAIT";
+    case HIGHBAR__AICOMMAND__COMMAND_SQUAD_WAIT:                 return "SQUAD_WAIT";
+    case HIGHBAR__AICOMMAND__COMMAND_DEATH_WAIT:                 return "DEATH_WAIT";
+    case HIGHBAR__AICOMMAND__COMMAND_GATHER_WAIT:                return "GATHER_WAIT";
+    case HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT:                  return "MOVE_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_PATROL:                     return "PATROL";
+    case HIGHBAR__AICOMMAND__COMMAND_FIGHT:                      return "FIGHT";
+    case HIGHBAR__AICOMMAND__COMMAND_ATTACK:                     return "ATTACK";
+    case HIGHBAR__AICOMMAND__COMMAND_ATTACK_AREA:                return "ATTACK_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_GUARD:                      return "GUARD";
+    case HIGHBAR__AICOMMAND__COMMAND_REPAIR:                     return "REPAIR";
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_UNIT:               return "RECLAIM_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_AREA:               return "RECLAIM_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_RESTORE_AREA:               return "RESTORE_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_RESURRECT:                  return "RESURRECT";
+    case HIGHBAR__AICOMMAND__COMMAND_RESURRECT_IN_AREA:          return "RESURRECT_IN_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_CAPTURE:                    return "CAPTURE";
+    case HIGHBAR__AICOMMAND__COMMAND_CAPTURE_AREA:               return "CAPTURE_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_BASE:                   return "SET_BASE";
+    case HIGHBAR__AICOMMAND__COMMAND_SELF_DESTRUCT:              return "SELF_DESTRUCT";
+    case HIGHBAR__AICOMMAND__COMMAND_LOAD_ONTO:                  return "LOAD_ONTO";
+    case HIGHBAR__AICOMMAND__COMMAND_UNLOAD_UNIT:                return "UNLOAD_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_UNLOAD_UNITS_AREA:           return "UNLOAD_UNITS_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_WANTED_MAX_SPEED:       return "SET_WANTED_MAX_SPEED";
+    case HIGHBAR__AICOMMAND__COMMAND_STOCKPILE:                  return "STOCKPILE";
+    case HIGHBAR__AICOMMAND__COMMAND_DGUN:                       return "DGUN";
+    case HIGHBAR__AICOMMAND__COMMAND_CUSTOM:                     return "CUSTOM";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_ON_OFF:                 return "SET_ON_OFF";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_REPEAT:                 return "SET_REPEAT";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_MOVE_STATE:             return "SET_MOVE_STATE";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_FIRE_STATE:             return "SET_FIRE_STATE";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_TRAJECTORY:             return "SET_TRAJECTORY";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_AUTO_REPAIR_LEVEL:      return "SET_AUTO_REPAIR_LEVEL";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_IDLE_MODE:              return "SET_IDLE_MODE";
+    case HIGHBAR__AICOMMAND__COMMAND_SEND_TEXT_MESSAGE:          return "SEND_TEXT_MESSAGE";
+    case HIGHBAR__AICOMMAND__COMMAND_SEND_RESOURCES:             return "SEND_RESOURCES";
+    case HIGHBAR__AICOMMAND__COMMAND_GIVE_ME:                    return "GIVE_ME";
+    case HIGHBAR__AICOMMAND__COMMAND_GIVE_ME_NEW_UNIT:           return "GIVE_ME_NEW_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_CALL_LUA_RULES:             return "CALL_LUA_RULES";
+    case HIGHBAR__AICOMMAND__COMMAND_CALL_LUA_UI:                return "CALL_LUA_UI";
+    case HIGHBAR__AICOMMAND__COMMAND_PAUSE_TEAM:                 return "PAUSE_TEAM";
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_IN_AREA:            return "RECLAIM_IN_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_FEATURE:            return "RECLAIM_FEATURE";
+    case HIGHBAR__AICOMMAND__COMMAND_LOAD_UNITS_AREA:            return "LOAD_UNITS_AREA";
+    case HIGHBAR__AICOMMAND__COMMAND_DRAW_ADD_POINT:             return "DRAW_ADD_POINT";
+    case HIGHBAR__AICOMMAND__COMMAND_DRAW_ADD_LINE:              return "DRAW_ADD_LINE";
+    case HIGHBAR__AICOMMAND__COMMAND_DRAW_REMOVE_POINT:          return "DRAW_REMOVE_POINT";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_LAST_POS_MESSAGE:       return "SET_LAST_POS_MESSAGE";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_MY_INCOME_SHARE_DIRECT: return "SET_MY_INCOME_SHARE_DIRECT";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_SHARE_LEVEL:            return "SET_SHARE_LEVEL";
+    case HIGHBAR__AICOMMAND__COMMAND_GROUP_ADD_UNIT:             return "GROUP_ADD_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_GROUP_REMOVE_UNIT:          return "GROUP_REMOVE_UNIT";
+    case HIGHBAR__AICOMMAND__COMMAND_INIT_PATH:                  return "INIT_PATH";
+    case HIGHBAR__AICOMMAND__COMMAND_GET_APPROX_LENGTH:          return "GET_APPROX_LENGTH";
+    case HIGHBAR__AICOMMAND__COMMAND_GET_NEXT_WAYPOINT:          return "GET_NEXT_WAYPOINT";
+    case HIGHBAR__AICOMMAND__COMMAND_FREE_PATH:                  return "FREE_PATH";
+    case HIGHBAR__AICOMMAND__COMMAND_CREATE_SPLINE_FIGURE:       return "CREATE_SPLINE_FIGURE";
+    case HIGHBAR__AICOMMAND__COMMAND_CREATE_LINE_FIGURE:         return "CREATE_LINE_FIGURE";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_FIGURE_POSITION:        return "SET_FIGURE_POSITION";
+    case HIGHBAR__AICOMMAND__COMMAND_SET_FIGURE_COLOR:           return "SET_FIGURE_COLOR";
+    case HIGHBAR__AICOMMAND__COMMAND_REMOVE_FIGURE:              return "REMOVE_FIGURE";
+    case HIGHBAR__AICOMMAND__COMMAND_DRAW_UNIT:                  return "DRAW_UNIT";
+    default:
+        snprintf(unknown_buf, sizeof(unknown_buf), "UNKNOWN(%d)", command_case);
+        return unknown_buf;
+    }
+}
+
+int hb_aicommand_unit_id(const Highbar__AICommand *cmd) {
+    if (!cmd) return -1;
+    switch (cmd->command_case) {
+    case HIGHBAR__AICOMMAND__COMMAND_BUILD_UNIT:             return cmd->build_unit           ? cmd->build_unit->unit_id         : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_STOP:                   return cmd->stop                  ? cmd->stop->unit_id               : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_WAIT:                   return cmd->wait                  ? cmd->wait->unit_id               : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_TIMED_WAIT:             return cmd->timed_wait            ? cmd->timed_wait->unit_id         : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SQUAD_WAIT:             return cmd->squad_wait            ? cmd->squad_wait->unit_id         : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_DEATH_WAIT:             return cmd->death_wait            ? cmd->death_wait->unit_id         : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_GATHER_WAIT:            return cmd->gather_wait           ? cmd->gather_wait->unit_id        : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_MOVE_UNIT:              return cmd->move_unit             ? cmd->move_unit->unit_id          : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_PATROL:                 return cmd->patrol                ? cmd->patrol->unit_id             : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_FIGHT:                  return cmd->fight                 ? cmd->fight->unit_id              : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_ATTACK:                 return cmd->attack                ? cmd->attack->unit_id             : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_ATTACK_AREA:            return cmd->attack_area           ? cmd->attack_area->unit_id        : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_GUARD:                  return cmd->guard                 ? cmd->guard->unit_id              : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_REPAIR:                 return cmd->repair                ? cmd->repair->unit_id             : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_UNIT:           return cmd->reclaim_unit          ? cmd->reclaim_unit->unit_id       : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_AREA:           return cmd->reclaim_area          ? cmd->reclaim_area->unit_id       : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RESTORE_AREA:           return cmd->restore_area          ? cmd->restore_area->unit_id       : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RESURRECT:              return cmd->resurrect             ? cmd->resurrect->unit_id          : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RESURRECT_IN_AREA:      return cmd->resurrect_in_area     ? cmd->resurrect_in_area->unit_id  : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_CAPTURE:                return cmd->capture               ? cmd->capture->unit_id            : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_CAPTURE_AREA:           return cmd->capture_area          ? cmd->capture_area->unit_id       : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_BASE:               return cmd->set_base              ? cmd->set_base->unit_id           : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SELF_DESTRUCT:          return cmd->self_destruct         ? cmd->self_destruct->unit_id      : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_LOAD_ONTO:              return cmd->load_onto             ? cmd->load_onto->unit_id          : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_UNLOAD_UNIT:            return cmd->unload_unit           ? cmd->unload_unit->unit_id        : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_UNLOAD_UNITS_AREA:      return cmd->unload_units_area     ? cmd->unload_units_area->unit_id  : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_WANTED_MAX_SPEED:   return cmd->set_wanted_max_speed  ? cmd->set_wanted_max_speed->unit_id : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_STOCKPILE:              return cmd->stockpile             ? cmd->stockpile->unit_id          : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_DGUN:                   return cmd->dgun                  ? cmd->dgun->unit_id               : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_CUSTOM:                 return cmd->custom                ? cmd->custom->unit_id             : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_ON_OFF:             return cmd->set_on_off            ? cmd->set_on_off->unit_id         : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_REPEAT:             return cmd->set_repeat            ? cmd->set_repeat->unit_id         : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_MOVE_STATE:         return cmd->set_move_state        ? cmd->set_move_state->unit_id     : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_FIRE_STATE:         return cmd->set_fire_state        ? cmd->set_fire_state->unit_id     : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_TRAJECTORY:         return cmd->set_trajectory        ? cmd->set_trajectory->unit_id     : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_AUTO_REPAIR_LEVEL:  return cmd->set_auto_repair_level ? cmd->set_auto_repair_level->unit_id : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_SET_IDLE_MODE:          return cmd->set_idle_mode         ? cmd->set_idle_mode->unit_id      : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_IN_AREA:        return cmd->reclaim_in_area       ? cmd->reclaim_in_area->unit_id    : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_RECLAIM_FEATURE:        return cmd->reclaim_feature       ? cmd->reclaim_feature->unit_id    : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_LOAD_UNITS_AREA:        return cmd->load_units_area       ? cmd->load_units_area->unit_id    : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_GROUP_ADD_UNIT:         return cmd->group_add_unit        ? cmd->group_add_unit->unit_id     : -1;
+    case HIGHBAR__AICOMMAND__COMMAND_GROUP_REMOVE_UNIT:      return cmd->group_remove_unit     ? cmd->group_remove_unit->unit_id  : -1;
+    default:
+        // Team-wide / unit-less commands: PAUSE_TEAM, SEND_TEXT_MESSAGE,
+        // SEND_RESOURCES, GIVE_ME, GIVE_ME_NEW_UNIT, CALL_LUA_RULES/UI,
+        // SET_SHARE_LEVEL, SET_MY_INCOME_SHARE_DIRECT, draw/figure ops,
+        // path queries. Per contract these log unit=-1.
+        return -1;
     }
 }

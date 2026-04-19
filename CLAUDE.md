@@ -24,6 +24,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-19
 - N/A — the fix is in-process state (a FIFO queue on the client instance). No persistence. (031-fix-callback-event-drop)
 - C11 (proxy), F# / .NET 10.0 (client) + protobuf-c (C), Google.Protobuf 3.28 (F#), Recoil `SSkirmishAICallback` (read-only) (032-batch-callback-rpcs)
 - N/A — in-memory snapshot only, no persistence (032-batch-callback-rpcs)
+- C11 (proxy), F# / .NET 10.0 (client + tests) + protobuf-c (proxy), Google.Protobuf 3.28 (client), Recoil `SSkirmishAICallback` (read-only), spring-headless 2025.06.19, xUnit 2.9.x (033-fix-scripting-dispatch)
+- Filesystem only — Unix domain sockets, session dirs in `/tmp` (033-fix-scripting-dispatch)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -100,9 +102,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 033-fix-scripting-dispatch: Added C11 (proxy), F# / .NET 10.0 (client + tests) + protobuf-c (proxy), Google.Protobuf 3.28 (client), Recoil `SSkirmishAICallback` (read-only), spring-headless 2025.06.19, xUnit 2.9.x
 - 032-batch-callback-rpcs: Added `CALLBACK_GAME_GET_STATE` + `GameStateSnapshot` — one-call per-tick snapshot (friendlies, LOS/radar enemies, economy) via `client.GetGameState()`. HighBar.Client 0.1.5.
 - 031-fix-callback-event-drop: Added F# / .NET 10.0 (client library and tests); C11 (proxy, verified read-only) + HighBar.Client (this project), Google.Protobuf 3.28, xUnit 2.9.x, protobuf-c (proxy, read-only)
-- 030-proxy-contract-docs: Added N/A (documentation-only feature; references C11 proxy and protobuf3 schema) + Existing proxy source (`proxy/src/proxy.c`, `proxy/src/deserialize.c`), protobuf schema (`proto/highbar/messages.proto`)
 
 
 <!-- MANUAL ADDITIONS START -->
