@@ -40,6 +40,15 @@ static Highbar__CallbackResponse *make_float_response(
     return resp;
 }
 
+// Helper to alloc a Vector3 sub-message (for nested uses like snapshot entries)
+static Highbar__Vector3 *alloc_vec3_for_snapshot(float x, float y, float z, ProtobufCAllocator *alloc) {
+    Highbar__Vector3 *v = alloc->alloc(alloc->allocator_data, sizeof(Highbar__Vector3));
+    if (!v) return NULL;
+    highbar__vector3__init(v);
+    v->x = x; v->y = y; v->z = z;
+    return v;
+}
+
 // Helper to create a success response with a Vector3 result
 static Highbar__CallbackResponse *make_vec3_response(
     uint32_t request_id, float x, float y, float z, ProtobufCAllocator *alloc) {
@@ -499,6 +508,168 @@ Highbar__CallbackResponse *hb_callback_dispatch(
             return make_int_response(req_id, result ? 1 : 0, alloc);
         }
         break;
+    }
+
+    // Per-tick gamestate snapshot — one-call aggregate
+    case HIGHBAR__CALLBACK_ID__CALLBACK_GAME_GET_STATE: {
+        if (!callback->Game_getCurrentFrame || !callback->getTeamUnits
+            || !callback->getEnemyUnitsInRadarAndLos || !callback->getEnemyUnits
+            || !callback->Unit_getPos || !callback->Unit_getDef
+            || !callback->Unit_getTeam || !callback->Unit_getHealth
+            || !callback->Game_getMyTeam) {
+            return make_error_response(req_id, "Snapshot callbacks unavailable", alloc);
+        }
+
+        int my_team = callback->Game_getMyTeam(skirmish_ai_id);
+
+        // Resolve max-units cap (env var HIGHBAR_SNAPSHOT_MAX_UNITS, default 4096)
+        int max_units = 4096;
+        const char *cap_env = getenv("HIGHBAR_SNAPSHOT_MAX_UNITS");
+        if (cap_env) {
+            int v = atoi(cap_env);
+            if (v > 0) max_units = v;
+        }
+
+        // Enumerate friendly unit IDs (team only)
+        int *friendly_ids = alloc->alloc(alloc->allocator_data, (size_t)max_units * sizeof(int));
+        if (!friendly_ids) return make_error_response(req_id, "Alloc failed (friendlies)", alloc);
+        int friendly_count = callback->getTeamUnits(skirmish_ai_id, friendly_ids, max_units);
+        if (friendly_count < 0) friendly_count = 0;
+
+        // Enumerate enemy IDs: LOS set and LOS+radar set (radar-only = set difference)
+        int *los_ids = alloc->alloc(alloc->allocator_data, (size_t)max_units * sizeof(int));
+        int *radar_los_ids = alloc->alloc(alloc->allocator_data, (size_t)max_units * sizeof(int));
+        if (!los_ids || !radar_los_ids) return make_error_response(req_id, "Alloc failed (enemies)", alloc);
+        int los_count = callback->getEnemyUnits(skirmish_ai_id, los_ids, max_units);
+        if (los_count < 0) los_count = 0;
+        int radar_los_count = callback->getEnemyUnitsInRadarAndLos(skirmish_ai_id, radar_los_ids, max_units);
+        if (radar_los_count < 0) radar_los_count = 0;
+
+        int total_enemy_count = radar_los_count;
+        if (friendly_count + total_enemy_count > max_units) {
+            return make_error_response(req_id, "Snapshot unit count exceeds HIGHBAR_SNAPSHOT_MAX_UNITS", alloc);
+        }
+
+        // Build snapshot
+        Highbar__GameStateSnapshot *snap = alloc->alloc(alloc->allocator_data, sizeof(Highbar__GameStateSnapshot));
+        if (!snap) return make_error_response(req_id, "Alloc failed (snapshot)", alloc);
+        highbar__game_state_snapshot__init(snap);
+        snap->frame = callback->Game_getCurrentFrame(skirmish_ai_id);
+
+        // Friendlies
+        if (friendly_count > 0) {
+            snap->friendlies = alloc->alloc(alloc->allocator_data, (size_t)friendly_count * sizeof(Highbar__FriendlyUnit *));
+            if (!snap->friendlies) return make_error_response(req_id, "Alloc failed (friendlies arr)", alloc);
+            snap->n_friendlies = (size_t)friendly_count;
+            for (int i = 0; i < friendly_count; i++) {
+                Highbar__FriendlyUnit *f = alloc->alloc(alloc->allocator_data, sizeof(Highbar__FriendlyUnit));
+                if (!f) return make_error_response(req_id, "Alloc failed (friendly)", alloc);
+                highbar__friendly_unit__init(f);
+                f->unit_id = friendly_ids[i];
+                float pos[3] = {0};
+                callback->Unit_getPos(skirmish_ai_id, friendly_ids[i], pos);
+                f->position = alloc_vec3_for_snapshot(pos[0], pos[1], pos[2], alloc);
+                f->health = callback->Unit_getHealth(skirmish_ai_id, friendly_ids[i]);
+                f->unit_def_id = callback->Unit_getDef(skirmish_ai_id, friendly_ids[i]);
+                f->team = callback->Unit_getTeam(skirmish_ai_id, friendly_ids[i]);
+                (void)my_team;
+                snap->friendlies[i] = f;
+            }
+        }
+
+        // Classify enemies: LOS vs radar-only (radar-only = radar_los \ los)
+        // Build a simple presence check: for small counts, O(N*M) is acceptable on hot path
+        // within the per-frame arena. For larger, a sort would be preferable.
+        int los_enemy_count = 0;
+        int radar_only_count = 0;
+        for (int i = 0; i < radar_los_count; i++) {
+            int id = radar_los_ids[i];
+            int in_los = 0;
+            for (int j = 0; j < los_count; j++) {
+                if (los_ids[j] == id) { in_los = 1; break; }
+            }
+            if (in_los) los_enemy_count++; else radar_only_count++;
+        }
+
+        if (los_enemy_count > 0) {
+            snap->los_enemies = alloc->alloc(alloc->allocator_data, (size_t)los_enemy_count * sizeof(Highbar__LosEnemyUnit *));
+            if (!snap->los_enemies) return make_error_response(req_id, "Alloc failed (los arr)", alloc);
+            snap->n_los_enemies = (size_t)los_enemy_count;
+        }
+        if (radar_only_count > 0) {
+            snap->radar_only_enemies = alloc->alloc(alloc->allocator_data, (size_t)radar_only_count * sizeof(Highbar__RadarOnlyEnemyUnit *));
+            if (!snap->radar_only_enemies) return make_error_response(req_id, "Alloc failed (radar arr)", alloc);
+            snap->n_radar_only_enemies = (size_t)radar_only_count;
+        }
+
+        int li = 0, ri = 0;
+        for (int i = 0; i < radar_los_count; i++) {
+            int id = radar_los_ids[i];
+            int in_los = 0;
+            for (int j = 0; j < los_count; j++) {
+                if (los_ids[j] == id) { in_los = 1; break; }
+            }
+            float pos[3] = {0};
+            callback->Unit_getPos(skirmish_ai_id, id, pos);
+            int def_id = callback->Unit_getDef(skirmish_ai_id, id);
+            int team = callback->Unit_getTeam(skirmish_ai_id, id);
+            if (in_los) {
+                Highbar__LosEnemyUnit *e = alloc->alloc(alloc->allocator_data, sizeof(Highbar__LosEnemyUnit));
+                if (!e) return make_error_response(req_id, "Alloc failed (los enemy)", alloc);
+                highbar__los_enemy_unit__init(e);
+                e->unit_id = id;
+                e->position = alloc_vec3_for_snapshot(pos[0], pos[1], pos[2], alloc);
+                e->health = callback->Unit_getHealth(skirmish_ai_id, id);
+                e->unit_def_id = def_id;
+                e->team = team;
+                snap->los_enemies[li++] = e;
+            } else {
+                Highbar__RadarOnlyEnemyUnit *e = alloc->alloc(alloc->allocator_data, sizeof(Highbar__RadarOnlyEnemyUnit));
+                if (!e) return make_error_response(req_id, "Alloc failed (radar enemy)", alloc);
+                highbar__radar_only_enemy_unit__init(e);
+                e->unit_id = id;
+                e->position = alloc_vec3_for_snapshot(pos[0], pos[1], pos[2], alloc);
+                e->unit_def_id = def_id;
+                e->team = team;
+                snap->radar_only_enemies[ri++] = e;
+            }
+        }
+
+        // Economy — metal (0) and energy (1)
+        Highbar__EconomyRecord *econ = alloc->alloc(alloc->allocator_data, sizeof(Highbar__EconomyRecord));
+        if (!econ) return make_error_response(req_id, "Alloc failed (econ)", alloc);
+        highbar__economy_record__init(econ);
+        if (callback->Economy_getCurrent) {
+            econ->metal_current = callback->Economy_getCurrent(skirmish_ai_id, 0);
+            econ->energy_current = callback->Economy_getCurrent(skirmish_ai_id, 1);
+        }
+        if (callback->Economy_getIncome) {
+            econ->metal_income = callback->Economy_getIncome(skirmish_ai_id, 0);
+            econ->energy_income = callback->Economy_getIncome(skirmish_ai_id, 1);
+        }
+        if (callback->Economy_getUsage) {
+            econ->metal_usage = callback->Economy_getUsage(skirmish_ai_id, 0);
+            econ->energy_usage = callback->Economy_getUsage(skirmish_ai_id, 1);
+        }
+        if (callback->Economy_getStorage) {
+            econ->metal_storage = callback->Economy_getStorage(skirmish_ai_id, 0);
+            econ->energy_storage = callback->Economy_getStorage(skirmish_ai_id, 1);
+        }
+        snap->economy = econ;
+
+        // Wrap in CallbackResponse
+        Highbar__CallbackResponse *resp = alloc->alloc(alloc->allocator_data, sizeof(Highbar__CallbackResponse));
+        if (!resp) return make_error_response(req_id, "Alloc failed (resp)", alloc);
+        highbar__callback_response__init(resp);
+        resp->request_id = req_id;
+        resp->success = 1;
+        Highbar__CallbackResult *result = alloc->alloc(alloc->allocator_data, sizeof(Highbar__CallbackResult));
+        if (!result) return make_error_response(req_id, "Alloc failed (result)", alloc);
+        highbar__callback_result__init(result);
+        result->value_case = HIGHBAR__CALLBACK_RESULT__VALUE_SNAPSHOT_VALUE;
+        result->snapshot_value = snap;
+        resp->result = result;
+        return resp;
     }
 
     default:

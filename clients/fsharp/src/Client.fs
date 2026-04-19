@@ -580,6 +580,17 @@ type HighBarClient(socketPath: string, ?readTimeoutMs: int) =
             resp.Result.IntValue
         else -1
 
+    /// One-call per-tick gamestate snapshot. Returns every friendly, every
+    /// LOS enemy, every radar-only enemy, plus the economy record — all from a
+    /// single CallbackRequest/Response round-trip (feature 032).
+    member this.GetGameState() : HighBar.Client.GameStateSnapshot =
+        let resp = this.SendCallback(uint32 CallbackId.CallbackGameGetState, [])
+        if not resp.Success then
+            failwith (if System.String.IsNullOrEmpty(resp.ErrorMessage) then "GetGameState failed" else resp.ErrorMessage)
+        if resp.Result = null || resp.Result.ValueCase <> CallbackResult.ValueOneofCase.SnapshotValue then
+            failwith "GetGameState: response missing snapshot_value"
+        HighBar.Client.GameStateSnapshot.fromProto resp.Result.SnapshotValue
+
     /// Enable or disable cheat events. Returns previous state.
     member this.SetCheatEventsEnabled(enabled: bool) : bool =
         let p = CallbackParam()

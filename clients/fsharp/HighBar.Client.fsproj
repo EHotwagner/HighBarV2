@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>HighBar.Client</RootNamespace>
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
@@ -21,8 +21,10 @@
     <Compile Include="src/Units.fs" />
     <Compile Include="src/Events.fs" />
     <Compile Include="src/Commands.fs" />
+    <Compile Include="src/GameStateSnapshot.fs" />
     <Compile Include="src/Client.fs" />
     <!-- Engine lifecycle management -->
+    <Compile Include="src/EngineDiscovery.fs" />
     <Compile Include="src/EngineConfig.fs" />
     <Compile Include="src/SessionDiagnostics.fs" />
     <Compile Include="src/ScriptGenerator.fs" />

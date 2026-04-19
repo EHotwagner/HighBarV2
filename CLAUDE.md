@@ -1,6 +1,6 @@
 # HighBarV2 Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-14
+Auto-generated from all feature plans. Last updated: 2026-04-19
 
 ## Active Technologies
 - C11 + protobuf-c, engine SSkirmishAICallback API (021-map-callbacks-proxy)
@@ -22,6 +22,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-14
 - Filesystem only (markdown contract documents) (030-proxy-contract-docs)
 - F# / .NET 10.0 (client library and tests); C11 (proxy, verified read-only) + HighBar.Client (this project), Google.Protobuf 3.28, xUnit 2.9.x, protobuf-c (proxy, read-only) (031-fix-callback-event-drop)
 - N/A — the fix is in-process state (a FIFO queue on the client instance). No persistence. (031-fix-callback-event-drop)
+- C11 (proxy), F# / .NET 10.0 (client) + protobuf-c (C), Google.Protobuf 3.28 (F#), Recoil `SSkirmishAICallback` (read-only) (032-batch-callback-rpcs)
+- N/A — in-memory snapshot only, no persistence (032-batch-callback-rpcs)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -98,9 +100,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 032-batch-callback-rpcs: Added `CALLBACK_GAME_GET_STATE` + `GameStateSnapshot` — one-call per-tick snapshot (friendlies, LOS/radar enemies, economy) via `client.GetGameState()`. HighBar.Client 0.1.5.
 - 031-fix-callback-event-drop: Added F# / .NET 10.0 (client library and tests); C11 (proxy, verified read-only) + HighBar.Client (this project), Google.Protobuf 3.28, xUnit 2.9.x, protobuf-c (proxy, read-only)
 - 030-proxy-contract-docs: Added N/A (documentation-only feature; references C11 proxy and protobuf3 schema) + Existing proxy source (`proxy/src/proxy.c`, `proxy/src/deserialize.c`), protobuf schema (`proto/highbar/messages.proto`)
-- 029-fix-trainer-issues: Added C11 (proxy), F# / .NET 10.0 (client and live tests), Protobuf3 (proto schema) + protobuf-c (C proxy serialization), Google.Protobuf 3.28 (F# client), Recoil engine SSkirmishAI plugin interface (vendored headers in `proxy/include/AI/`), spring-headless 2025.06.19 (live tests)
 
 
 <!-- MANUAL ADDITIONS START -->

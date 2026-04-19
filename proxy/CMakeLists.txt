@@ -82,3 +82,12 @@ target_include_directories(test_callbacks PRIVATE
 )
 target_link_libraries(test_callbacks PRIVATE SkirmishAI ${PROTOBUF_C_LIBRARIES})
 add_test(NAME test_callbacks COMMAND test_callbacks)
+
+add_executable(test_gamestate_snapshot tests/test_gamestate_snapshot.c ${PROTO_SOURCES})
+target_include_directories(test_gamestate_snapshot PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${PROTO_GEN_DIR}
+    ${PROTOBUF_C_INCLUDE_DIRS}
+)
+target_link_libraries(test_gamestate_snapshot PRIVATE SkirmishAI ${PROTOBUF_C_LIBRARIES})
+add_test(NAME test_gamestate_snapshot COMMAND test_gamestate_snapshot)

@@ -31,6 +31,8 @@
     <Compile Include="CallbackFrameInterleavingTests.fs" />
     <Compile Include="UnitDataTests.fs" />
     <Compile Include="NonMoveCommandEffectTests.fs" />
+    <Compile Include="GameStateSnapshotUnitTests.fs" />
+    <Compile Include="GetGameStateTests.fs" />
   </ItemGroup>
 
 </Project>

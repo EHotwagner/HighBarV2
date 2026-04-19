@@ -53,16 +53,41 @@ GAME_NAME=$(jq -r '.game.name' "${CONFIG_FILE}")
 RAPID_TAG=$(jq -r '.game.rapidTag' "${CONFIG_FILE}")
 MAP_NAME=$(jq -r '.map.name' "${CONFIG_FILE}")
 
+# Dynamically resolve the game name from rapid/versions.gz (ported from
+# FSBarV1 EngineDiscovery). Upstream cuts new byar:test releases every few
+# days; the hardcoded game.name in engine-version.json goes stale quickly.
+# If a rapidTag is configured, prefer the latest matching entry in rapid.
+if [ -n "${RAPID_TAG}" ] && [ "${RAPID_TAG}" != "null" ]; then
+    _BAR_DATA="${HOME}/.local/state/Beyond All Reason"
+    for _VPATH in \
+        "${_BAR_DATA}/rapid/repos-cdn.beyondallreason.dev/byar/versions.gz" \
+        "${_BAR_DATA}/rapid/repos.springrts.com/byar/versions.gz"; do
+        if [ -f "${_VPATH}" ]; then
+            _RESOLVED="$(zcat "${_VPATH}" 2>/dev/null | grep "^${RAPID_TAG}," | tail -1 | cut -d',' -f4)"
+            if [ -n "${_RESOLVED}" ]; then
+                GAME_NAME="${_RESOLVED}"
+            fi
+            break
+        fi
+    done
+fi
+
 # Determine data directory — auto-detect from engine binary location if not set
 DATA_DIR="${SPRING_DATADIR:-}"
 if [ -z "${DATA_DIR}" ]; then
-    # Try to detect from engine binary location (BAR AppImage layout)
-    _ENGINE_PATH="${HIGHBAR_TEST_ENGINE:-$(command -v "${ENGINE_BINARY}" 2>/dev/null || true)}"
-    if [ -n "${_ENGINE_PATH}" ] && [ -x "${_ENGINE_PATH}" ]; then
-        _ENGINE_DIR="$(dirname "$(readlink -f "${_ENGINE_PATH}")")"
-        _CANDIDATE="$(dirname "$(dirname "${_ENGINE_DIR}")")"
-        if [ -d "${_CANDIDATE}/maps" ] && [ -d "${_CANDIDATE}/packages" ]; then
-            DATA_DIR="${_CANDIDATE}"
+    # Prefer the standard BAR data directory when it has maps+packages
+    _BAR_DATA="${HOME}/.local/state/Beyond All Reason"
+    if [ -d "${_BAR_DATA}/maps" ] && [ -d "${_BAR_DATA}/packages" ]; then
+        DATA_DIR="${_BAR_DATA}"
+    else
+        # Fall back: try to detect from engine binary location (BAR AppImage layout)
+        _ENGINE_PATH="${HIGHBAR_TEST_ENGINE:-$(command -v "${ENGINE_BINARY}" 2>/dev/null || true)}"
+        if [ -n "${_ENGINE_PATH}" ] && [ -x "${_ENGINE_PATH}" ]; then
+            _ENGINE_DIR="$(dirname "$(readlink -f "${_ENGINE_PATH}")")"
+            _CANDIDATE="$(dirname "$(dirname "${_ENGINE_DIR}")")"
+            if [ -d "${_CANDIDATE}/maps" ] && [ -d "${_CANDIDATE}/packages" ]; then
+                DATA_DIR="${_CANDIDATE}"
+            fi
         fi
     fi
     DATA_DIR="${DATA_DIR:-${HOME}/.spring}"
@@ -84,12 +109,26 @@ if [ -n "${ENGINE_PATH}" ]; then
     fi
 else
     FOUND_PATH=$(command -v "${ENGINE_BINARY}" 2>/dev/null || true)
+    if [ -z "${FOUND_PATH}" ]; then
+        # Auto-detect from the standard BAR data directory (ported from
+        # FSBarV1 EngineDiscovery). Walk recoil_* directories newest-first.
+        _BAR_DATA="${HOME}/.local/state/Beyond All Reason"
+        if [ -d "${_BAR_DATA}/engine" ]; then
+            while IFS= read -r _cand_dir; do
+                _bin="${_cand_dir}/${ENGINE_BINARY}"
+                if [ -x "${_bin}" ]; then
+                    FOUND_PATH="${_bin}"
+                    break
+                fi
+            done < <(find "${_BAR_DATA}/engine" -maxdepth 1 -type d -name 'recoil_*' 2>/dev/null | sort -r)
+        fi
+    fi
     if [ -n "${FOUND_PATH}" ]; then
         RESOLVED_ENGINE="${FOUND_PATH}"
         CHECKS+=("{\"name\":\"engine_binary\",\"passed\":true,\"detail\":\"${ENGINE_BINARY} found at ${FOUND_PATH}\"}")
     else
         ALL_PASSED=false
-        CHECKS+=("{\"name\":\"engine_binary\",\"passed\":false,\"detail\":\"${ENGINE_BINARY} not found on PATH\",\"resolution\":\"Install ${ENGINE_BINARY} from ${DOWNLOAD_URL} or set HIGHBAR_TEST_ENGINE=/path/to/${ENGINE_BINARY}\"}")
+        CHECKS+=("{\"name\":\"engine_binary\",\"passed\":false,\"detail\":\"${ENGINE_BINARY} not found on PATH or in ~/.local/state/Beyond All Reason/engine/recoil_*/\",\"resolution\":\"Install ${ENGINE_BINARY} from ${DOWNLOAD_URL} or set HIGHBAR_TEST_ENGINE=/path/to/${ENGINE_BINARY}\"}")
     fi
 fi
 

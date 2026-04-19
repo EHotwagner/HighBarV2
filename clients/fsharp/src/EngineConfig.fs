@@ -73,6 +73,18 @@ module EngineConfig =
                 match tryGetString game "name" with
                 | Some name -> config <- { config with GameType = name }
                 | None -> ()
+                // Prefer dynamically-resolved name from rapid/versions.gz when
+                // a rapidTag is configured — the hardcoded json name goes
+                // stale every few days as upstream cuts test releases.
+                match tryGetString game "rapidTag" with
+                | Some tag ->
+                    match EngineDiscovery.defaultDataDir () with
+                    | Some dd ->
+                        match EngineDiscovery.discoverGameName dd tag with
+                        | Some resolved -> config <- { config with GameType = resolved }
+                        | None -> ()
+                    | None -> ()
+                | None -> ()
             | _ -> ()
 
             match root.TryGetProperty("map") with
