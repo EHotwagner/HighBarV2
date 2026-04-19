@@ -28,6 +28,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-19
 - Filesystem only — Unix domain sockets, session dirs in `/tmp` (033-fix-scripting-dispatch)
 - C11 (proxy, the only code that changes), F# / .NET 10.0 (live regression tests) + protobuf-c (proxy), Recoil `SSkirmishAICallback` vendored headers (`proxy/include/AI/`), HighBar.Client (Google.Protobuf 3.28), xUnit 2.9.x (034-fix-command-execute)
 - N/A — the change is in-process proxy dispatch; logs to `engine.infolog` and temporary session dirs under `/tmp` only (034-fix-command-execute)
+- Research reads C11 (Recoil engine, proxy), C++ (engine internals, Circuit wrapper classes), Lua (BARb, `Spring.GiveOrderToUnit`), F# / .NET 10.0 (HighBar.Client for any probe). Any code changes are scoped to the C11 proxy (`proxy/src/deserialize.c`) and optionally F# client (`clients/fsharp/src/Commands.fs` for FR-014). + Recoil engine source at tag `2025.06.19` (GitHub `beyond-all-reason/RecoilEngine`); Circuit AI source (`rlcevg/CircuitAI` — resolve actual shipping SHA from `~/.local/state/Beyond All Reason/engine/recoil_2025.06.19/AI/Skirmish/CircuitAI/`); BARb Lua source (extract from `.sdz`/`.sdp` under `~/.local/state/Beyond All Reason/packages/`); protobuf-c, Google.Protobuf 3.28, xUnit 2.9.x for any probe. (035-research-dispatch-paths)
+- Filesystem only — markdown under `specs/035-research-dispatch-paths/`, optional mailbox reply under `Mailbox/`, Unix-domain sockets and `/tmp` session dirs if a live probe runs. (035-research-dispatch-paths)
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
@@ -104,9 +106,9 @@ cd build && ctest
 - Generated code MUST NOT be checked into version control
 
 ## Recent Changes
+- 035-research-dispatch-paths: Added Research reads C11 (Recoil engine, proxy), C++ (engine internals, Circuit wrapper classes), Lua (BARb, `Spring.GiveOrderToUnit`), F# / .NET 10.0 (HighBar.Client for any probe). Any code changes are scoped to the C11 proxy (`proxy/src/deserialize.c`) and optionally F# client (`clients/fsharp/src/Commands.fs` for FR-014). + Recoil engine source at tag `2025.06.19` (GitHub `beyond-all-reason/RecoilEngine`); Circuit AI source (`rlcevg/CircuitAI` — resolve actual shipping SHA from `~/.local/state/Beyond All Reason/engine/recoil_2025.06.19/AI/Skirmish/CircuitAI/`); BARb Lua source (extract from `.sdz`/`.sdp` under `~/.local/state/Beyond All Reason/packages/`); protobuf-c, Google.Protobuf 3.28, xUnit 2.9.x for any probe.
 - 034-fix-command-execute: Added C11 (proxy, the only code that changes), F# / .NET 10.0 (live regression tests) + protobuf-c (proxy), Recoil `SSkirmishAICallback` vendored headers (`proxy/include/AI/`), HighBar.Client (Google.Protobuf 3.28), xUnit 2.9.x
 - 033-fix-scripting-dispatch: Added C11 (proxy), F# / .NET 10.0 (client + tests) + protobuf-c (proxy), Google.Protobuf 3.28 (client), Recoil `SSkirmishAICallback` (read-only), spring-headless 2025.06.19, xUnit 2.9.x
-- 032-batch-callback-rpcs: Added `CALLBACK_GAME_GET_STATE` + `GameStateSnapshot` — one-call per-tick snapshot (friendlies, LOS/radar enemies, economy) via `client.GetGameState()`. HighBar.Client 0.1.5.
 
 
 <!-- MANUAL ADDITIONS START -->
